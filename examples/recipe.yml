@@ -1,0 +1,39 @@
+--- #sample recipe
+- step: &step1
+    name: Create Kong API
+    httpMethod: POST
+    URL: http://kong:8001/apis
+    request:
+      body:
+        name: Consumer API
+        upstream_uri: http://wiremock/blah
+        strip_url: false
+      headers:
+        Authorisation: yadda
+      queryString:
+        keya: vala
+        keyb: valb
+    response:
+
+- step: &step2
+    name: Load OAUTH Plugin
+    httpMethod: POST
+    URL: http://kong:8001/apis
+    request:
+      queryString:
+        key: value
+      body:
+        key: value
+- step: &step3
+    name: Load SSL Key
+    httpMethod: POST
+    URL: http://kong:8001/apis
+    request:
+      queryString:
+        key: value
+      body:
+        key: value
+- step:
+    <<: *step2
+    name: Copy of Load OAUTH Plugin
+
