@@ -1,0 +1,39 @@
+--- #sample recipe
+recipe:
+  -  # step0
+    name: Create Kong API
+    httpmethod: POST
+    URL: http://kong:8001/apis
+    request:
+      body:
+        name: Consumer API
+        upstream_uri: http://wiremock/blah
+        strip_url: false
+      headers:
+        Authorisation: yadda
+        Content-type: application/json
+      querystring:
+        keya: vala
+        keyb: valb
+    response: # set up this response section if you need to pull out data here for use later in the recipe.
+      body:
+        id:
+      headers:
+        Authorisation:
+      code:
+  -
+    name: Load OAUTH Plugin
+    httpmethod: POST
+    URL: http://kong:8001/apis/<%=step[0].response.body.id%> #gets the JSON field id from the body of the response from step 1.
+    request:
+      querystring:
+        key3: value3
+      body:
+        key4: value4
+      headers:
+        blah: blahbha
+    response: # set up this response section if you need to pull out data here for use later in the recipe.
+      code:
+      body:
+      headers:
+        Authorisation:

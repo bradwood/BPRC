@@ -49,7 +49,7 @@ class Body(collections.MutableMapping): #Make this class behave and look like a 
         return len(self._body)
 
 
-class QueryString: #Make this class behave and look like a dict
+class QueryString(collections.MutableMapping): #Make this class behave and look like a dict
     """An collection of parameters passed on an HTTP Querystring, used for passing URL parameters"""
     def __init__(self, querystring):
         self._querystring=querystring
@@ -81,7 +81,6 @@ class Request:
     """An HTTP Request, part of a step"""
     def __init__(self, headers, querystring, body): # TODO use kwargs
         self.headers=Headers(headers)
-        logging.debug("in Request.__init__", headers)
         self.querystring=QueryString(querystring)
         self.body=Body(body)
 
