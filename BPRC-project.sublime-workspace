@@ -1,0 +1,578 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ste",
+				"step2"
+			],
+			[
+				"K",
+				"key"
+			],
+			[
+				"Auth",
+				"AuthenticationService"
+			],
+			[
+				"CB_c",
+				"CB_cache"
+			],
+			[
+				"Tra",
+				"TransactionService"
+			],
+			[
+				"Merc",
+				"MerchantService"
+			],
+			[
+				"Act",
+				"ActService"
+			],
+			[
+				"Pro",
+				"ProfileService"
+			],
+			[
+				"Ac",
+				"ActService"
+			],
+			[
+				"ad",
+				"admin_group"
+			],
+			[
+				"con",
+				"consumer_group"
+			],
+			[
+				"refres",
+				"refresh_token"
+			],
+			[
+				"AP",
+				"API_VERSION"
+			],
+			[
+				"ap",
+				"api_base_url"
+			],
+			[
+				"ex",
+				"expires_in"
+			],
+			[
+				"toke",
+				"token_type"
+			],
+			[
+				"ref",
+				"refresh_token"
+			],
+			[
+				"ACC",
+				"ACCESS_TOKEN"
+			],
+			[
+				"PRO",
+				"PROVISION_KEY_FILE"
+			],
+			[
+				"AUTH",
+				"AUTH_USERNAME"
+			],
+			[
+				"authen",
+				"authenticated_userid"
+			],
+			[
+				"provision",
+				"provision_key"
+			],
+			[
+				"pro",
+				"provision_key"
+			],
+			[
+				"CLI",
+				"CLIENT_REQUEST"
+			],
+			[
+				"A",
+				"ACL_GROUPS"
+			],
+			[
+				"CLIENT_s",
+				"client_secret"
+			],
+			[
+				"client_S",
+				"CLIENT_SECRET"
+			],
+			[
+				"CLIENT",
+				"CLIENT_ID"
+			],
+			[
+				"C",
+				"CONSUMER"
+			],
+			[
+				"client",
+				"client"
+			],
+			[
+				"clien",
+				"client_secret"
+			],
+			[
+				"Au",
+				"AUTHORIZE_API_NAME"
+			],
+			[
+				"Exec",
+				"ExecStartPre"
+			],
+			[
+				"Acc",
+				"ACCESS_TOKEN"
+			],
+			[
+				"oa",
+				"OATH_CLIENT_ID"
+			],
+			[
+				"API",
+				"API_NAME"
+			],
+			[
+				"request_",
+				"request_path"
+			],
+			[
+				"ubu",
+				"ubuntu-dev"
+			],
+			[
+				"request",
+				"request_path"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "examples/recipe.yml",
+			"settings":
+			{
+				"buffer_size": 925,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 686.0,
+		"last_filter": "todo",
+		"selected_items":
+		[
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"git add",
+				"Git: Add..."
+			],
+			[
+				"unix",
+				"Line Ending to all views: Unix"
+			],
+			[
+				"git co",
+				"Git: Quick Commit"
+			],
+			[
+				"git comm",
+				"Git: Commit"
+			],
+			[
+				"git st",
+				"Git: Status"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git ad",
+				"Git: Add All"
+			],
+			[
+				"git s",
+				"Git: Status"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"uni",
+				"Line Ending to all views: Unix"
+			],
+			[
+				"com",
+				"Toggle Comment"
+			],
+			[
+				"con",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"un",
+				"Line Ending to all views: Unix"
+			],
+			[
+				"",
+				"Line Ending to all views: Unix"
+			],
+			[
+				"l",
+				"Line Ending: Unix"
+			],
+			[
+				"package control: I",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 959.0
+	},
+	"console":
+	{
+		"height": 186.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples"
+	],
+	"file_history":
+	[
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/Dockerfile",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/service-dependency-map/servicemap.dot",
+		"/C/Users/micro/Docker/docker-kong/Compose/wiremock-kong-callback/wiremock.yaml",
+		"/C/Users/micro/Docker/docker-kong/Builds/wiremock_kong_callback/Dockerfile",
+		"/C/Users/micro/AppData/Local/Microsoft/Windows/INetCache/Content.Outlook/RJ188EJQ/kong.yaml",
+		"/C/Users/micro/Docker/docker-kong/Builds/wiremock/Dockerfile",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/reset_kong.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/client_credentials",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/configure_consumer_ACLs.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/provision_consumer_app.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/test_auth_API_rate_limit.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/test_signup_user.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/test_token_expiry.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/test_successful_authenticate_with_oauth_token.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/configure_API_ACLs.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/api_config_variables",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/admin/v1/hello.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/consumer/v1/hello.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/consumer/v2/hello.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/m-manager/v1/hello.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/load_oauth2_plugins_and_obtain_provision_keys.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/load_ssl_plugins.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/create_apis.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/merchant/v1/hello.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/load_correlationid_plugins.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/throttle_authentication_API.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/mappings/newuser.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/usercreated.json",
+		"/C/Users/micro/Docker/docker-kong/Builds/kong/start_kong",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/mappings/user_authenticate_success.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/mappings/user_authenticate_failure.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/provision_keys",
+		"/C/Users/micro/Docker/docker-kong/Builds/kong/kong.yml",
+		"/C/Users/micro/Docker/docker-kong/Builds/kong/Dockerfile",
+		"/C/Users/micro/Docker/docker-kong/Compose/Kong_test_suite/docker-compose.yml",
+		"/C/Users/micro/Docker/docker-kong/docker-kong.sublime-workspace",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/mappings/hello.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/test-oauth2-client-credentials-grant.sh",
+		"/C/Users/micro/Docker/docker-kong/.gitignore",
+		"/C/Users/micro/Docker/docker-kong/docker-kong.sublime-project",
+		"/C/Users/micro/Docker/docker-kong/Builds/ubuntu-dev/Dockerfile",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/consumer/v1.0/hello.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/__files/oauth_redirect_url.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/mappings/v1.0/authenticate.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/reset_wiremock.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/delete_consumer_object.sh",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/wiremock/mappings/authorize.json",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/create_api.py",
+		"/C/Users/micro/DevOps/kubernetes-test/user-data.etcd-hosts",
+		"/C/Users/micro/DevOps/kubernetes-test/user-data.minions",
+		"/C/Users/micro/DevOps/kubernetes-test/config.rb",
+		"/C/Users/micro/DevOps/kubernetes-test/Vagrantfile",
+		"/C/Users/micro/.editorconfig",
+		"/C/Users/micro/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/micro/DevOps/kubernetes-test/user-data",
+		"/C/Users/micro/.bash_profile",
+		"/C/Users/micro/Docker/Compose/Kong_test_suite/docker-compose.yml",
+		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test-oauth2-client-credentials-grant.sh",
+		"/C/Users/micro/Docker/Builds/ubuntu-dev/Dockerfile",
+		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test-oauth2-resource-owner-credentials-grant.sh",
+		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test_api_key_plus_hmac_plugins.sh",
+		"/C/Users/micro/Docker/Mountpoints/wiremock/__files/oauth_redirect_url.json",
+		"/C/Users/micro/Docker/Mountpoints/wiremock/mappings/oauth_redirect_url.json",
+		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/configure_kong.sh",
+		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test_api_key_plugin.sh",
+		"/C/Users/micro/Docker/Mountpoints/wiremock/mappings/hello.json",
+		"/C/Users/micro/Docker/Mountpoints/wiremock/__files/hello.json",
+		"/C/Program Files/Docker Toolbox/start.sh",
+		"/c/Program Files/Docker Toolbox/start.sh",
+		"/C/Users/micro/Docker/README.md",
+		"/C/Users/micro/Docker/Builds/kong/Dockerfile",
+		"/C/Users/micro/Docker/Builds/wiremock/Dockerfile",
+		"/C/Users/micro/Docker/Builds/kong/start_kong",
+		"/C/Users/micro/.docker/config.json"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"SECURE_API_REQUEST_PATHS",
+			"echo_downstream",
+			"generator",
+			"SSL",
+			"signup",
+			"SIGNUP",
+			"Signup",
+			"SIGNUP",
+			"Signup",
+			"SIGNUP",
+			"signup",
+			"POST",
+			"password",
+			"echo",
+			"AUTH_API_PROVISION_KEY",
+			"AUTHENTICATE_API_NAME",
+			"authenticate",
+			"AUTHENTICATE",
+			"authenticate",
+			"AUTHENTICATE",
+			"ACCESS_TOKEN_RESPONSE",
+			"MOB_CLIENT_SECRET",
+			"...",
+			"CONSUMER_NAME",
+			"AUTHORIZE_API_NAME",
+			"num_etcd_instances",
+			"provider",
+			"plugin",
+			"num_instances",
+			"CLOUD_CONFIG_PATH",
+			"expose",
+			"provis",
+			"instance_n",
+			"dev/nul",
+			"someusername",
+			"mobile_api_v1",
+			"API",
+			"mobile_api_v1.0"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "examples/recipe.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 925,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 47.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 591.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 127.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 39.0
+	},
+	"pinned_build_system": "",
+	"project": "BPRC-project.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 304.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

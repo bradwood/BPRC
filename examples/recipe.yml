@@ -1,7 +1,8 @@
 --- #sample recipe
-- step: &step1
+recipe:
+  -  # step0
     name: Create Kong API
-    httpMethod: POST
+    httpmethod: POST
     URL: http://kong:8001/apis
     request:
       body:
@@ -10,30 +11,29 @@
         strip_url: false
       headers:
         Authorisation: yadda
-      queryString:
+        Content-type: application/json
+      querystring:
         keya: vala
         keyb: valb
-    response:
-
-- step: &step2
+    response: # set up this response section if you need to pull out data here for use later in the recipe.
+      body:
+        id:
+      headers:
+        Authorisation:
+      code:
+  -
     name: Load OAUTH Plugin
-    httpMethod: POST
-    URL: http://kong:8001/apis
+    httpmethod: POST
+    URL: http://kong:8001/apis/<%=step[0].response.body.id%> #gets the JSON field id from the body of the response from step 1.
     request:
-      queryString:
-        key: value
+      querystring:
+        key3: value3
       body:
-        key: value
-- step: &step3
-    name: Load SSL Key
-    httpMethod: POST
-    URL: http://kong:8001/apis
-    request:
-      queryString:
-        key: value
+        key4: value4
+      headers:
+        blah: blahbha
+    response: # set up this response section if you need to pull out data here for use later in the recipe.
+      code:
       body:
-        key: value
-- step:
-    <<: *step2
-    name: Copy of Load OAUTH Plugin
-
+      headers:
+        Authorisation:
