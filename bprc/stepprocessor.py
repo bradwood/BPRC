@@ -36,13 +36,14 @@ class StepProcessor():
             return self.recipe.steps[self.stepid] # nothing to process if we are on the first step TODO: maybe do some step validation later?
         else:
             # Algorithm:
+
             # process substitutions in URL string
             u=self.recipe.steps[self.stepid].URL
-
             substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), u)
             #TODO: Log the above
             self.recipe.steps[self.stepid].URL=substituted_text
             logging.debug('In StepProcessor.prepare(): substituted_text=%s',substituted_text)
+
             # loop through all QueryString dictionaries and process substition
             for key in self.recipe.steps[self.stepid].request.querystring:
                 qs=self.recipe.steps[self.stepid].request.querystring[key]
@@ -50,11 +51,19 @@ class StepProcessor():
                 #TODO: Log the above
                 self.recipe.steps[self.stepid].request.querystring[key]=substituted_text
 
-
-
-
             # loop through all Request.body dictionaries and process substitutions
-            # loop throuhg all Request.header dictionaries and process substitutions
+            for key in self.recipe.steps[self.stepid].request.body:
+                bod=self.recipe.steps[self.stepid].request.body[key]
+                substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), bod)
+                #TODO: Log the above
+                self.recipe.steps[self.stepid].request.body[key]=substituted_text
+
+            # loop through all Request.header dictionaries and process substitutions
+            for key in self.recipe.steps[self.stepid].request.headers:
+                heads=self.recipe.steps[self.stepid].request.headers[key]
+                substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), heads)
+                #TODO: Log the above
+                self.recipe.steps[self.stepid].request.headers[key]=substituted_text
 
         return self.recipe.steps[self.stepid]
 

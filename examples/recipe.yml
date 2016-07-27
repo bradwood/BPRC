@@ -30,9 +30,10 @@ recipe:
         key3: value3
         keysub: <%=steps[0].request.headers["Authorisation"]%>
       body:
-        key4: value4
+        key4: valueprefix <%=steps[0].request.headers["Content-type"]%>
       headers:
         blah: blahbha
+        Authorisation: bearer <%=steps[0].request.body["upstream_uri"]%>
     response: # set up this response section if you need to pull out data here for use later in the recipe.
       code:
       body:
