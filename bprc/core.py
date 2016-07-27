@@ -23,11 +23,15 @@ def main():
     and run the main program with error handling.
     Return exit status code.
     """
-    #configure login
-    #TODO: generalise this and make logging better
+
+    import cli
+    print(cli.args.yamlfile)
+    print(cli.args.verbose)
+    print(cli.args.dryrun)
+
     logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(asctime)s:%(message)s')
     logging.debug('Initialising log')
-
+    #TODO: try
     with open("examples/recipe.yml") as stream:
         try:
             datamap = yaml.safe_load(stream)
