@@ -55,3 +55,5 @@ def main():
     print("\n\n")
     print(r)
     logging.debug('AFTER PROCESSING LOOP: r.steps[1].URL=%s',r.steps[1].URL)
+    logging.debug('AFTER PROCESSING LOOP: r.steps[1].request.querystring["keysub"]=%s',r.steps[1].request.querystring["keysub"])
+

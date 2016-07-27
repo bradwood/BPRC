@@ -10,7 +10,7 @@ recipe:
         upstream_uri: http://wiremock/blah
         strip_url: false
       headers:
-        Authorisation: yadda
+        Authorisation: yadda-step one authorisation header brad
         Content-type: application/json
       querystring:
         keya: vala
@@ -24,10 +24,11 @@ recipe:
   -
     name: Load OAUTH Plugin
     httpmethod: POST
-    URL: http://kong:8001/apdis/<%=steps[0].response.body["id"]%> #gets the JSON field id from the body of the response from step 1.
+    URL: http://kong:8001/apdis/<%=steps[0].response.body["id"]%>/<%=steps[0].request.querystring["keya"]%> #gets the JSON field id from the body of the response from step 1.
     request:
       querystring:
         key3: value3
+        keysub: <%=steps[0].request.headers["Authorisation"]%>
       body:
         key4: value4
       headers:

@@ -18,6 +18,9 @@ class StepProcessor():
     def prepare(self):
         """prepares the step by substituting php-like constructs in the step subtree of the passed recipe"""
         logging.debug('In StepProcessor.prepare(): stepid=%s',self.stepid)
+
+        subpat=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
+
         def _insert_param(m, recipe):
             """
             used by the re.subn call below
@@ -35,15 +38,20 @@ class StepProcessor():
             # Algorithm:
             # process substitutions in URL string
             u=self.recipe.steps[self.stepid].URL
-            subpat=re.compile(r'<%=(\S+)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
+
             substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), u)
+            #TODO: Log the above
             self.recipe.steps[self.stepid].URL=substituted_text
-
             logging.debug('In StepProcessor.prepare(): substituted_text=%s',substituted_text)
-            #matches=re.search(u)
-
             # loop through all QueryString dictionaries and process substition
-            #for key, value in self.recipe[self.stepid]
+            for key in self.recipe.steps[self.stepid].request.querystring:
+                qs=self.recipe.steps[self.stepid].request.querystring[key]
+                substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), qs)
+                #TODO: Log the above
+                self.recipe.steps[self.stepid].request.querystring[key]=substituted_text
+
+
+
 
             # loop through all Request.body dictionaries and process substitutions
             # loop throuhg all Request.header dictionaries and process substitutions
