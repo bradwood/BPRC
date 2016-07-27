@@ -12,8 +12,9 @@ Invocation flow:
 """
 
 import yaml
-from recipe import Recipe
 import logging
+from recipe import Recipe
+from stepprocessor import StepProcessor
 
 def main():
     """
@@ -24,7 +25,7 @@ def main():
     """
     #configure login
     #TODO: generalise this and make logging better
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(asctime)s:%(message)s')
     logging.debug('Initialising log')
 
     with open("examples/recipe.yml") as stream:
@@ -36,13 +37,21 @@ def main():
 
     r = Recipe(datamap)
 
-    logging.debug(r.steps[0].request.headers["Authorisation"])
-    logging.debug(r.steps[1].request.headers["blah"])
-    logging.debug(r.steps[0].response.body["id"])
-    logging.debug(r.steps[1].response.headers["Authorisation"])
+    logging.debug('r.steps[0].request.headers["Authorisation"]=%s', r.steps[0].request.headers["Authorisation"])
+    logging.debug('r.steps[1].request.headers["blah"]=%s',r.steps[1].request.headers["blah"])
+    logging.debug('r.steps[0].response.body["id"]=%s',r.steps[0].response.body["id"])
+    logging.debug('r.steps[1].response.headers["Authorisation"]=%s',r.steps[1].response.headers["Authorisation"])
 
-
+    #loop through steps and execute each one.
+    for i, step in enumerate(r.steps):
+        logging.debug('In steps loop PREPROCESS: r.steps[%s].URL=%s',i,r.steps[i].URL)
+        # firstly, for the step about to be executed, substitute any items in the request object using the php-like
+        # <%= =>
+        processor = StepProcessor(recipe=r, stepid=i) # instantiate a step processor
+        r.steps[i] = processor.prepare() # substitutes and php-like strings to prepare the step for calling & returns
+        processor.call() # makes the call and populates the response object.
+        logging.debug('In steps loop POSTPROCESS: r.steps[%s].URL=%s',i,r.steps[i].URL)
 
     print("\n\n")
     print(r)
-
+    logging.debug('AFTER PROCESSING LOOP: r.steps[1].URL=%s',r.steps[1].URL)
