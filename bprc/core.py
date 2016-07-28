@@ -1,6 +1,6 @@
 """This module provides the main functionality of bprc.
 Invocation flow:
-  1. Read, validate and process the input (args, `stdin`).
+  1. Read, validate and process the input (args).
   2. Create the Recipe object.
     2.1. Validate the Recipe Opbject
   3. Iterate over the Recipe object
@@ -15,6 +15,22 @@ import yaml
 import logging
 from recipe import Recipe
 from stepprocessor import StepProcessor
+import sys
+import cli
+
+
+#Turns on stack-traces if debug is passed
+def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.excepthook):
+    if cli.args.debug:
+        debug_hook(exception_type, exception, traceback)
+    else:
+        print("{}: {}".format(exception_type.__name__, exception))
+
+sys.excepthook = exceptionHandler
+
+# set up logging if needed.
+logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(asctime)s:%(message)s')
+logging.debug('Initialising log')
 
 def main():
     """
@@ -24,13 +40,11 @@ def main():
     Return exit status code.
     """
 
-    import cli
+
     print(cli.args.yamlfile)
     print(cli.args.verbose)
     print(cli.args.dryrun)
 
-    logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(asctime)s:%(message)s')
-    logging.debug('Initialising log')
     #TODO: try
     with open("examples/recipe.yml") as stream:
         try:

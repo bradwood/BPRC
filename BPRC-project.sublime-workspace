@@ -4,12 +4,36 @@
 		"selected_items":
 		[
 			[
-				"R",
-				"Request"
+				"ass",
+				"assertIsNone"
 			],
 			[
 				"re",
+				"recipe"
+			],
+			[
+				"te",
+				"test_yaml_load"
+			],
+			[
+				"r",
 				"request"
+			],
+			[
+				"ste",
+				"stepid"
+			],
+			[
+				"subst",
+				"substituted_text"
+			],
+			[
+				"step",
+				"stepid"
+			],
+			[
+				"R",
+				"Request"
 			],
 			[
 				"RES",
@@ -34,10 +58,6 @@
 			[
 				"_",
 				"__init__"
-			],
-			[
-				"ste",
-				"step2"
 			],
 			[
 				"K",
@@ -207,31 +227,7 @@
 			"file": "/C/Users/micro/DevOps/general-purpose-ubuntu/Dockerfile",
 			"settings":
 			{
-				"buffer_size": 1158,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/__init__.py",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Makefile",
-			"settings":
-			{
-				"buffer_size": 132,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/core.py",
-			"settings":
-			{
-				"buffer_size": 1350,
+				"buffer_size": 1208,
 				"line_ending": "Unix"
 			}
 		},
@@ -240,6 +236,64 @@
 			"settings":
 			{
 				"buffer_size": 3462,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/core.py",
+			"settings":
+			{
+				"buffer_size": 2732,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "// Wednesday 07/27/16 at 09:47PM - 28 files in 0.07 secs\n\n## TODO (8)\n1. bprc/core.py:27            generalise this and make logging better\n2. bprc/recipe.py:89          use kwargs\n3. bprc/stepprocessor.py:36   maybe do some step validation later?\n4. bprc/stepprocessor.py:43   Log the above\n5. bprc/stepprocessor.py:51   Log the above\n6. bprc/stepprocessor.py:58   Log the above\n7. bprc/stepprocessor.py:65   Log the above\n8. test/test_basic.py:7       Parametrise test cases -- try this http://pastebin.com/rdMqXc7b\n",
+			"settings":
+			{
+				"buffer_size": 518,
+				"line_ending": "Windows",
+				"name": "TodoReview",
+				"scratch": true
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 111,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/stepprocessor.py",
+			"settings":
+			{
+				"buffer_size": 3260,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test/test_basic.py",
+			"settings":
+			{
+				"buffer_size": 3223,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "examples/recipe.yml",
+			"settings":
+			{
+				"buffer_size": 1319,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/cli.py",
+			"settings":
+			{
+				"buffer_size": 679,
 				"line_ending": "Unix"
 			}
 		}
@@ -251,10 +305,18 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 686.0,
-		"last_filter": "to",
+		"height": 562.0,
+		"last_filter": "todo",
 		"selected_items":
 		[
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"tod",
+				"TodoReview: Project and Open Files"
+			],
 			[
 				"to",
 				"TodoReview: Open Files"
@@ -262,10 +324,6 @@
 			[
 				"inde",
 				"Indentation: Convert to all views to Spaces"
-			],
-			[
-				"todo",
-				"TodoReview: Project Files"
 			],
 			[
 				"pack",
@@ -373,11 +431,16 @@
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/docs",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/__pycache__"
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/test"
 	],
 	"file_history":
 	[
+		"/C/Users/micro/.ssh/config",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/__init__.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.gitignore",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/README.md",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/test/test_recipe.yml",
+		"/C/Users/micro/.bash_profile",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_recipe_deserialise.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_recipe.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/__main__.py",
@@ -439,7 +502,6 @@
 		"/C/Users/micro/.editorconfig",
 		"/C/Users/micro/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/micro/DevOps/kubernetes-test/user-data",
-		"/C/Users/micro/.bash_profile",
 		"/C/Users/micro/Docker/Compose/Kong_test_suite/docker-compose.yml",
 		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test-oauth2-client-credentials-grant.sh",
 		"/C/Users/micro/Docker/Builds/ubuntu-dev/Dockerfile",
@@ -476,6 +538,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bod",
+			"body",
+			"AFTER PROCESSING LOOP",
+			"qs",
+			"querystring",
 			"_body",
 			"_headers",
 			"headers",
@@ -537,7 +604,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -554,72 +621,7 @@
 						[
 							[
 								173,
-								0
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/micro/DevOps/general-purpose-ubuntu/Dockerfile",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1158,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1157,
-								1157
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Dockerfile Syntax Highlighting/Syntaxes/Dockerfile.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "bprc/__init__.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								173
 							]
 						],
 						"settings":
@@ -639,27 +641,27 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "Makefile",
+					"buffer": 1,
+					"file": "/C/Users/micro/DevOps/general-purpose-ubuntu/Dockerfile",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 132,
+						"buffer_size": 1208,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								30,
-								30
+								833,
+								833
 							]
 						],
 						"settings":
 						{
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
+							"syntax": "Packages/Dockerfile Syntax Highlighting/Syntaxes/Dockerfile.tmLanguage",
 							"translate_tabs_to_spaces": false,
 							"trim_trailing_white_space_on_save": true
 						},
@@ -667,30 +669,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 9,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 4,
-					"file": "bprc/core.py",
+					"buffer": 2,
+					"file": "bprc/recipe.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1350,
+						"buffer_size": 3462,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								451,
-								477
+								2344,
+								2344
 							]
 						],
 						"settings":
@@ -710,20 +706,196 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "bprc/recipe.py",
+					"buffer": 3,
+					"file": "bprc/core.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3462,
+						"buffer_size": 2732,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								115,
-								115
+								915,
+								915
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 414.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 518,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								518,
+								518
+							]
+						],
+						"settings":
+						{
+							"line_padding_bottom": 2,
+							"line_padding_top": 2,
+							"review_args":
+							{
+								"settings":
+								{
+								}
+							},
+							"review_results":
+							{
+								"140,181":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
+									"line": 89,
+									"note": "use kwargs",
+									"patt": "todo",
+									"priority": 100
+								},
+								"181,248":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 36,
+									"note": "maybe do some step validation later?",
+									"patt": "todo",
+									"priority": 100
+								},
+								"248,292":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 43,
+									"note": "Log the above",
+									"patt": "todo",
+									"priority": 100
+								},
+								"292,336":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 51,
+									"note": "Log the above",
+									"patt": "todo",
+									"priority": 100
+								},
+								"336,380":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 58,
+									"note": "Log the above",
+									"patt": "todo",
+									"priority": 100
+								},
+								"380,424":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 65,
+									"note": "Log the above",
+									"patt": "todo",
+									"priority": 100
+								},
+								"424,518":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\test\\test_basic.py",
+									"line": 7,
+									"note": "Parametrise test cases -- try this http://pastebin.com/rdMqXc7b",
+									"patt": "todo",
+									"priority": 100
+								},
+								"70,140":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\core.py",
+									"line": 27,
+									"note": "generalise this and make logging better",
+									"patt": "todo",
+									"priority": 100
+								}
+							},
+							"selected_result": 0,
+							"syntax": "Packages/TodoReview/TodoReview.hidden-tmLanguage",
+							"todo_results": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 111,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								92,
+								92
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
+							"translate_tabs_to_spaces": false,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "bprc/stepprocessor.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3260,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								153,
+								153
 							]
 						],
 						"settings":
@@ -739,7 +911,106 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "test/test_basic.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3223,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								105,
+								105
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "examples/recipe.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1319,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								1319
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "bprc/cli.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 679,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								260,
+								260
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -778,7 +1049,7 @@
 		"rows":
 		[
 			0.0,
-			0.471130890576,
+			0.45544518739,
 			1.0
 		]
 	},
@@ -833,7 +1104,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -841,7 +1112,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 304.0,
+	"side_bar_width": 261.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

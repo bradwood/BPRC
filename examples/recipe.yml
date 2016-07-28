@@ -1,6 +1,6 @@
 --- #sample recipe
 recipe:
-  -  # step0
+-  # step0
     name: Create Kong API
     httpmethod: POST
     URL: http://kong:8001/apis

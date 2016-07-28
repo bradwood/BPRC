@@ -82,7 +82,7 @@ recipe:
         self.assertEquals(r.steps[1].request.headers["Authorisation"],"bearer http://wiremock/blah")
         self.assertIsNone(r.steps[1].response.code)
 
-
+#TODO: add cli tests.
 
 if __name__ == '__main__':
     unittest.main()
