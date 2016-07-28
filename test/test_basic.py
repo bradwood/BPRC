@@ -5,7 +5,7 @@ from bprc.recipe import Recipe
 from bprc.stepprocessor import StepProcessor
 
 #TODO: Parametrise test cases -- try this http://pastebin.com/rdMqXc7b
-
+#TODO: Add mocking for some of these tests to make them smaller/less complex
 
 class RecipeTest(unittest.TestCase):
     def setUp(self):
@@ -59,6 +59,7 @@ recipe:
         """tests the yaml loads and is able to instantiate a Recipe object"""
         datamap=yaml.load(self.yamldata)
         r = Recipe(datamap)
+        #TODO: add a test for multiple docs in 1 YAML (using ---) -- reject this??
 
     def test_yaml_parse(self):
         """conducts misc checks on the values passed in from the yaml on the Recipe object"""

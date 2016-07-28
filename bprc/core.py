@@ -17,7 +17,7 @@ from recipe import Recipe
 from stepprocessor import StepProcessor
 import sys
 import cli
-
+import fileinput
 
 #Turns on stack-traces if debug is passed
 def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.excepthook):
@@ -32,6 +32,17 @@ sys.excepthook = exceptionHandler
 logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(asctime)s:%(message)s')
 logging.debug('Initialising log')
 
+#TODO: finish this
+if cli.args.verbose:
+    def verboseprint(*args):
+        # Print each argument separately so caller doesn't need to
+        # stuff everything to be printed into a single string
+        for arg in args:
+           print(arg,)
+        print
+else:
+    verboseprint = lambda *a: None      # do-nothing function
+
 def main():
     """
     The main function.
@@ -39,19 +50,17 @@ def main():
     and run the main program with error handling.
     Return exit status code.
     """
-
-
-    print(cli.args.yamlfile)
     print(cli.args.verbose)
     print(cli.args.dryrun)
 
-    #TODO: try
-    with open("examples/recipe.yml") as stream:
-        try:
-            datamap = yaml.safe_load(stream)
-        except Exception as e:
-            raise RuntimeError("An error occured parsing the yaml input file") from None
-            print("Reason:", e)
+    #try to read in the file.
+
+    try:
+        datamap = yaml.safe_load(cli.args.yamlfile)
+    except Exception as e:
+        raise RuntimeError("An error occured parsing the yaml input file") from None
+    logging.debug("Yaml file parsed ok...")
+    logging.debug(cli.args.yamlfile)
 
     r = Recipe(datamap)
 

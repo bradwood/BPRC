@@ -1,44 +1,63 @@
 """
-This module takes care of capturing the cli options
+This module takes care of capturing the cli options and setting up the environmental parameters
+like logging, etc.
 """
 
 import argparse
+import sys
+import logging
+from _version import __version__
 
 parser = argparse.ArgumentParser(description='Batch Processing RESTful Client')
 
-#TODO add version argument -- see https://pymotw.com/2/argparse/
-parser.add_argument('--version', action='version', version='%(prog)s 2.0',
-                    help='shows version number and exits') ##TODO: fix/check
+#TODO:implement ALL cli commands!!!
+#TODO:COSMETIC: re-order args and consider groupings for readability. ArgumentParser.add_argument_group(title=None, description=None)
 
-parser.add_argument(dest='yamlfile', nargs=1, help="YAML recipe file")
+filegroup=parser.add_argument_group(title="I/O arguments")
+logtestgroup=parser.add_argument_group(title="Logging, testing and debugging arguments")
+protocolgorup=parser.add_argument_group(title="Protocol arguments")
 
-parser.add_argument('-v', '--verbose', dest='verbose', action='store_true',
+
+parser.add_argument('--version', action='version', version='{} {}'.format(sys.argv[0],__version__),
+                    help='shows version number and exits')
+#ABOVE IMPLEMENTED
+filegroup.add_argument('-f', '--input-file', dest='yamlfile', metavar='yamlfile', action='store',
+                    help="YAML recipe file", type=argparse.FileType('r'), default=sys.stdin)
+
+filegroup.add_argument('--output-file', dest='outfile', action='store', metavar='outfile',
+                    help='specifies output file, defaults to ./bprc.out.{pid}')
+#TODO: think about output format? yaml, json, CSV, other?
+
+
+logtestgroup.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                     help='verbose mode', default=False)
 
-parser.add_argument('-d', '--dry-run', dest='dryrun', action='store_true',default=False,
-                    help='parses and outputs recipe without making any calls')
+logtestgroup.add_argument('-d', '--dry-run', dest='dryrun', action='store_true',default=False,
+                    help='does everything except actually making any HTTP calls')
 
-parser.add_argument('--ignore-ssl', dest='ignoressl', action='store_true',default=False,
+protocolgorup.add_argument('--ignore-ssl', dest='ignoressl', action='store_true',default=False,
                     help='do not validate ssl certificates')
 
-#DONE
-parser.add_argument('--debug', dest='debug', action='store_true',default=False,
-                    help='turns on stacktrace dumps on errors')
+logtestgroup.add_argument('--debug', dest='debug', action='store_true',default=False,
+                    help='turns on stacktrace dumps for exceptions')
+#ABOVE IMPLEMENTED
 
-parser.add_argument('-q','--quiet', dest='quiet', action='store_true',default=False,
-                    help='supresses all console output')
 
-parser.add_argument('--skip-http-errors', dest='skiphttperrors', action='store_true',default=False,
-                    help='does not exit when HTTP 4xx or 5xx is returned')
+protocolgorup.add_argument('--skip-http-errors', dest='skiphttperrors', action='store_true',default=False,
+                    help='moves to the next step if an HTTP 4xx or 5xx response code is returned')
 
-parser.add_argument('--log-level', dest='loglevel', action='store',default='none',
+logtestgroup.add_argument('--log-level', dest='loglevel', action='store',default='none',
                     choices={'none','critical','error','warning','info','debug'},
-                    help='sets logging level, defaults to none.')
+                    help='sets logging level, defaults to %(default)s.')
 
-parser.add_argument('--log-file', dest='logfile', action='store', metavar='logfile',
-                    help='specifies logfile, defaults to STDOUT')
+logtestgroup.add_argument('--log-file', dest='logfile', action='store', metavar='logfile',
+                    help='specifies logfile, defaults to stderr')
 
-
-#TODO: output files /formats
 
 args = parser.parse_args()
+
+## hack for the case when no arguments are passed. without this, it just sits waiting for stdin.
+if len(sys.argv) < 2:
+    parser.print_usage()
+    parser.exit(status=0)
+
