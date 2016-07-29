@@ -1,9 +1,10 @@
 import unittest
 import yaml
 from ddt import ddt, data, file_data, unpack
-
 from bprc.recipe import Recipe
 from bprc.stepprocessor import StepProcessor
+from bprc.utils import *
+
 
 #TODO: Add mocking for some of these tests to make them smaller/less complex
 

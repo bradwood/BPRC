@@ -4,7 +4,6 @@ This module implements all the class types required to represent the YAML recipe
 
 import logging
 import collections
-import utils
 from utils import vlog,errlog,verboseprint
 
 class Headers(collections.MutableMapping): #Make this class behave and look like a dict
