@@ -1,4 +1,6 @@
 import sys
+sys.path.append('./BPRC/bprc')
+sys.path.append('./BPRC/bprc/tests')
 print(sys.path)
 
 import unittest
