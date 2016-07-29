@@ -81,7 +81,6 @@ class Response:
 
 class Request:
     """An HTTP Request, part of a step"""
-    #TODO: hadnle the case where
     def __init__(self, *, headers, querystring, body):
         self.headers=Headers(headers)
         self.querystring=QueryString(querystring)

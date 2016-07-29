@@ -47,7 +47,6 @@ class StepProcessor():
                 errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
 
             logging.debug('In StepProcessor.prepare()._insert_param: m.group(1)=%s',m.group(1))
-            logging.debug('In StepProcessor.prepare()._insert_param: recipe.steps[0].response.body["id"]=%s',recipe.steps[0].response.body["id"])
 
             return eval('recipe.' + m.group(1))
 
@@ -106,21 +105,36 @@ class StepProcessor():
         name = self.recipe.steps[self.stepid].name
         httpmethod = self.recipe.steps[self.stepid].httpmethod
         url = self.recipe.steps[self.stepid].URL
+        #request
         querystring = self.recipe.steps[self.stepid].request.querystring
-        headers = self.recipe.steps[self.stepid].request.headers
-        body = self.recipe.steps[self.stepid].request.body
+        requestheaders = self.recipe.steps[self.stepid].request.headers
+        requestbody = self.recipe.steps[self.stepid].request.body
+        #response
+        responsecode = self.recipe.steps[self.stepid].response.code
+        responseheaders = self.recipe.steps[self.stepid].response.headers
+        responsebody = self.recipe.steps[self.stepid].response.body
+
         #make the call
         #TODO: wrap in a try to catch bad methods, dodgy URLS, timeouts, etc, etc
-        #TODO: enhancement, take file data and for data.
+        #TODO: enhancement, take file data and form data. "@ parameter"
         #TODO: SSL
-
-        r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=headers, data=json.dumps(body, cls=BodyEncoder))')
+        vlog("About to make HTTP request for step " + str(self.stepid) + " " + str(self.recipe.steps[self.stepid].name))
+        vlog(httpmethod.upper() + " " + self.recipe.steps[self.stepid].URL)
+        r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, data=json.dumps(requestbody, cls=BodyEncoder))')
         #set the response code
         self.recipe.steps[self.stepid].response.code=r.status_code
 
-        logging.debug(json.dumps(body, cls=BodyEncoder))
+        #TODO: implement break on error code cli flag here.
+        vlog("Received HTTP response code: " + str(self.recipe.steps[self.stepid].response.code))
+
+        #now grab the headers and load them into the response.headers
+        self.recipe.steps[self.stepid].response.headers=r.headers
+
+        #now parse the json response and load it into the response.body
+        #TODO: try: on this to catch dodgy/missing json.
+        self.recipe.steps[self.stepid].response.body=json.loads(r.text)
         logging.debug(r.text)
-        logging.debug("response code " + str(self.recipe.steps[self.stepid].response.code))
+
 
 
 

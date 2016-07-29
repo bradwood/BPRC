@@ -21,6 +21,7 @@ recipe:
               # can access them with the php-like construct
       body:
         id: this_is_a_param
+        origin: somval
       headers:
         Authorisation:
       code:
