@@ -12,36 +12,15 @@ Invocation flow:
 """
 
 import yaml
+import utils
+from utils import vlog,errlog,verboseprint
 import logging
+import cli
 from recipe import Recipe
 from stepprocessor import StepProcessor
 import sys
-import cli
-import fileinput
 
-#Turns on stack-traces if debug is passed
-def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.excepthook):
-    if cli.args.debug:
-        debug_hook(exception_type, exception, traceback)
-    else:
-        print("{}: {}".format(exception_type.__name__, exception))
 
-sys.excepthook = exceptionHandler
-
-# set up logging if needed.
-logging.basicConfig(level=logging.DEBUG, format='%(levelname)s:%(asctime)s:%(message)s')
-logging.debug('Initialising log')
-
-#TODO: finish this
-if cli.args.verbose:
-    def verboseprint(*args):
-        # Print each argument separately so caller doesn't need to
-        # stuff everything to be printed into a single string
-        for arg in args:
-           print(arg,)
-        print
-else:
-    verboseprint = lambda *a: None      # do-nothing function
 
 def main():
     """
@@ -50,17 +29,14 @@ def main():
     and run the main program with error handling.
     Return exit status code.
     """
-    print(cli.args.verbose)
-    print(cli.args.dryrun)
-
     #try to read in the file.
 
     try:
+        vlog("Loading YAML input...")
         datamap = yaml.safe_load(cli.args.yamlfile)
     except Exception as e:
-        raise RuntimeError("An error occured parsing the yaml input file") from None
-    logging.debug("Yaml file parsed ok...")
-    logging.debug(cli.args.yamlfile)
+        errlog("An error occured parsing the yaml input file")
+    vlog("Yaml file parsed ok...")
 
     r = Recipe(datamap)
 
