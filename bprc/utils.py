@@ -4,6 +4,9 @@ Misc utils and setup calls.
 import sys
 import cli
 import logging
+import json
+
+#TODO: add docstrings to all these functions
 
 #Turns on stack-traces if debug is passed
 def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.excepthook):
@@ -44,9 +47,9 @@ def errlog(msg, e):
     logging.error(msg)
     raise RuntimeError(msg) from e
 
-#helper function to package up querystring.
-from urllib.parse import urlencode
-def generateQueryString(dct):
-    urlencode(dct)
-
-
+#helper function to serialise a an object so json.dumps will accept it.
+def serialiseBody(obj):
+    #d=dict()
+    #d.update(vars(obj))
+    d=vars(obj)
+    return d

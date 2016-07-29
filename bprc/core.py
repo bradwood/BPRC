@@ -50,10 +50,9 @@ def main():
         # <%= =>
         vlog("Commencing php-like substitutions for step " + str(i) + ":" + r.steps[i].name)
         processor = StepProcessor(recipe=r, stepid=i) # instantiate a step processor
-
         r.steps[i] = processor.prepare() # substitutes and php-like strings to prepare the step for calling & returns
+        vlog("Php-like substitutions complete for step " + str(i) + ":" + r.steps[i].name)
         processor.call() # makes the call and populates the response object.
-        logging.debug('In steps loop POSTPROCESS: r.steps[%s].URL=%s',i,r.steps[i].URL)
 
     print("\n\n")
     print(r)

@@ -7,8 +7,19 @@ import requests
 import re
 from functools import partial
 import utils
-from utils import vlog,errlog,verboseprint, generateQueryString
+from recipe import Body
+from utils import vlog,errlog,verboseprint,serialiseBody
 from urllib.parse import urlencode
+
+
+
+class BodyEncoder(json.JSONEncoder):
+    """ encodes a request body"""
+    def default(self,body):
+        logging.debug("inside JSON BodyEncoder.default()")
+        if isinstance(body,Body):
+            return body._body
+
 
 class StepProcessor():
     """Class to process """
@@ -30,7 +41,11 @@ class StepProcessor():
             returns a string
             """
             #TODO: add try catches on RE replace.
-            vlog("Found php-like pattern: <$=" +m.group(1) + "%>... substituting with " +eval('recipe.' + m.group(1)))
+            try:
+                vlog("Found php-like pattern: <$=" +m.group(1) + "%>... substituting with " +eval('recipe.' + m.group(1)))
+            except KeyError as ke:
+                errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
+
             logging.debug('In StepProcessor.prepare()._insert_param: m.group(1)=%s',m.group(1))
             logging.debug('In StepProcessor.prepare()._insert_param: recipe.steps[0].response.body["id"]=%s',recipe.steps[0].response.body["id"])
 
@@ -54,7 +69,6 @@ class StepProcessor():
 
             for key in self.recipe.steps[self.stepid].request.querystring:
                 vlog("QueryString: " + key + " found: Commencing pattern match for php-like pattern...")
-
                 qs=self.recipe.steps[self.stepid].request.querystring[key]
                 substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), qs)
                 vlog("QueryString: Made " +str(n)+ " substitutions. Result: " + key + "=" + substituted_text)
@@ -88,5 +102,25 @@ class StepProcessor():
 
     def call(self):
         """calls the URL specified in the current step"""
-        pass
+        # set up parameters
+        name = self.recipe.steps[self.stepid].name
+        httpmethod = self.recipe.steps[self.stepid].httpmethod
+        url = self.recipe.steps[self.stepid].URL
+        querystring = self.recipe.steps[self.stepid].request.querystring
+        headers = self.recipe.steps[self.stepid].request.headers
+        body = self.recipe.steps[self.stepid].request.body
+        #make the call
+        #TODO: wrap in a try to catch bad methods, dodgy URLS, timeouts, etc, etc
+        #TODO: enhancement, take file data and for data.
+        #TODO: SSL
+
+        r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=headers, data=json.dumps(body, cls=BodyEncoder))')
+        #set the response code
+        self.recipe.steps[self.stepid].response.code=r.status_code
+
+        logging.debug(json.dumps(body, cls=BodyEncoder))
+        logging.debug(r.text)
+        logging.debug("response code " + str(self.recipe.steps[self.stepid].response.code))
+
+
 

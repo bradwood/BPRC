@@ -11,7 +11,6 @@ import select
 parser = argparse.ArgumentParser(description='Batch Processing RESTful Client')
 
 #TODO:implement ALL cli commands!!!
-#TODO:COSMETIC: re-order args and consider groupings for readability. ArgumentParser.add_argument_group(title=None, description=None)
 
 filegroup=parser.add_argument_group(title="I/O arguments")
 logtestgroup=parser.add_argument_group(title="Logging, testing and debugging arguments")

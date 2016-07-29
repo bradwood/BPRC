@@ -74,26 +74,71 @@ class QueryString(collections.MutableMapping): #Make this class behave and look 
 
 class Response:
     """An HTTP Response, part of a step"""
-    def __init__(self, code, headers, body):
+    def __init__(self, *, code, headers, body):
         self.code = code
         self.headers=Headers(headers)
         self.body=Body(body)
 
 class Request:
     """An HTTP Request, part of a step"""
-    def __init__(self, headers, querystring, body): # TODO use kwargs
+    #TODO: hadnle the case where
+    def __init__(self, *, headers, querystring, body):
         self.headers=Headers(headers)
         self.querystring=QueryString(querystring)
         self.body=Body(body)
 
 class Step:
     """Defines a Step in the Recipe - a specific URL and its properties"""
-    def __init__(self, name, URL, httpmethod, request, response): #TODO: use kwargs
+    def __init__(self, *, name, URL, httpmethod, request, response):
         self.name = name
         self.URL = URL
         self.httpmethod = httpmethod
-        self.request = Request(request["headers"], request["querystring"],request["body"])
-        self.response = Response(response["code"], response["headers"], response["body"])
+        #set up empty request headers if none are passed
+        try:
+            logging.debug(request["headers"])
+        except KeyError as ke:
+            vlog("No request headers values passed into step " + self.name)
+            request.update({'headers': {}})
+        #set up empty request body if none is passed
+        try:
+            logging.debug(request["body"])
+        except KeyError as ke:
+            vlog("No request body values passed into step " + self.name)
+            request.update({'body': {}})
+
+        #set up empty request body if none is passed
+        try:
+            logging.debug(request["querystring"])
+        except KeyError as ke:
+            vlog("No request querystring values passed into step " + self.name)
+            request.update({'querystring': {}})
+
+        self.request = Request(headers=request["headers"], querystring=request["querystring"], body=request["body"])
+
+
+        #set up empty response headers if none are passed
+        try:
+            logging.debug(response["headers"])
+        except KeyError as ke:
+            vlog("No response headers values passed into step " + self.name)
+            response.update({'headers': {}})
+        #set up empty response body if none is passed
+        try:
+            logging.debug(response["body"])
+        except KeyError as ke:
+            vlog("No response body values passed into step " + self.name)
+            response.update({'body': {}})
+
+        #set up empty response body if none is passed
+        try:
+            logging.debug(response["code"])
+        except KeyError as ke:
+            vlog("No response code values passed into step " + self.name)
+            response.update({'code': ''})
+
+
+        #logging.debug("in step constructor " + response["code"])
+        self.response = Response(code=response["code"], headers=response["headers"], body=response["body"])
 
 class Recipe:
     """Defines the Recipe class, which holds a list of URLs to process"""
@@ -102,13 +147,51 @@ class Recipe:
         self.steps = []
         for i, item in enumerate(dmap["recipe"]):
             #instantiate the step object and add it to the list of steps.
-            vlog("Parsing recipe step " + str(i) + ":" + dmap["recipe"][i]["name"])
+            vlog("Parsing recipe step " + str(i))
             try:
-                self.steps.append(Step(dmap["recipe"][i]["name"],
-                                       dmap["recipe"][i]["URL"],
-                                       dmap["recipe"][i]["httpmethod"],
-                                       dmap["recipe"][i]["request"],
-                                       dmap["recipe"][i]["response"]))
+                #set default step Name if one is not set in the YAML
+                try:
+                    logging.debug(dmap["recipe"][i]["name"])
+                except KeyError as ke:
+                    vlog("No step name set. Setting name to 'Step " + str(i)+"'")
+                    dmap["recipe"][i].update({'name': 'GET'})
+
+                #Check for URL passed in the YAML, otherwise fail.
+                try:
+                    logging.debug(dmap["recipe"][i]["URL"])
+                except KeyError as ke:
+                    errlog("No URL set in step " + str(i)+". Aborting...", ke)
+
+                #set default HTTP Method if one is not set in the YAML
+                try:
+                    logging.debug(dmap["recipe"][i]["httpmethod"])
+                except KeyError as ke:
+                    vlog("No HTTPMethod set. Defaulting to GET")
+                    dmap["recipe"][i].update({'httpmethod': 'GET'})
+
+                # create request object if one is not set in the YAML
+                # and populate it with a body, querystring and headers
+                try:
+                    logging.debug(dmap["recipe"][i]["request"])
+                except KeyError as ke:
+                    vlog("No request set. Creating an empty request object with headers, body and querystring")
+                    dmap["recipe"][i].update({'request': {'body': {}, 'querystring': {}, 'headers': {}}})
+
+                # create response object if one is not set in the YAML
+                # and populate it with a body, querystring and headers
+                try:
+                    logging.debug(dmap["recipe"][i]["response"])
+                except KeyError as ke:
+                    vlog("No response set. Creating an empty response object with headers, body and response code")
+                    dmap["recipe"][i].update({'response': {'body': {}, 'code': '', 'headers': {}}})
+
+                #Now instantiate the ste
+                vlog("Creating recipe step object id=" + str(i) + "...")
+                self.steps.append(Step(name=dmap["recipe"][i]["name"],
+                                       URL=dmap["recipe"][i]["URL"],
+                                       httpmethod=dmap["recipe"][i]["httpmethod"],
+                                       request=dmap["recipe"][i]["request"],
+                                       response=dmap["recipe"][i]["response"]))
             except Exception as e:
                 errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
             vlog("Parsed recipe step " + str(i) + " ok...")
