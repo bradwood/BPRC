@@ -4,6 +4,8 @@ This module implements all the class types required to represent the YAML recipe
 
 import logging
 import collections
+import utils
+from utils import vlog,errlog,verboseprint
 
 class Headers(collections.MutableMapping): #Make this class behave and look like a dict
     """A collection of HTTP request or response headers"""
@@ -100,11 +102,16 @@ class Recipe:
         self.steps = []
         for i, item in enumerate(dmap["recipe"]):
             #instantiate the step object and add it to the list of steps.
-            self.steps.append(Step(dmap["recipe"][i]["name"],
-                                   dmap["recipe"][i]["URL"],
-                                   dmap["recipe"][i]["httpmethod"],
-                                   dmap["recipe"][i]["request"],
-                                   dmap["recipe"][i]["response"]))
+            vlog("Parsing recipe step " + str(i) + ":" + dmap["recipe"][i]["name"])
+            try:
+                self.steps.append(Step(dmap["recipe"][i]["name"],
+                                       dmap["recipe"][i]["URL"],
+                                       dmap["recipe"][i]["httpmethod"],
+                                       dmap["recipe"][i]["request"],
+                                       dmap["recipe"][i]["response"]))
+            except Exception as e:
+                errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
+            vlog("Parsed recipe step " + str(i) + " ok...")
 
     # def __str__(self):
     #     #TODO make a nice string printable function here.

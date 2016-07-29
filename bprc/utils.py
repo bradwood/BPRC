@@ -40,8 +40,13 @@ def vlog(msg):
     logging.info(msg)
 
 #helper function to call logging.error and raise a RunTime error
-def errlog(msg):
+def errlog(msg, e):
     logging.error(msg)
-    raise RuntimeError(msg) from None
+    raise RuntimeError(msg) from e
+
+#helper function to package up querystring.
+from urllib.parse import urlencode
+def generateQueryString(dct):
+    urlencode(dct)
 
 
