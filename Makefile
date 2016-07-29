@@ -1,4 +1,4 @@
-PYTHONPATH := .:$(HOME):$(HOME)/BPRC/:$(HOME)/BPRC/bprc:$(HOME)/BPRC/tests/"
+PYTHONPATH := .:$(HOME):$(HOME)/BPRC/:$(HOME)/BPRC/bprc:$(HOME)/BPRC/tests/
 
 
 init:
