@@ -4,7 +4,7 @@ from ddt import ddt, data, file_data, unpack
 from bprc.recipe import Recipe
 from bprc.stepprocessor import StepProcessor
 from bprc.utils import *
-
+import sys; print(sys.path)
 
 #TODO: Add mocking for some of these tests to make them smaller/less complex
 
