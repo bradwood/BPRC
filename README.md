@@ -1,6 +1,6 @@
 # BPRC 
 [![Build Status](https://travis-ci.org/bradwood/BPRC.svg?branch=master)](https://travis-ci.org/bradwood/BPRC)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/bradwood/BPRC/blob/master/LICENSE)
 
 Batch Processing RESTFul Client
 
