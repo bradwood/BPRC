@@ -123,11 +123,14 @@ class StepProcessor():
 
         #make the call
         #TODO: enhancement, take file data and form data. "@ parameter"
-        #TODO: SSL
+        #cli.args.ignoressl
+
         vlog("About to make HTTP request for step " + str(self.stepid) + " " + str(self.recipe.steps[self.stepid].name))
         vlog(httpmethod.upper() + " " + self.recipe.steps[self.stepid].URL)
         try:
-            r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, data=json.dumps(requestbody, cls=BodyEncoder))')
+            r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, verify='+ str(not cli.args.ignoressl) +', data=json.dumps(requestbody, cls=BodyEncoder))')
+        except requests.exceptions.SSLError as ssle:
+            errlog("Could not verify SSL certificate. Try the --ignore-ssl option", ssle)
         except requests.exceptions.ConnectionError as httpe:
             errlog("Could not open HTTP connection. Network problem or bad URL?", httpe)
         except AttributeError as ae:

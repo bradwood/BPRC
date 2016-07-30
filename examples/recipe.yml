@@ -24,10 +24,8 @@ recipe:
   -
     name: Load OAUTH Plugin
     httpmethod: GET
-    URL: http://httpbin.org/get #gets the JSON field id from the body of the response from step 1.
+    URL: https://wiremock:8081/hello #gets the JSON field id from the body of the response from step 1.
     request:
-      querystring:
-        key3: value3
       body: #TODO: put in a check for when a body, querystring, or header is defined withot anything below it!
         something: blah
       headers:
