@@ -23,10 +23,15 @@ filegroup.add_argument('-f', '--input-file', dest='yamlfile', metavar='yamlfile'
                     help="YAML recipe file", type=argparse.FileType('r'), default=sys.stdin)
 #ABOVE IMPLEMENTED
 
-filegroup.add_argument('--output-file', dest='outfile', action='store', metavar='outfile',
-                    help='specifies output file, defaults to ./bprc.out.{pid}')
-#TODO: think about output format? yaml, json, CSV, other?
+filegroup.add_argument('--output-file', dest='outfile', action='store', metavar='outfile', default="bprc.out",
+                    help='specifies output file, defaults to %(default)s')
 
+filegroup.add_argument('--output-format', dest='outputformat', action='store',
+                    choices={'raw','json'}, default='raw',
+                    help='specifies output format, defaults to %(default)s. ' +
+                    'If json is selected a separate file will be created for ' +
+                    'each step in the recipe with the filename suffixed with the ' +
+                    'step number. Raw-formatted output, on the other hand, will all be written to a single file.')
 
 logtestgroup.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                     help='verbose mode', default=False)
@@ -51,6 +56,7 @@ logtestgroup.add_argument('--log-file', dest='logfile', action='store', metavar=
 
 protocolgroup.add_argument('--skip-http-errors', dest='skiphttperrors', action='store_true',default=False,
                     help='moves to the next step if an HTTP 4xx or 5xx response code is returned')
+#ABOVE IMPLEMENTED
 
 protocolgroup.add_argument('--ignore-ssl', dest='ignoressl', action='store_true',default=False,
                     help='do not validate ssl certificates')

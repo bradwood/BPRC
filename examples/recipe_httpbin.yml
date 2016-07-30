@@ -1,4 +1,4 @@
---- #sample recipe #TODO: MAYBE add character encoding support?
+--- #sample recipe
 recipe:
   -  # step0
     name: HTTPBIN call

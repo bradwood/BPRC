@@ -42,7 +42,6 @@ def main():
     r = Recipe(datamap)
     vlog("Recipe object instantiated ok...")
 
-
     #loop through steps and execute each one.
     vlog("Commencing processing loop...")
     for i, step in enumerate(r.steps):
@@ -53,10 +52,5 @@ def main():
         r.steps[i] = processor.prepare() # substitutes and php-like strings to prepare the step for calling & returns
         vlog("Php-like substitutions complete for step " + str(i) + ":" + r.steps[i].name)
         processor.call() # makes the call and populates the response object.
+        processor.generateOutput() #writes the output for this step.
 
-    print("\n\n")
-    print(r)
-    logging.debug('Post-loop: r.steps[1].URL=%s',r.steps[1].URL)
-    logging.debug('Post-loop: r.steps[1].request.querystring["keysub"]=%s',r.steps[1].request.querystring["keysub"])
-    logging.debug('Post-loop: r.steps[1].request.body["key4"]=%s',r.steps[1].request.body["key4"])
-    logging.debug('Post-loop: r.steps[1].request.headers["Authorisation"]=%s',r.steps[1].request.headers["Authorisation"])

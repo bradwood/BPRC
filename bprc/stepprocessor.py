@@ -8,9 +8,11 @@ import re
 from functools import partial
 import utils
 from recipe import Body
-from utils import vlog,errlog,verboseprint,serialiseBody
+from utils import vlog,errlog,verboseprint, httpstatuscodes
 from urllib.parse import urlencode
 import cli
+from outputprocessor import OutputProcessor
+import os
 
 
 
@@ -114,6 +116,11 @@ class StepProcessor():
         responseheaders = self.recipe.steps[self.stepid].response.headers
         responsebody = self.recipe.steps[self.stepid].response.body
 
+        #TODO: stuff a few extra request headers if these are not aready present
+        # e.g: accepts:
+        # content-type? maybe, if requests doesn't do this
+        # User agent.
+
         #make the call
         #TODO: enhancement, take file data and form data. "@ parameter"
         #TODO: SSL
@@ -126,6 +133,7 @@ class StepProcessor():
         except AttributeError as ae:
             errlog("Problem with URL or HTTP method", ae)
         #set the response code
+        #and if it's 4xx or 5xx exist based on whether --ignore-http-errors were passed or not.
         self.recipe.steps[self.stepid].response.code=r.status_code
         vlog("Received HTTP response code: " + str(self.recipe.steps[self.stepid].response.code))
         if not r.status_code == requests.codes.ok:
@@ -142,19 +150,42 @@ class StepProcessor():
                         print("Response body: " + r.text)
                     errlog("Got error HTTP response. Aborting", e)
 
-
-
-
-        #TODO: implement break on error code cli flag here.
-
         #now grab the headers and load them into the response.headers
         self.recipe.steps[self.stepid].response.headers=r.headers
 
+        #Now load some of the meta data from the response into the step.response
+        self.recipe.steps[self.stepid].response.httpversion=r.raw.version
+        self.recipe.steps[self.stepid].response.encoding=r.encoding
+        self.recipe.steps[self.stepid].response.statusmsg=httpstatuscodes[str(r.status_code)]
+
         #now parse the json response and load it into the response.body
-        #TODO: try: on this to catch dodgy/missing json -- do this by interrogtating the Content-type: header
+        response_content_type = r.headers['content-type'].split(';')[0] # grebs the xxx/yyyy bit of the header
         logging.debug(r.text)
-        self.recipe.steps[self.stepid].response.body=json.loads(r.text)
-        logging.debug(r.text)
+        logging.debug("Content-type:" + response_content_type)
+        logging.debug("Encoding:" + str(r.encoding))
+        logging.debug("Text:" + r.text)
+
+        #now, check if JSON was sent in the response body, if it was, load it, otherwise exit with an error
+        if response_content_type.lower() == 'application/json':
+            vlog("JSON response expected. Content-type: " + response_content_type)
+            try:
+                vlog("Attempting to parse JSON response body...")
+                self.recipe.steps[self.stepid].response.body=json.loads(r.text)
+            except Exception as e:
+                errlog("Failed to parse JSON response. Aborting", e)
+            vlog("JSON parsed ok.")
+        else:
+            errlog("Response body is not JSON! Content-type: " +response_content_type+". Aborting", None)
+
+    def generateOutput(self):
+        """imvokes the output processor to write the output"""
+        #instantiate an OutputProcessor
+        output=OutputProcessor(step=self.recipe.steps[self.stepid], id=self.stepid)
+        # get cli arguments and pass to the output processor
+
+        output.writeOutput(writeformat=cli.args.outputformat, writefile=cli.args.outfile)
+
+
 
 
 

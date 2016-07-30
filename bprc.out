@@ -1,0 +1,115 @@
+--- Step 0: Create Kong API ---
+GET http://kong:8001/apis
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Connection: keep-alive
+Content-Type: application/json; charset=utf-8
+Date: Sat, 30 Jul 2016 16:02:15 GMT
+Server: kong/0.8.3
+Transfer-Encoding: chunked
+{
+    "data": [
+        {
+            "created_at": 1468851772000,
+            "id": "6912385b-6da0-4f42-8cd6-f031a01766ce",
+            "name": "authenticate-v1",
+            "preserve_host": false,
+            "request_path": "/authenticate/v1",
+            "strip_request_path": false,
+            "upstream_url": "https://wiremock:8081/"
+        },
+        {
+            "created_at": 1468851772000,
+            "id": "26804951-9886-4314-be73-aa0ac0041d2c",
+            "name": "client-v1",
+            "preserve_host": false,
+            "request_path": "/client/v1",
+            "strip_request_path": false,
+            "upstream_url": "https://wiremock:8081/"
+        },
+        {
+            "created_at": 1468851774000,
+            "id": "b0c8ae3d-e4a1-4507-8430-f9280fd0a673",
+            "name": "consumer-v1",
+            "preserve_host": false,
+            "request_path": "/consumer/v1",
+            "strip_request_path": false,
+            "upstream_url": "http://wiremock:8080/"
+        },
+        {
+            "created_at": 1468851774000,
+            "id": "571044ec-af4b-4ef8-a23c-33430580c91f",
+            "name": "merchant-v1",
+            "preserve_host": false,
+            "request_path": "/merchant/v1",
+            "strip_request_path": false,
+            "upstream_url": "http://wiremock:8080/"
+        },
+        {
+            "created_at": 1468851775000,
+            "id": "ee2f213c-3170-428b-a7b0-711ad04f6543",
+            "name": "m-manager-v1",
+            "preserve_host": false,
+            "request_path": "/m-manager/v1",
+            "strip_request_path": false,
+            "upstream_url": "http://wiremock:8080/"
+        },
+        {
+            "created_at": 1468851775000,
+            "id": "e14de6dc-29f1-4fe3-9e30-bae26e67c200",
+            "name": "admin-v1",
+            "preserve_host": false,
+            "request_path": "/admin/v1",
+            "strip_request_path": false,
+            "upstream_url": "http://wiremock:8080/"
+        },
+        {
+            "created_at": 1468851775000,
+            "id": "cf6fa919-b6b6-42d6-9533-6fce763e4598",
+            "name": "consumer-v2",
+            "preserve_host": false,
+            "request_path": "/consumer/v2",
+            "strip_request_path": false,
+            "upstream_url": "http://wiremock:8080/"
+        },
+        {
+            "created_at": 1469453773000,
+            "id": "bd820319-f66f-4421-9f5a-181f785ca595",
+            "name": "test",
+            "preserve_host": false,
+            "request_host": "blah.copm",
+            "strip_request_path": false,
+            "upstream_url": "http://kong.com/"
+        }
+    ],
+    "total": 8
+}
+
+
+--- Step 1: Load OAUTH Plugin ---
+GET http://httpbin.org/get?key3=value3
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: *
+Connection: keep-alive
+Content-Length: 326
+Content-Type: application/json
+Date: Sat, 30 Jul 2016 19:36:16 GMT
+Server: nginx
+{
+    "args": {
+        "key3": "value3"
+    },
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Blah": "blahbha",
+        "Content-Length": "21",
+        "Host": "httpbin.org",
+        "User-Agent": "python-requests/2.10.0"
+    },
+    "origin": "94.192.71.57",
+    "url": "http://httpbin.org/get?key3=value3"
+}
+
+
