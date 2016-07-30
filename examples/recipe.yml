@@ -2,7 +2,7 @@
 recipe:
   -  # step0
     name: Create Kong API
-    httpmethod: POST
+    httpmethod: GET
     URL: http://kong:8001/apis
     request:
       body:
@@ -24,7 +24,7 @@ recipe:
   -
     name: Load OAUTH Plugin
     httpmethod: POST
-    URL: http://kong:8001/apdis/<%=steps[0].response.body["id"]%>/<%=steps[0].request.querystring["keya"]%> #gets the JSON field id from the body of the response from step 1.
+    URL: http://kong:8001/apdis/<%=steps[0].response.body["strip_url"]%>/<%=steps[0].request.querystring["keya"]%> #gets the JSON field id from the body of the response from step 1.
     request:
       querystring:
         key3: value3

@@ -10,6 +10,7 @@ import utils
 from recipe import Body
 from utils import vlog,errlog,verboseprint,serialiseBody
 from urllib.parse import urlencode
+import cli
 
 
 
@@ -40,7 +41,6 @@ class StepProcessor():
             takes an re.match object
             returns a string
             """
-            #TODO: add try catches on RE replace.
             try:
                 vlog("Found php-like pattern: <$=" +m.group(1) + "%>... substituting with " +eval('recipe.' + m.group(1)))
             except KeyError as ke:
@@ -52,7 +52,7 @@ class StepProcessor():
 
         if self.stepid == 0:
             vlog("Stepid=" + str(self.stepid) + " - nothing to parse, skipping step") #TODO: change handing of step 0.
-            return self.recipe.steps[self.stepid] # nothing to process if we are on the first step TODO: maybe do some step validation later?
+            return self.recipe.steps[self.stepid]
         else:
             # Algorithm:
 
@@ -115,23 +115,44 @@ class StepProcessor():
         responsebody = self.recipe.steps[self.stepid].response.body
 
         #make the call
-        #TODO: wrap in a try to catch bad methods, dodgy URLS, timeouts, etc, etc
         #TODO: enhancement, take file data and form data. "@ parameter"
         #TODO: SSL
         vlog("About to make HTTP request for step " + str(self.stepid) + " " + str(self.recipe.steps[self.stepid].name))
         vlog(httpmethod.upper() + " " + self.recipe.steps[self.stepid].URL)
-        r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, data=json.dumps(requestbody, cls=BodyEncoder))')
+        try:
+            r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, data=json.dumps(requestbody, cls=BodyEncoder))')
+        except requests.exceptions.ConnectionError as httpe:
+            errlog("Could not open HTTP connection. Network problem or bad URL?", httpe)
+        except AttributeError as ae:
+            errlog("Problem with URL or HTTP method", ae)
         #set the response code
         self.recipe.steps[self.stepid].response.code=r.status_code
+        vlog("Received HTTP response code: " + str(self.recipe.steps[self.stepid].response.code))
+        if not r.status_code == requests.codes.ok:
+            msg="Received an HTTP error code..."
+            logging.warning(msg)
+            verboseprint(msg)
+            if cli.args.skiphttperrors:
+                vlog("--skip-http-errors passed. Ignoring error and proceeding...")
+            else:
+                try:
+                    r.raise_for_status()
+                except Exception as e:
+                    if cli.args.debug:
+                        print("Response body: " + r.text)
+                    errlog("Got error HTTP response. Aborting", e)
+
+
+
 
         #TODO: implement break on error code cli flag here.
-        vlog("Received HTTP response code: " + str(self.recipe.steps[self.stepid].response.code))
 
         #now grab the headers and load them into the response.headers
         self.recipe.steps[self.stepid].response.headers=r.headers
 
         #now parse the json response and load it into the response.body
-        #TODO: try: on this to catch dodgy/missing json.
+        #TODO: try: on this to catch dodgy/missing json -- do this by interrogtating the Content-type: header
+        logging.debug(r.text)
         self.recipe.steps[self.stepid].response.body=json.loads(r.text)
         logging.debug(r.text)
 
