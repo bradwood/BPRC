@@ -26,7 +26,7 @@ recipe:
     httpmethod: GET
     URL: https://wiremock:8081/hello #gets the JSON field id from the body of the response from step 1.
     request:
-      body: #TODO: put in a check for when a body, querystring, or header is defined withot anything below it!
+      body: #TODO: NB!! put in a check for when a body, querystring, or header is defined withot anything below it!
         something: blah
       headers:
         blah: blahbha

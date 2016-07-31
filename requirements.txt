@@ -2,7 +2,9 @@
 #TODO: add coverage.py and badge script.
 pyyaml
 ddt
-pdoc
+pypandoc
+#pdoc
+#pandoc
 requests
 pyyaml
 
