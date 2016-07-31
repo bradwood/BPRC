@@ -46,6 +46,9 @@ newverfile = open(verfile, 'w')
 newverfile.write('__version__ = "'+ newver +'"' +"\n")
 newverfile.close()
 call(["git", "add", verfile])
+call(["git", "commit", "-m", "Version bump to " + newver])
+call(["git", "tag", newver ,"-m", "Version bump to " + newver])
+
 
 
 
