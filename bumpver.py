@@ -31,8 +31,6 @@ if args.bump == 'minor':
 if args.bump == 'patch':
     newver=semver.bump_patch(__version__)
 
-print('New version is ' + newver)
-
 # check if there are any unstaged changes. if there are, then exit
 from subprocess import call, run, PIPE
 result=run('expr $(git status --porcelain 2>/dev/null| egrep "^(M| M)" | wc -l)',
@@ -42,10 +40,12 @@ if int(result.stdout) > 0:
     print("There are unstaged changes. Please fix, and re-run.")
     sys.exit(1)
 
-call(["git", "add", verfile])
+print('Git status is clean. Incrementing version number in' + verfile)
+print('New version is ' + newver)
 newverfile = open(verfile, 'w')
 newverfile.write('__version__ = "'+ newver +'"' +"\n")
 newverfile.close()
+call(["git", "add", verfile])
 
 
 
