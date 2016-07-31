@@ -28,8 +28,6 @@ except (IOError, ImportError):
 
 long_description = pypandoc.convert('README.md', 'rst')
 
-print(long_description)
-
 # get the version number from the canonocial version file
 import re
 VERSIONFILE="bprc/_version.py"
@@ -54,6 +52,9 @@ setup(
 
     # The project's main homepage.
     url='https://github.com/bradwood/BPRC',
+
+    # download url -- use github
+    download_url ='https://github.com/bradwood/BPRC/tarball/' + verstr,
 
     # Author details
     author='Bradley Wood',
