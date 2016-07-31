@@ -33,6 +33,7 @@ filegroup.add_argument('--output-format', dest='outputformat', action='store',
 logtestgroup.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                     help='verbose mode', default=False)
 
+#TODO implement dry run
 logtestgroup.add_argument('-d', '--dry-run', dest='dryrun', action='store_true',default=False,
                     help='does everything except actually making any HTTP calls')
 

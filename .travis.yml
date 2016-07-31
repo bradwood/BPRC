@@ -1,9 +1,12 @@
+# https://github.com/bradwood/BPRC
+sudo: false
 language: python
 python:
 #  - "3.2"
 #  - "3.3"
 #  - "3.4"
   - "3.5"
+# - pypy3
 # command to install dependencies
 install: "pip3 install -r requirements.txt"
 # command to run tests

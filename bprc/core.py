@@ -8,12 +8,13 @@ Invocation flow:
         3.1.1. Substiting any response data into the current Ingredient
         3.1.2. Executing the call
         3.1.3. Updating all response objects
+        3.1.4. Write output file
   4. Exit.
 """
 
 import yaml
 import utils
-from utils import vlog,errlog,verboseprint
+from utils import vlog,errlog,verboseprint, logleveldict
 import logging
 import cli
 from recipe import Recipe
@@ -29,6 +30,21 @@ def main():
     and run the main program with error handling.
     Return exit status code.
     """
+
+    if cli.args.loglevel == 'none':
+        logging.basicConfig(
+        level=logleveldict[cli.args.loglevel],
+        format='%(levelname)s:%(asctime)s: %(message)s',
+        handlers=[logging.NullHandler()]) # set up with a NullHandler
+    else:
+        logging.basicConfig(
+        level=logleveldict[cli.args.loglevel],
+        filename=cli.args.logfile,
+        format='%(levelname)s:%(asctime)s: %(message)s') #Use the standard FileHandler
+
+
+    logging.info('----------------Initialising log----------------')
+
     #try to read in the file.
 
     try:

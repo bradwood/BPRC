@@ -8,7 +8,6 @@ import json
 from urllib.parse import urlencode
 import collections
 
-#TODO: add docstrings to all these functions
 httpstatuscodes = {
 "100": "Continue",
 "101": "Switching Protocols",
@@ -70,13 +69,6 @@ logleveldict = {'none': 100, #Hack, as will only log stuff >= 100, critical=50
                 'critical': logging.CRITICAL
                 }
 
-logging.basicConfig(
-    level=logleveldict[cli.args.loglevel],
-    filename=cli.args.logfile,
-    format='%(levelname)s:%(asctime)s: %(message)s')
-
-
-logging.info('----------------Initialising log----------------')
 
 #sets up a print function for the --verbose argument
 verboseprint = print if cli.args.verbose else lambda *a, **k: None

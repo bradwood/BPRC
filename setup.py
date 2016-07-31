@@ -13,7 +13,6 @@ from os import path
 
 here = path.abspath(path.dirname(__file__))
 
-#TODO: get this .MD to .rst conversion working.
 # try:
 #     from pypandoc import convert
 #     read_md = lambda f: convert(f, 'rst')
@@ -31,9 +30,6 @@ if mo:
     verstr = mo.group(1)
 else:
     raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
-
-
-
 
 # Get the long description from the README file
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
