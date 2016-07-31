@@ -10,6 +10,7 @@ Invocation flow:
         3.1.3. Updating all response objects
         3.1.4. Write output file
   4. Exit.
+
 """
 
 import yaml

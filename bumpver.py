@@ -33,10 +33,21 @@ if args.bump == 'patch':
 
 print('New version is ' + newver)
 
+# check if there are any unstaged changes. if there are, then exit
+from subprocess import call, run, PIPE
+result=run('expr $(git status --porcelain 2>/dev/null| egrep "^(M| M)" | wc -l)',
+            shell=True, universal_newlines=True, stdout=PIPE)
+
+if int(result.stdout) > 0:
+    print("There are unstaged changes. Please fix, and re-run.")
+    sys.exit(1)
+
+call(["git", "add", verfile])
 newverfile = open(verfile, 'w')
 newverfile.write('__version__ = "'+ newver +'"' +"\n")
 newverfile.close()
 
-from subprocess import call
-call(["git", "add",verfile])
+
+
+
 
