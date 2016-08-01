@@ -13,14 +13,21 @@ Invocation flow:
 
 """
 
+import os
+import sys
+# see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
+
 import yaml
-import utils
+import bprc.utils
 from utils import vlog,errlog,verboseprint, logleveldict
 import logging
-import cli
-from recipe import Recipe
-from stepprocessor import StepProcessor
-import sys
+import bprc.cli
+from bprc.recipe import Recipe
+from bprc.stepprocessor import StepProcessor
 
 
 
@@ -32,15 +39,15 @@ def main():
     Return exit status code.
     """
 
-    if cli.args.loglevel == 'none':
+    if bprc.cli.args.loglevel == 'none':
         logging.basicConfig(
-        level=logleveldict[cli.args.loglevel],
+        level=logleveldict[bprc.cli.args.loglevel],
         format='%(levelname)s:%(asctime)s: %(message)s',
         handlers=[logging.NullHandler()]) # set up with a NullHandler
     else:
         logging.basicConfig(
-        level=logleveldict[cli.args.loglevel],
-        filename=cli.args.logfile,
+        level=logleveldict[bprc.cli.args.loglevel],
+        filename=bprc.cli.args.logfile,
         format='%(levelname)s:%(asctime)s: %(message)s') #Use the standard FileHandler
 
 
@@ -50,7 +57,7 @@ def main():
 
     try:
         vlog("Loading yaml input...")
-        datamap = yaml.safe_load(cli.args.yamlfile)
+        datamap = yaml.safe_load(bprc.cli.args.yamlfile)
     except Exception as e:
         errlog("An error occured parsing the yaml input file", e)
     vlog("Yaml file parsed ok...")

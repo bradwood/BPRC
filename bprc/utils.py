@@ -1,8 +1,17 @@
 """
 Misc utils and setup calls.
 """
+
 import sys
-import cli
+import os
+
+
+# see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
+import bprc.cli
 import logging
 import json
 from urllib.parse import urlencode
@@ -53,7 +62,7 @@ httpstatuscodes = {
 
 #Turns on stack-traces if debug is passed
 def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.excepthook):
-    if cli.args.debug:
+    if bprc.cli.args.debug:
         debug_hook(exception_type, exception, traceback)
     else:
         print("{}: {}".format(exception_type.__name__, exception))
@@ -71,7 +80,7 @@ logleveldict = {'none': 100, #Hack, as will only log stuff >= 100, critical=50
 
 
 #sets up a print function for the --verbose argument
-verboseprint = print if cli.args.verbose else lambda *a, **k: None
+verboseprint = print if bprc.cli.args.verbose else lambda *a, **k: None
 
 # helper function to call both verboseprint and logging.info
 def vlog(msg):

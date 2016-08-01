@@ -1,19 +1,27 @@
 """
 This module implements the logic to process a step in a recipe
 """
+
+import sys
+import os
+
+
+# see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
 import logging
 import json
 import requests
 import re
 from functools import partial
-import utils
-from recipe import Body
-from utils import vlog,errlog,verboseprint, httpstatuscodes
+import bprc.utils
+from bprc.recipe import Body
+from bprc.utils import vlog,errlog,verboseprint, httpstatuscodes
 from urllib.parse import urlencode
-import cli
+import bprc.cli
 from outputprocessor import OutputProcessor
-import os
-
 
 
 class BodyEncoder(json.JSONEncoder):
@@ -123,12 +131,12 @@ class StepProcessor():
 
         #make the call
         #TODO: enhancement, take file data and form data. "@ parameter"
-        #cli.args.ignoressl
+        #bprc.cli.args.ignoressl
 
         vlog("About to make HTTP request for step " + str(self.stepid) + " " + str(self.recipe.steps[self.stepid].name))
         vlog(httpmethod.upper() + " " + self.recipe.steps[self.stepid].URL)
         try:
-            r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, verify='+ str(not cli.args.ignoressl) +', data=json.dumps(requestbody, cls=BodyEncoder))')
+            r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, verify='+ str(not bprc.cli.args.ignoressl) +', data=json.dumps(requestbody, cls=BodyEncoder))')
         except requests.exceptions.SSLError as ssle:
             errlog("Could not verify SSL certificate. Try the --ignore-ssl option", ssle)
         except requests.exceptions.ConnectionError as httpe:
@@ -143,13 +151,13 @@ class StepProcessor():
             msg="Received an HTTP error code..."
             logging.warning(msg)
             verboseprint(msg)
-            if cli.args.skiphttperrors:
+            if bprc.cli.args.skiphttperrors:
                 vlog("--skip-http-errors passed. Ignoring error and proceeding...")
             else:
                 try:
                     r.raise_for_status()
                 except Exception as e:
-                    if cli.args.debug:
+                    if bprc.cli.args.debug:
                         print("Response body: " + r.text)
                     errlog("Got error HTTP response. Aborting", e)
 
@@ -186,7 +194,7 @@ class StepProcessor():
         output=OutputProcessor(step=self.recipe.steps[self.stepid], id=self.stepid)
         # get cli arguments and pass to the output processor
 
-        output.writeOutput(writeformat=cli.args.outputformat, writefile=cli.args.outfile)
+        output.writeOutput(writeformat=bprc.cli.args.outputformat, writefile=bprc.cli.args.outfile)
 
 
 
