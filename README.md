@@ -1,8 +1,11 @@
 # BPRC 
 [![Build Status](https://travis-ci.org/bradwood/BPRC.svg?branch=master)](https://travis-ci.org/bradwood/BPRC)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/bradwood/BPRC/blob/master/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
+[![PyPI](https://img.shields.io/pypi/pyversions/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
+[![PyPI](https://img.shields.io/pypi/status/bprc.svg?maxAge=2592000)]()
 
-**Batch Processing RESTFul Client**
+#Batch Processing RESTFul Client
 
 A Dev/DevOps tool to automate calling a set of RESTFul JSON endpoints, with the ability to grab data from the JSON payload and use it in subsequent calls in the recipe.
 
