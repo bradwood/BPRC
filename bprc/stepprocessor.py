@@ -21,7 +21,7 @@ from bprc.recipe import Body
 from bprc.utils import vlog,errlog,verboseprint, httpstatuscodes
 from urllib.parse import urlencode
 import bprc.cli
-from outputprocessor import OutputProcessor
+from bprc.outputprocessor import OutputProcessor
 
 
 class BodyEncoder(json.JSONEncoder):
