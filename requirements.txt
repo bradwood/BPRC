@@ -8,3 +8,5 @@ pypandoc
 requests
 pyyaml
 semver
+coverage
+

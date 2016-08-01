@@ -8,6 +8,10 @@ python:
   - "3.5"
 # - pypy3
 # command to install dependencies
-install: "pip3 install -r requirements.txt"
+install:
+  - pip3 install -r requirements.txt
 # command to run tests
-script: make test
+script:
+  - coverage make test
+after_success:
+  - codecov
