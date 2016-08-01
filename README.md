@@ -3,7 +3,7 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/bradwood/BPRC/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
 [![PyPI](https://img.shields.io/pypi/pyversions/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
-[![PyPI](https://img.shields.io/pypi/status/bprc.svg?maxAge=2592000)]()
+[![PyPI](https://img.shields.io/pypi/status/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
 
 #Batch Processing RESTFul Client
 
