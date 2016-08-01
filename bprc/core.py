@@ -23,7 +23,7 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 import yaml
 import bprc.utils
-from utils import vlog,errlog,verboseprint, logleveldict
+from bprc.utils import vlog,errlog,verboseprint, logleveldict
 import logging
 import bprc.cli
 from bprc.recipe import Recipe

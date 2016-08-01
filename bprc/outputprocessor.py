@@ -2,7 +2,16 @@
 This module implements output processing class.
 """
 
-from utils import vlog, errlog, verboseprint, printstepcolophon, printhttprequest, printheaders, printbody
+import os
+import sys
+# see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
+
+
+from bprc.utils import vlog, errlog, verboseprint, printstepcolophon, printhttprequest, printheaders, printbody
 
 import json
 from pprint import pprint
