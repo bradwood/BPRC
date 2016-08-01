@@ -2,9 +2,9 @@
 [![Build Status](https://travis-ci.org/bradwood/BPRC.svg?branch=master)](https://travis-ci.org/bradwood/BPRC)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/bradwood/BPRC/blob/master/LICENSE)
 
-Batch Processing RESTFul Client
+**Batch Processing RESTFul Client**
 
-A DevOps tool to script calling a load of RESTFul JSON endpoints, with the ability to grab data from the JSON payload and use it in subsequent calls in the recipe.
+A Dev/DevOps tool to automate calling a set of RESTFul JSON endpoints, with the ability to grab data from the JSON payload and use it in subsequent calls in the recipe.
 
 ## What it does
 If you're a Dev/DevOps engineer you may have been faced with a situation where you find yourself writing a shell script to automate getting JSON data from one or more RESTful endpoints using `curl` or `wget` or `httpie`, and then parsing the output using `sed`, `grep` or `jq`. This tool is designed to provide a generic, simplied, yet powerful means of writing such scripts in the form of a simple _recipe_ specification, rather than a shell script. 
@@ -88,12 +88,18 @@ recipe:
  - Dry-run *(Not implemented yet)*
  - verbose and/or debug output
 
-## Known issues
+## Known issues/shortcomings
 The following are known areas for improvement:
 - poor tolerance of badly formatted YAML
 - `--dry-run` option not implemented
 - poor test coverage and test automation
+- only handles JSON in both the request and response bodies, XML or ther payload types are not supported.
+- can not do a substitution using data in a response body if the JSON payload is a list (array). Only dictionaries (key/value pairs) at the top level of the JSON document are currently supported. 
+- does not support multiple YAML recipes in one file (separated by `---`)
 
 ## Planned improvements
 - The ability to include a file's data into the recipe using an `@` prefix
-- Fixing the known issues above
+- Improving error handling
+- Better test coverage and integration with a coverage tool
+- Implementing `--dry-run`
+- Improving sensible default (e.g., `User-agent` header)
