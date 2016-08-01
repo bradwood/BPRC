@@ -1,7 +1,7 @@
 --- #sample recipe
 recipe:
   -  # step0
-    name: Create Kong API --b
+    name: Create Kong API
     httpmethod: GET
     URL: http://kong:8001/apis
     request:
