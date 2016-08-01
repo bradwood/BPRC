@@ -2,9 +2,17 @@
 This module implements all the class types required to represent the YAML recipe in memory.
 """
 
+import os
+import sys
+# see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
+
 import logging
 import collections
-from utils import vlog,errlog,verboseprint
+from bprc.utils import vlog,errlog,verboseprint
 
 class Headers(collections.MutableMapping): #Make this class behave and look like a dict
     """A collection of HTTP request or response headers"""
