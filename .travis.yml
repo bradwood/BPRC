@@ -12,6 +12,6 @@ install:
   - pip3 install -r requirements.txt
 # command to run tests
 script:
-  - coverage make test
+  - codecov make test
 after_success:
   - codecov
