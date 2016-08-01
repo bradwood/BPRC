@@ -13,8 +13,6 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 import os
-import pypandoc
-from pypandoc.pandoc_download import download_pandoc
 
 
 here = path.abspath(path.dirname(__file__))
@@ -24,10 +22,11 @@ here = path.abspath(path.dirname(__file__))
 
 try:
     import pypandoc
+    from pypandoc.pandoc_download import download_pandoc
+    download_pandoc()
+    long_description = pypandoc.convert('README.md', 'rst')
 except (IOError, ImportError):
-   download_pandoc()
-
-long_description = pypandoc.convert('README.md', 'rst')
+    long_description = ''
 
 # get the version number from the canonocial version file
 import re
