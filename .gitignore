@@ -84,3 +84,6 @@ ENV/
 
 #panddoc downloads...
 pandoc*
+
+#ssh
+.ssh/

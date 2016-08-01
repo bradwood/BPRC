@@ -5,7 +5,7 @@ This module takes care of capturing the cli options
 import argparse
 import sys
 import logging
-from _version import __version__
+from bprc._version import __version__ as __version__
 import select
 
 parser = argparse.ArgumentParser(description='Batch Processing RESTful Client')
