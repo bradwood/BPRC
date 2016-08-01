@@ -13,6 +13,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 import os
+import pypandoc
 from pypandoc.pandoc_download import download_pandoc
 
 
@@ -101,7 +102,7 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['pyyaml', 'requests','pypandoc'],
+    install_requires=['pyyaml', 'requests'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,
