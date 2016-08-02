@@ -6,6 +6,7 @@ import sys
 import os
 
 #TODO: make sure type casting works for boolean, int, string, float etc
+#TODO: for header comparisions, make case insensitive -- check the RFC!!
 
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 PACKAGE_PARENT = '..'
