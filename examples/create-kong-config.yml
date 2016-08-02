@@ -61,87 +61,87 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
         config.only_https: <%!only_https%>
 
 #CLIENT API
-  # -
-  #   name: Delete <%!client_api%> API
-  #   httpmethod: DELETE
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!client_api%>-<%!api_version%>
-  # -
-  #   name: Create <%!client_api%> API
-  #   httpmethod: POST
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
-  #   request:
-  #     body:
-  #       name: <%!client_api%>-<%!api_version%>
-  #       upstream_url: <%!wiremock_url%>
-  #       request_path: /<%!client_api%>/<%!api_version%>
-  #       strip_request_path: <%!strip_request_path%>
-  # -  # step5
-  #   name: Delete <%!consumer_api%> API
-  #   httpmethod: DELETE
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!consumer_api%>-<%!api_version%>
-  # -  # step6
-  #   name: Create <%!consumer_api%> API
-  #   httpmethod: POST
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
-  #   request:
-  #     body:
-  #       name: <%!consumer_api%>-<%!api_version%>
-  #       upstream_url: <%!wiremock_url%>
-  #       request_path: /<%!consumer_api%>/<%!api_version%>
-  #       strip_request_path: <%!strip_request_path%>
-  # -  # step7
-  #   name: Delete <%!merchant_api%> API
-  #   httpmethod: DELETE
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!merchant_api%>-<%!api_version%>
-  # -  # step8
-  #   name: Create <%!merchant_api%> API
-  #   httpmethod: POST
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
-  #   request:
-  #     body:
-  #       name: <%!merchant_api%>-<%!api_version%>
-  #       upstream_url: <%!wiremock_url%>
-  #       request_path: /<%!merchant_api%>/<%!api_version%>
-  #       strip_request_path: <%!strip_request_path%>
-  # -  # step9
-  #   name: Delete <%!m-manager_api%> API
-  #   httpmethod: DELETE
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!m-manager_api%>-<%!api_version%>
-  # -  # step10
-  #   name: Create <%!m-manager_api%> API
-  #   httpmethod: POST
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
-  #   request:
-  #     body:
-  #       name: <%!m-manager_api%>-<%!api_version%>
-  #       upstream_url: <%!wiremock_url%>
-  #       request_path: /<%!m-manager_api%>/<%!api_version%>
-  #       strip_request_path: <%!strip_request_path%>
-  # -  # step11
-  #   name: Delete <%!c-manager_api%> API
-  #   httpmethod: DELETE
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!c-manager_api%>-<%!api_version%>
-  # -  # step12
-  #   name: Create <%!c-manager_api%> API
-  #   httpmethod: POST
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
-  #   request:
-  #     body:
-  #       name: <%!c-manager_api%>-<%!api_version%>
-  #       upstream_url: <%!wiremock_url%>
-  #       request_path: /<%!c-manager_api%>/<%!api_version%>
-  #       strip_request_path: <%!strip_request_path%>
-  # -  # step13
-  #   name: Delete <%!admin_api%> API
-  #   httpmethod: DELETE
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!admin_api%>-<%!api_version%>
-  # -  # step14
-  #   name: Create <%!admin_api%> API
-  #   httpmethod: POST
-  #   URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
-  #   request:
-  #     body:
-  #       name: <%!admin_api%>-<%!api_version%>
-  #       upstream_url: <%!wiremock_url%>
-  #       request_path: /<%!admin_api%>/<%!api_version%>
-  #       strip_request_path: <%!strip_request_path%>
+  -
+    name: Delete <%!client_api%> API
+    httpmethod: DELETE
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!client_api%>-<%!api_version%>
+  -
+    name: Create <%!client_api%> API
+    httpmethod: POST
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    request:
+      body:
+        name: <%!client_api%>-<%!api_version%>
+        upstream_url: <%!wiremock_url%>
+        request_path: /<%!client_api%>/<%!api_version%>
+        strip_request_path: <%!strip_request_path%>
+  -  # step5
+    name: Delete <%!consumer_api%> API
+    httpmethod: DELETE
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!consumer_api%>-<%!api_version%>
+  -  # step6
+    name: Create <%!consumer_api%> API
+    httpmethod: POST
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    request:
+      body:
+        name: <%!consumer_api%>-<%!api_version%>
+        upstream_url: <%!wiremock_url%>
+        request_path: /<%!consumer_api%>/<%!api_version%>
+        strip_request_path: <%!strip_request_path%>
+  -  # step7
+    name: Delete <%!merchant_api%> API
+    httpmethod: DELETE
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!merchant_api%>-<%!api_version%>
+  -  # step8
+    name: Create <%!merchant_api%> API
+    httpmethod: POST
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    request:
+      body:
+        name: <%!merchant_api%>-<%!api_version%>
+        upstream_url: <%!wiremock_url%>
+        request_path: /<%!merchant_api%>/<%!api_version%>
+        strip_request_path: <%!strip_request_path%>
+  -  # step9
+    name: Delete <%!m-manager_api%> API
+    httpmethod: DELETE
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!m-manager_api%>-<%!api_version%>
+  -  # step10
+    name: Create <%!m-manager_api%> API
+    httpmethod: POST
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    request:
+      body:
+        name: <%!m-manager_api%>-<%!api_version%>
+        upstream_url: <%!wiremock_url%>
+        request_path: /<%!m-manager_api%>/<%!api_version%>
+        strip_request_path: <%!strip_request_path%>
+  -  # step11
+    name: Delete <%!c-manager_api%> API
+    httpmethod: DELETE
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!c-manager_api%>-<%!api_version%>
+  -  # step12
+    name: Create <%!c-manager_api%> API
+    httpmethod: POST
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    request:
+      body:
+        name: <%!c-manager_api%>-<%!api_version%>
+        upstream_url: <%!wiremock_url%>
+        request_path: /<%!c-manager_api%>/<%!api_version%>
+        strip_request_path: <%!strip_request_path%>
+  -  # step13
+    name: Delete <%!admin_api%> API
+    httpmethod: DELETE
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!admin_api%>-<%!api_version%>
+  -  # step14
+    name: Create <%!admin_api%> API
+    httpmethod: POST
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    request:
+      body:
+        name: <%!admin_api%>-<%!api_version%>
+        upstream_url: <%!wiremock_url%>
+        request_path: /<%!admin_api%>/<%!api_version%>
+        strip_request_path: <%!strip_request_path%>

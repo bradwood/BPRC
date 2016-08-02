@@ -44,10 +44,10 @@ class Headers(collections.MutableMapping): #Make this class behave and look like
         self._headers = headers
 
     def __getitem__(self, key):
-        return self._headers[key.lower()]  #Header key's should be case-insensitive
+        return self._headers[key]  #Header key's should be case-insensitive
 
     def __setitem__(self, key, value):
-        self._headers[key.lower()] = value
+        self._headers[key] = value
 
     def __delitem__(self, key):
         del self._headers[key]
