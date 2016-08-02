@@ -1,9 +1,9 @@
 # BPRC 
 [![Build Status](https://travis-ci.org/bradwood/BPRC.svg?branch=master)](https://travis-ci.org/bradwood/BPRC)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/bradwood/BPRC/blob/master/LICENSE)
-[![PyPI](https://img.shields.io/pypi/v/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
-[![PyPI](https://img.shields.io/pypi/pyversions/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
-[![PyPI](https://img.shields.io/pypi/status/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
+[![bprc version](https://img.shields.io/pypi/v/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
+[![PyPI Version](https://img.shields.io/pypi/pyversions/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
+[![PyPI Status](https://img.shields.io/pypi/status/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
 
 #Batch Processing RESTFul Client
 
