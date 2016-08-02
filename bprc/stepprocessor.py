@@ -5,6 +5,7 @@ This module implements the logic to process a step in a recipe
 import sys
 import os
 
+#TODO: make sure type casting works for boolean, int, string, float etc
 
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 PACKAGE_PARENT = '..'
@@ -46,38 +47,49 @@ class StepProcessor():
         """prepares the step by substituting php-like constructs or variables in the step subtree of the passed recipe"""
         vlog("Step parser initialised for step " + str(self.stepid))
         php_sub_pattern=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
-        var_sub_pattern=re.compile(r'<%!(\S+?)%>')
+        var_sub_pattern=re.compile(r'<%!(\S+?)%>')  #substitution pattern to find - of the form <%!somevar%>
+        file_sub_pattern=re.compile(r'<%f(\S+?)%>')  #substitution pattern to find - of the form <%f./somefile.txt%>
+
+        def _insert_file_param(m):
+            """used by the re.subn call below - takes an re.match object -returns a string"""
+            try:
+                with open(str(m.group(1)), "rb") as f:
+                    data=f.read()
+                    text = data.decode('utf-8')
+                    vlog("Found file-like pattern: <$f" +m.group(1) + "%>... substituting with contents of " + m.group(1))
+            except Exception as e:
+                errlog("Could not open "+ m.group(1)+" in the rest of the recipe. Aborting.", e)
+            return text
+
         def _insert_php_param(m, recipe):
-            """
-            used by the re.subn call below
-            takes an re.match object
-            returns a string
-            """
+            """used by the re.subn call below - takes an re.match object -returns a string"""
             try:
                 vlog("Found php-like pattern: <$=" +str(m.group(1)) + "%>... substituting with " +str(eval('recipe.' + m.group(1))))
             except KeyError as ke:
                 errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
-
-            logging.debug('In StepProcessor.prepare()._insert_php_param: m.group(1)=%s',m.group(1))
-
             return str(eval('recipe.' + m.group(1)))
 
         def _insert_var(m, variables):
-            """
-            used by the re.subn call below
-            takes an re.match object
-            returns a string
-            """
+            """used by the re.subn call below - takes an re.match object -returns a string """
             try:
-                vlog("Found variable pattern: <$=" +str(m.group(1)) + "%>... substituting with " +str(eval('variables["' + m.group(1)+'"]')))
+                vlog("Found variable pattern: <$!" +str(m.group(1)) + "%>... substituting with " +str(eval('variables["' + m.group(1)+'"]')))
             except KeyError as ke:
                 errlog("Could not find "+ m.group(1)+" in the variables. Aborting.", ke)
-
-            logging.debug('In StepProcessor.prepare()._insert_var: m.group(1)=%s',m.group(1))
-
             return str(eval('variables["' + m.group(1)+'"]'))
 
-        # Algorithm:
+        # Algorithm: -- TODO: turn this into a set of functions or a parser parametrised object.
+
+        #do variable substitutions --  only doing files and other variables
+        vlog("Variables: Commencing pattern match for substitutions...")
+        for key in self.variables:
+            vari=self.variables[key]
+            file_substituted_text, n = file_sub_pattern.subn(_insert_file_param, str(vari))
+            vlog("Files: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + file_substituted_text)
+            v=file_substituted_text
+            var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
+            vlog("Files: Made " +str(n)+ " variable substitutions. Result: "+key+"="+ var_substituted_text)
+            self.variables[key]=var_substituted_text
+
 
         # process substitutions in Name string
         vlog("Name: Commencing pattern match for substitutions...")
@@ -162,14 +174,6 @@ class StepProcessor():
             vlog("Non User-agent header set, defaulting to bprc/" + __version__)
             self.recipe.steps[self.stepid].request.headers["User-agent"]="bprc/"+__version__
 
-
-        #TODO: stuff a few extra request headers if these are not aready present
-        # e.g: accepts:
-        # content-type? maybe, if requests doesn't do this
-        # User agent.
-
-
-
         #request
         querystring = self.recipe.steps[self.stepid].request.querystring
         requestheaders = self.recipe.steps[self.stepid].request.headers
@@ -182,7 +186,6 @@ class StepProcessor():
 
 
         #make the call
-        #TODO: enhancement, take file data and form data. "@ parameter"
 
         vlog("About to make HTTP request for step " + str(self.stepid) + " " + str(self.recipe.steps[self.stepid].name))
         vlog(httpmethod.upper() + " " + self.recipe.steps[self.stepid].URL)

@@ -87,3 +87,8 @@ pandoc*
 
 #ssh
 .ssh/
+
+#ssl serts
+*.crt
+*.csr
+*.key

@@ -174,7 +174,7 @@ class Recipe:
     #takes a datamap to initialise the data structure
     def __init__(self, dmap):
         self.steps = []
-        try:
+        try:    #TODO: don't use vlog to test for the error condition -- it messes up the log
             for i, item in enumerate(dmap["recipe"]):
                 #instantiate the step object and add it to the list of steps.
                 vlog("Parsing recipe step " + str(i))
@@ -228,7 +228,7 @@ class Recipe:
         except TypeError as te:
             errlog("Could not parse YAML. PLease check the input file.", te)
 
-
+    #TODO: implement __str__ for all other objects in this module
     def __str__(self):
         ret_str = ""
         for s in self.steps:

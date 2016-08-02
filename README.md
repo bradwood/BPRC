@@ -34,16 +34,28 @@ The recipe is specified in a single YAML file which describes:
  - the HTTP method to use for each
  - the headers, querystring and body data to include for each step of the recipe
 
-Additionally, the YAML recipe file supports the ability to  grab data from any part of any of the HTTP requests or responses in earlier steps in the recipe and insert them into later steps using a PHP-like construct. For example, say I have a 10-step recipe specified and in step 7 I need to POST some data that I received in step 3's reponse. I can include a construct like this in any part of the YAML file: 
+Additionally, the YAML recipe file supports the ability to grab data from any part of any of the HTTP requests or responses in earlier steps in the recipe and insert them into later steps using a PHP-like construct. For example, say I have a 10-step recipe specified and in step 7 I need to POST some data that I received in step 3's reponse. I can include a construct like this in any part of the YAML file: 
 ```
 <%=steps[3].response.body["id"]%>
 ```
-Assuming that step 3 did indeed contain a parameter called `id` in it's JSON response payload, this data will then be substituted in the specified part of step 10's request. 
+Assuming that step 3 did indeed contain a parameter called `id` in it's JSON response payload, this data will then be substituted in the specified part of step 10's request.
+
+The inclusion of variables in the recipe are also supported. They can be inserted into the recipe as shown:
+```
+<%!varname%>
+```
+Files can also be included into a recipe using a construct like this:
+```
+<%f/path/to/file.txt%>
+```
 
 ### Sample Recipe
 This functionality is best illustrated with a complete recipe file as shown below.
 ```yaml
 --- #sample recipe
+variables: ## substitution patter for variables is <%!varname%>
+  varname: val-1
+  var2: 8001
 recipe:
   -  # step0
     name: HTTPBIN call
@@ -55,7 +67,7 @@ recipe:
         url: http://wiremock/blah
         booleanflag: false
       headers:
-        X-ABC: 1231233425435fsdf
+        X-ABC: 1231233425435fsdf <%!varname%>
       querystring:
         keya: vala
         keyb: valb
@@ -101,8 +113,6 @@ The following are known areas for improvement:
 - does not support multiple YAML recipes in one file (separated by `---`)
 
 ## Planned improvements
-- The ability to include a file's data into the recipe using an `@` prefix
 - Improving error handling
 - Better test coverage and integration with a coverage tool
 - Implementing `--dry-run`
-- Improving sensible default (e.g., `User-agent` header)
