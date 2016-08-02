@@ -94,7 +94,7 @@ recipe:
         """tests the php-like substitution logic in the recipe steps using various random checks for values"""
         datamap=yaml.load(self.yamldata)
         r = Recipe(datamap)
-        processor = StepProcessor(recipe=r, stepid=1, variables=None) #instantiate a step processor
+        processor = StepProcessor(recipe=r, stepid=1, variables={}) #instantiate a step processor
         r.steps[1] = processor.prepare()
         self.assertEquals(eval('r.' + path_suffix),val)
 
@@ -103,7 +103,7 @@ recipe:
         """tests the php-like substitution logic in the recipe steps using various random checks for NONE"""
         datamap=yaml.load(self.yamldata)
         r = Recipe(datamap)
-        processor = StepProcessor(recipe=r, stepid=1,variables=None) #instantiate a step processor
+        processor = StepProcessor(recipe=r, stepid=1,variables={}) #instantiate a step processor
         r.steps[1] = processor.prepare()
         self.assertIsNone(eval(path_suffix))
 
