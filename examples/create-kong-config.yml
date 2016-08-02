@@ -1,3 +1,4 @@
+# Requires bprc (https://github.com/bradwood/BPRC)
 --- #Creates the Kong APIs
 variables: ## substitution patter for variables is <%!varname%>
 #Kong host variables
