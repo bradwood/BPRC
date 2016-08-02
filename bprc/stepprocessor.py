@@ -22,6 +22,7 @@ from bprc.utils import vlog,errlog,verboseprint, httpstatuscodes
 from urllib.parse import urlencode
 import bprc.cli
 from bprc.outputprocessor import OutputProcessor
+from bprc._version import __version__
 
 
 class BodyEncoder(json.JSONEncoder):
@@ -142,23 +143,40 @@ class StepProcessor():
         name = self.recipe.steps[self.stepid].name
         httpmethod = self.recipe.steps[self.stepid].httpmethod
         url = self.recipe.steps[self.stepid].URL
-        #request
-        querystring = self.recipe.steps[self.stepid].request.querystring
-        requestheaders = self.recipe.steps[self.stepid].request.headers
-        requestbody = self.recipe.steps[self.stepid].request.body
-        #response
-        responsecode = self.recipe.steps[self.stepid].response.code
-        responseheaders = self.recipe.steps[self.stepid].response.headers
-        responsebody = self.recipe.steps[self.stepid].response.body
+
+        try:
+            vlog("Content-type = " +self.recipe.steps[self.stepid].request.headers["Content-type"])
+        except KeyError as ke:
+            vlog("No Content-type header set, defaulting to application/json")
+            self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
+
+        try:
+            vlog("User-agent = " +self.recipe.steps[self.stepid].request.headers["User-agent"])
+        except KeyError as ke:
+            vlog("Non User-agent header set, defaulting to bprc/" + __version__)
+            self.recipe.steps[self.stepid].request.headers["User-agent"]="bprc/"+__version__
+
 
         #TODO: stuff a few extra request headers if these are not aready present
         # e.g: accepts:
         # content-type? maybe, if requests doesn't do this
         # User agent.
 
+
+
+        #request
+        querystring = self.recipe.steps[self.stepid].request.querystring
+        requestheaders = self.recipe.steps[self.stepid].request.headers
+        requestbody = self.recipe.steps[self.stepid].request.body
+
+        #response
+        responsecode = self.recipe.steps[self.stepid].response.code
+        responseheaders = self.recipe.steps[self.stepid].response.headers
+        responsebody = self.recipe.steps[self.stepid].response.body
+
+
         #make the call
         #TODO: enhancement, take file data and form data. "@ parameter"
-        #bprc.cli.args.ignoressl
 
         vlog("About to make HTTP request for step " + str(self.stepid) + " " + str(self.recipe.steps[self.stepid].name))
         vlog(httpmethod.upper() + " " + self.recipe.steps[self.stepid].URL)

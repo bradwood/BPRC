@@ -1,62 +1,61 @@
 --- #Creates the Kong APIs
-variables: ## substitution patter for variables is <%!varname%> TO BE IMPLEMENTED
-  varname: brad
-  varname2: wood
+variables: ## substitution patter for variables is <%!varname%> - nested variables not (yet) supported
+#Kong host variables
+  kong_host_name: kong
+  kong_admin_port: 8001
+
+#generic API variables
+  wiremock_url: https://wiremock:8081/
+  api_version: v1
+
+
+#consumer API variables
+  consumer_api: consumer
+  strip_request_path: false
+
+
+
+
 recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["key_of_var"]%>
   -  # step0
     name: Delete authenticate API
     httpmethod: DELETE
-    URL: http://kong:8001/apis/authenticate-v1
-    request:
-      headers:
-        content-type: application/json
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/authenticate-v1
   -  # step1
     name: Create authenticate API
     httpmethod: POST
-    URL: http://kong:8001/apis
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
     request:
-      headers:
-        content-type: application/json
       body:
         name: authenticate-v1
-        upstream_url: https://wiremock:8081/
+        upstream_url: <%!wiremock_url%>
         request_path: /authenticate/v1
-        strip_request_path: false
+        strip_request_path: <%!strip_request_path%>
   -  # step3
     name: Delete client API
     httpmethod: DELETE
-    URL: http://kong:8001/apis/client-v1
-    request:
-      headers:
-        content-type: application/json
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/client-v1
   -  # step4
     name: Create client API
     httpmethod: POST
-    URL: http://kong:8001/apis
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
     request:
-      headers:
-        content-type: application/json
       body:
         name: client-v1
-        upstream_url: https://wiremock:8081/
+        upstream_url: <%!wiremock_url%>
         request_path: /client/v1
-        strip_request_path: false
+        strip_request_path: <%!strip_request_path%>
   -  # step4
     name: Delete consumer API
     httpmethod: DELETE
-    URL: http://kong:8001/apis/consumer-v1
-    request:
-      headers:
-        content-type: application/json
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/consumer-v1
   -  # step5
     name: Create consumer API
     httpmethod: POST
-    URL: http://kong:8001/apis
+    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
     request:
-      headers:
-        content-type: application/json
       body:
         name: consumer-v1
-        upstream_url: https://wiremock:8081/
+        upstream_url: <%!wiremock_url%>
         request_path: /consumer/v1
-        strip_request_path: false
+        strip_request_path: <%!strip_request_path%>
