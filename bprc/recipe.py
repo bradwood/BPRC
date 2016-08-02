@@ -4,6 +4,8 @@ This module implements all the class types required to represent the YAML recipe
 
 import os
 import sys
+from itertools import chain
+
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
@@ -206,6 +208,11 @@ class Recipe:
             errlog("Could not parse YAML. PLease check the input file.", te)
 
 
-    # def __str__(self):
-    #     #TODO make a nice string printable function here.
-    #     return '{0!s}'.format(self)
+    def __str__(self):
+        ret_str = ""
+        for s in self.steps:
+            ret_str += "Step= " + str(s)
+        return ret_str
+
+
+

@@ -90,7 +90,7 @@ class StepProcessor():
             vlog("Body: Commencing pattern match for php-like pattern over all parameters...")
             for key in self.recipe.steps[self.stepid].request.body:
                 vlog("Body: " + key + " found: Commencing pattern match for php-like pattern...")
-                bod=self.recipe.steps[self.stepid].request.body[key]
+                bod=str(self.recipe.steps[self.stepid].request.body[key])
                 substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), bod)
                 vlog("Body: Made " +str(n)+ " substitutions. Result: " + key + "=" + substituted_text)
                 self.recipe.steps[self.stepid].request.body[key]=substituted_text
@@ -171,18 +171,25 @@ class StepProcessor():
         self.recipe.steps[self.stepid].response.statusmsg=httpstatuscodes[str(r.status_code)]
 
         #now parse the json response and load it into the response.body
-        response_content_type = r.headers['content-type'].split(';')[0] # grebs the xxx/yyyy bit of the header
+        #TODO: put try: around to to see if a Content-type was actually returned. if no content (code=204) then ignore.
+        if r.status_code == 204 or r.status_code == 205: # no content or reset content don't send any content
+            response_content_type = ""
+        else:
+            response_content_type = r.headers['Content-type'].split(';')[0] # grabs the xxx/yyyy bit of the header
         logging.debug(r.text)
         logging.debug("Content-type:" + response_content_type)
         logging.debug("Encoding:" + str(r.encoding))
         logging.debug("Text:" + r.text)
 
         #now, check if JSON was sent in the response body, if it was, load it, otherwise exit with an error
-        if response_content_type.lower() == 'application/json':
-            vlog("JSON response expected. Content-type: " + response_content_type)
+        if response_content_type.lower() == 'application/json' or response_content_type == "":
+            vlog("JSON/empty response expected. Received Content-type: " + response_content_type)
             try:
                 vlog("Attempting to parse JSON response body...")
-                self.recipe.steps[self.stepid].response.body=json.loads(r.text)
+                if response_content_type == "":
+                    self.recipe.steps[self.stepid].response.body=None
+                else:
+                    self.recipe.steps[self.stepid].response.body=json.loads(r.text)
             except Exception as e:
                 errlog("Failed to parse JSON response. Aborting", e)
             vlog("JSON parsed ok.")

@@ -29,9 +29,12 @@ class OutputProcessor():
         vlog("Generating output of step: " + str(self.id) +" " + self.step.name + ". Format=" + writeformat)
 
         if writeformat == 'json':
-            with open(writefile + '.'+str(self.id),'wt') as f:
-                print(json.dumps(self.step.response.body,indent=4, sort_keys=True),file=f)
-                vlog("Wrote " + writefile + '.'+str(self.id))
+            if self.step.response.body is not None:
+                with open(writefile + '.'+str(self.id),'wt') as f:
+                    print(json.dumps(self.step.response.body,indent=4, sort_keys=True),file=f)
+                    vlog("Wrote " + writefile + '.'+str(self.id))
+            else:
+                open(writefile + '.'+str(self.id),'wt').close() #touch the file (although it's empty)
         else:
             ## assume format = raw
             if self.id==0: open(writefile,'wt').close() # empty out the output file if it exists.
@@ -39,7 +42,8 @@ class OutputProcessor():
                 printstepcolophon(self.step,id=self.id, file=f)
                 printhttprequest(self.step, id=self.id,file=f)
                 printheaders(self.step, id=self.id,file=f)
-                printbody(self.step, id=self.id,file=f)
+                if self.step.response.body is not None:
+                    printbody(self.step, id=self.id,file=f)
                 vlog("Appended output to " + writefile)
 
 

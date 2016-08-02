@@ -1,0 +1,40 @@
+--- #Creates the Kong APIs
+recipe:
+  -  # step0
+    name: Delete Authentication API
+    httpmethod: DELETE
+    URL: http://kong:8001/apis/authenticate-v1
+    request:
+      headers:
+        content-type: application/json
+  -  # step1
+    name: Create Authentication API
+    httpmethod: POST
+    URL: http://kong:8001/apis
+    request:
+      headers:
+        content-type: application/json
+      body:
+        name: authenticate-v1
+        upstream_url: https://wiremock:8081/
+        request_path: /authenticate/v1
+        strip_request_path: false
+  -  # step3
+    name: Delete Client API
+    httpmethod: DELETE
+    URL: http://kong:8001/apis/client-v1
+    request:
+      headers:
+        content-type: application/json
+  -  # step4
+    name: Create Client API
+    httpmethod: POST
+    URL: http://kong:8001/apis
+    request:
+      headers:
+        content-type: application/json
+      body:
+        name: client-v1
+        upstream_url: https://wiremock:8081/
+        request_path: /client/v1
+        strip_request_path: false

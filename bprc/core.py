@@ -66,6 +66,8 @@ def main():
     r = Recipe(datamap)
     vlog("Recipe object instantiated ok...")
 
+    vlog('Recipe-'+ str(r))
+
     #loop through steps and execute each one.
     vlog("Commencing processing loop...")
     for i, step in enumerate(r.steps):
