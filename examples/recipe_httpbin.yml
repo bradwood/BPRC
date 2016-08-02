@@ -30,9 +30,6 @@ recipe:
     httpmethod: POST
     URL: http://httpbin.org/post #gets the JSON field id from the body of the response from step 1.
     request:
-      querystring:
-        key3: value3
-        keysub: <%=steps[0].request.headers["Authorisation"]%>
       body:
         key4: valueprefix <%=steps[0].request.headers["X-ABC"]%>
       headers:

@@ -72,6 +72,7 @@ def main():
         # firstly, for the step about to be executed, substitute any items in the request object using the php-like
         # <%= =>
         vlog("Commencing php-like substitutions for step " + str(i) + ":" + r.steps[i].name)
+        #TODO: add try:'s around all the below calls.
         processor = StepProcessor(recipe=r, stepid=i) # instantiate a step processor
         r.steps[i] = processor.prepare() # substitutes and php-like strings to prepare the step for calling & returns
         vlog("Php-like substitutions complete for step " + str(i) + ":" + r.steps[i].name)

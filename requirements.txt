@@ -9,4 +9,6 @@ requests
 pyyaml
 semver
 codecov
+coverage
+
 

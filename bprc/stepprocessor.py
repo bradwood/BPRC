@@ -52,13 +52,13 @@ class StepProcessor():
             returns a string
             """
             try:
-                vlog("Found php-like pattern: <$=" +m.group(1) + "%>... substituting with " +eval('recipe.' + m.group(1)))
+                vlog("Found php-like pattern: <$=" +str(m.group(1)) + "%>... substituting with " +str(eval('recipe.' + m.group(1))))
             except KeyError as ke:
                 errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
 
             logging.debug('In StepProcessor.prepare()._insert_param: m.group(1)=%s',m.group(1))
 
-            return eval('recipe.' + m.group(1))
+            return str(eval('recipe.' + m.group(1)))
 
         if self.stepid == 0:
             vlog("Stepid=" + str(self.stepid) + " - nothing to parse, skipping step") #TODO: change handing of step 0.
@@ -69,6 +69,7 @@ class StepProcessor():
             # process substitutions in URL string
             vlog("URL: Commencing pattern match for php-like pattern...")
             u=self.recipe.steps[self.stepid].URL
+            #TODO: add try: here
             substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), u)
             vlog("URL: Made " +str(n)+ " substitutions. Result: URL="+ substituted_text)
             self.recipe.steps[self.stepid].URL=substituted_text

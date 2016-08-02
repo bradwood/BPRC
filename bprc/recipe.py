@@ -151,10 +151,10 @@ class Recipe:
     #takes a datamap to initialise the data structure
     def __init__(self, dmap):
         self.steps = []
-        for i, item in enumerate(dmap["recipe"]):
-            #instantiate the step object and add it to the list of steps.
-            vlog("Parsing recipe step " + str(i))
-            try:
+        try:
+            for i, item in enumerate(dmap["recipe"]):
+                #instantiate the step object and add it to the list of steps.
+                vlog("Parsing recipe step " + str(i))
                 #set default step Name if one is not set in the YAML
                 try:
                     logging.debug(dmap["recipe"][i]["name"])
@@ -191,16 +191,20 @@ class Recipe:
                     vlog("No response set. Creating an empty response object with headers, body and response code")
                     dmap["recipe"][i].update({'response': {'body': {}, 'code': '', 'headers': {}}})
 
-                #Now instantiate the ste
-                vlog("Creating recipe step object id=" + str(i) + "...")
-                self.steps.append(Step(name=dmap["recipe"][i]["name"],
-                                       URL=dmap["recipe"][i]["URL"],
-                                       httpmethod=dmap["recipe"][i]["httpmethod"],
-                                       request=dmap["recipe"][i]["request"],
-                                       response=dmap["recipe"][i]["response"]))
-            except Exception as e:
-                errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
-            vlog("Parsed recipe step " + str(i) + " ok...")
+                #Now instantiate the step
+                try:
+                    vlog("Creating recipe step object id=" + str(i) + "...")
+                    self.steps.append(Step(name=dmap["recipe"][i]["name"],
+                                           URL=dmap["recipe"][i]["URL"],
+                                           httpmethod=dmap["recipe"][i]["httpmethod"],
+                                           request=dmap["recipe"][i]["request"],
+                                           response=dmap["recipe"][i]["response"]))
+                except Exception as e:
+                    errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
+                vlog("Parsed recipe step " + str(i) + " ok...")
+        except TypeError as te:
+            errlog("Could not parse YAML. PLease check the input file.", te)
+
 
     # def __str__(self):
     #     #TODO make a nice string printable function here.
