@@ -9,8 +9,8 @@ variables: ## substitution patter for variables is <%!varname%> - nested variabl
   api_version: v1
 
 
-#consumer API variables
-  consumer_api: consumer
+#authenticatate API variables
+  auth_api: authenticate
   strip_request_path: false
 
 
@@ -18,7 +18,7 @@ variables: ## substitution patter for variables is <%!varname%> - nested variabl
 
 recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["key_of_var"]%>
   -  # step0
-    name: Delete authenticate API
+    name: Delete <%!auth_api%> API
     httpmethod: DELETE
     URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/authenticate-v1
   -  # step1
