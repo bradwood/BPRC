@@ -35,17 +35,18 @@ class BodyEncoder(json.JSONEncoder):
 class StepProcessor():
     """Class to process """
 
-    def __init__(self, *, recipe,stepid): #kwargs for recipe and stepid
+    def __init__(self, *, recipe,stepid,variables): #kwargs for recipe and stepid
         """Instantiates the Step Processor Object"""
         self.recipe = recipe
         self.stepid = stepid
+        self.variables = variables
 
     def prepare(self):
-        """prepares the step by substituting php-like constructs in the step subtree of the passed recipe"""
+        """prepares the step by substituting php-like constructs or variables in the step subtree of the passed recipe"""
         vlog("Step parser initialised for step " + str(self.stepid))
-        subpat=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
-
-        def _insert_param(m, recipe):
+        php_sub_pattern=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
+        var_sub_pattern=re.compile(r'<%!(\S+?)%>')
+        def _insert_php_param(m, recipe):
             """
             used by the re.subn call below
             takes an re.match object
@@ -56,23 +57,43 @@ class StepProcessor():
             except KeyError as ke:
                 errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
 
-            logging.debug('In StepProcessor.prepare()._insert_param: m.group(1)=%s',m.group(1))
+            logging.debug('In StepProcessor.prepare()._insert_php_param: m.group(1)=%s',m.group(1))
 
             return str(eval('recipe.' + m.group(1)))
 
-        if self.stepid == 0:
-            vlog("Stepid=" + str(self.stepid) + " - nothing to parse, skipping step") #TODO: change handing of step 0.
+        def _insert_var(m, variables):
+            """
+            used by the re.subn call below
+            takes an re.match object
+            returns a string
+            """
+            try:
+                vlog("Found variable pattern: <$=" +str(m.group(1)) + "%>... substituting with " +str(eval('variables["' + m.group(1)+'"]')))
+            except KeyError as ke:
+                errlog("Could not find "+ m.group(1)+" in the variables. Aborting.", ke)
+
+            logging.debug('In StepProcessor.prepare()._insert_var: m.group(1)=%s',m.group(1))
+
+            return str(eval('variables["' + m.group(1)+'"]'))
+
+        if False: #TODO: remove this condition -- just process step0
+        #if self.stepid == 0:
+            vlog("Stepid=" + str(self.stepid) + " - nothing to parse, skipping step")
             return self.recipe.steps[self.stepid]
         else:
             # Algorithm:
 
             # process substitutions in URL string
-            vlog("URL: Commencing pattern match for php-like pattern...")
+            vlog("URL: Commencing pattern match for substitutions...")
             u=self.recipe.steps[self.stepid].URL
             #TODO: add try: here
-            substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), u)
-            vlog("URL: Made " +str(n)+ " substitutions. Result: URL="+ substituted_text)
-            self.recipe.steps[self.stepid].URL=substituted_text
+            php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), u)
+            vlog("URL: Made " +str(n)+ " php-like substitutions. Result: URL="+ php_substituted_text)
+            v=php_substituted_text
+            var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
+            vlog("URL: Made " +str(n)+ " variable substitutions. Result: URL="+ var_substituted_text)
+            self.recipe.steps[self.stepid].URL=var_substituted_text
+
 
             # loop through all QueryString dictionaries and process substition
             vlog("QueryString: Commencing pattern match for php-like pattern over all parameters...")
@@ -80,33 +101,38 @@ class StepProcessor():
             for key in self.recipe.steps[self.stepid].request.querystring:
                 vlog("QueryString: " + key + " found: Commencing pattern match for php-like pattern...")
                 qs=self.recipe.steps[self.stepid].request.querystring[key]
-                substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), qs)
-                vlog("QueryString: Made " +str(n)+ " substitutions. Result: " + key + "=" + substituted_text)
-                self.recipe.steps[self.stepid].request.querystring[key]=substituted_text
-
-            vlog("QueryString: now looks like " + urlencode(self.recipe.steps[self.stepid].request.querystring))
+                php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), qs)
+                vlog("QueryString: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + php_substituted_text)
+                v=php_substituted_text
+                var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
+                vlog("QueryString: Made " +str(n)+ " variable substitutions. Result: "+key+"="+ var_substituted_text)
+                self.recipe.steps[self.stepid].request.querystring[key]=var_substituted_text
 
             # loop through all Request.body dictionaries and process substitutions
             vlog("Body: Commencing pattern match for php-like pattern over all parameters...")
             for key in self.recipe.steps[self.stepid].request.body:
                 vlog("Body: " + key + " found: Commencing pattern match for php-like pattern...")
                 bod=str(self.recipe.steps[self.stepid].request.body[key])
-                substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), bod)
-                vlog("Body: Made " +str(n)+ " substitutions. Result: " + key + "=" + substituted_text)
-                self.recipe.steps[self.stepid].request.body[key]=substituted_text
-
-            # TODO: fix vlog("Body: now looks like " + urlencode(self.recipe.steps[self.stepid].request.body))
+                php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), bod)
+                vlog("Body: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + php_substituted_text)
+                v=php_substituted_text
+                var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
+                vlog("Body: Made " +str(n)+ " variable substitutions. Result: "+key+"="+  var_substituted_text)
+                self.recipe.steps[self.stepid].request.body[key]=var_substituted_text
 
             # loop through all Request.header dictionaries and process substitutions
             vlog("Header: Commencing pattern match for php-like pattern over all parameters...")
             for key in self.recipe.steps[self.stepid].request.headers:
                 vlog("Header: " + key + " found: Commencing pattern match for php-like pattern...")
                 heads=self.recipe.steps[self.stepid].request.headers[key]
-                substituted_text, n = subpat.subn(partial(_insert_param, recipe=self.recipe), heads)
-                vlog("Header: Made " +str(n)+ " substitutions. Result: " + key + "=" + substituted_text)
-                self.recipe.steps[self.stepid].request.headers[key]=substituted_text
+                php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), heads)
+                vlog("Header: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + php_substituted_text)
+                v=php_substituted_text
+                var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
+                vlog("Header: Made " +str(n)+ " variable substitutions. Result: "+key+"="+  var_substituted_text)
+                self.recipe.steps[self.stepid].request.headers[key]=var_substituted_text
 
-            # TODO: fix vlog("Header: Headers now look like " + urlencode(self.recipe.steps[self.stepid].request.headers))
+
 
         return self.recipe.steps[self.stepid]
 
@@ -171,7 +197,6 @@ class StepProcessor():
         self.recipe.steps[self.stepid].response.statusmsg=httpstatuscodes[str(r.status_code)]
 
         #now parse the json response and load it into the response.body
-        #TODO: put try: around to to see if a Content-type was actually returned. if no content (code=204) then ignore.
         if r.status_code == 204 or r.status_code == 205: # no content or reset content don't send any content
             response_content_type = ""
         else:
@@ -187,6 +212,7 @@ class StepProcessor():
             try:
                 vlog("Attempting to parse JSON response body...")
                 if response_content_type == "":
+                    vlog("Response had no body... Proceeding...")
                     self.recipe.steps[self.stepid].response.body=None
                 else:
                     self.recipe.steps[self.stepid].response.body=json.loads(r.text)

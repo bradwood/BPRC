@@ -1,14 +1,17 @@
 --- #Creates the Kong APIs
-recipe:
+variables: ## substitution patter for variables is <%!varname%> TO BE IMPLEMENTED
+  varname: brad
+  varname2: wood
+recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["key_of_var"]%>
   -  # step0
-    name: Delete Authentication API
+    name: Delete authenticate API
     httpmethod: DELETE
     URL: http://kong:8001/apis/authenticate-v1
     request:
       headers:
         content-type: application/json
   -  # step1
-    name: Create Authentication API
+    name: Create authenticate API
     httpmethod: POST
     URL: http://kong:8001/apis
     request:
@@ -20,14 +23,14 @@ recipe:
         request_path: /authenticate/v1
         strip_request_path: false
   -  # step3
-    name: Delete Client API
+    name: Delete client API
     httpmethod: DELETE
     URL: http://kong:8001/apis/client-v1
     request:
       headers:
         content-type: application/json
   -  # step4
-    name: Create Client API
+    name: Create client API
     httpmethod: POST
     URL: http://kong:8001/apis
     request:
@@ -37,4 +40,23 @@ recipe:
         name: client-v1
         upstream_url: https://wiremock:8081/
         request_path: /client/v1
+        strip_request_path: false
+  -  # step4
+    name: Delete consumer API
+    httpmethod: DELETE
+    URL: http://kong:8001/apis/consumer-v1
+    request:
+      headers:
+        content-type: application/json
+  -  # step5
+    name: Create consumer API
+    httpmethod: POST
+    URL: http://kong:8001/apis
+    request:
+      headers:
+        content-type: application/json
+      body:
+        name: consumer-v1
+        upstream_url: https://wiremock:8081/
+        request_path: /consumer/v1
         strip_request_path: false

@@ -1,21 +1,26 @@
 --- #Gets Kong API settings -- requires bprc -- see https://github.com/bradwood/BPRC
+variables: ## substitution patter for variables is <%!varname%> TO BE IMPLEMENTED
+  varname: brad
+  varname2: wood
+  somevar: blahblahblah
+
 recipe:
   -  # step0
     name: Get API details
     httpmethod: GET
-    URL: http://kong:8001/apis
+    URL: http://kong:8001/apis/<%!varname%>/<%!varname2%>
     # name: Load OAUTH Plugin
     # httpmethod: POST
     # URL: http://httpbin.org/post #gets the JSON field id from the body of the response from step 1.
-    # request:
-    #   querystring:
-    #     key3: value3
-    #     keysub: <%=steps[0].request.headers["Authorisation"]%>
-    #   body:
-    #     key4: valueprefix <%=steps[0].request.headers["X-ABC"]%>
-    #   headers:
-    #     blah: blahbha
-    #     Authorisation: bearer <%=steps[0].request.querystring["keyb"]%>
+    request:
+      querystring:
+        key3: value3 <%!varname2%>
+        keysub: keysubval
+      body:
+        key4: valueprefix  <%!somevar%>
+      headers:
+        blah: blahbha <%!varname2%>
+        Authorisation: bearer <%=steps[0].request.querystring["key3"]%>
     # response: # set up this response section if you need to pull out data here for use later in the recipe.
     #   code:
     #   body:
@@ -27,5 +32,5 @@ recipe:
   -  # step1
     name: Get specific API details
     httpmethod: GET
-    URL: http://kong:8001/apis/<%=steps[0].response.body["total"]%>
+    URL: http://kong:8001/apis/<%=steps[0].httpmethod%>/<%!varname%>
 

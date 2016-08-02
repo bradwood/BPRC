@@ -16,6 +16,27 @@ import logging
 import collections
 from bprc.utils import vlog,errlog,verboseprint
 
+class Variables(collections.MutableMapping): #Make this class behave and look like a dict
+    """A collection of general purpose variables that can be substituted in throughout the recipe"""
+
+    def __init__(self, variables):
+        self._variables = variables
+
+    def __getitem__(self, key):
+        return self._variables[key]
+
+    def __setitem__(self, key, value):
+        self._variables[key] = value
+
+    def __delitem__(self, key):
+        del self._variables[key]
+
+    def __iter__(self):
+        return iter(self._variables)
+
+    def __len__(self):
+        return len(self._variables)
+
 class Headers(collections.MutableMapping): #Make this class behave and look like a dict
     """A collection of HTTP request or response headers"""
 

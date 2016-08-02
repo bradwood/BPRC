@@ -26,7 +26,7 @@ import bprc.utils
 from bprc.utils import vlog,errlog,verboseprint, logleveldict
 import logging
 import bprc.cli
-from bprc.recipe import Recipe
+from bprc.recipe import Recipe, Variables
 from bprc.stepprocessor import StepProcessor
 
 
@@ -62,11 +62,22 @@ def main():
         errlog("An error occured parsing the yaml input file", e)
     vlog("Yaml file parsed ok...")
 
-    vlog("Instantiating recipe object...")
-    r = Recipe(datamap)
-    vlog("Recipe object instantiated ok...")
+    #TODO: add try/catch around this
+    vlog("Instantiating variables object...")
+    try:
+        variables = Variables(datamap["variables"])
+    except Exception as e:
+        vlog("No variable object in YAML file")
+        variables =Variables({})
+    vlog("Variables object instantiated ok... (albeit maybe empty")
 
-    vlog('Recipe-'+ str(r))
+    try:
+        vlog("Instantiating recipe object...")
+        r = Recipe(datamap)
+        vlog("Recipe object instantiated ok...")
+        vlog('Recipe-'+ str(r))
+    except Exception as e:
+        errlog("Could not create Recipe Object.",e)
 
     #loop through steps and execute each one.
     vlog("Commencing processing loop...")
@@ -75,7 +86,7 @@ def main():
         # <%= =>
         vlog("Commencing php-like substitutions for step " + str(i) + ":" + r.steps[i].name)
         #TODO: add try:'s around all the below calls.
-        processor = StepProcessor(recipe=r, stepid=i) # instantiate a step processor
+        processor = StepProcessor(recipe=r, stepid=i, variables=variables) # instantiate a step processor
         r.steps[i] = processor.prepare() # substitutes and php-like strings to prepare the step for calling & returns
         vlog("Php-like substitutions complete for step " + str(i) + ":" + r.steps[i].name)
         processor.call() # makes the call and populates the response object.
