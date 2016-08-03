@@ -20,13 +20,14 @@ here = path.abspath(path.dirname(__file__))
 # I really prefer Markdown to reStructuredText.  PyPi does not.
 # This creates a README.rst
 
-#try:
-import pypandoc
-from pypandoc.pandoc_download import download_pandoc
-download_pandoc()
-long_description = pypandoc.convert('README.md', 'rst')
-#except (IOError, ImportError):
-#    long_description = ''
+#this is used so that local builds will work, but pypandoc is not needed when users install
+try:
+    import pypandoc
+    from pypandoc.pandoc_download import download_pandoc
+    download_pandoc()
+    long_description = pypandoc.convert('README.md', 'rst')
+except (IOError, ImportError):
+    long_description = ''
 
 # get the version number from the canonocial version file
 import re
