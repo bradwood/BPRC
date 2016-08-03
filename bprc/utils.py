@@ -16,6 +16,7 @@ import logging
 import json
 from urllib.parse import urlencode
 import collections
+import re
 
 httpstatuscodes = {
 "100": "Continue",
@@ -87,6 +88,8 @@ def vlog(msg):
     verboseprint(msg)
     logging.info(msg)
 
+#TODO: do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.
+
 #helper function to call logging.error and raise a RunTime error
 def errlog(msg, e):
     logging.error(msg)
@@ -116,3 +119,36 @@ def printbody(step,*,file, id):
     print(json.dumps(step.response.body,indent=4, sort_keys=True),file=file)
     print("\n", file=file)
 
+# define regex patterns.
+php_sub_pattern=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
+var_sub_pattern=re.compile(r'<%!(\S+?)%>')  #substitution pattern to find - of the form <%!somevar%>
+file_sub_pattern=re.compile(r'<%f(\S+?)%>')  #substitution pattern to find - of the form <%f./somefile.txt%>
+
+###### The three functions below are used to parse variables in the recipe.
+# They are passed into the re.sub() call
+def _insert_file_param(m):
+    """used by the re.subn call below - takes an re.match object -returns a string"""
+    try:
+        with open(str(m.group(1)), "rb") as f:
+            data=f.read()
+            text = data.decode('utf-8')
+            vlog("Found file-like pattern: <$f" +m.group(1) + "%>... substituting with contents of " + m.group(1))
+    except Exception as e:
+        errlog("Could not open "+ m.group(1)+" in the rest of the recipe. Aborting.", e)
+    return text
+
+def _insert_php_param(m, recipe):
+    """used by the re.subn call below - takes an re.match object -returns a string"""
+    try:
+        vlog("Found php-like pattern: <$=" +str(m.group(1)) + "%>... substituting with " +str(eval('recipe.' + m.group(1))))
+    except KeyError as ke:
+        errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
+    return str(eval('recipe.' + m.group(1)))
+
+def _insert_var(m, variables):
+    """used by the re.subn call below - takes an re.match object -returns a string """
+    try:
+        vlog("Found variable pattern: <$!" +str(m.group(1)) + "%>... substituting with " +str(eval('variables["' + m.group(1)+'"]')))
+    except KeyError as ke:
+        errlog("Could not find "+ m.group(1)+" in the variables. Aborting.", ke)
+    return str(eval('variables["' + m.group(1)+'"]'))

@@ -4,6 +4,7 @@ variables: ## substitution patter for variables is <%!varname%>
 #Kong host variables
   kong_host_name: kong
   kong_admin_port: 8001
+  kong_host_port: <%!kong_host_name%>:<%!kong_admin_port%>
 
 #generic API variables
   wiremock_url: https://wiremock:8081/
@@ -39,11 +40,11 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -
     name: Delete <%!auth_api%> API
     httpmethod: DELETE
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!auth_api%>-<%!api_version%>
+    URL: http://<%!kong_host_port%>/apis/<%!auth_api%>-<%!api_version%>
   -
     name: Create <%!auth_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    URL: http://<%!kong_host_port%>/apisd
     request:
       body:
         name: <%!auth_api%>-<%!api_version%>
@@ -53,7 +54,7 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -
     name: Create SSL Plugin for <%!auth_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!auth_api%>-<%!api_version%>/plugins
+    URL: http://<%!kong_host_port%>/apis/<%!auth_api%>-<%!api_version%>/plugins
     request:
       body:
         name: ssl
@@ -65,11 +66,11 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -
     name: Delete <%!client_api%> API
     httpmethod: DELETE
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!client_api%>-<%!api_version%>
+    URL: http://<%!kong_host_port%>/apis/<%!client_api%>-<%!api_version%>
   -
     name: Create <%!client_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    URL: http://<%!kong_host_port%>/apis
     request:
       body:
         name: <%!client_api%>-<%!api_version%>
@@ -79,11 +80,11 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -  # step5
     name: Delete <%!consumer_api%> API
     httpmethod: DELETE
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!consumer_api%>-<%!api_version%>
+    URL: http://<%!kong_host_port%>/apis/<%!consumer_api%>-<%!api_version%>
   -  # step6
     name: Create <%!consumer_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    URL: http://<%!kong_host_port%>/apis
     request:
       body:
         name: <%!consumer_api%>-<%!api_version%>
@@ -93,11 +94,11 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -  # step7
     name: Delete <%!merchant_api%> API
     httpmethod: DELETE
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!merchant_api%>-<%!api_version%>
+    URL: http://<%!kong_host_port%>/apis/<%!merchant_api%>-<%!api_version%>
   -  # step8
     name: Create <%!merchant_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    URL: http://<%!kong_host_port%>/apis
     request:
       body:
         name: <%!merchant_api%>-<%!api_version%>
@@ -107,11 +108,11 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -  # step9
     name: Delete <%!m-manager_api%> API
     httpmethod: DELETE
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!m-manager_api%>-<%!api_version%>
+    URL: http://<%!kong_host_port%>/apis/<%!m-manager_api%>-<%!api_version%>
   -  # step10
     name: Create <%!m-manager_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    URL: http://<%!kong_host_port%>/apis
     request:
       body:
         name: <%!m-manager_api%>-<%!api_version%>
@@ -121,11 +122,11 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -  # step11
     name: Delete <%!c-manager_api%> API
     httpmethod: DELETE
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!c-manager_api%>-<%!api_version%>
+    URL: http://<%!kong_host_port%>/apis/<%!c-manager_api%>-<%!api_version%>
   -  # step12
     name: Create <%!c-manager_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    URL: http://<%!kong_host_port%>/apis
     request:
       body:
         name: <%!c-manager_api%>-<%!api_version%>
@@ -135,11 +136,11 @@ recipe: ## substitution pattern for http elements is <%=steps[i].path.to_var["ke
   -  # step13
     name: Delete <%!admin_api%> API
     httpmethod: DELETE
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis/<%!admin_api%>-<%!api_version%>
+    URL: http://<%!kong_host_port%>/apis/<%!admin_api%>-<%!api_version%>
   -  # step14
     name: Create <%!admin_api%> API
     httpmethod: POST
-    URL: http://<%!kong_host_name%>:<%!kong_admin_port%>/apis
+    URL: http://<%!kong_host_port%>/apis
     request:
       body:
         name: <%!admin_api%>-<%!api_version%>

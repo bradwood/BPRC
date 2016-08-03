@@ -26,8 +26,10 @@ import bprc.utils
 from bprc.utils import vlog,errlog,verboseprint, logleveldict
 import logging
 import bprc.cli
-from bprc.recipe import Recipe, Variables
+from bprc.recipe import Recipe
+from bprc.variables import Variables
 from bprc.stepprocessor import StepProcessor
+from bprc.varprocessor import VarProcessor
 
 
 
@@ -78,6 +80,22 @@ def main():
         vlog('Recipe-'+ str(r))
     except Exception as e:
         errlog("Could not create Recipe Object.",e)
+
+    #parse variables
+    vlog("Commencing variable parsing and substitution...")
+    varprocessor = VarProcessor(variables)
+    #do recursive variable substitution.
+    for varname, varval in variables.items():
+        vlog("Commencing variable substitutions for variable " + str(varname) + "=" + str(varval))
+        variables[varname] = varprocessor.parse(varval, variables)
+        vlog("Substituted " + str(varname) + "=" + str(variables[varname]))
+
+    # no subsitute filenames -- note, I tried this in the above loop but go errors.
+    # probably safer to parse *all* varnames before trying with files anyway.
+    for varname, varval in variables.items():
+        vlog("Commencing filename-- substitutions for variable " + str(varname) + "=" + str(varval))
+        variables[varname] = varprocessor.fileparse(varval, variables)
+        vlog("Substituted filespec " + str(varname) + "=" + str(variables[varname]))
 
     #loop through steps and execute each one.
     vlog("Commencing processing loop...")

@@ -18,9 +18,16 @@ import json
 import requests
 import re
 from functools import partial
-import bprc.utils
+#import bprc.utils
 from bprc.recipe import Body
-from bprc.utils import vlog,errlog,verboseprint, httpstatuscodes
+from bprc.utils import vlog
+from bprc.utils import errlog
+from bprc.utils import verboseprint
+from bprc.utils import httpstatuscodes
+from bprc.utils import php_sub_pattern
+from bprc.utils import var_sub_pattern
+from bprc.utils import file_sub_pattern
+
 from urllib.parse import urlencode
 import bprc.cli
 from bprc.outputprocessor import OutputProcessor
@@ -47,50 +54,15 @@ class StepProcessor():
     def prepare(self):
         """prepares the step by substituting php-like constructs or variables in the step subtree of the passed recipe"""
         vlog("Step parser initialised for step " + str(self.stepid))
-        php_sub_pattern=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
-        var_sub_pattern=re.compile(r'<%!(\S+?)%>')  #substitution pattern to find - of the form <%!somevar%>
-        file_sub_pattern=re.compile(r'<%f(\S+?)%>')  #substitution pattern to find - of the form <%f./somefile.txt%>
+        # php_sub_pattern=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>
+        # var_sub_pattern=re.compile(r'<%!(\S+?)%>')  #substitution pattern to find - of the form <%!somevar%>
+        # file_sub_pattern=re.compile(r'<%f(\S+?)%>')  #substitution pattern to find - of the form <%f./somefile.txt%>
 
-        def _insert_file_param(m):
-            """used by the re.subn call below - takes an re.match object -returns a string"""
-            try:
-                with open(str(m.group(1)), "rb") as f:
-                    data=f.read()
-                    text = data.decode('utf-8')
-                    vlog("Found file-like pattern: <$f" +m.group(1) + "%>... substituting with contents of " + m.group(1))
-            except Exception as e:
-                errlog("Could not open "+ m.group(1)+" in the rest of the recipe. Aborting.", e)
-            return text
-
-        def _insert_php_param(m, recipe):
-            """used by the re.subn call below - takes an re.match object -returns a string"""
-            try:
-                vlog("Found php-like pattern: <$=" +str(m.group(1)) + "%>... substituting with " +str(eval('recipe.' + m.group(1))))
-            except KeyError as ke:
-                errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
-            return str(eval('recipe.' + m.group(1)))
-
-        def _insert_var(m, variables):
-            """used by the re.subn call below - takes an re.match object -returns a string """
-            try:
-                vlog("Found variable pattern: <$!" +str(m.group(1)) + "%>... substituting with " +str(eval('variables["' + m.group(1)+'"]')))
-            except KeyError as ke:
-                errlog("Could not find "+ m.group(1)+" in the variables. Aborting.", ke)
-            return str(eval('variables["' + m.group(1)+'"]'))
+        from bprc.utils import _insert_file_param
+        from bprc.utils import _insert_php_param
+        from bprc.utils import _insert_var
 
         # Algorithm: -- TODO: turn this into a set of functions or a parser parametrised object.
-
-        #do variable substitutions --  only doing files and other variables
-        vlog("Variables: Commencing pattern match for substitutions...")
-        for key in self.variables:
-            vari=self.variables[key]
-            file_substituted_text, n = file_sub_pattern.subn(_insert_file_param, str(vari))
-            vlog("Files: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + file_substituted_text)
-            v=file_substituted_text
-            var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
-            vlog("Files: Made " +str(n)+ " variable substitutions. Result: "+key+"="+ var_substituted_text)
-            self.variables[key]=var_substituted_text
-
 
         # process substitutions in Name string
         vlog("Name: Commencing pattern match for substitutions...")
@@ -202,19 +174,20 @@ class StepProcessor():
         #and if it's 4xx or 5xx exist based on whether --ignore-http-errors were passed or not.
         self.recipe.steps[self.stepid].response.code=r.status_code
         vlog("Received HTTP response code: " + str(self.recipe.steps[self.stepid].response.code))
-        if not r.status_code == requests.codes.ok:
-            msg="Received an HTTP error code..."
-            logging.warning(msg)
+        vlog("Code prefix " + str(r.status_code)[:1])
+        if (str(r.status_code)[:1] == '4') or (str(r.status_code)[:1] == '5'): #4xx or 5xx
+            msg="Received an HTTP error code..." + str(r.status_code)
+            logging.error(msg)
             verboseprint(msg)
             if bprc.cli.args.skiphttperrors:
-                vlog("--skip-http-errors passed. Ignoring error and proceeding...")
+                pass #vlog("--skip-http-errors passed. Ignoring error and proceeding...")
             else:
                 try:
-                    r.raise_for_status()
+                    r.raise_for_status() #TODO: check this is working as expected, ie only for 5xx & 4xx
                 except Exception as e:
                     if bprc.cli.args.debug:
                         print("Response body: " + r.text)
-                    errlog("Got error HTTP response. Aborting", e)
+                    errlog("Got error HTTP response and --skip-http-errors not passed. Aborting", e)
 
         #now grab the headers and load them into the response.headers
         self.recipe.steps[self.stepid].response.headers=r.headers
