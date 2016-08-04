@@ -5,6 +5,7 @@ init:
 	pip3 install -r requirements.txt
 
 test:
-	python3 -m unittest -v
+	#python3 -m unittest -v
+	coverage run -m unittest -v
 
 .PHONY:	test
