@@ -3,6 +3,7 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/bradwood/BPRC/blob/master/LICENSE)
 [![PyPI version](https://badge.fury.io/py/bprc.svg)](https://badge.fury.io/py/bprc)
 [![PyPI status](https://img.shields.io/pypi/status/bprc.svg?maxAge=2592000)](https://pypi.python.org/pypi/bprc)
+[![codecov](https://codecov.io/gh/bradwood/BPRC/branch/master/graph/badge.svg)](https://codecov.io/gh/bradwood/BPRC)
 
 #Batch Processing RESTFul Client
 
@@ -53,46 +54,46 @@ This functionality is best illustrated with a complete recipe file as shown belo
 ```yaml
 --- #sample recipe
 variables: ## substitution patter for variables is <%!varname%>
-  varname: val-1
-  var2: 8001
+	varname: val-1
+	var2: 8001
 recipe:
-  -  # step0
-    name: HTTPBIN call
-    httpmethod: GET
-    URL: http://httpbin.org/get
-    request:
-      body:
-        name: json name parameter
-        url: http://wiremock/blah
-        booleanflag: false
-      headers:
-        X-ABC: 1231233425435fsdf <%!varname%>
-      querystring:
-        keya: vala
-        keyb: valb
-    response: # set up this response section if you need to pull out data here for use later in the recipe.
-              # the YAML hierarchy will map to the JSON response obtained and the the values received from
-              # the call will be inserted into the appropriate response variables so that subsequent steps
-              # can access them with the php-like construct
-      body:
-        id: this_is_a_param
-        origin: somval
-      headers:
-        Authorization:
-      code: #HTTP response code
-  -
-    name: Load OAUTH Plugin
-    httpmethod: POST
-    URL: http://httpbin.org/post
-    request:
-      querystring:
-        key3: value3
-      body:
-        key4: valueprefix <%=steps[0].request.headers["X-ABC"]%>
-      headers:
-        blah: blahbha
-        Authorisation: bearer <%=steps[0].request.querystring["keyb"]%>
-   
+	-  # step0
+		name: HTTPBIN call
+		httpmethod: GET
+		URL: http://httpbin.org/get
+		request:
+			body:
+				name: json name parameter
+				url: http://wiremock/blah
+				booleanflag: false
+			headers:
+				X-ABC: 1231233425435fsdf <%!varname%>
+			querystring:
+				keya: vala
+				keyb: valb
+		response: # set up this response section if you need to pull out data here for use later in the recipe.
+							# the YAML hierarchy will map to the JSON response obtained and the the values received from
+							# the call will be inserted into the appropriate response variables so that subsequent steps
+							# can access them with the php-like construct
+			body:
+				id: this_is_a_param
+				origin: somval
+			headers:
+				Authorization:
+			code: #HTTP response code
+	-
+		name: Load OAUTH Plugin
+		httpmethod: POST
+		URL: http://httpbin.org/post
+		request:
+			querystring:
+				key3: value3
+			body:
+				key4: valueprefix <%=steps[0].request.headers["X-ABC"]%>
+			headers:
+				blah: blahbha
+				Authorisation: bearer <%=steps[0].request.querystring["keyb"]%>
+	 
 ```
 ## Other features
 `bprc` provides the following features:
