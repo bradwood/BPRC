@@ -1,0 +1,22 @@
+[run]
+branch = True
+source = bprc
+
+omit =
+    # omit anything in a .local directory anywhere
+    */.local/*
+    # omit everything in /usr
+    /usr/*
+    # omit this single file
+    utils/tirefire.py
+
+[report]
+exclude_lines =
+    if self.debug:
+    pragma: no cover
+    raise NotImplementedError
+    if __name__ == .__main__.:
+
+ignore_errors = True
+
+[xml]
