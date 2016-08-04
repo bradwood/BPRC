@@ -157,9 +157,6 @@ class StepProcessor():
             bodyformat='json' # if the option wasn't set at all, default to json too.
             self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
 
-
-
-        #TODO: HTTP set Accepts header here
         #request
         querystring = self.recipe.steps[self.stepid].request.querystring
         requestheaders = self.recipe.steps[self.stepid].request.headers
