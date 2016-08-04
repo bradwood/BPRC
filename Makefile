@@ -7,5 +7,6 @@ init:
 test:
 	#python3 -m unittest -v
 	coverage run -m unittest -v
+	coverage xml
 
 .PHONY:	test
