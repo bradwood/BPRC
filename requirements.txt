@@ -1,5 +1,5 @@
-#TODO: break out into build, test, dist requirements
-#TODO: add coverage.py and badge script.
+#TODO: CICD break out into build, test, dist requirements
+#TODO: CICD add coverage.py and badge script.
 pyyaml
 ddt
 pypandoc

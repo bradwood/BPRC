@@ -64,13 +64,12 @@ def main():
         errlog("An error occured parsing the yaml input file", e)
     vlog("Yaml file parsed ok...")
 
-    #TODO: add try/catch around this
     vlog("Instantiating variables object...")
     try:
         variables = Variables(datamap["variables"])
     except Exception as e:
         vlog("No variable object in YAML file")
-        variables =Variables({})
+        variables = Variables({})
     vlog("Variables object instantiated ok... (albeit maybe empty")
 
     try:
@@ -103,10 +102,10 @@ def main():
         # firstly, for the step about to be executed, substitute any items in the request object using the php-like
         # <%= =>
         vlog("Commencing php-like substitutions for step " + str(i) + ":" + r.steps[i].name)
-        #TODO: add try:'s around all the below calls.
+        #TODO: ERROR HANDLING add try:'s around all the below calls.
         processor = StepProcessor(recipe=r, stepid=i, variables=variables) # instantiate a step processor
-        r.steps[i] = processor.prepare() # substitutes and recipe strings to prepare the step for calling. #TODO: NB!!!! take out vairable subs from this and make a separate call
+        r.steps[i] = processor.prepare() # substitutes recipe strings to prepare the step for calling.
         vlog("Php-like substitutions complete for step " + str(i) + ":" + r.steps[i].name)
-        processor.call() # makes the call and populates the response object.
-        processor.generateOutput() #writes the output for this step.
+        req=processor.call() # makes the call and populates the response object.
+        processor.generateOutput(req) #writes the output for this step.
 

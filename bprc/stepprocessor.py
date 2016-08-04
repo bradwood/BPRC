@@ -5,8 +5,8 @@ This module implements the logic to process a step in a recipe
 import sys
 import os
 
-#TODO: make sure type casting works for boolean, int, string, float etc
-#TODO: for header comparisions, make case insensitive -- check the RFC!!
+#TODO: ERROR HANDLING make sure type casting works for boolean, int, string, float etc
+#TODO: ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!
 
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 PACKAGE_PARENT = '..'
@@ -62,12 +62,11 @@ class StepProcessor():
         from bprc.utils import _insert_php_param
         from bprc.utils import _insert_var
 
-        # Algorithm: -- TODO: turn this into a set of functions or a parser parametrised object.
+        # Algorithm: -- TODO: REFACTOR: use  parametrised regex object + try/catchs
 
         # process substitutions in Name string
         vlog("Name: Commencing pattern match for substitutions...")
         u=self.recipe.steps[self.stepid].name
-        #TODO: add try: here
         php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), u)
         vlog("Name: Made " +str(n)+ " php-like substitutions. Result: Name="+ php_substituted_text)
         v=php_substituted_text
@@ -78,7 +77,6 @@ class StepProcessor():
         # process substitutions in URL string
         vlog("URL: Commencing pattern match for substitutions...")
         u=self.recipe.steps[self.stepid].URL
-        #TODO: add try: here
         php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), u)
         vlog("URL: Made " +str(n)+ " php-like substitutions. Result: URL="+ php_substituted_text)
         v=php_substituted_text
@@ -134,12 +132,7 @@ class StepProcessor():
         name = self.recipe.steps[self.stepid].name
         httpmethod = self.recipe.steps[self.stepid].httpmethod
         url = self.recipe.steps[self.stepid].URL
-
-        try:
-            vlog("Content-type = " +self.recipe.steps[self.stepid].request.headers["Content-type"])
-        except KeyError as ke:
-            vlog("No Content-type header set, defaulting to application/json")
-            self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
+        options = self.recipe.steps[self.stepid].options
 
         try:
             vlog("User-agent = " +self.recipe.steps[self.stepid].request.headers["User-agent"])
@@ -147,6 +140,26 @@ class StepProcessor():
             vlog("Non User-agent header set, defaulting to bprc/" + __version__)
             self.recipe.steps[self.stepid].request.headers["User-agent"]="bprc/"+__version__
 
+        #Set accept header
+        self.recipe.steps[self.stepid].request.headers["Accept"]="application/json"
+
+
+        #Sets up content header according to the format of the body.
+        if 'request.body_format' in options:
+            if options['request.body_format'] == 'form':   #form option passed, so must encode
+                bodyformat='form'
+                self.recipe.steps[self.stepid].request.headers["Content-type"]="application/x-www-form-urlencoded"
+
+            else:                       #defaults to json
+                bodyformat='json'
+                self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
+        else:
+            bodyformat='json' # if the option wasn't set at all, default to json too.
+            self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
+
+
+
+        #TODO: HTTP set Accepts header here
         #request
         querystring = self.recipe.steps[self.stepid].request.querystring
         requestheaders = self.recipe.steps[self.stepid].request.headers
@@ -163,7 +176,28 @@ class StepProcessor():
         vlog("About to make HTTP request for step " + str(self.stepid) + " " + str(self.recipe.steps[self.stepid].name))
         vlog(httpmethod.upper() + " " + self.recipe.steps[self.stepid].URL)
         try:
-            r = eval('requests.'+httpmethod.lower()+'(url, params=querystring, headers=requestheaders, verify='+ str(not bprc.cli.args.ignoressl) +', data=json.dumps(requestbody, cls=BodyEncoder))')
+            if bodyformat == 'json':
+                r = requests.Request(httpmethod.lower(),
+                                      url,
+                                      params=querystring,
+                                      headers=requestheaders,
+                                      data=json.dumps(requestbody, cls=BodyEncoder)
+                                      )
+
+            else:
+                r = requests.Request(httpmethod.lower(),
+                                      url,
+                                      params=querystring,
+                                      headers=requestheaders,
+                                      data=requestbody._body
+                                      )
+
+            prepared = r.prepare()
+            logging.debug("Req body" + prepared.body)
+            s = requests.Session()
+            logging.debug("Verify parameter == " + str(not bprc.cli.args.ignoressl))
+            resp = s.send(prepared,verify=not bprc.cli.args.ignoressl)
+
         except requests.exceptions.SSLError as ssle:
             errlog("Could not verify SSL certificate. Try the --ignore-ssl option", ssle)
         except requests.exceptions.ConnectionError as httpe:
@@ -172,40 +206,40 @@ class StepProcessor():
             errlog("Problem with URL or HTTP method", ae)
         #set the response code
         #and if it's 4xx or 5xx exist based on whether --ignore-http-errors were passed or not.
-        self.recipe.steps[self.stepid].response.code=r.status_code
+        self.recipe.steps[self.stepid].response.code=resp.status_code
         vlog("Received HTTP response code: " + str(self.recipe.steps[self.stepid].response.code))
-        vlog("Code prefix " + str(r.status_code)[:1])
-        if (str(r.status_code)[:1] == '4') or (str(r.status_code)[:1] == '5'): #4xx or 5xx
-            msg="Received an HTTP error code..." + str(r.status_code)
+        vlog("Code prefix " + str(resp.status_code)[:1])
+        if (str(resp.status_code)[:1] == '4') or (str(resp.status_code)[:1] == '5'): #4xx or 5xx
+            msg="Received an HTTP error code..." + str(resp.status_code)
             logging.error(msg)
             verboseprint(msg)
             if bprc.cli.args.skiphttperrors:
                 pass #vlog("--skip-http-errors passed. Ignoring error and proceeding...")
             else:
                 try:
-                    r.raise_for_status() #TODO: check this is working as expected, ie only for 5xx & 4xx
+                    resp.raise_for_status()
                 except Exception as e:
                     if bprc.cli.args.debug:
-                        print("Response body: " + r.text)
+                        print("Response body: " + resp.text)
                     errlog("Got error HTTP response and --skip-http-errors not passed. Aborting", e)
 
         #now grab the headers and load them into the response.headers
-        self.recipe.steps[self.stepid].response.headers=r.headers
+        self.recipe.steps[self.stepid].response.headers=resp.headers
 
         #Now load some of the meta data from the response into the step.response
-        self.recipe.steps[self.stepid].response.httpversion=r.raw.version
-        self.recipe.steps[self.stepid].response.encoding=r.encoding
-        self.recipe.steps[self.stepid].response.statusmsg=httpstatuscodes[str(r.status_code)]
+        self.recipe.steps[self.stepid].response.httpversion=resp.raw.version
+        self.recipe.steps[self.stepid].response.encoding=resp.encoding
+        self.recipe.steps[self.stepid].response.statusmsg=httpstatuscodes[str(resp.status_code)]
 
         #now parse the json response and load it into the response.body
-        if r.status_code == 204 or r.status_code == 205: # no content or reset content don't send any content
+        if resp.status_code == 204 or resp.status_code == 205: # no content or reset content don't send any content
             response_content_type = ""
         else:
-            response_content_type = r.headers['Content-type'].split(';')[0] # grabs the xxx/yyyy bit of the header
-        logging.debug(r.text)
+            response_content_type = resp.headers['Content-type'].split(';')[0] # grabs the xxx/yyyy bit of the header
+        logging.debug(resp.text)
         logging.debug("Content-type:" + response_content_type)
-        logging.debug("Encoding:" + str(r.encoding))
-        logging.debug("Text:" + r.text)
+        logging.debug("Encoding:" + str(resp.encoding))
+        logging.debug("Text:" + resp.text)
 
         #now, check if JSON was sent in the response body, if it was, load it, otherwise exit with an error
         if response_content_type.lower() == 'application/json' or response_content_type == "":
@@ -216,20 +250,22 @@ class StepProcessor():
                     vlog("Response had no body... Proceeding...")
                     self.recipe.steps[self.stepid].response.body=None
                 else:
-                    self.recipe.steps[self.stepid].response.body=json.loads(r.text)
+                    self.recipe.steps[self.stepid].response.body=json.loads(resp.text)
             except Exception as e:
                 errlog("Failed to parse JSON response. Aborting", e)
             vlog("JSON parsed ok.")
         else:
             errlog("Response body is not JSON! Content-type: " +response_content_type+". Aborting", None)
 
-    def generateOutput(self):
+        return prepared
+
+    def generateOutput(self, req):
         """imvokes the output processor to write the output"""
         #instantiate an OutputProcessor
-        output=OutputProcessor(step=self.recipe.steps[self.stepid], id=self.stepid)
+        output=OutputProcessor(step=self.recipe.steps[self.stepid], id=self.stepid, req=req)
         # get cli arguments and pass to the output processor
 
-        output.writeOutput(writeformat=bprc.cli.args.outputformat, writefile=bprc.cli.args.outfile)
+        output.writeOutput(writeformat=bprc.cli.args.outputformat, writefile=bprc.cli.args.outfile, req=req)
 
 
 

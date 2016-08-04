@@ -10,7 +10,7 @@ from bprc.recipe import Recipe
 from bprc.stepprocessor import StepProcessor
 from bprc.utils import *
 
-#TODO: Add mocking for some of these tests to make them smaller/less complex
+#TODO: TEST -Add mocking for some of these tests to make them smaller/less complex
 
 @ddt
 class SimpleTest(unittest.TestCase):
@@ -60,13 +60,13 @@ recipe:
         Authorisation:
 
 """
-#TODO: impement excecptions test
+#TODO: TEST impement excecptions test
     def test_yaml_load(self):
         """tests the yaml loads and is able to instantiate a Recipe object"""
         datamap=yaml.load(self.yamldata)
         r = Recipe(datamap)
         self.assertIsInstance(r,Recipe)
-        #TODO: add a test for multiple docs in 1 YAML (using ---) -- reject this??
+        #TODO: TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??
 
     @unpack
     @data(['steps[0].request.headers["Authorisation"]', "yadda-step one authorisation header brad"],
@@ -107,7 +107,7 @@ recipe:
         r.steps[1] = processor.prepare()
         self.assertIsNone(eval(path_suffix))
 
-#TODO: add cli tests.
+#TODO: TEST add cli tests.
 
 if __name__ == '__main__':
     unittest.main()

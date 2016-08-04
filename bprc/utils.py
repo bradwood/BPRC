@@ -88,7 +88,7 @@ def vlog(msg):
     verboseprint(msg)
     logging.info(msg)
 
-#TODO: do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.
+#TODO: NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.
 
 #helper function to call logging.error and raise a RunTime error
 def errlog(msg, e):
@@ -106,17 +106,23 @@ def printhttprequest(step,*,file, id):
         print(step.httpmethod + " " + step.URL,file=file)
     else:
         print(step.httpmethod + " " + step.URL +"?" + urlencode(step.request.querystring),file=file)
+
+def printhttpresponse(step,*,file, id):
     print("HTTP/"+str(step.response.httpversion/10) +" " + str(step.response.code) +" " + httpstatuscodes[str(step.response.code)].upper() ,file=file)
 
-def printheaders(step,*,file, id):
+def printheaders(step,*,file, id, http_part):
     """Prints out the heading of the step to the output file"""
-    od = collections.OrderedDict(sorted(step.response.headers.items())) # sort the headers
+    logging.debug("in printheaders() http_part=" + http_part)
+    od = collections.OrderedDict(sorted(eval("step."+ http_part +".headers.items()"))) # sort the headers
 
     for key, val in od.items():
         print(key +": "+val, file=file)
 
-def printbody(step,*,file, id):
-    print(json.dumps(step.response.body,indent=4, sort_keys=True),file=file)
+def printbody(step,*,file, id,http_part):
+    if http_part == 'response':
+        print(json.dumps(step.response.body,indent=4, sort_keys=True),file=file)
+    else: ## assuming request.
+        print(json.dumps(step.request.body,indent=4, sort_keys=True),file=file)
     print("\n", file=file)
 
 # define regex patterns.

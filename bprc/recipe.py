@@ -80,6 +80,31 @@ class QueryString(collections.MutableMapping): #Make this class behave and look 
     def __len__(self):
         return len(self._querystring)
 
+class Options(collections.MutableMapping): #Make this class behave and look like a dict
+    """An collection of parameters passed options into a step"""
+    def __init__(self, options):
+        self._options=options
+
+    def __getitem__(self, key):
+        return self._options[key]
+
+    def __setitem__(self, key, value):
+        self._options[key] = value
+
+    def __delitem__(self, key):
+        del self._options[key]
+
+    def __iter__(self):
+        return iter(self._options)
+
+    def __len__(self):
+        return len(self._options)
+
+    def __str__(self):
+        outstr = ''
+        for key, value in sorted(self._options.items()):
+            outstr += key+": " + value +", "
+        return outstr
 
 class Response:
     """An HTTP Response, part of a step"""
@@ -97,24 +122,34 @@ class Request:
 
 class Step:
     """Defines a Step in the Recipe - a specific URL and its properties"""
-    def __init__(self, *, name, URL, httpmethod, request, response):
+    def __init__(self, *, name, URL, httpmethod, request, response, options):
         self.name = name
         self.URL = URL
         self.httpmethod = httpmethod
-        #set up empty request headers if none are passed
+        self.options = Options(options)
+        logging.debug("Options dump =" + str(self.options))
+
+        # try:
+        #     logging.debug(request["options"])
+        # except KeyError as ke:
+        #     vlog("No options values passed into step " + self.name)
+        #     request.update({'options': {}})
+
+
+
+        #TODO NTH -- fix these trys to not use logging as a test...
         try:
             logging.debug(request["headers"])
         except KeyError as ke:
             vlog("No request headers values passed into step " + self.name)
             request.update({'headers': {}})
-        #set up empty request body if none is passed
+
         try:
             logging.debug(request["body"])
         except KeyError as ke:
             vlog("No request body values passed into step " + self.name)
             request.update({'body': {}})
 
-        #set up empty request body if none is passed
         try:
             logging.debug(request["querystring"])
         except KeyError as ke:
@@ -153,7 +188,7 @@ class Recipe:
     #takes a datamap to initialise the data structure
     def __init__(self, dmap):
         self.steps = []
-        try:    #TODO: don't use vlog to test for the error condition -- it messes up the log
+        try:    #TODO: NTH don't use vlog to test for the error condition -- it messes up the log
             for i, item in enumerate(dmap["recipe"]):
                 #instantiate the step object and add it to the list of steps.
                 vlog("Parsing recipe step " + str(i))
@@ -163,6 +198,12 @@ class Recipe:
                 except KeyError as ke:
                     vlog("No step name set. Setting name to 'Step " + str(i)+"'")
                     dmap["recipe"][i].update({'name': 'GET'})
+
+                try:
+                    logging.debug(dmap["recipe"][i]["options"])
+                except KeyError as ke:
+                    vlog("No step options passed. Creating empty options opbject for this step.")
+                    dmap["recipe"][i].update({'options': {}})
 
                 #Check for URL passed in the YAML, otherwise fail.
                 try:
@@ -200,14 +241,15 @@ class Recipe:
                                            URL=dmap["recipe"][i]["URL"],
                                            httpmethod=dmap["recipe"][i]["httpmethod"],
                                            request=dmap["recipe"][i]["request"],
-                                           response=dmap["recipe"][i]["response"]))
+                                           response=dmap["recipe"][i]["response"],
+                                           options=dmap["recipe"][i]["options"]))
                 except Exception as e:
                     errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
                 vlog("Parsed recipe step " + str(i) + " ok...")
         except TypeError as te:
             errlog("Could not parse YAML. PLease check the input file.", te)
 
-    #TODO: implement __str__ for all other objects in this module
+    #TODO: NTH implement __str__ for all other objects in this module
     def __str__(self):
         ret_str = ""
         for s in self.steps:

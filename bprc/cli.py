@@ -33,7 +33,7 @@ filegroup.add_argument('--output-file', dest='outfile', action='store', metavar=
                     help='specifies output file, defaults to %(default)s')
 
 filegroup.add_argument('--output-format', dest='outputformat', action='store',
-                    choices={'raw','json'}, default='raw',
+                    choices={'raw-all','raw-response','json'}, default='raw-response',
                     help='specifies output format, defaults to %(default)s. ' +
                     'If json is selected a separate file will be created for ' +
                     'each step in the recipe with the filename suffixed with the ' +
@@ -43,8 +43,8 @@ logtestgroup.add_argument('-v', '--verbose', dest='verbose', action='store_true'
                     help='verbose mode', default=False)
 
 #TODO implement dry run
-logtestgroup.add_argument('-d', '--dry-run', dest='dryrun', action='store_true',default=False,
-                    help='does everything except actually making any HTTP calls')
+# logtestgroup.add_argument('-d', '--dry-run', dest='dryrun', action='store_true',default=False,
+#                     help='does everything except actually making any HTTP calls')
 
 logtestgroup.add_argument('--debug', dest='debug', action='store_true',default=False,
                     help='turns on stacktrace dumps for exceptions')
