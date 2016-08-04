@@ -58,71 +58,63 @@ class StepProcessor():
         # var_sub_pattern=re.compile(r'<%!(\S+?)%>')  #substitution pattern to find - of the form <%!somevar%>
         # file_sub_pattern=re.compile(r'<%f(\S+?)%>')  #substitution pattern to find - of the form <%f./somefile.txt%>
 
+        # these are teh functions to produce the substition for each regex type
         from bprc.utils import _insert_file_param
         from bprc.utils import _insert_php_param
         from bprc.utils import _insert_var
 
-        # Algorithm: -- TODO: REFACTOR: use  parametrised regex object + try/catchs
+        def executeSubstition(*, re, substitfunc, inputstring, recipe, variables):
+            """executes the appropriate substitution type, given a:
+            - regex pattern
+            - substitution function
+            - input text
+            - the recipe object
+            - the variables object
+            """
+            vlog("Commencing " + str(inputstring) + " substitution with " + substitfunc.__name__)
+            substituted_text, n = re.subn(partial(substitfunc, recipe=recipe, variables=variables),inputstring)
+            vlog("Made -------------"+ str(n) + " substitutions resulting in " + substituted_text)
+            return substituted_text
 
-        # process substitutions in Name string
-        vlog("Name: Commencing pattern match for substitutions...")
-        u=self.recipe.steps[self.stepid].name
-        php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), u)
-        vlog("Name: Made " +str(n)+ " php-like substitutions. Result: Name="+ php_substituted_text)
-        v=php_substituted_text
-        var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
-        vlog("Name: Made " +str(n)+ " variable substitutions. Result: Name="+ var_substituted_text)
-        self.recipe.steps[self.stepid].name=var_substituted_text
+        #parse the parts of each step for php-like patterns
+        parts = [self.recipe.steps[self.stepid].name,
+                 self.recipe.steps[self.stepid].URL,
+                 self.recipe.steps[self.stepid].request.querystring,
+                 self.recipe.steps[self.stepid].request.body,
+                 self.recipe.steps[self.stepid].request.headers
+                ]
+        # these 2 lists work in pairs, for each type of substitution introducted.
+        # you need to create a new regex object and and new substitution pattern for
+        # each new subscription type.
+        subREs = [var_sub_pattern, php_sub_pattern] #TODO: BUG - add parsing of file-type arguments here too!
+        subfuncs = [_insert_var, _insert_php_param]
 
-        # process substitutions in URL string
-        vlog("URL: Commencing pattern match for substitutions...")
-        u=self.recipe.steps[self.stepid].URL
-        php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), u)
-        vlog("URL: Made " +str(n)+ " php-like substitutions. Result: URL="+ php_substituted_text)
-        v=php_substituted_text
-        var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
-        vlog("URL: Made " +str(n)+ " variable substitutions. Result: URL="+ var_substituted_text)
-        self.recipe.steps[self.stepid].URL=var_substituted_text
-
-
-        # loop through all QueryString dictionaries and process substition
-        vlog("QueryString: Commencing pattern match for php-like pattern over all parameters...")
-
-        for key in self.recipe.steps[self.stepid].request.querystring:
-            vlog("QueryString: " + key + " found: Commencing pattern match for php-like pattern...")
-            qs=self.recipe.steps[self.stepid].request.querystring[key]
-            php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), qs)
-            vlog("QueryString: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + php_substituted_text)
-            v=php_substituted_text
-            var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
-            vlog("QueryString: Made " +str(n)+ " variable substitutions. Result: "+key+"="+ var_substituted_text)
-            self.recipe.steps[self.stepid].request.querystring[key]=var_substituted_text
-
-        # loop through all Request.body dictionaries and process substitutions
-        vlog("Body: Commencing pattern match for php-like pattern over all parameters...")
-        for key in self.recipe.steps[self.stepid].request.body:
-            vlog("Body: " + key + " found: Commencing pattern match for php-like pattern...")
-            bod=str(self.recipe.steps[self.stepid].request.body[key])
-            php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), bod)
-            vlog("Body: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + php_substituted_text)
-            v=php_substituted_text
-            var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
-            vlog("Body: Made " +str(n)+ " variable substitutions. Result: "+key+"="+  var_substituted_text)
-            self.recipe.steps[self.stepid].request.body[key]=var_substituted_text
-
-        # loop through all Request.header dictionaries and process substitutions
-        vlog("Header: Commencing pattern match for php-like pattern over all parameters...")
-        for key in self.recipe.steps[self.stepid].request.headers:
-            vlog("Header: " + key + " found: Commencing pattern match for php-like pattern...")
-            heads=self.recipe.steps[self.stepid].request.headers[key]
-            php_substituted_text, n = php_sub_pattern.subn(partial(_insert_php_param, recipe=self.recipe), heads)
-            vlog("Header: Made " +str(n)+ " php-like substitutions. Result: " + key + "=" + php_substituted_text)
-            v=php_substituted_text
-            var_substituted_text, n = var_sub_pattern.subn(partial(_insert_var,variables=self.variables),v)
-            vlog("Header: Made " +str(n)+ " variable substitutions. Result: "+key+"="+  var_substituted_text)
-            self.recipe.steps[self.stepid].request.headers[key]=var_substituted_text
+        partlist =[]
+        for part in parts:
+            for subRE, subfunc in zip(subREs,subfuncs):
+                if isinstance(part, str): # part is a string
+                    part = executeSubstition(
+                           re=subRE,
+                           substitfunc=subfunc,
+                           inputstring=part,
+                           recipe=self.recipe,
+                           variables=self.variables)
+                elif hasattr(part, '__getitem__'): # part is a dict
+                    for key in part:
+                        part[key] = executeSubstition(
+                                  re=subRE,
+                                  substitfunc=subfunc,
+                                  inputstring=part[key],
+                                  recipe=self.recipe,
+                                  variables=self.variables)
+            partlist.append(part)
 
 
+        self.recipe.steps[self.stepid].name = partlist[0]
+        self.recipe.steps[self.stepid].URL = partlist[1]
+        self.recipe.steps[self.stepid].request.querystring = partlist[2]
+        self.recipe.steps[self.stepid].request.body = partlist[3]
+        self.recipe.steps[self.stepid].request.headers = partlist[4]
 
         return self.recipe.steps[self.stepid]
 

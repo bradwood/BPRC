@@ -132,7 +132,7 @@ file_sub_pattern=re.compile(r'<%f(\S+?)%>')  #substitution pattern to find - of 
 
 ###### The three functions below are used to parse variables in the recipe.
 # They are passed into the re.sub() call
-def _insert_file_param(m):
+def _insert_file_param(m,*,recipe,variables):
     """used by the re.subn call below - takes an re.match object -returns a string"""
     try:
         with open(str(m.group(1)), "rb") as f:
@@ -143,7 +143,7 @@ def _insert_file_param(m):
         errlog("Could not open "+ m.group(1)+" in the rest of the recipe. Aborting.", e)
     return text
 
-def _insert_php_param(m, recipe):
+def _insert_php_param(m,*,recipe,variables):
     """used by the re.subn call below - takes an re.match object -returns a string"""
     try:
         vlog("Found php-like pattern: <$=" +str(m.group(1)) + "%>... substituting with " +str(eval('recipe.' + m.group(1))))
@@ -151,7 +151,7 @@ def _insert_php_param(m, recipe):
         errlog("Could not find "+ m.group(1)+" in the rest of the recipe. Aborting.", ke)
     return str(eval('recipe.' + m.group(1)))
 
-def _insert_var(m, variables):
+def _insert_var(m, *,recipe,variables):
     """used by the re.subn call below - takes an re.match object -returns a string """
     try:
         vlog("Found variable pattern: <$!" +str(m.group(1)) + "%>... substituting with " +str(eval('variables["' + m.group(1)+'"]')))

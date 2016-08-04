@@ -12,7 +12,7 @@ sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
 import logging
 import re
-#from functools import partial
+from functools import partial
 #import bprc.utils
 from bprc.utils import vlog
 from bprc.utils import errlog
@@ -44,6 +44,6 @@ class VarProcessor():
     def fileparse(self, val,src):
         """does file substitutions on the current variable"""
         vlog("Filename parser initialised for variable " + str(val))
-        file_substituted_text, n = file_sub_pattern.subn(_insert_file_param, str(val))
+        file_substituted_text, n = file_sub_pattern.subn(partial(_insert_file_param, recipe=None, variables=None), str(val))
         vlog("Files: Made " +str(n)+ " file substitutions. Result: " + str(val) + "=" + file_substituted_text)
         return file_substituted_text

@@ -1,37 +1,33 @@
 --- #sample recipe
+variables:
+  name: brad
+  favourite_colour: red
+  age: 345
+  drinks_beer: true
+  age_and_colour: <%!age%>:<%!favourite_colour%>
+  lorumfile: <%f./examples/lorum.txt%>
+
 recipe:
   -  # step0
-    name: Create Kong API
-    httpmethod: GET
-    URL: http://kong:8001/apis
+    name: Call Mockbin # see http://mockbin.org/docs#http-request
+    httpmethod: POST
+    URL: http://mockbin.org/request/path/to/<%!name%>
     request:
-      # body:
-      #   name: Consumer API
-      #   upstream_uri: http://wiremock/blah
-      #   strip_url: false
-      headers:
-        # Authorisation: yadda-step one authorisation header brad
-        Content-type: application/json
-      # querystring:
-      #   keya: vala
-      #   keyb: valb
-    response: # set up this response section if you need to pull out data here for use later in the recipe.
       body:
-        id: this_is_a_param
+        name: My name is <%!name%>
+        age: I am <%!name%> years old.
+        beer_drinker: <%!drinks_beer%>
+        lorum_impsum: <%!lorumfile%>
+      querystring:
+        colors: blue, green,  <%!favourite_colour%>
       headers:
-        Authorisation:
-      code:
-  -
-    name: Load OAUTH Plugin
+        X-info: <%!age_and_colour%>
+  - name: Call Mockbin with data from the previous call.
     httpmethod: GET
-    URL: https://wiremock:8081/hello #gets the JSON field id from the body of the response from step 1.
+    URL: http://mockbin.org/request/path/to/<%!name%>
     request:
-      body: #TODO: TEST put in a check for when a body, querystring, or header is defined withot anything below it!
-        something: blah
       headers:
-        blah: blahbha
-    response: # set up this response section if you need to pull out data here for use later in the recipe.
-      code:
+        date_header_from_previous_call: <%=steps[0].response.headers["Date"]%>
       body:
-      headers:
-        Authorisation:
+        http_response_code_from_previous_call: <%=steps[0].response.code%>
+
