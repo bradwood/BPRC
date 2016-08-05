@@ -15,7 +15,7 @@ recipe:
     request:
       body:
         name: My name is <%!name%>
-        age: I am <%!name%> years old.
+        age: I am <%!age%> years old.
         beer_drinker: <%!drinks_beer%>
         lorum_impsum: <%!lorumfile%>
       querystring:
