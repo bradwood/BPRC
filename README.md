@@ -53,66 +53,63 @@ Files can also be included into a recipe using a construct like this:
 This functionality is best illustrated with a complete recipe file as shown below.
 ```yaml
 --- #sample recipe
-variables: ## substitution patter for variables is <%!varname%>
-	varname: val-1
-	var2: 8001
+variables:
+  name: brad
+  favourite_colour: red
+  age: 345
+  drinks_beer: true
+  age_and_colour: <%!age%>:<%!favourite_colour%>
+  lorumfile: <%f./examples/lorum.txt%>
+
 recipe:
-	-  # step0
-		name: HTTPBIN call
-		httpmethod: GET
-		URL: http://httpbin.org/get
-		request:
-			body:
-				name: json name parameter
-				url: http://wiremock/blah
-				booleanflag: false
-			headers:
-				X-ABC: 1231233425435fsdf <%!varname%>
-			querystring:
-				keya: vala
-				keyb: valb
-		response: # set up this response section if you need to pull out data here for use later in the recipe.
-							# the YAML hierarchy will map to the JSON response obtained and the the values received from
-							# the call will be inserted into the appropriate response variables so that subsequent steps
-							# can access them with the php-like construct
-			body:
-				id: this_is_a_param
-				origin: somval
-			headers:
-				Authorization:
-			code: #HTTP response code
-	-
-		name: Load OAUTH Plugin
-		httpmethod: POST
-		URL: http://httpbin.org/post
-		request:
-			querystring:
-				key3: value3
-			body:
-				key4: valueprefix <%=steps[0].request.headers["X-ABC"]%>
-			headers:
-				blah: blahbha
-				Authorisation: bearer <%=steps[0].request.querystring["keyb"]%>
-	 
+  -  # step0
+    name: Call Mockbin # see http://mockbin.org/docs#http-request
+    httpmethod: POST
+    URL: http://mockbin.org/request/path/to/<%!name%>
+    request:
+      body:
+        name: My name is <%!name%>
+        age: I am <%!name%> years old.
+        beer_drinker: <%!drinks_beer%>
+        lorum_impsum: <%!lorumfile%>
+      querystring:
+        colors: blue, green,  <%!favourite_colour%>
+      headers:
+        X-info: <%!age_and_colour%>
+  - name: Call Mockbin with data from the previous call.
+    httpmethod: GET
+    URL: http://mockbin.org/request/path/to/<%!name%>
+    request:
+      headers:
+        date_header_from_previous_call: <%=steps[0].response.headers["Date"]%>
+      body:
+        http_response_code_from_previous_call: <%=steps[0].response.code%>
+
 ```
 ## Other features
 `bprc` provides the following features:
  - robust logging support
- - saving output files as raw HTTP or JSON
+ - saving output files as raw HTTP (response only, or both request and response) or JSON
  - SSL support (including the ability to ingore invalid server certificates)
- - Dry-run *(Not implemented yet)*
  - verbose and/or debug output
+ - HTTP request bodies formatted either as JSON or form-encoded 
 
 ## Known issues/shortcomings
 The following are known areas for improvement:
 - poor tolerance of badly formatted YAML
 - `--dry-run` option not implemented
 - poor test coverage and test automation
-- only handles JSON in both the request and response bodies, XML or ther payload types are not supported.
-- can not do a substitution using data in a response body if the JSON payload is a list (array). Only dictionaries (key/value pairs) at the top level of the JSON document are currently supported. 
-- does not support multiple YAML recipes in one file (separated by `---`)
+- only handles JSON in the response bodies, XML or ther payload types are not supported.
+- BUG: file substitution only happens in the variables section of the YAML, not the recipe section. 
 
 ## Planned improvements
-- Improving error handling
-- Better test coverage and integration with a coverage tool
+- improving error handling
+- better test coverage and integration with a coverage tool
 - Implementing `--dry-run`
+- passing an entire payload, rather than just a single parameter, using a file include
+- setting a recipe variable via cli and/or environment variable
+
+## Contributing
+Contributions are welcome! Please fork, make your changes, add tests to cover your work and then raise a pull request.
+
+
