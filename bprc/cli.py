@@ -26,8 +26,8 @@ protocolgroup=parser.add_argument_group(title="Protocol arguments")
 parser.add_argument('--version', action='version', version='{} {}'.format(sys.argv[0],__version__),
                     help='shows version number and exits')
 
-filegroup.add_argument('-f', '--input-file', dest='yamlfile', metavar='yamlfile', action='store',
-                    help="YAML recipe file", type=argparse.FileType('r'), default=sys.stdin)
+parser.add_argument('yamlfile', nargs='?', action='store',
+                    help="YAML recipe file, defaults to stdin", type=argparse.FileType('r'), default=sys.stdin)
 
 filegroup.add_argument('--output-file', dest='outfile', action='store', metavar='outfile', default="bprc.out",
                     help='specifies output file, defaults to %(default)s')
@@ -67,7 +67,9 @@ args = parser.parse_args()
 
 ## hack for the case when no arguments are passed. without this, it just sits waiting for stdin.
 ## first checks to make sure no arguments were passed, then checks for no input piped in from stdin
-if len(sys.argv) < 2 and not select.select([sys.stdin,],[],[],0.0)[0]:
+# TODO: bug, fix this as it breaks if more than 2 args are passed
+# Remove -f and use this http://stackoverflow.com/questions/7576525/optional-stdin-in-python-with-argparse
+if args.yamlfile == sys.stdin and not select.select([sys.stdin,],[],[],0.0)[0]:
     parser.print_usage()
-    parser.exit(status=0)
+    parser.exit(status=1)
 
