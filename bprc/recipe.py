@@ -103,7 +103,7 @@ class Options(collections.MutableMapping): #Make this class behave and look like
     def __str__(self):
         outstr = ''
         for key, value in sorted(self._options.items()):
-            outstr += key+": " + value +", "
+            outstr += key+": " + str(value) +", "
         return outstr
 
 class Response:

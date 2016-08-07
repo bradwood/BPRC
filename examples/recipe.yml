@@ -11,7 +11,9 @@ recipe:
   -  # step0
     name: Call Mockbin # see http://mockbin.org/docs#http-request
     httpmethod: POST
-    URL: http://mockbin.org/request/path/to/<%!name%>
+    # using the HTTP Basic auth process to see if the Authorization: header
+    # is visible in the output file.
+    URL: http://Aladdin:OpenSesame@mockbin.org/request/path/to/<%!name%>
     request:
       body:
         name: My name is <%!name%>
@@ -24,6 +26,8 @@ recipe:
         X-info: <%!age_and_colour%>
   - name: Call Mockbin with data from the previous call.
     httpmethod: GET
+    options:
+      request.retries: 10  #set retries to 10, overriding the default of 3.
     URL: http://mockbin.org/request/path/to/<%!name%>
     request:
       headers:

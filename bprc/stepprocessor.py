@@ -126,10 +126,25 @@ class StepProcessor():
         url = self.recipe.steps[self.stepid].URL
         options = self.recipe.steps[self.stepid].options
 
+
+        #Set host header on the request.
+        from urllib.parse import urlparse
+        parse_object = urlparse(url)
+
+        #Set host header on the request.
+        try:
+            vlog("Host: = " +self.recipe.steps[self.stepid].request.headers["Host"])
+        except KeyError as ke:
+            from urllib.parse import urlparse
+            vlog("No Host header set, using host part of URL: " + urlparse(url).hostname)
+            self.recipe.steps[self.stepid].request.headers["Host"]=urlparse(url).hostname
+
+
+        #Set user agent header
         try:
             vlog("User-agent = " +self.recipe.steps[self.stepid].request.headers["User-agent"])
         except KeyError as ke:
-            vlog("Non User-agent header set, defaulting to bprc/" + __version__)
+            vlog("No User-agent header set, defaulting to bprc/" + __version__)
             self.recipe.steps[self.stepid].request.headers["User-agent"]="bprc/"+__version__
 
         #Set accept header
@@ -148,6 +163,14 @@ class StepProcessor():
         else:
             bodyformat='json' # if the option wasn't set at all, default to json too.
             self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
+
+        #sets up number of retries based on options passed
+        #TODO: document available OPTIONS
+        if 'request.retries' in options:
+            #TODO: check type of option parameter in try
+            retries=int(options['request.retries'])
+        else:
+            retries=3 #sensible default
 
         #request
         querystring = self.recipe.steps[self.stepid].request.querystring
@@ -183,7 +206,19 @@ class StepProcessor():
 
             prepared = r.prepare()
             logging.debug("Req body" + prepared.body)
+            # TODO: OPTIMISATION, consider creating the session at the Recipe level, not
+            # the step level. You can then set up a pool of http connections for reuse.
             s = requests.Session()
+            # see http://docs.python-requests.org/en/master/_modules/requests/adapters/#HTTPAdapter
+            # sets up connection pooling and retry configs.
+            # also see http://stackoverflow.com/questions/21371809/cleanly-setting-max-retries-on-python-requests-get-or-post-method
+            # and http://www.coglib.com/~icordasc/blog/2014/12/retries-in-requests.html
+            a = requests.adapters.HTTPAdapter(max_retries=retries)
+            b = requests.adapters.HTTPAdapter(max_retries=retries)
+            s.mount('http://', a)
+            s.mount('https://', b)
+            logging.debug("Retries set to " + str(retries))
+
             logging.debug("Verify parameter == " + str(not bprc.cli.args.ignoressl))
             resp = s.send(prepared,verify=not bprc.cli.args.ignoressl)
 
@@ -193,6 +228,13 @@ class StepProcessor():
             errlog("Could not open HTTP connection. Network problem or bad URL?", httpe)
         except AttributeError as ae:
             errlog("Problem with URL or HTTP method", ae)
+
+        # load the request headers from requests request opbject rather than just
+        # relying on the step's request headers object. We do this to grab any other
+        # request headers that requests adds, e.g., an Authorization header which
+        # might be set in the library
+        self.recipe.steps[self.stepid].request.headers=resp.request.headers
+
         #set the response code
         #and if it's 4xx or 5xx exist based on whether --ignore-http-errors were passed or not.
         self.recipe.steps[self.stepid].response.code=resp.status_code
