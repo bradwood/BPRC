@@ -19,7 +19,7 @@ recipe:
         name: My name is <%!name%>
         age: I am <%!age%> years old.
         beer_drinker: <%!drinks_beer%>
-        lorum_impsum: <%!lorumfile%>
+        lorum_impsum: <%!lorumfile%> # this uses the variable which in turn points to the file
       querystring:
         colors: blue, green,  <%!favourite_colour%>
       headers:
@@ -34,4 +34,5 @@ recipe:
         date_header_from_previous_call: <%=steps[0].response.headers["Date"]%>
       body:
         http_response_code_from_previous_call: <%=steps[0].response.code%>
+        lorum: <%f./examples/lorum.txt%> #this uses the file directly.
 

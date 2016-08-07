@@ -1,15 +1,18 @@
 """This module provides the main functionality of bprc.
 Invocation flow:
-  1. Read, validate and process the input (args).
-  2. Create the Recipe object.
-    2.1. Validate the Recipe Opbject
-  3. Iterate over the Recipe object
-    3.1. Invoke each Ingredient by:
-        3.1.1. Substiting any response data into the current Ingredient
-        3.1.2. Executing the call
-        3.1.3. Updating all response objects
-        3.1.4. Write output file
-  4. Exit.
+  - Read, validate and process the input (args).
+  - Parse the YAML file.
+  - Create a Variables object from the yaml file.
+    - Parse it and create the Variables object
+  - Create the Recipe object from the yaml file.
+    - Validate the Recipe Opbject
+  - Iterate over the Recipe object
+    - Invoke each step by:
+      - Substiting any response, variable or file data into the current step
+      - Executing the call
+      - Updating all response objects
+      - Writing the output
+  - Exit.
 
 """
 
@@ -41,6 +44,7 @@ def main():
     Return exit status code.
     """
 
+    # set up the log file
     if bprc.cli.args.loglevel == 'none':
         logging.basicConfig(
         level=logleveldict[bprc.cli.args.loglevel],
@@ -70,7 +74,7 @@ def main():
     except Exception as e:
         vlog("No variable object in YAML file")
         variables = Variables({})
-    vlog("Variables object instantiated ok... (albeit maybe empty")
+    vlog("Variables object instantiated ok... (albeit maybe empty)")
 
     try:
         vlog("Instantiating recipe object...")

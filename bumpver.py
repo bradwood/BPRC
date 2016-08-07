@@ -5,7 +5,7 @@ Simple script that:
 - using an argument, bumps it
 - does a git tag and a git commit
 """
-
+#TODO: RELEASE NOTES - consider using git shortlog 0.6.2..0.6.3 to generate release notes.
 import semver
 import argparse
 import sys

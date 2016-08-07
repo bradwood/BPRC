@@ -86,8 +86,8 @@ class StepProcessor():
         # these 2 lists work in pairs, for each type of substitution introducted.
         # you need to create a new regex object and and new substitution pattern for
         # each new subscription type.
-        subREs = [var_sub_pattern, php_sub_pattern] #TODO: BUG - add parsing of file-type arguments here too!
-        subfuncs = [_insert_var, _insert_php_param]
+        subREs = [var_sub_pattern, php_sub_pattern, file_sub_pattern]
+        subfuncs = [_insert_var, _insert_php_param, _insert_file_param]
 
         partlist =[]
         for part in parts:
