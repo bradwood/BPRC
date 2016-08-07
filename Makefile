@@ -19,5 +19,7 @@ clean:
 	rm -rf build
 	rm -rf dist
 
+pypi:
+	python3 setup.py register bdist upload
 
 .PHONY:	test

@@ -6,13 +6,20 @@ See:
 https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
+import os
+import sys
+# see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
+PACKAGE_PARENT = '..'
+SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
+sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
+
 
 # Always prefer setuptools over distutils
 from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 from os import path
-import os
+
 
 
 here = path.abspath(path.dirname(__file__))
@@ -28,8 +35,9 @@ try:
     long_description = pypandoc.convert('README.md', 'rst')
 except (IOError, ImportError):
     long_description = ''
+    print("Warning, couldn't create rst file from md file!!.")
 
-# get the version number from the canonocial version file
+# get the version number from the canonical version file
 import re
 VERSIONFILE="bprc/_version.py"
 verstrline = open(VERSIONFILE, "rt").read()
