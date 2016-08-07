@@ -27,12 +27,21 @@ Install like this:
 ```bash
 pip3 install bprc
 ```
+Or a tagged version directly from GitHub (as PyPI can sometimes be erratic)
+```bash
+pip3 install https://github.com/bradwood/BPRC/tarball/x.y.x # replace with version tag in GitHub
+```
 
 ## How it works
 The recipe is specified in a single YAML file which describes:
- - the list of URLs that need to be visited, in order
- - the HTTP method to use for each
- - the headers, querystring and body data to include for each step of the recipe
+ - A list of variables that are initialised at the top of the recipe for use in the steps below.
+ - A list of ordered steps that comprise the recipe, each containing some or all of the below:
+	 - the URL that need to be visited
+	 - the HTTP method to use
+	 - the headers, querystring and body data to include in the step
+	 - specific options to pass into the this step -- currently only the following options are supported:
+		 - `request.retries` - set to the number of retries to attempt on the step in question. Only works for non-mutating calls (e.g., GETs), defaults to 3.
+		 - `request.body_format` - can be set to `json` (default) or `form`. Will assemble the request body as either form-encoded or json and set the `Content-type:` header to `application/x-www-form-urlencoded` or `application/json` respectively.
 
 Additionally, the YAML recipe file supports the ability to grab data from any part of any of the HTTP requests or responses in earlier steps in the recipe and insert them into later steps using a PHP-like construct. For example, say I have a 10-step recipe specified and in step 7 I need to POST some data that I received in step 3's reponse. I can include a construct like this in any part of the YAML file: 
 ```
@@ -40,7 +49,7 @@ Additionally, the YAML recipe file supports the ability to grab data from any pa
 ```
 Assuming that step 3 did indeed contain a parameter called `id` in it's JSON response payload, this data will then be substituted in the specified part of step 10's request.
 
-The inclusion of variables in the recipe are also supported. They can be inserted into the recipe as shown:
+The insertion of  variables anywhare in the recipe is done as shown:
 ```
 <%!varname%>
 ```
@@ -65,7 +74,9 @@ recipe:
   -  # step0
     name: Call Mockbin # see http://mockbin.org/docs#http-request
     httpmethod: POST
-    URL: http://mockbin.org/request/path/to/<%!name%>
+    # using the HTTP Basic auth process to see if the Authorization: header
+    # is visible in the output file.
+    URL: http://Aladdin:OpenSesame@mockbin.org/request/path/to/<%!name%>
     request:
       body:
         name: My name is <%!name%>
@@ -78,12 +89,15 @@ recipe:
         X-info: <%!age_and_colour%>
   - name: Call Mockbin with data from the previous call.
     httpmethod: GET
+    options:
+      request.retries: 10  #set retries to 10, overriding the default of 3.
     URL: http://mockbin.org/request/path/to/<%!name%>
     request:
       headers:
         date_header_from_previous_call: <%=steps[0].response.headers["Date"]%>
       body:
         http_response_code_from_previous_call: <%=steps[0].response.code%>
+
 
 ```
 ## Other features
@@ -104,7 +118,7 @@ The following are known areas for improvement:
 
 ## Planned improvements
 - improving error handling
-- better test coverage and integration with a coverage tool
+- better test coverage
 - Implementing `--dry-run`
 - passing an entire payload, rather than just a single parameter, using a file include
 - setting a recipe variable via cli and/or environment variable

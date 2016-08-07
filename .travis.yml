@@ -17,4 +17,3 @@ after_success:
 #  - bash <(curl -s https://codecov.io/bash)
   - codecov
 
-# to run tests with coverage do coverage run -m unittest -v
