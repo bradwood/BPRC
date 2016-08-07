@@ -23,7 +23,7 @@ PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))
 sys.path.append(os.path.normpath(os.path.join(SCRIPT_DIR, PACKAGE_PARENT)))
 
-
+import select
 import yaml
 import bprc.utils
 from bprc.utils import vlog,errlog,verboseprint, logleveldict
@@ -43,6 +43,10 @@ def main():
     and run the main program with error handling.
     Return exit status code.
     """
+    # Hack to make the program exit if neither stdin, nor a file param is passed.
+    if bprc.cli.args.yamlfile == sys.stdin and not select.select([sys.stdin,],[],[],0.0)[0]:
+        bprc.cli.parser.print_usage()
+        bprc.cli.parser.exit(status=1)
 
     # set up the log file
     if bprc.cli.args.loglevel == 'none':
