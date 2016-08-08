@@ -41,7 +41,6 @@ class BodyEncoder(json.JSONEncoder):
         if isinstance(body,Body):
             return body._body
 
-
 class StepProcessor():
     """Class to process """
 
@@ -165,7 +164,6 @@ class StepProcessor():
             self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
 
         #sets up number of retries based on options passed
-        #TODO: document available OPTIONS
         if 'request.retries' in options:
             #TODO: check type of option parameter in try
             retries=int(options['request.retries'])
@@ -296,7 +294,7 @@ class StepProcessor():
         output=OutputProcessor(step=self.recipe.steps[self.stepid], id=self.stepid, req=req)
         # get cli arguments and pass to the output processor
 
-        output.writeOutput(writeformat=bprc.cli.args.outputformat, writefile=bprc.cli.args.outfile, req=req)
+        output.writeOutput(writeformat=bprc.cli.args.outputformat, writefile=bprc.cli.args.outputfile, req=req)
 
 
 

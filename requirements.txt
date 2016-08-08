@@ -1,5 +1,3 @@
-#TODO: CICD break out into build, test, dist requirements
-#TODO: CICD add coverage.py and badge script.
 pyyaml
 ddt
 pypandoc
@@ -10,5 +8,6 @@ pyyaml
 semver
 codecov
 coverage
+pygments
 
 

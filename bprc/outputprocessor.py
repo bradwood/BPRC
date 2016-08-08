@@ -31,44 +31,48 @@ class OutputProcessor():
         self.id = id
         self.req = req
 
-    #TODO: REFACTOR Rewrite this Output generatro to use the requests object for output.
     # See http://stackoverflow.com/questions/20658572/python-requests-print-entire-http-request-raw
     def writeOutput(self, *, writeformat, writefile, req):
         """Writes the output to the writefile in the format specified"""
         vlog("Generating output of step: " + str(self.id) +" " + self.step.name + ". Format=" + writeformat)
 
         if writeformat == 'json':
-            if self.step.response.body is not None:
-                with open(writefile + '.'+str(self.id),'wt') as f:
-                    print(json.dumps(self.step.response.body,indent=4, sort_keys=True),file=f)
-                    vlog("Wrote " + writefile + '.'+str(self.id))
+            formatted_json = json.dumps(self.step.response.body,indent=4, sort_keys=True)
+            #colorise the json
+            if sys.stdout.isatty():
+                from pygments import highlight, lexers, formatters
+                colorful_json = highlight(formatted_json, lexers.JsonLexer(), formatters.TerminalFormatter())
+                print(colorful_json, file=writefile)
             else:
-                open(writefile + '.'+str(self.id),'wt').close() #touch the file (although it's empty)
-        else:
-            ## assume format = raw
-            if self.id==0: open(writefile,'wt').close() # empty out the output file if it exists.
-            with open(writefile,'at') as f:
+                print(formatted_json, file=writefile)
 
-                printstepcolophon(self.step,id=self.id, file=f)
+            vlog("Wrote to " + writefile.name)
 
-                if writeformat == 'raw-all': ## need to write the http resquest first.
-                    print("-- Request --", file=f)
-                    printhttprequest(self.step, id=self.id,file=f)
-                    printheaders(self.step, id=self.id,file=f,http_part='request')
-                    logging.debug("PRINTING REQUEST HEADERS")
-                    if self.step.request.body:
-                        logging.debug("Req.body==" +req.body)
-                        print(req.body, file=f)
-                    print("-- Response --", file=f)
+        else: # format is raw-(all|response)
+            printstepcolophon(self.step,id=self.id, file=writefile)
 
-                # now write the response
-                printhttpresponse(self.step, id=self.id,file=f)
-                printheaders(self.step, id=self.id,file=f,http_part='response')
+            colourful = sys.stdout.isatty()
 
-                if self.step.response.body:
-                    printbody(self.step, id=self.id,file=f,http_part='response')
-                    #print(req.body, file=f)
-                vlog("Appended output to " + writefile)
+            if writeformat == 'raw-all': ## need to write the http resquest first.
+                print("-- Request --", file=writefile)
+                printhttprequest(self.step, id=self.id, file=writefile, colourful=colourful)
+                printheaders(self.step, id=self.id,file=writefile, http_part='request',  colourful=colourful)
+                logging.debug("PRINTING REQUEST HEADERS")
+                if self.step.request.body:
+                    logging.debug("Req.body==" +req.body)
+                    self.step.request.body=json.loads(req.body) #TODO: check if a try is needed here, may not be if non-json is trapped earlier
+                    printbody(self.step, id=self.id, file=writefile, http_part='request',  colourful=colourful)
+                print("-- Response --", file=writefile)
+
+            # now write the response
+            printhttpresponse(self.step, id=self.id, file=writefile, colourful=colourful)
+            printheaders(self.step, id=self.id, file=writefile, http_part='response', colourful=colourful)
+
+            if self.step.response.body:
+                printbody(self.step, id=self.id, file=writefile, http_part='response',  colourful=colourful)
+            vlog("Appended output to " + writefile.name)
+
+
 
 
 

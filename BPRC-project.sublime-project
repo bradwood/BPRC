@@ -2,7 +2,26 @@
 	"folders":
 	[
 		{
+			"folder_exclude_patterns":
+			[
+				"dist",
+				"build",
+				".cache",
+				"bprc.egg-info"
+			],
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+        "todoreview": {
+            "exclude_folders":
+            [
+            	"*.git*",
+            	"dist",
+				"build",
+				".cache",
+				"bprc.egg-info"
+			]
+        }
+    }
 }

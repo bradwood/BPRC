@@ -28,15 +28,12 @@ parser.add_argument('--version', action='version', version='{} {}'.format(sys.ar
 parser.add_argument('yamlfile', nargs='?', help="YAML recipe file, defaults to stdin",
                     type=argparse.FileType('r'), default=sys.stdin)
 
-filegroup.add_argument('--output-file', dest='outfile', action='store', metavar='outfile', default="bprc.out",
-                    help='specifies output file, defaults to %(default)s')
+parser.add_argument('outputfile', nargs='?', help=argparse.SUPPRESS, #help='specifies output file, defaults to stdout', turned off for now.
+                    type=argparse.FileType('w'), default=sys.stdout)
 
 filegroup.add_argument('--output-format', dest='outputformat', action='store',
                     choices={'raw-all','raw-response','json'}, default='raw-response',
-                    help='specifies output format, defaults to %(default)s. ' +
-                    'If json is selected a separate file will be created for ' +
-                    'each step in the recipe with the filename suffixed with the ' +
-                    'step number. Raw-formatted output, on the other hand, will all be written to a single file.')
+                    help='specifies output format, defaults to %(default)s.')
 
 logtestgroup.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                     help='verbose mode', default=False)
@@ -64,10 +61,4 @@ protocolgroup.add_argument('--ignore-ssl', dest='ignoressl', action='store_true'
 
 args = parser.parse_args()
 
-## hack for the case when no arguments are passed. without this, it just sits waiting for stdin.
-
-##TODO: this code breaks the tests -- need tofix!!!
-#if args.yamlfile == sys.stdin and not select.select([sys.stdin,],[],[],0.0)[0]:
-#    parser.print_usage()
-#    parser.exit(status=1)
 

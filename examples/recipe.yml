@@ -24,7 +24,8 @@ recipe:
         colors: blue, green,  <%!favourite_colour%>
       headers:
         X-info: <%!age_and_colour%>
-  - name: Call Mockbin with data from the previous call.
+  -  # step 1
+    name: Call Mockbin with data from the previous call.
     httpmethod: GET
     options:
       request.retries: 10  #set retries to 10, overriding the default of 3.

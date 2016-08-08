@@ -17,6 +17,8 @@ import json
 from urllib.parse import urlencode
 import collections
 import re
+from pygments import highlight, lexers, formatters
+from json import JSONDecoder
 
 httpstatuscodes = {
 "100": "Continue",
@@ -67,6 +69,7 @@ def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.except
         debug_hook(exception_type, exception, traceback)
     else:
         print("{}: {}".format(exception_type.__name__, exception))
+        #TODO: try file=sys.stderr as an arg to print()
 
 sys.excepthook = exceptionHandler
 
@@ -81,7 +84,10 @@ logleveldict = {'none': 100, #Hack, as will only log stuff >= 100, critical=50
 
 
 #sets up a print function for the --verbose argument
-verboseprint = print if bprc.cli.args.verbose else lambda *a, **k: None
+def vprint(arg):
+    print(arg, file=sys.stderr)
+
+verboseprint = vprint if bprc.cli.args.verbose else lambda *a, **k: None
 
 # helper function to call both verboseprint and logging.info
 def vlog(msg):
@@ -100,30 +106,68 @@ def printstepcolophon(step,*,file, id):
     """Prints out the heading of the step to the output file"""
     print("--- Step " + str(id) + ": " + step.name +" ---",file=file)
 
-def printhttprequest(step,*,file, id):
+def printhttprequest(step,*,file, id, colourful):
     """Prints out the heading of the step to the output file"""
-    if step.request.querystring == {}:
-        print(step.httpmethod + " " + step.URL,file=file)
+
+    if colourful:
+        if step.request.querystring == {}:
+            print(step.httpmethod + " " + step.URL +"?" + urlencode(step.request.querystring),file=file)
+            #print(highlight(step.httpmethod + " " + step.URL,lexers.HttpLexer(stripnl=True), formatters.TerminalFormatter()), file=file)
+        else:
+            print(step.httpmethod + " " + step.URL +"?" + urlencode(step.request.querystring),file=file)
     else:
-        print(step.httpmethod + " " + step.URL +"?" + urlencode(step.request.querystring),file=file)
+        if step.request.querystring == {}:
+            print(step.httpmethod + " " + step.URL,file=file)
+        else:
+            print(step.httpmethod + " " + step.URL +"?" + urlencode(step.request.querystring),file=file)
 
-def printhttpresponse(step,*,file, id):
-    print("HTTP/"+str(step.response.httpversion/10) +" " + str(step.response.code) +" " + httpstatuscodes[str(step.response.code)].upper() ,file=file)
 
-def printheaders(step,*,file, id, http_part):
+def printhttpresponse(step,*,file, id, colourful):
+    if colourful:
+        #print(highlight("HTTP/"+str(step.response.httpversion/10) +" " +
+        #str(step.response.code) +" " +
+        #httpstatuscodes[str(step.response.code)].upper(),lexers.HttpLexer(stripnl=True), formatters.TerminalFormatter()) ,file=file)
+        print("HTTP/"+str(step.response.httpversion/10) +" " +
+        str(step.response.code) +" " +
+        httpstatuscodes[str(step.response.code)].upper() ,file=file)
+    else:
+        print("HTTP/"+str(step.response.httpversion/10) +" " +
+        str(step.response.code) +" " +
+        httpstatuscodes[str(step.response.code)].upper() ,file=file)
+
+def printheaders(step,*,file, id, http_part, colourful):
     """Prints out the heading of the step to the output file"""
     logging.debug("in printheaders() http_part=" + http_part)
     od = collections.OrderedDict(sorted(eval("step."+ http_part +".headers.items()"))) # sort the headers
-
     for key, val in od.items():
-        print(key +": "+val, file=file)
+        if colourful: #for now, does the same thing
+            #print(highlight(key +": "+ val, lexers.TextLexer(stripnl=True), formatters.TerminalFormatter()), file=file)
+            print(key +": "+val, file=file)
+        else:
+            print(key +": "+val, file=file)
 
-def printbody(step,*,file, id,http_part):
-    if http_part == 'response':
-        print(json.dumps(step.response.body,indent=4, sort_keys=True),file=file)
-    else: ## assuming request.
-        print(json.dumps(step.request.body,indent=4, sort_keys=True),file=file)
-    print("\n", file=file)
+#class BodyPrintEncoder(json.JSONEncoder):
+#    """ encodes a request body"""
+
+#    def default(self,inputbody):
+#        self.strict = False
+#        return str(inputbody)
+
+# cls=BodyPrintEncoder
+
+
+def printbody(step,*,file, id,http_part, colourful):
+    if colourful:
+        if http_part == 'response':
+            print(highlight(json.dumps(step.response.body,indent=4, sort_keys=True),lexers.JsonLexer(),formatters.TerminalFormatter()),file=file)
+        else: ## assuming request.
+            print(highlight(json.dumps(step.request.body,indent=4, sort_keys=True),lexers.JsonLexer(),formatters.TerminalFormatter()),file=file)
+        print("\n", file=file)
+    else:
+        if http_part == 'response':
+            print(json.dumps(step.response.body,indent=4, sort_keys=True),file=file)
+        else: ## assuming request.
+            print(json.dumps(step.request.body,indent=4, sort_keys=True),file=file)
 
 # define regex patterns.
 php_sub_pattern=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>

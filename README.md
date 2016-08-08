@@ -12,24 +12,26 @@ A Dev/DevOps tool to automate calling a set of RESTFul JSON endpoints, with the 
 ## What it does
 If you're a Dev/DevOps engineer you may have been faced with a situation where you find yourself writing a shell script to automate getting JSON data from one or more RESTful endpoints using `curl` or `wget` or `httpie`, and then parsing the output using `sed`, `grep` or `jq`. This tool is designed to provide a generic, simplied, yet powerful means of writing such scripts in the form of a simple _recipe_ specification, rather than a shell script. 
 
+It relies on the excellent [Pygments](http://pygments.org/) and [Requests](http://docs.python-requests.org/en/master/) libraries.
+
 ## To install
 This is a Python application which is written in Python 3. It has only currently been tested on Linux (Ubuntu 14.04).
 
 ### Pre-requisites
 Make sure you've installed Python 3 and Pip 3
 ```bash
-apt-get install -y python3
-apt-get install -y python3-pip
+$ apt-get install -y python3
+$ apt-get install -y python3-pip
 ```
 
 ### Installation
 Install like this:
 ```bash
-pip3 install bprc
+$ pip3 install bprc
 ```
 Or a tagged version directly from GitHub (as PyPI can sometimes be erratic)
 ```bash
-pip3 install https://github.com/bradwood/BPRC/tarball/x.y.x # replace with version tag in GitHub
+$ pip3 install https://github.com/bradwood/BPRC/tarball/x.y.x # replace with version tag in GitHub, no tar.gz extension needed
 ```
 
 ## How it works
@@ -107,6 +109,7 @@ recipe:
  - SSL support (including the ability to ingore invalid server certificates)
  - verbose and/or debug output
  - HTTP request bodies formatted either as JSON or form-encoded 
+ - Pretty-printed output
 
 ## Known issues/shortcomings
 The following are known areas for improvement:
@@ -114,7 +117,6 @@ The following are known areas for improvement:
 - `--dry-run` option not implemented
 - poor test coverage and test automation
 - only handles JSON in the response bodies, XML or ther payload types are not supported.
-- BUG: file substitution only happens in the variables section of the YAML, not the recipe section. 
 
 ## Planned improvements
 - improving error handling
