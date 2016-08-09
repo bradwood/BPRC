@@ -71,7 +71,7 @@ class StepProcessor():
             - the variables object
             """
             vlog("Commencing " + str(inputstring) + " substitution with " + substitfunc.__name__)
-            substituted_text, n = re.subn(partial(substitfunc, recipe=recipe, variables=variables),inputstring)
+            substituted_text, n = re.subn(partial(substitfunc, recipe=recipe, variables=variables),str(inputstring))
             vlog("Made -------------"+ str(n) + " substitutions resulting in " + substituted_text)
             return substituted_text
 

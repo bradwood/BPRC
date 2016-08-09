@@ -78,10 +78,15 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 4 - Beta',
+
 
         # Indicate who your project is intended for
         'Intended Audience :: Developers',
+        'Intended Audience :: Information Technology',
+        'Intended Audience :: System Administrators',
+        'Operating System :: POSIX :: Linux',
+
         'Topic :: Software Development :: Build Tools',
 
         # Pick your license as you wish (should match "license" above)
@@ -91,7 +96,14 @@ setup(
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 3.5',
         'Environment :: Console',
+        'Environment :: Web Environment',
         'Topic :: Utilities',
+        'Topic :: Internet :: WWW/HTTP',
+        'Topic :: Internet :: WWW/HTTP :: HTTP Servers',
+        'Topic :: Internet :: WWW/HTTP :: WSGI',
+        'Topic :: Internet :: WWW/HTTP :: Browsers',
+        'Topic :: System :: Installation/Setup',
+        'Topic :: System :: Systems Administration',
 
     ],
 
@@ -111,7 +123,8 @@ setup(
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=['pyyaml>=3.11',
-                      'requests>=2.10.0'],
+                      'requests>=2.10.0',
+                      'pygments>=2.1.3'],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,

@@ -17,6 +17,7 @@ from bprc.utils import printhttprequest
 from bprc.utils import printheaders
 from bprc.utils import printbody
 from bprc.utils import printhttpresponse
+import bprc.cli
 
 import json
 from pprint import pprint
@@ -52,6 +53,8 @@ class OutputProcessor():
             printstepcolophon(self.step,id=self.id, file=writefile)
 
             colourful = sys.stdout.isatty()
+            if bprc.cli.args.nocolor:
+                colourful = False
 
             if writeformat == 'raw-all': ## need to write the http resquest first.
                 print("-- Request --", file=writefile)

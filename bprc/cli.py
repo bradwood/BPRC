@@ -18,7 +18,7 @@ from bprc._version import __version__ as __version__
 
 parser = argparse.ArgumentParser(description='Batch Processing RESTful Client')
 
-filegroup=parser.add_argument_group(title="I/O arguments")
+outputgroup=parser.add_argument_group(title="I/O arguments")
 logtestgroup=parser.add_argument_group(title="Logging, testing and debugging arguments")
 protocolgroup=parser.add_argument_group(title="Protocol arguments")
 
@@ -31,9 +31,12 @@ parser.add_argument('yamlfile', nargs='?', help="YAML recipe file, defaults to s
 parser.add_argument('outputfile', nargs='?', help=argparse.SUPPRESS, #help='specifies output file, defaults to stdout', turned off for now.
                     type=argparse.FileType('w'), default=sys.stdout)
 
-filegroup.add_argument('--output-format', dest='outputformat', action='store',
+outputgroup.add_argument('--output-format', dest='outputformat', action='store',
                     choices={'raw-all','raw-response','json'}, default='raw-response',
-                    help='specifies output format, defaults to %(default)s.')
+                    help='specifies output format, defaults to %(default)s')
+
+outputgroup.add_argument('--no-color', dest='nocolor', action='store_true', default=False,
+                    help='turns off pretty printing for console output')
 
 logtestgroup.add_argument('-v', '--verbose', dest='verbose', action='store_true',
                     help='verbose mode', default=False)
