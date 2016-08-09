@@ -52,9 +52,11 @@ class OutputProcessor():
         else: # format is raw-(all|response)
             printstepcolophon(self.step,id=self.id, file=writefile)
 
-            colourful = sys.stdout.isatty()
+
             if bprc.cli.args.nocolor:
                 colourful = False
+            else:
+                colourful = sys.stdout.isatty()
 
             if writeformat == 'raw-all': ## need to write the http resquest first.
                 print("-- Request --", file=writefile)
