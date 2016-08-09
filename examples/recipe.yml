@@ -24,6 +24,10 @@ recipe:
         colors: blue, green,  <%!favourite_colour%>
       headers:
         X-info: <%!age_and_colour%>
+        Cache-Control: no-cache, no-store, must-revalidate  # tells squid not to cache
+        Pragma: no-cache
+        Expires: 0
+
   -  # step 1
     name: Call Mockbin with data from the previous call.
     httpmethod: GET

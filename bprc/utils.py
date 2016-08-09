@@ -99,7 +99,12 @@ def vlog(msg):
 #helper function to call logging.error and raise a RunTime error
 def errlog(msg, e):
     logging.error(msg)
-    raise RuntimeError(msg) from e
+    try:
+        raise RuntimeError(msg) from e
+    except Exception as er:
+        sys.stderr.write('ERROR: ' + str(er) + "\n")
+        return 1
+
 
 ## helper functions to print out bits of a step.
 def printstepcolophon(step,*,file, id):
