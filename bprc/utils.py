@@ -19,6 +19,7 @@ import collections
 import re
 from pygments import highlight, lexers, formatters
 from json import JSONDecoder
+from json import JSONDecodeError
 
 httpstatuscodes = {
 "100": "Continue",
@@ -151,28 +152,33 @@ def printheaders(step,*,file, id, http_part, colourful):
         else:
             print(key +": "+val, file=file)
 
-#class BodyPrintEncoder(json.JSONEncoder):
-#    """ encodes a request body"""
-
-#    def default(self,inputbody):
-#        self.strict = False
-#        return str(inputbody)
-
-# cls=BodyPrintEncoder
-
+#TODO: @REFACTOR (2) refactor all these print* functions -- too much copy/paste!
 
 def printbody(step,*,file, id,http_part, colourful):
-    if colourful:
-        if http_part == 'response':
-            print(highlight(json.dumps(step.response.body,indent=4, sort_keys=True),lexers.JsonLexer(),formatters.TerminalFormatter()),file=file)
-        else: ## assuming request.
-            print(highlight(json.dumps(step.request.body,indent=4, sort_keys=True),lexers.JsonLexer(),formatters.TerminalFormatter()),file=file)
-        print("\n", file=file)
-    else:
-        if http_part == 'response':
-            print(json.dumps(step.response.body,indent=4, sort_keys=True),file=file)
-        else: ## assuming request.
-            print(json.dumps(step.request.body,indent=4, sort_keys=True),file=file)
+    if http_part == 'response':
+        try:
+            printoutput = json.dumps(step.response.body,indent=4, sort_keys=True)
+            isJsonPayload = True
+        except JSONDecodeError as e: # if it doesn't parse as JSON, set it as raw output
+            printoutput = step.response.body
+            colourful = False # and if it is not JSON, turn off colourful output.
+            isJsonPayload = False
+    else: ## http_part == request:
+        try:
+            printoutput = json.dumps(step.request.body,indent=4, sort_keys=True)
+            isJsonPayload = True
+        except JSONDecodeError as e: # if it doesn't parse as JSON, set it as raw output
+            printoutput = step.request.body
+            colourful = False # and if it is not JSON, turn off colourful output.
+            isJsonPayload = False
+
+
+    if colourful and isJsonPayload:
+        print(highlight(printoutput,lexers.JsonLexer(),formatters.TerminalFormatter()),file=file)
+    else: #not JSON payload, and therefore, not colourful either
+        print(printoutput,file=file)
+
+
 
 # define regex patterns.
 php_sub_pattern=re.compile(r'<%=(\S+?)%>') #substitution pattern to find - of the form <%=some.var["blah"]%>

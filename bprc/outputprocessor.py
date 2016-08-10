@@ -20,6 +20,7 @@ from bprc.utils import printhttpresponse
 import bprc.cli
 
 import json
+from json import JSONDecodeError
 from pprint import pprint
 import logging
 
@@ -65,7 +66,11 @@ class OutputProcessor():
                 logging.debug("PRINTING REQUEST HEADERS")
                 if self.step.request.body:
                     logging.debug("Req.body==" +req.body)
-                    self.step.request.body=json.loads(req.body) #TODO: check if a try is needed here, may not be if non-json is trapped earlier
+                    try: # if this doesn't decode then it's probably not JSON, just print it
+                         # without a decode
+                        self.step.request.body=json.loads(req.body)
+                    except JSONDecodeError as e:
+                        self.step.request.body=req.body
                     printbody(self.step, id=self.id, file=writefile, http_part='request',  colourful=colourful)
                 print("-- Response --", file=writefile)
 
