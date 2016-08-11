@@ -5,8 +5,8 @@ This module implements the logic to process a step in a recipe
 import sys
 import os
 
-#TODO: ERROR HANDLING make sure type casting works for boolean, int, string, float etc
-#TODO: ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!
+#TODO: @ERROR @TEST (10) make sure type casting works for boolean, int, string, float etc
+#TODO: @ERROR @TEST (10) for header comparisions, make case insensitive -- check the RFC!!
 
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 PACKAGE_PARENT = '..'
@@ -165,7 +165,7 @@ class StepProcessor():
 
         #sets up number of retries based on options passed
         if 'request.retries' in options:
-            #TODO: check type of option parameter in try
+            #TODO: @ERROR (5) @TEST check type of option parameter in try
             retries=int(options['request.retries'])
         else:
             retries=3 #sensible default
@@ -204,7 +204,7 @@ class StepProcessor():
 
             prepared = r.prepare()
             logging.debug("Req body" + prepared.body)
-            # TODO: OPTIMISATION, consider creating the session at the Recipe level, not
+            # TODO: (100) @NTH OPTIMISATION, consider creating the session at the Recipe level, not
             # the step level. You can then set up a pool of http connections for reuse.
             s = requests.Session()
             # see http://docs.python-requests.org/en/master/_modules/requests/adapters/#HTTPAdapter

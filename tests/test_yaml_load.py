@@ -9,63 +9,21 @@ from ddt import ddt, data, file_data, unpack
 from bprc.recipe import Recipe
 from bprc.utils import *
 
-#TODO: TEST -Add mocking for some of these tests to make them smaller/less complex
+#TODO: @TEST  (100) -Add mocking for some of these tests to make them smaller/less complex
 
 @ddt
 class SimpleTest(unittest.TestCase):
     def setUp(self):
-         """Sets up the YAML data."""
-         self.yamldata="""
---- #sample recipe
-recipe:
-  -  # step0
-    name: Create Kong API
-    httpmethod: POST
-    URL: http://kong:8001/apis
-    request:
-      body:
-        name: Consumer API
-        upstream_uri: http://wiremock/blah
-        strip_url: false
-      headers:
-        Authorisation: yadda-step one authorisation header brad
-        Content-type: application/json
-      querystring:
-        keya: vala
-        keyb: valb
-    response: # set up this response section if you need to pull out data here for use later in the recipe.
-      body:
-        id: this_is_a_param
-      headers:
-        Authorisation:
-      code:
-  -
-    name: Load OAUTH Plugin
-    httpmethod: POST
-    URL: http://kong:8001/apdis/<%=steps[0].response.body["id"]%>/<%=steps[0].request.querystring["keya"]%> #gets the JSON field id from the body of the response from step 1.
-    request:
-      querystring:
-        key3: value3
-        keysub: <%=steps[0].request.headers["Authorisation"]%>
-      body:
-        key4: valueprefix <%=steps[0].request.headers["Content-type"]%>
-      headers:
-        blah: blahbha
-        Authorisation: bearer <%=steps[0].request.body["upstream_uri"]%>
-    response: # set up this response section if you need to pull out data here for use later in the recipe.
-      code:
-      body:
-      headers:
-        Authorisation:
+        """Sets up the YAML data."""
+        with open('tests/yaml_load_test.yml', 'r') as myfile:
+            self.yamldata=myfile.read()
 
-"""
-#TODO: TEST impement excecptions test
     def test_yaml_load(self):
         """tests the yaml loads and is able to instantiate a Recipe object"""
-        datamap=yaml.load(self.yamldata)
+        datamap=yaml.safe_load(self.yamldata)
         r = Recipe(datamap)
         self.assertIsInstance(r,Recipe)
-        #TODO: TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??
+        #TODO: @TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??
 
     @unpack
     @data(['steps[0].request.headers["Authorisation"]', "yadda-step one authorisation header brad"],
@@ -73,16 +31,68 @@ recipe:
           ['steps[0].response.body["id"]', "this_is_a_param"])
     def test_yaml_parse_values(self, path_suffix, val):
         """conducts misc value checks on the values passed in from the yaml on the Recipe object"""
-        datamap=yaml.load(self.yamldata)
+        datamap=yaml.safe_load(self.yamldata)
         r = Recipe(datamap)
         self.assertEquals(eval('r.' + path_suffix),val)
 
     @data('r.steps[1].response.headers["Authorisation"]')
     def test_yaml_parse_nones(self, path_suffix):
         """conducts misc None checks on the values passed in from the yaml on the Recipe object"""
-        datamap=yaml.load(self.yamldata)
+        datamap=yaml.safe_load(self.yamldata)
         r = Recipe(datamap)
         self.assertIsNone(eval(path_suffix))
+
+    @unpack
+    @data(['steps[2].request.querystring["qsbool0"]'],
+          ['steps[2].request.querystring["qsbool1"]'],
+          ['steps[2].request.querystring["qsbool2"]'],
+          ['steps[2].request.querystring["qsbool3"]'],
+          ['steps[2].request.headers["headerbool0"]'],
+          ['steps[2].request.headers["headerbool1"]'],
+          ['steps[2].request.headers["headerbool2"]'],
+          ['steps[2].request.headers["headerbool3"]'],
+          ['steps[2].request.body["bodybool0"]'],
+          ['steps[2].request.body["bodybool1"]'],
+          ['steps[2].request.body["bodybool2"]'],
+          ['steps[2].request.body["bodybool3"]'],)
+    def test_yaml_true(self,path_suffix):
+        """conducts misc Boolean checks on the values passed in from the yaml on the Recipe object"""
+        datamap=yaml.safe_load(self.yamldata)
+        r = Recipe(datamap)
+        self.assertTrue(eval('r.' + path_suffix))
+
+
+    @unpack
+    @data(['steps[2].request.querystring["qsbool0"]'  , bool],
+          ['steps[2].request.querystring["qsint"]'    , int],
+          ['steps[2].request.querystring["qsstring"]' , str],
+          ['steps[2].request.querystring["qsfloat"]'  , float],
+          ['steps[2].request.headers["headerbool0"]'  , bool],
+          ['steps[2].request.headers["headerint"]'    , int],
+          ['steps[2].request.headers["headerstring"]' , str],
+          ['steps[2].request.headers["headerfloat"]'  , float],
+          ['steps[2].request.body["bodybool0"]'       , bool],
+          ['steps[2].request.body["bodyint"]'         , int],
+          ['steps[2].request.body["bodystring"]'      , str],
+          ['steps[2].request.body["bodyfloat"]'       , float],
+          )
+    def test_yaml_types(self, path_suffix, type):
+        """conducts misc value checks on the values passed in from the yaml on the Recipe object"""
+        datamap=yaml.safe_load(self.yamldata)
+        r = Recipe(datamap)
+        self.assertIsInstance(eval('r.' + path_suffix),type)
+
+#TODO: @TEST (20) recipe object types (Step, QueryString, URL, etc)
+#TODO: @TEST (20) URL validity
+#TODO: @TEST (20) missing Name, URL, Method etc
+#TODO: @TEST (20) Finite list of HTTP methods
+#TODO: @TEST (20) Empty Request, QS, Header objects list of HTTP methods
+#TODO: @TEST (20) Unrecognised element, e.g: "Reesponse", "Heeederr" objects list of HTTP methods
+#TODO@ @TEST (20) dicts/lists in a leaf element in the recipe.
+
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

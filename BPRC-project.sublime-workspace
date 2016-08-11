@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"re",
+				"response"
+			],
+			[
+				"http",
+				"http_part"
+			],
+			[
+				"ht",
+				"http_part"
+			],
+			[
+				"e",
+				"except"
+			],
+			[
+				"is",
+				"isJsonPayload"
+			],
+			[
+				"json",
+				"jsonpayload"
+			],
+			[
+				"Ex",
+				"Exception"
+			],
+			[
+				"col",
+				"colourful"
+			],
+			[
+				"ver",
+				"verboseprint"
+			],
+			[
 				"test",
 				"testnull"
 			],
@@ -14,10 +50,6 @@
 			[
 				"file",
 				"file_sub_pattern"
-			],
-			[
-				"re",
-				"retries"
 			],
 			[
 				"subp",
@@ -56,10 +88,6 @@
 				"executeSubstition"
 			],
 			[
-				"ht",
-				"httpmethod"
-			],
-			[
 				"de",
 				"debug"
 			],
@@ -74,10 +102,6 @@
 			[
 				"bod",
 				"bodyformat"
-			],
-			[
-				"e",
-				"error"
 			],
 			[
 				"Var",
@@ -130,10 +154,6 @@
 			[
 				"n",
 				"newverfile"
-			],
-			[
-				"ver",
-				"verstr"
 			],
 			[
 				"log",
@@ -400,34 +420,36 @@
 	"buffers":
 	[
 		{
-			"file": "bprc/variables.py",
+			"file": "docs/YAML-format.md",
 			"settings":
 			{
-				"buffer_size": 1111,
+				"buffer_size": 3731,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "bprc/stepprocessor.py",
+			"contents": "// Monday 08/08/16 at 12:36AM - 71 files in 0.22 secs\n\n## TODO (32)\n1. bprc/core.py:113                            @ERROR-HANDLING (10) add try:'s around all the below calls.\n2. bprc/recipe.py:252                          @NTH  (74)implement __str__ for all other objects in this module\n3. bprc/recipe.py:191                          (75) @NTH don't use vlog to test for the error condition -- it messes up the log\n4. bprc/utils.py:91                            @NTH (76) do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.\n5. BPRC/bumpver.py:8                           @RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.\n6. bprc/stepprocessor.py:8                     ERROR HANDLING make sure type casting works for boolean, int, string, float etc\n7. bprc/stepprocessor.py:9                     ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!\n8. bprc/stepprocessor.py:169                   check type of option parameter in try\n9. bprc/stepprocessor.py:208                   OPTIMISATION, consider creating the session at the Recipe level, not\n10. bprc/utils.py:91                           NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.\n11. bprc/core.py:109                           ERROR HANDLING add try:'s around all the below calls.\n12. bprc/outputprocessor.py:34                 REFACTOR Rewrite this Output generatro to use the requests object for output.\n13. bprc/recipe.py:191                         NTH don't use vlog to test for the error condition -- it messes up the log\n14. bprc/recipe.py:252                         NTH implement __str__ for all other objects in this module\n15. bprc/stepprocessor.py:8                    ERROR HANDLING make sure type casting works for boolean, int, string, float etc\n16. bprc/stepprocessor.py:9                    ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!\n17. bprc/stepprocessor.py:169                  check type of option parameter in try\n18. bprc/stepprocessor.py:208                  OPTIMISATION, consider creating the session at the Recipe level, not\n19. tests/test_basic.py:13                     Add mocking for some of these tests to make them smaller/less complex\n20. tests/test_basic.py:63                     TEST impement excecptions test\n21. tests/test_basic.py:69                     TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n22. tests/test_basic.py:110                    TEST add cli tests.\n23. tests/test_recipe_prepare_and_parse.py:13  TEST -Add mocking for some of these tests to make them smaller/less complex\n24. tests/test_recipe_prepare_and_parse.py:85  TEST add cli tests.\n25. tests/test_yaml_load.py:12                 TEST -Add mocking for some of these tests to make them smaller/less complex\n26. tests/test_yaml_load.py:62                 TEST impement excecptions test\n27. tests/test_yaml_load.py:68                 TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n28. tests/test_recipe_prepare_and_parse.py:13  TEST -Add mocking for some of these tests to make them smaller/less complex\n29. tests/test_recipe_prepare_and_parse.py:85  TEST add cli tests.\n30. tests/test_yaml_load.py:12                 TEST -Add mocking for some of these tests to make them smaller/less complex\n31. tests/test_yaml_load.py:62                 TEST impement excecptions test\n32. tests/test_yaml_load.py:68                 TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n",
 			"settings":
 			{
-				"buffer_size": 14108,
+				"buffer_size": 3611,
+				"line_ending": "Windows",
+				"name": "TodoReview",
+				"scratch": true
+			}
+		},
+		{
+			"file": "examples/recipe.yml",
+			"settings":
+			{
+				"buffer_size": 1467,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "bprc/utils.py",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 5855,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/recipe.py",
-			"settings":
-			{
-				"buffer_size": 9548,
+				"buffer_size": 5974,
 				"line_ending": "Unix"
 			}
 		},
@@ -440,68 +462,18 @@
 			}
 		},
 		{
-			"file": "tests/test_yaml_load.py",
+			"file": "setup.py",
 			"settings":
 			{
-				"buffer_size": 3033,
+				"buffer_size": 5472,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "tests/test_variable_parser.py",
+			"file": "bprc/__main__.py",
 			"settings":
 			{
-				"buffer_size": 2535,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Makefile",
-			"settings":
-			{
-				"buffer_size": 378,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "build/lib/bprc/stepprocessor.py",
-			"settings":
-			{
-				"buffer_size": 14066,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "// Monday 08/08/16 at 12:03AM - 71 files in 0.23 secs\n\n## TODO (33)\n1. bprc/stepprocessor.py:8                     ERROR HANDLING make sure type casting works for boolean, int, string, float etc\n2. bprc/stepprocessor.py:9                     ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!\n3. bprc/stepprocessor.py:168                   document available OPTIONS\n4. bprc/stepprocessor.py:170                   check type of option parameter in try\n5. bprc/stepprocessor.py:209                   OPTIMISATION, consider creating the session at the Recipe level, not\n6. bprc/utils.py:91                            NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.\n7. bprc/recipe.py:191                          NTH don't use vlog to test for the error condition -- it messes up the log\n8. bprc/recipe.py:252                          NTH implement __str__ for all other objects in this module\n9. tests/test_yaml_load.py:12                  TEST -Add mocking for some of these tests to make them smaller/less complex\n10. tests/test_yaml_load.py:62                 TEST impement excecptions test\n11. tests/test_yaml_load.py:68                 TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n12. bprc/stepprocessor.py:8                    ERROR HANDLING make sure type casting works for boolean, int, string, float etc\n13. bprc/stepprocessor.py:9                    ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!\n14. bprc/stepprocessor.py:169                  check type of option parameter in try\n15. bprc/stepprocessor.py:208                  OPTIMISATION, consider creating the session at the Recipe level, not\n16. bprc/core.py:113                           ERROR HANDLING add try:'s around all the below calls.\n17. tests/test_recipe_prepare_and_parse.py:13  TEST -Add mocking for some of these tests to make them smaller/less complex\n18. tests/test_recipe_prepare_and_parse.py:85  TEST add cli tests.\n19. BPRC/bumpver.py:8                          RELEASE NOTES - consider using git shortlog 0.6.2..0.6.3 to generate release notes.\n20. bprc/core.py:109                           ERROR HANDLING add try:'s around all the below calls.\n21. bprc/outputprocessor.py:34                 REFACTOR Rewrite this Output generatro to use the requests object for output.\n22. bprc/recipe.py:191                         NTH don't use vlog to test for the error condition -- it messes up the log\n23. bprc/recipe.py:252                         NTH implement __str__ for all other objects in this module\n24. bprc/utils.py:91                           NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.\n25. tests/test_basic.py:13                     TEST -Add mocking for some of these tests to make them smaller/less complex\n26. tests/test_basic.py:63                     TEST impement excecptions test\n27. tests/test_basic.py:69                     TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n28. tests/test_basic.py:110                    TEST add cli tests.\n29. tests/test_recipe_prepare_and_parse.py:13  TEST -Add mocking for some of these tests to make them smaller/less complex\n30. tests/test_recipe_prepare_and_parse.py:85  TEST add cli tests.\n31. tests/test_yaml_load.py:12                 TEST -Add mocking for some of these tests to make them smaller/less complex\n32. tests/test_yaml_load.py:62                 TEST impement excecptions test\n33. tests/test_yaml_load.py:68                 TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n",
-			"settings":
-			{
-				"buffer_size": 3662,
-				"line_ending": "Windows",
-				"name": "TodoReview",
-				"scratch": true
-			}
-		},
-		{
-			"file": "BPRC-project.sublime-project",
-			"settings":
-			{
-				"buffer_size": 342,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "requirements.txt",
-			"settings":
-			{
-				"buffer_size": 76,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/core.py",
-			"settings":
-			{
-				"buffer_size": 4733,
+				"buffer_size": 492,
 				"line_ending": "Unix"
 			}
 		},
@@ -509,7 +481,15 @@
 			"file": "bprc/cli.py",
 			"settings":
 			{
-				"buffer_size": 3132,
+				"buffer_size": 3040,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/stepprocessor.py",
+			"settings":
+			{
+				"buffer_size": 14073,
 				"line_ending": "Unix"
 			}
 		},
@@ -517,31 +497,39 @@
 			"file": "bprc/outputprocessor.py",
 			"settings":
 			{
-				"buffer_size": 2958,
+				"buffer_size": 3562,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "bprc/varprocessor.py",
+			"file": "bprc/utils.py",
 			"settings":
 			{
-				"buffer_size": 1952,
+				"buffer_size": 8275,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "tests/test_recipe_prepare_and_parse.py",
+			"file": "bprc/recipe.py",
 			"settings":
 			{
-				"buffer_size": 3254,
+				"buffer_size": 9560,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "examples/recipe.yml",
+			"file": "bprc/core.py",
 			"settings":
 			{
-				"buffer_size": 1321,
+				"buffer_size": 4755,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bumpver.py",
+			"settings":
+			{
+				"buffer_size": 1579,
 				"line_ending": "Unix"
 			}
 		}
@@ -553,13 +541,37 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 686.0,
-		"last_filter": "t",
+		"height": 621.0,
+		"last_filter": "pack in",
 		"selected_items":
 		[
 			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
 				"t",
-				"TodoReview: Project and Open Files"
+				"TodoReview: Project Files"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Add Repository"
+			],
+			[
+				"packa",
+				"Package Control: Upgrade Package"
 			],
 			[
 				"to",
@@ -568,10 +580,6 @@
 			[
 				"shy",
 				"Set Syntax: Python3"
-			],
-			[
-				"pack",
-				"Package Control: Disable Package"
 			],
 			[
 				"todo",
@@ -662,7 +670,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 959.0
+		"width": 934.0
 	},
 	"console":
 	{
@@ -683,41 +691,59 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC"
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/docs",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples"
 	],
 	"file_history":
 	[
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/requirements.txt",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/BPRC-project.sublime-project",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/test_oauth_login.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/utils.py",
+		"/C/Users/micro/brad-mac-address.txt",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create_admin_api.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create_authenticate_api.yml",
+		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/bprc-scripts/create_all_apis.sh",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/requirements.txt",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/variables.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/stepprocessor.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/utils.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/recipe.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.gitignore",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_yaml_load.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_variable_parser.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/Makefile",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/tests/test_basic.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/core.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/cli.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/outputprocessor.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/varprocessor.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_recipe_prepare_and_parse.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/recipe.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/stepprocessor.py",
+		"/C/Users/micro/AppData/Roaming/Sublime Text 3/Packages/TodoReview/TodoReview.sublime-settings",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_basic.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.travis.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.coveragerc",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/README.md",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/bootstrap.sh",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/Makefile",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/setup.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bumpver.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/_version.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/Dockerfile",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/recipe.yml",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/outputprocessor.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/lorum.txt",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/recipe_httpbin.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/__main__.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/test_oauth_login.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create_consumer_api.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create-kong-config.yml",
 		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/bprc-scripts/create-kong-config.yml",
 		"/C/Users/micro/Docker/docker-kong/.gitignore",
 		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/bprc-scripts/get-kong-api-details.yml",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/recipe.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/get-kong-api-details.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc.out.0",
 		"/C/Users/micro/Documents/kong_config.txt",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/stepprocessor.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/utils.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/core.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/stepprocessor.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/MANIFEST.in",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/.gitignore",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.bumpversion.cfg",
@@ -726,7 +752,6 @@
 		"/C/Users/micro/.ssh/config",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc.log",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/__init__.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.gitignore",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/test/test_recipe.yml",
 		"/C/Users/micro/.bash_profile",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_recipe_deserialise.py",
@@ -800,12 +825,7 @@
 		"/C/Users/micro/Docker/Mountpoints/wiremock/mappings/hello.json",
 		"/C/Users/micro/Docker/Mountpoints/wiremock/__files/hello.json",
 		"/C/Program Files/Docker Toolbox/start.sh",
-		"/c/Program Files/Docker Toolbox/start.sh",
-		"/C/Users/micro/Docker/README.md",
-		"/C/Users/micro/Docker/Builds/kong/Dockerfile",
-		"/C/Users/micro/Docker/Builds/wiremock/Dockerfile",
-		"/C/Users/micro/Docker/Builds/kong/start_kong",
-		"/C/Users/micro/.docker/config.json"
+		"/c/Program Files/Docker Toolbox/start.sh"
 	],
 	"find":
 	{
@@ -835,6 +855,26 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"response",
+			"green",
+			"errlog",
+			"parsing the",
+			"An error occured parsing the yaml file",
+			"filegroup",
+			"BodyEncoder",
+			"JSONDecoder",
+			"JSONEncoder",
+			"JSONDecoder",
+			"Req",
+			"req",
+			"REQ",
+			"req",
+			"Req",
+			"req",
+			"JSONLexer",
+			"printhttprequest",
+			"colourful",
+			"f",
 			"nonlocal",
 			"Ingredient",
 			"rm",
@@ -942,27 +982,7 @@
 			"echo_downstream",
 			"generator",
 			"SSL",
-			"signup",
-			"SIGNUP",
-			"Signup",
-			"SIGNUP",
-			"Signup",
-			"SIGNUP",
-			"signup",
-			"POST",
-			"password",
-			"echo",
-			"AUTH_API_PROVISION_KEY",
-			"AUTHENTICATE_API_NAME",
-			"authenticate",
-			"AUTHENTICATE",
-			"authenticate",
-			"AUTHENTICATE",
-			"ACCESS_TOKEN_RESPONSE",
-			"MOB_CLIENT_SECRET",
-			"...",
-			"CONSUMER_NAME",
-			"AUTHORIZE_API_NAME"
+			"signup"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -981,24 +1001,499 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "bprc/variables.py",
+					"file": "docs/YAML-format.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1111,
+						"buffer_size": 3731,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								776,
-								776
+								2984,
+								2984
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/MarkdownHighlighting/Markdown.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1445.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3611,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								896,
+								896
+							]
+						],
+						"settings":
+						{
+							"line_padding_bottom": 2,
+							"line_padding_top": 2,
+							"review_args":
+							{
+								"settings":
+								{
+									"exclude_folders":
+									[
+										"*.git*",
+										"dist",
+										"build",
+										".cache",
+										"bprc.egg-info"
+									]
+								}
+							},
+							"review_results":
+							{
+								"1039,1155":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 208,
+									"note": "OPTIMISATION, consider creating the session at the Recipe level, not",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1155,1297":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py",
+									"line": 91,
+									"note": "NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1297,1398":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\core.py",
+									"line": 109,
+									"note": "ERROR HANDLING add try:'s around all the below calls.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1398,1523":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\outputprocessor.py",
+									"line": 34,
+									"note": "REFACTOR Rewrite this Output generatro to use the requests object for output.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1523,1645":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\recipe.py",
+									"line": 191,
+									"note": "NTH don't use vlog to test for the error condition -- it messes up the log",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1645,1751":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\recipe.py",
+									"line": 252,
+									"note": "NTH implement __str__ for all other objects in this module",
+									"patt": "todo",
+									"priority": 100
+								},
+								"175,287":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
+									"line": 252,
+									"note": "@NTH  (74)implement __str__ for all other objects in this module",
+									"patt": "todo",
+									"priority": 74
+								},
+								"1751,1878":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
+									"line": 8,
+									"note": "ERROR HANDLING make sure type casting works for boolean, int, string, float etc",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1878,2006":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
+									"line": 9,
+									"note": "ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2006,2091":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
+									"line": 169,
+									"note": "check type of option parameter in try",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2091,2207":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
+									"line": 208,
+									"note": "OPTIMISATION, consider creating the session at the Recipe level, not",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2207,2324":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
+									"line": 13,
+									"note": "Add mocking for some of these tests to make them smaller/less complex",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2324,2402":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
+									"line": 63,
+									"note": "TEST impement excecptions test",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2402,2522":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
+									"line": 69,
+									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2522,2589":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
+									"line": 110,
+									"note": "TEST add cli tests.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2589,2712":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_recipe_prepare_and_parse.py",
+									"line": 13,
+									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2712,2779":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_recipe_prepare_and_parse.py",
+									"line": 85,
+									"note": "TEST add cli tests.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2779,2902":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
+									"line": 12,
+									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
+									"patt": "todo",
+									"priority": 100
+								},
+								"287,415":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
+									"line": 191,
+									"note": "(75) @NTH don't use vlog to test for the error condition -- it messes up the log",
+									"patt": "todo",
+									"priority": 75
+								},
+								"2902,2980":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
+									"line": 62,
+									"note": "TEST impement excecptions test",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2980,3100":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
+									"line": 68,
+									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
+									"patt": "todo",
+									"priority": 100
+								},
+								"3100,3223":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py",
+									"line": 13,
+									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
+									"patt": "todo",
+									"priority": 100
+								},
+								"3223,3290":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py",
+									"line": 85,
+									"note": "TEST add cli tests.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"3290,3413":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 12,
+									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
+									"patt": "todo",
+									"priority": 100
+								},
+								"3413,3491":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 62,
+									"note": "TEST impement excecptions test",
+									"patt": "todo",
+									"priority": 100
+								},
+								"3491,3611":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 68,
+									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
+									"patt": "todo",
+									"priority": 100
+								},
+								"415,563":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\utils.py",
+									"line": 91,
+									"note": "@NTH (76) do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.",
+									"patt": "todo",
+									"priority": 76
+								},
+								"563,699":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bumpver.py",
+									"line": 8,
+									"note": "@RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.",
+									"patt": "todo",
+									"priority": 99
+								},
+								"68,175":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\core.py",
+									"line": 113,
+									"note": "@ERROR-HANDLING (10) add try:'s around all the below calls.",
+									"patt": "todo",
+									"priority": 10
+								},
+								"699,826":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 8,
+									"note": "ERROR HANDLING make sure type casting works for boolean, int, string, float etc",
+									"patt": "todo",
+									"priority": 100
+								},
+								"826,954":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 9,
+									"note": "ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!",
+									"patt": "todo",
+									"priority": 100
+								},
+								"954,1039":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 169,
+									"note": "check type of option parameter in try",
+									"patt": "todo",
+									"priority": 100
+								}
+							},
+							"selected_result": 5,
+							"syntax": "Packages/TodoReview/TodoReview.hidden-tmLanguage",
+							"todo_results": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/recipe.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1467,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								42,
+								42
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5974,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								415,
+								415
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/MarkdownHighlighting/Markdown.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 324.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": ".gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1057,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								260,
+								260
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "setup.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5472,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1404,
+								1404
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 829.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "bprc/__main__.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 492,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								492,
+								492
 							]
 						],
 						"settings":
@@ -1018,20 +1513,53 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 7,
+					"file": "bprc/cli.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3040,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1579,
+								1586
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"tab_size": 5,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 729.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
 					"file": "bprc/stepprocessor.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14108,
+						"buffer_size": 14073,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4669,
-								4669
+								9779,
+								9802
 							]
 						],
 						"settings":
@@ -1044,229 +1572,93 @@
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1950.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "bprc/utils.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5855,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5143,
-								5143
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3525.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 17,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "bprc/recipe.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9548,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2915,
-								2920
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2422.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 16,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": ".gitignore",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1057,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								613,
-								613
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 865.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 14,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "tests/test_yaml_load.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3033,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								276,
-								276
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "tests/test_variable_parser.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2535,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								325,
-								325
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 5477.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "Makefile",
+					"buffer": 9,
+					"file": "bprc/outputprocessor.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 378,
+						"buffer_size": 3562,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								118,
-								118
+								2967,
+								2967
 							]
 						],
 						"settings":
 						{
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Makefile/Makefile.sublime-syntax",
-							"translate_tabs_to_spaces": false,
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1134.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 2,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 8,
-					"file": "build/lib/bprc/stepprocessor.py",
+					"buffer": 10,
+					"file": "bprc/utils.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 14066,
+						"buffer_size": 8275,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								181,
-								181
+								6448,
+								6448
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3969.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "bprc/recipe.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9560,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								515,
+								515
 							]
 						],
 						"settings":
@@ -1282,385 +1674,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3662,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3662,
-								3662
-							]
-						],
-						"settings":
-						{
-							"line_padding_bottom": 2,
-							"line_padding_top": 2,
-							"review_args":
-							{
-								"open_files": true,
-								"settings":
-								{
-									"exclude_folders":
-									[
-										"*.git*",
-										"dist",
-										"build",
-										".cache",
-										"bprc.egg-info"
-									]
-								}
-							},
-							"review_results":
-							{
-								"1091,1169":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
-									"line": 62,
-									"note": "TEST impement excecptions test",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1169,1289":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
-									"line": 68,
-									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1289,1416":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 8,
-									"note": "ERROR HANDLING make sure type casting works for boolean, int, string, float etc",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1416,1544":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 9,
-									"note": "ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1544,1629":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 169,
-									"note": "check type of option parameter in try",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1629,1745":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 208,
-									"note": "OPTIMISATION, consider creating the session at the Recipe level, not",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1745,1846":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\core.py",
-									"line": 113,
-									"note": "ERROR HANDLING add try:'s around all the below calls.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1846,1969":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 13,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"195,323":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 9,
-									"note": "ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1969,2036":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 85,
-									"note": "TEST add cli tests.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2036,2167":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bumpver.py",
-									"line": 8,
-									"note": "RELEASE NOTES - consider using git shortlog 0.6.2..0.6.3 to generate release notes.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2167,2268":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\core.py",
-									"line": 109,
-									"note": "ERROR HANDLING add try:'s around all the below calls.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2268,2393":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\outputprocessor.py",
-									"line": 34,
-									"note": "REFACTOR Rewrite this Output generatro to use the requests object for output.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2393,2515":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\recipe.py",
-									"line": 191,
-									"note": "NTH don't use vlog to test for the error condition -- it messes up the log",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2515,2621":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\recipe.py",
-									"line": 252,
-									"note": "NTH implement __str__ for all other objects in this module",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2621,2763":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\utils.py",
-									"line": 91,
-									"note": "NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2763,2886":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 13,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2886,2964":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 63,
-									"note": "TEST impement excecptions test",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2964,3084":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 69,
-									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3084,3151":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 110,
-									"note": "TEST add cli tests.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3151,3274":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 13,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"323,397":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 168,
-									"note": "document available OPTIONS",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3274,3341":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 85,
-									"note": "TEST add cli tests.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3341,3464":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
-									"line": 12,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3464,3542":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
-									"line": 62,
-									"note": "TEST impement excecptions test",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3542,3662":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
-									"line": 68,
-									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
-									"patt": "todo",
-									"priority": 100
-								},
-								"397,482":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 170,
-									"note": "check type of option parameter in try",
-									"patt": "todo",
-									"priority": 100
-								},
-								"482,598":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 209,
-									"note": "OPTIMISATION, consider creating the session at the Recipe level, not",
-									"patt": "todo",
-									"priority": 100
-								},
-								"598,740":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py",
-									"line": 91,
-									"note": "NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"68,195":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 8,
-									"note": "ERROR HANDLING make sure type casting works for boolean, int, string, float etc",
-									"patt": "todo",
-									"priority": 100
-								},
-								"740,862":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
-									"line": 191,
-									"note": "NTH don't use vlog to test for the error condition -- it messes up the log",
-									"patt": "todo",
-									"priority": 100
-								},
-								"862,968":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
-									"line": 252,
-									"note": "NTH implement __str__ for all other objects in this module",
-									"patt": "todo",
-									"priority": 100
-								},
-								"968,1091":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
-									"line": 12,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								}
-							},
-							"selected_result": 12,
-							"syntax": "Packages/TodoReview/TodoReview.hidden-tmLanguage",
-							"todo_results": true,
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 522.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "BPRC-project.sublime-project",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 342,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								158,
-								158
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"translate_tabs_to_spaces": false,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "requirements.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 76,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								6
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -1669,15 +1683,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4733,
+						"buffer_size": 4755,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1126,
-								1126
+								2304,
+								2304
 							]
 						],
 						"settings":
@@ -1690,7 +1704,7 @@
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 600.0,
+						"translation.y": 1333.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
@@ -1698,19 +1712,19 @@
 				},
 				{
 					"buffer": 13,
-					"file": "bprc/cli.py",
+					"file": "bumpver.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3132,
+						"buffer_size": 1579,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3131,
-								3131
+								175,
+								175
 							]
 						],
 						"settings":
@@ -1723,142 +1737,10 @@
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1237.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "bprc/outputprocessor.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2958,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								950,
-								950
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 327.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "bprc/varprocessor.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1952,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1122,
-								1122
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 600.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "tests/test_recipe_prepare_and_parse.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3254,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1133,
-								1133
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 700.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "examples/recipe.yml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1321,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1021,
-								1021
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/YAML/YAML.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 675.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 15,
 					"type": "text"
 				}
 			]
@@ -1866,7 +1748,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 33.0
+		"height": 35.0
 	},
 	"input":
 	{
@@ -1897,7 +1779,7 @@
 		"rows":
 		[
 			0.0,
-			0.360565110565,
+			0.139632968708,
 			1.0
 		]
 	},
@@ -1922,7 +1804,7 @@
 	"project": "BPRC-project.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 66.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1960,7 +1842,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 355.0,
+	"side_bar_width": 283.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -70,7 +70,7 @@ def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.except
         debug_hook(exception_type, exception, traceback)
     else:
         print("{}: {}".format(exception_type.__name__, exception))
-        #TODO: try file=sys.stderr as an arg to print()
+        #TODO: @TEST (40) try file=sys.stderr as an arg to print()
 
 sys.excepthook = exceptionHandler
 
@@ -95,7 +95,7 @@ def vlog(msg):
     verboseprint(msg)
     logging.info(msg)
 
-#TODO: NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.
+#TODO: @NTH (40) @LOGGING Add a debug and an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.
 
 #helper function to call logging.error and raise a RunTime error
 def errlog(msg, e):

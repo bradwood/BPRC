@@ -5,9 +5,9 @@ The recipe file follows the standard [YAML](https://en.wikipedia.org/wiki/YAML) 
 <pre>
 ---
 variables:
-  <i>&lt;variables&gt;</i>
+	<i>&lt;variables&gt;</i>
 recipe:
-  <i>&lt;steps&gt;</i>
+	<i>&lt;steps&gt;</i>
 </pre>
 
 ## Variables
@@ -16,12 +16,12 @@ The variables section is represented as a set of key-value pairs indented under 
 
 ```yaml
 variables:
-  name: brad
-  favourite_colour: red
-  age: 345
-  drinks_beer: true
-  age_and_colour: <%!age%>:<%!favourite_colour%> # 345:red
-  lorumfile: <%f./examples/lorum.txt%> #entire contents of file.
+	name: brad
+	favourite_colour: red
+	age: 345
+	drinks_beer: true
+	age_and_colour: <%!age%>:<%!favourite_colour%> # 345:red
+	lorumfile: <%f./examples/lorum.txt%> #entire contents of file.
 ```
 You can use the `<%! %>` and `<%f %>` constructs to insert other variable values or data from files repsectively in any of the variable as shown above. You can use these constructs repeatedly to build up more complex strings without a problem, but **nesting of these constructs is currently untested**.
 
@@ -31,12 +31,12 @@ Unlike the variables section, the recipe section must be organised as a _list_ i
 
 <pre>
 recipe:
-  - 
-    <i>&lt;step 0...&gt;</i>
-  -
-    <i>&lt;step 1...&gt;</i>
-  - 
-    <i>&lt;...&gt;</i>
+	- 
+		<i>&lt;step 0...&gt;</i>
+	-
+		<i>&lt;step 1...&gt;</i>
+	- 
+		<i>&lt;...&gt;</i>
 </pre>
 
 ### Steps

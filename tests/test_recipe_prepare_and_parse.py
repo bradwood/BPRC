@@ -10,56 +10,16 @@ from bprc.recipe import Recipe
 from bprc.stepprocessor import StepProcessor
 from bprc.utils import *
 
-#TODO: TEST -Add mocking for some of these tests to make them smaller/less complex
+#TODO: @TEST (100)  Add mocking for some of these tests to make them smaller/less complex
 
 @ddt
 class SimpleTest(unittest.TestCase):
     def setUp(self):
-         """Sets up the YAML data."""
-         self.yamldata="""
---- #sample recipe
-recipe:
-  -  # step0
-    name: Create Kong API
-    httpmethod: POST
-    URL: http://kong:8001/apis
-    request:
-      body:
-        name: Consumer API
-        upstream_uri: http://wiremock/blah
-        strip_url: false
-      headers:
-        Authorisation: yadda-step one authorisation header brad
-        Content-type: application/json
-      querystring:
-        keya: vala
-        keyb: valb
-    response: # set up this response section if you need to pull out data here for use later in the recipe.
-      body:
-        id: this_is_a_param
-      headers:
-        Authorisation:
-      code:
-  -
-    name: Load OAUTH Plugin
-    httpmethod: POST
-    URL: http://kong:8001/apdis/<%=steps[0].response.body["id"]%>/<%=steps[0].request.querystring["keya"]%> #gets the JSON field id from the body of the response from step 1.
-    request:
-      querystring:
-        key3: value3
-        keysub: <%=steps[0].request.headers["Authorisation"]%>
-      body:
-        key4: valueprefix <%=steps[0].request.headers["Content-type"]%>
-      headers:
-        blah: blahbha
-        Authorisation: bearer <%=steps[0].request.body["upstream_uri"]%>
-    response: # set up this response section if you need to pull out data here for use later in the recipe.
-      code:
-      body:
-      headers:
-        Authorisation:
+        """Sets up the YAML data."""
+        with open('tests/yaml_load_test.yml', 'r') as myfile:
+            self.yamldata=myfile.read()
 
-"""
+
     @unpack ##note, this is hardwired into step1 only, for now... improve at some point
     @data(['steps[1].URL', "http://kong:8001/apdis/this_is_a_param/vala"],
           ['steps[1].request.querystring["keysub"]', "yadda-step one authorisation header brad"],
@@ -82,7 +42,7 @@ recipe:
         r.steps[1] = processor.prepare()
         self.assertIsNone(eval(path_suffix))
 
-#TODO: TEST add cli tests.
+#TODO: @TEST (150) add cli tests.
 
 if __name__ == '__main__':
     unittest.main()

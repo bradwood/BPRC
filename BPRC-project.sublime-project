@@ -12,16 +12,18 @@
 			"path": "."
 		}
 	],
-	"settings": {
-        "todoreview": {
-            "exclude_folders":
-            [
-            	"*.git*",
-            	"dist",
-				"build",
+	"settings":
+	{
+		"todoreview":
+		{
+			"folder_exclude_patterns":
+			[
+				"*.git*",
+				"*dist*",
+				"*build*",
 				".cache",
 				"bprc.egg-info"
 			]
-        }
-    }
+		}
+	}
 }
