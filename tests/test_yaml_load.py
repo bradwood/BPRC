@@ -9,8 +9,6 @@ from ddt import ddt, data, file_data, unpack
 from bprc.recipe import Recipe, Request, Response, Options, QueryString, Headers, Body
 from bprc.utils import *
 
-#TODO: @TEST  (100) -Add mocking for some of these tests to make them smaller/less complex
-
 @ddt
 class SimpleTest(unittest.TestCase):
     def setUp(self):
@@ -156,8 +154,8 @@ class SimpleTest(unittest.TestCase):
         r = Recipe(datamap)
         self.assertEquals(eval('r.' + path_suffix),val)
 
-#TODO: @TEST dodgy Options passed.  Options type checking, etc. retries=int not string, etc...
-#NOTE: @TEST (20) URL validity  == @WONTFIX allow requests to throw the error
+#TODO: @TEST test dodgy Options passed in @call() tests. lower() on string options, type checking on ints, etc.
+#TODO: @TEST (20) URL validity @call() allow requests to throw the error
 #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.
 #TODO: @DOCUMENTATION (70) document handling of duplicate yaml keys (last one takes preference)
 #TODO: @DOCUMENTATION (70) document handling of uknown options passed (last one takes preference)

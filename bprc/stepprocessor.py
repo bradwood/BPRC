@@ -170,7 +170,7 @@ class StepProcessor():
 
         #sets up number of retries based on options passed
         if 'request.retries' in options:
-            #TODO: @ERROR (25) @TEST check type of option parameter in try
+            #TODO: @ERROR (25) Add a test for @TEST check type of option parameter in try
             try:
                 retries=int(options['request.retries'])
             except ValueError as e:
