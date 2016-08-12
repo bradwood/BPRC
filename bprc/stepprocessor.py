@@ -137,7 +137,6 @@ class StepProcessor():
             vlog("No Host header set, using host part of URL: " + urlparse(url).hostname)
             self.recipe.steps[self.stepid].request.headers["Host"]=urlparse(url).hostname
 
-
         #Set user agent header
         try:
             vlog("User-agent = " +self.recipe.steps[self.stepid].request.headers["User-agent"])
@@ -148,7 +147,16 @@ class StepProcessor():
         #Set accept header
         self.recipe.steps[self.stepid].request.headers["Accept"]="application/json"
 
-        #TODO: @OPTIMISATION (75) set gzip, deflate header
+        #NOTE: Step Options list HERE! @options
+        extra_options = list(set(options.keys()) - set(['request.retries','request.body_format']))
+
+        if len(extra_options)>0:
+            #TODO (30) add a wlog options here @optimisation
+            vlog("Unrecognised options detected... Ingoring " + str(extra_options))
+            #logging.warn("Unrecognised options detected... Ingoring " + str(extra_options))
+
+        #TODO: @OPTIMISATION (90) set gzip, deflate header
+
         #Sets up content header according to the format of the body.
         if 'request.body_format' in options:
             if options['request.body_format'] == 'form':   #form option passed, so must encode
@@ -165,7 +173,10 @@ class StepProcessor():
         #sets up number of retries based on options passed
         if 'request.retries' in options:
             #TODO: @ERROR (25) @TEST check type of option parameter in try
-            retries=int(options['request.retries'])
+            try:
+                retries=int(options['request.retries'])
+            except ValueError as e:
+                errlog("Bad type passed on 'request.retries' option", e)
         else:
             retries=3 #sensible default
 
@@ -283,7 +294,7 @@ class StepProcessor():
                 errlog("Failed to parse JSON response. Aborting", e)
             vlog("JSON parsed ok.")
         else:
-            errlog("Response body is not JSON! Content-type: " +response_content_type+". Aborting", None)
+            errlog("Response body is not JSON! Content-type: " +response_content_type+". Aborting", Exception)
 
         return prepared
 

@@ -127,7 +127,62 @@ class Step:
         self.URL = URL
         self.httpmethod = httpmethod
         self.options = Options(options)
+        for part in ['headers','body','querystring']:
+            try:
+                logging.debug(request[part])
+            except KeyError as ke: # object exists, but key doesn't
+                vlog("No request " + part + " values passed into step " + self.name)
+                request.update({part: {}})
+            except TypeError as te: # object doesn't exist at all
+                vlog("No request " + part + " object passed into step " + self.name)
+                request = {}
+                request.update({part: {}})
+
+        #try:
+        #    logging.debug(request["body"])
+        #except KeyError as ke:
+        #    vlog("No request body values passed into step " + self.name)
+        #    request.update({'body': {}})
+
+        #try:
+        #    logging.debug(request["querystring"])
+        #except KeyError as ke:
+        #    vlog("No request querystring values passed into step " + self.name)
+        #    request.update({'querystring': {}})
+
         self.request = Request(headers=request["headers"], querystring=request["querystring"], body=request["body"])
+
+        for part in ['headers','body']:
+            try:
+                logging.debug(response[part])
+            except KeyError as ke: # object exists, but key doesn't
+                vlog("No response " + part + " values passed into step " + self.name)
+                response.update({part: {}})
+            except TypeError as te: # object doesn't exist at all
+                vlog("No response " + part + " object passed into step " + self.name)
+                response = {}
+                response.update({part: {}})
+
+        ##set up empty response headers if none are passed
+        #try:
+        #    logging.debug(response["headers"])
+        #except KeyError as ke:
+        #    vlog("No response headers values passed into step " + self.name)
+        #    response.update({'headers': {}})
+        ##set up empty response body if none is passed
+        #try:
+        #    logging.debug(response["body"])
+        #except KeyError as ke:
+        #    vlog("No response body values passed into step " + self.name)
+        #    response.update({'body': {}})
+
+        #set up empty response body if none is passed
+        try:
+            logging.debug(response["code"])
+        except KeyError as ke:
+            vlog("No response code values passed into step " + self.name)
+            response.update({'code': ''})
+
         self.response = Response(code=response["code"], headers=response["headers"], body=response["body"])
 
 class Recipe:
@@ -189,7 +244,7 @@ class Recipe:
                 vlog("No response set. Creating an empty response object with headers, body and response code")
                 dmap["recipe"][i].update({'response': {'body': {}, 'code': '', 'headers': {}}})
 
-            #Now instantiate the step
+            ### TODO: remove below try as appears to not ever trigger.
             try:
                 vlog("Creating recipe step object id=" + str(i) + "...")
                 self.steps.append(Step(name=dmap["recipe"][i]["name"],

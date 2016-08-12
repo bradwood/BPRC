@@ -104,7 +104,8 @@ def errlog(msg, e):
         raise RuntimeError(msg) from e
     except Exception as er:
         sys.stderr.write('ERROR: ' + str(er) + "\n")
-        return 1
+    finally:
+        raise e
 
 ## helper functions to print out bits of a step.
 def printstepcolophon(step,*,file, id):
@@ -151,7 +152,7 @@ def printheaders(step,*,file, id, http_part, colourful):
         else:
             print(key +": "+val, file=file)
 
-#TODO: @REFACTOR (2) refactor all these print* functions -- too much copy/paste!
+#TODO: @REFACTOR (60) refactor all these print* functions -- too much copy/paste!
 
 def printbody(step,*,file, id,http_part, colourful):
     if http_part == 'response':

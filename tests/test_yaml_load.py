@@ -6,7 +6,7 @@ print(sys.path)
 import unittest
 import yaml
 from ddt import ddt, data, file_data, unpack
-from bprc.recipe import Recipe
+from bprc.recipe import Recipe, Request, Response, Options, QueryString, Headers, Body
 from bprc.utils import *
 
 #TODO: @TEST  (100) -Add mocking for some of these tests to make them smaller/less complex
@@ -85,6 +85,14 @@ class SimpleTest(unittest.TestCase):
           ['steps[2].request.body["bodyint"]'         , int],
           ['steps[2].request.body["bodystring"]'      , str],
           ['steps[2].request.body["bodyfloat"]'       , float],
+          ['steps[5].request'                         , Request], ##instatiates empty item
+          ['steps[5].response'                        , Response], ##instatiates empty item
+          ['steps[3].request'                         , Request], ##instatiates absent item
+          ['steps[3].response'                        , Response], ##instatiates absent item
+          ['steps[3].options'                         , Options], ##instatiates absent item
+          ['steps[2].request.querystring'             , QueryString],
+          ['steps[2].request.headers'                 , Headers],
+          ['steps[2].request.body'                    , Body],
           )
     def test_yaml_types(self, path_suffix, type):
         """conducts misc value checks on the values passed in from the yaml on the Recipe object"""
@@ -128,16 +136,11 @@ class SimpleTest(unittest.TestCase):
         r = Recipe(datamap)
         self.assertEquals(eval('r.' + path_suffix),val)
 
-
-#TODO: @TEST (20) URL validity
+#TODO: @TEST dodgy Options passed.  Options type checking, etc. retries=int not string, etc...
+#NOTE: @TEST (20) URL validity  == @WONTFIX allow requests to throw the error
 #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.
-#TODO: @TEST (20) add options tests and check for wrong/missing/type issues
-#TODO: @TEST (20) add dict tests (options, querystring, headers etc) to check for duplicates, etc
-#TODO: @TEST (20) add check for unrecognised option passes.
-
-
-
-
+#TODO: @DOCUMENTATION (70) document handling of duplicate yaml keys (last one takes preference)
+#TODO: @DOCUMENTATION (70) document handling of uknown options passed (last one takes preference)
 
 if __name__ == '__main__':
     unittest.main()

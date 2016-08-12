@@ -50,7 +50,7 @@ recipe:
   -  # step 2
     name: Test types
     httpmethod: POST
-    URL: ddodgy URL ## TODO: @TEST (5)try a load of different types, different schemas, etc, etc, etc.
+    URL: ddodgy URL
     request:
       querystring:
         qsbool0: true
@@ -77,7 +77,16 @@ recipe:
         bodyint: 2016
         bodystring: this is a string with some unicode
         bodyfloat: 3.14157
-        CAPBody: brad  # check for case-sensitive field name -- JSON
+        CAPBody: brad  #TODO: @TEST (40) check for case-sensitive field name -- JSON
   -  # step 3
-    URL: http://mockbin.org/ ## TODO: @TEST (5)try a load of different types, different schemas, etc, etc, etc.
+    URL: http://mockbin.org/
+  -  # step 4
+    URL: http://mockbin.org/
+    options:
+      request.retries: ddd
+      request.body_format: ddd
+  -  # step 5
+    URL: http://mockbin.org/
+    request:
+    response:
 
