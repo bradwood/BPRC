@@ -127,60 +127,7 @@ class Step:
         self.URL = URL
         self.httpmethod = httpmethod
         self.options = Options(options)
-        logging.debug("Options dump =" + str(self.options))
-
-        # try:
-        #     logging.debug(request["options"])
-        # except KeyError as ke:
-        #     vlog("No options values passed into step " + self.name)
-        #     request.update({'options': {}})
-
-
-
-        #TODO NTH -- fix these trys to not use logging as a test...
-        try:
-            logging.debug(request["headers"])
-        except KeyError as ke:
-            vlog("No request headers values passed into step " + self.name)
-            request.update({'headers': {}})
-
-        try:
-            logging.debug(request["body"])
-        except KeyError as ke:
-            vlog("No request body values passed into step " + self.name)
-            request.update({'body': {}})
-
-        try:
-            logging.debug(request["querystring"])
-        except KeyError as ke:
-            vlog("No request querystring values passed into step " + self.name)
-            request.update({'querystring': {}})
-
         self.request = Request(headers=request["headers"], querystring=request["querystring"], body=request["body"])
-
-
-        #set up empty response headers if none are passed
-        try:
-            logging.debug(response["headers"])
-        except KeyError as ke:
-            vlog("No response headers values passed into step " + self.name)
-            response.update({'headers': {}})
-        #set up empty response body if none is passed
-        try:
-            logging.debug(response["body"])
-        except KeyError as ke:
-            vlog("No response body values passed into step " + self.name)
-            response.update({'body': {}})
-
-        #set up empty response body if none is passed
-        try:
-            logging.debug(response["code"])
-        except KeyError as ke:
-            vlog("No response code values passed into step " + self.name)
-            response.update({'code': ''})
-
-
-        #logging.debug("in step constructor " + response["code"])
         self.response = Response(code=response["code"], headers=response["headers"], body=response["body"])
 
 class Recipe:
@@ -202,27 +149,27 @@ class Recipe:
                 vlog("Parsing recipe step " + str(i))
                 #set default step Name if one is not set in the YAML
                 try:
-                    logging.debug(dmap["recipe"][i]["name"])
+                    logging.debug("Recipe: Name =" + str(dmap["recipe"][i]["name"]))
                 except KeyError as ke:
                     vlog("No step name set. Setting name to 'Step " + str(i)+"'")
                     dmap["recipe"][i].update({'name': 'Step: '+ str(i)})
 
                 try:
-                    logging.debug(dmap["recipe"][i]["options"])
+                    logging.debug("Recipe: Options =" + str(dmap["recipe"][i]["options"]))
                 except KeyError as ke:
                     vlog("No step options passed. Creating empty options opbject for this step.")
                     dmap["recipe"][i].update({'options': {}})
 
                 #Check for URL passed in the YAML, otherwise fail.
                 try:
-                    logging.debug(dmap["recipe"][i]["URL"])
+                    logging.debug("Recipe: URL =" + str(dmap["recipe"][i]["URL"]))
                 except KeyError as ke:
                     errlog("No URL set in step " + str(i)+". Aborting...", ke)
                     raise KeyError
 
                 #set default HTTP Method if one is not set in the YAML
                 try:
-                    logging.debug(dmap["recipe"][i]["httpmethod"])
+                    logging.debug("Recipe: HTTPMethod =" + str(dmap["recipe"][i]["httpmethod"]))
                 except KeyError as ke:
                     vlog("No HTTPMethod set. Defaulting to GET")
                     dmap["recipe"][i].update({'httpmethod': 'GET'})
@@ -230,7 +177,7 @@ class Recipe:
                 # create request object if one is not set in the YAML
                 # and populate it with a body, querystring and headers
                 try:
-                    logging.debug(dmap["recipe"][i]["request"])
+                    logging.debug("Recipe: Request =" + str(dmap["recipe"][i]["request"]))
                 except KeyError as ke:
                     vlog("No request set. Creating an empty request object with headers, body and querystring")
                     dmap["recipe"][i].update({'request': {'body': {}, 'querystring': {}, 'headers': {}}})
@@ -238,7 +185,7 @@ class Recipe:
                 # create response object if one is not set in the YAML
                 # and populate it with a body, querystring and headers
                 try:
-                    logging.debug(dmap["recipe"][i]["response"])
+                    logging.debug("Recipe: Response =" + str(dmap["recipe"][i]["response"]))
                 except KeyError as ke:
                     vlog("No response set. Creating an empty response object with headers, body and response code")
                     dmap["recipe"][i].update({'response': {'body': {}, 'code': '', 'headers': {}}})

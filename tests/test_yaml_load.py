@@ -110,6 +110,7 @@ class SimpleTest(unittest.TestCase):
     @data('r.steps[3].request.headers',
           'r.steps[3].request.querystring',
           'r.steps[3].request.body',
+          'r.steps[3].options',
         )
     def test_yaml_check_empty_elements_created(self, emtydata):
         """conducts checks for a steps key passed in the YAML"""
@@ -128,12 +129,11 @@ class SimpleTest(unittest.TestCase):
         self.assertEquals(eval('r.' + path_suffix),val)
 
 
-#TODO: @TEST (20) Unrecognised element, e.g: "Reesponse", "Heeederr" objects list of HTTP methods
-
-
 #TODO: @TEST (20) URL validity
-#TODO@ @TEST (20) dicts/lists in a leaf element in the recipe.
+#TODO  @TEST (20) dicts/lists in a leaf element in the recipe.
 #TODO: @TEST (20) add options tests and check for wrong/missing/type issues
+#TODO: @TEST (20) add dict tests (options, querystring, headers etc) to check for duplicates, etc
+#TODO: @TEST (20) add check for unrecognised option passes.
 
 
 
