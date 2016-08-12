@@ -143,68 +143,64 @@ class Recipe:
             raise TypeError
 
         self.steps = []
-        try:    #TODO: (75) @NTH don't use vlog to test for the error condition -- it messes up the log
-            for i, item in enumerate(dmap["recipe"]):
-                #instantiate the step object and add it to the list of steps.
-                vlog("Parsing recipe step " + str(i))
-                #set default step Name if one is not set in the YAML
-                try:
-                    logging.debug("Recipe: Name =" + str(dmap["recipe"][i]["name"]))
-                except KeyError as ke:
-                    vlog("No step name set. Setting name to 'Step " + str(i)+"'")
-                    dmap["recipe"][i].update({'name': 'Step: '+ str(i)})
+        for i, item in enumerate(dmap["recipe"]):
+            #instantiate the step object and add it to the list of steps.
+            vlog("Parsing recipe step " + str(i))
+            #set default step Name if one is not set in the YAML
+            try:
+                logging.debug("Recipe: Name =" + str(dmap["recipe"][i]["name"]))
+            except KeyError as ke:
+                vlog("No step name set. Setting name to 'Step " + str(i)+"'")
+                dmap["recipe"][i].update({'name': 'Step: '+ str(i)})
 
-                try:
-                    logging.debug("Recipe: Options =" + str(dmap["recipe"][i]["options"]))
-                except KeyError as ke:
-                    vlog("No step options passed. Creating empty options opbject for this step.")
-                    dmap["recipe"][i].update({'options': {}})
+            try:
+                logging.debug("Recipe: Options =" + str(dmap["recipe"][i]["options"]))
+            except KeyError as ke:
+                vlog("No step options passed. Creating empty options opbject for this step.")
+                dmap["recipe"][i].update({'options': {}})
 
-                #Check for URL passed in the YAML, otherwise fail.
-                try:
-                    logging.debug("Recipe: URL =" + str(dmap["recipe"][i]["URL"]))
-                except KeyError as ke:
-                    errlog("No URL set in step " + str(i)+". Aborting...", ke)
-                    raise KeyError
+            #Check for URL passed in the YAML, otherwise fail.
+            try:
+                logging.debug("Recipe: URL =" + str(dmap["recipe"][i]["URL"]))
+            except KeyError as ke:
+                errlog("No URL set in step " + str(i)+". Aborting...", ke)
+                raise KeyError
 
-                #set default HTTP Method if one is not set in the YAML
-                try:
-                    logging.debug("Recipe: HTTPMethod =" + str(dmap["recipe"][i]["httpmethod"]))
-                except KeyError as ke:
-                    vlog("No HTTPMethod set. Defaulting to GET")
-                    dmap["recipe"][i].update({'httpmethod': 'GET'})
+            #set default HTTP Method if one is not set in the YAML
+            try:
+                logging.debug("Recipe: HTTPMethod =" + str(dmap["recipe"][i]["httpmethod"]))
+            except KeyError as ke:
+                vlog("No HTTPMethod set. Defaulting to GET")
+                dmap["recipe"][i].update({'httpmethod': 'GET'})
 
-                # create request object if one is not set in the YAML
-                # and populate it with a body, querystring and headers
-                try:
-                    logging.debug("Recipe: Request =" + str(dmap["recipe"][i]["request"]))
-                except KeyError as ke:
-                    vlog("No request set. Creating an empty request object with headers, body and querystring")
-                    dmap["recipe"][i].update({'request': {'body': {}, 'querystring': {}, 'headers': {}}})
+            # create request object if one is not set in the YAML
+            # and populate it with a body, querystring and headers
+            try:
+                logging.debug("Recipe: Request =" + str(dmap["recipe"][i]["request"]))
+            except KeyError as ke:
+                vlog("No request set. Creating an empty request object with headers, body and querystring")
+                dmap["recipe"][i].update({'request': {'body': {}, 'querystring': {}, 'headers': {}}})
 
-                # create response object if one is not set in the YAML
-                # and populate it with a body, querystring and headers
-                try:
-                    logging.debug("Recipe: Response =" + str(dmap["recipe"][i]["response"]))
-                except KeyError as ke:
-                    vlog("No response set. Creating an empty response object with headers, body and response code")
-                    dmap["recipe"][i].update({'response': {'body': {}, 'code': '', 'headers': {}}})
+            # create response object if one is not set in the YAML
+            # and populate it with a body, querystring and headers
+            try:
+                logging.debug("Recipe: Response =" + str(dmap["recipe"][i]["response"]))
+            except KeyError as ke:
+                vlog("No response set. Creating an empty response object with headers, body and response code")
+                dmap["recipe"][i].update({'response': {'body': {}, 'code': '', 'headers': {}}})
 
-                #Now instantiate the step
-                try:
-                    vlog("Creating recipe step object id=" + str(i) + "...")
-                    self.steps.append(Step(name=dmap["recipe"][i]["name"],
-                                           URL=dmap["recipe"][i]["URL"],
-                                           httpmethod=dmap["recipe"][i]["httpmethod"],
-                                           request=dmap["recipe"][i]["request"],
-                                           response=dmap["recipe"][i]["response"],
-                                           options=dmap["recipe"][i]["options"]))
-                except Exception as e:
-                    errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
-                vlog("Parsed recipe step " + str(i) + " (" + dmap["recipe"][i]["name"] + ") ok...")
-        except TypeError as te:
-            errlog("Could not find any recipe steps in the YAML input. Please check the input file.", te)
-            raise ValueError
+            #Now instantiate the step
+            try:
+                vlog("Creating recipe step object id=" + str(i) + "...")
+                self.steps.append(Step(name=dmap["recipe"][i]["name"],
+                                       URL=dmap["recipe"][i]["URL"],
+                                       httpmethod=dmap["recipe"][i]["httpmethod"],
+                                       request=dmap["recipe"][i]["request"],
+                                       response=dmap["recipe"][i]["response"],
+                                       options=dmap["recipe"][i]["options"]))
+            except Exception as e:
+                errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
+            vlog("Parsed recipe step " + str(i) + " (" + dmap["recipe"][i]["name"] + ") ok...")
 
     #TODO: @NTH  (74)implement __str__ for all other objects in this module
     def __str__(self):
