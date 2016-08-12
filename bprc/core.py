@@ -70,6 +70,7 @@ def main():
         datamap = yaml.safe_load(bprc.cli.args.yamlfile)
     except Exception as e:
         errlog("An error occured parsing the yaml input file", e)
+        sys.exit(1)
     vlog("Yaml file parsed ok...")
 
     vlog("Instantiating variables object...")
@@ -87,6 +88,7 @@ def main():
         vlog('Recipe-'+ str(r))
     except Exception as e:
         errlog("Could not create Recipe Object.",e)
+        sys.exit(2)
 
     #parse variables
     vlog("Commencing variable parsing and substitution...")
@@ -110,10 +112,10 @@ def main():
         # firstly, for the step about to be executed, substitute any items in the request object using the php-like
         # <%= =>
         vlog("Commencing php-like substitutions for step " + str(i) + ":" + r.steps[i].name)
-        #TODO: @ERROR-HANDLING (10) add try:'s around all the below calls.
         processor = StepProcessor(recipe=r, stepid=i, variables=variables) # instantiate a step processor
         r.steps[i] = processor.prepare() # substitutes recipe strings to prepare the step for calling.
         vlog("Php-like substitutions complete for step " + str(i) + ":" + r.steps[i].name)
         p_statement=processor.call() # makes the call and populates the response object.
         processor.generateOutput(p_statement) #writes the output for this step.
+    sys.exit(0)
 

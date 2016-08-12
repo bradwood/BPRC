@@ -187,6 +187,14 @@ class Recipe:
     """Defines the Recipe class, which holds a list of URLs to process"""
     #takes a datamap to initialise the data structure
     def __init__(self, dmap):
+        if 'recipe' not in dmap: ## checks for a top-level 'recipe' entry in the yaml file
+            errlog("No 'recipe' found in YAML input. Aborting", KeyError)
+            raise KeyError
+
+        if not isinstance(dmap["recipe"], list): #checks that under the 'recipe' yaml element there is a lsit of stuff
+            errlog("Could not find any 'steps' in the recipe", TypeError)
+            raise TypeError
+
         self.steps = []
         try:    #TODO: (75) @NTH don't use vlog to test for the error condition -- it messes up the log
             for i, item in enumerate(dmap["recipe"]):
@@ -197,7 +205,7 @@ class Recipe:
                     logging.debug(dmap["recipe"][i]["name"])
                 except KeyError as ke:
                     vlog("No step name set. Setting name to 'Step " + str(i)+"'")
-                    dmap["recipe"][i].update({'name': 'GET'})
+                    dmap["recipe"][i].update({'name': 'Step: '+ str(i)})
 
                 try:
                     logging.debug(dmap["recipe"][i]["options"])
@@ -210,6 +218,7 @@ class Recipe:
                     logging.debug(dmap["recipe"][i]["URL"])
                 except KeyError as ke:
                     errlog("No URL set in step " + str(i)+". Aborting...", ke)
+                    raise KeyError
 
                 #set default HTTP Method if one is not set in the YAML
                 try:
@@ -245,9 +254,10 @@ class Recipe:
                                            options=dmap["recipe"][i]["options"]))
                 except Exception as e:
                     errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
-                vlog("Parsed recipe step " + str(i) + " ok...")
+                vlog("Parsed recipe step " + str(i) + " (" + dmap["recipe"][i]["name"] + ") ok...")
         except TypeError as te:
-            errlog("Could not parse YAML. PLease check the input file.", te)
+            errlog("Could not find any recipe steps in the YAML input. Please check the input file.", te)
+            raise ValueError
 
     #TODO: @NTH  (74)implement __str__ for all other objects in this module
     def __str__(self):

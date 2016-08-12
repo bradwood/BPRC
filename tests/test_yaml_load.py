@@ -18,6 +18,16 @@ class SimpleTest(unittest.TestCase):
         with open('tests/yaml_load_test.yml', 'r') as myfile:
             self.yamldata=myfile.read()
 
+        with open('tests/yaml_no_recipe.yml', 'r') as myfile:
+            self.yamlnorecipe=myfile.read()
+
+        with open('tests/yaml_no_URL.yml', 'r') as myfile:
+            self.yamlnoURL=myfile.read()
+
+        with open('tests/yaml_no_steps.yml', 'r') as myfile:
+            self.yamlnosteps=myfile.read()
+
+
     def test_yaml_load(self):
         """tests the yaml loads and is able to instantiate a Recipe object"""
         datamap=yaml.safe_load(self.yamldata)
@@ -82,13 +92,48 @@ class SimpleTest(unittest.TestCase):
         r = Recipe(datamap)
         self.assertIsInstance(eval('r.' + path_suffix),type)
 
-#TODO: @TEST (20) recipe object types (Step, QueryString, URL, etc)
-#TODO: @TEST (20) URL validity
-#TODO: @TEST (20) missing Name, URL, Method etc
-#TODO: @TEST (20) Finite list of HTTP methods
-#TODO: @TEST (20) Empty Request, QS, Header objects list of HTTP methods
+    def test_yaml_no_recipe(self):
+        """conducts checks for a recipe key passed in the YAML"""
+        datamap=yaml.safe_load(self.yamlnorecipe)
+        self.assertRaises(KeyError, Recipe, datamap)
+
+    def test_yaml_no_URL(self):
+        """conducts checks for a URL key passed in the YAML"""
+        datamap=yaml.safe_load(self.yamlnoURL)
+        self.assertRaises(KeyError, Recipe, datamap)
+
+    def test_yaml_no_steps(self):
+        """conducts checks for a steps key passed in the YAML"""
+        datamap=yaml.safe_load(self.yamlnosteps)
+        self.assertRaises(TypeError, Recipe, datamap)
+
+    @data('r.steps[3].request.headers',
+          'r.steps[3].request.querystring',
+          'r.steps[3].request.body',
+        )
+    def test_yaml_check_empty_elements_created(self, emtydata):
+        """conducts checks for a steps key passed in the YAML"""
+        datamap=yaml.safe_load(self.yamldata)
+        r = Recipe(datamap)
+        self.assertFalse(eval(emtydata)) ## empty dicts evaluate to false, so true shows that these are created.
+
+    @unpack
+    @data(['steps[3].httpmethod'  , 'GET'],
+          ['steps[3].name'  , 'Step: 3'],
+          )
+    def test_yaml_check_default_step_elements_created(self, path_suffix, val):
+        """conducts checks for a steps key passed in the YAML"""
+        datamap=yaml.safe_load(self.yamldata)
+        r = Recipe(datamap)
+        self.assertEquals(eval('r.' + path_suffix),val)
+
+
 #TODO: @TEST (20) Unrecognised element, e.g: "Reesponse", "Heeederr" objects list of HTTP methods
+
+
+#TODO: @TEST (20) URL validity
 #TODO@ @TEST (20) dicts/lists in a leaf element in the recipe.
+#TODO: @TEST (20) add options tests and check for wrong/missing/type issues
 
 
 

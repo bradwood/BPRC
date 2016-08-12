@@ -106,7 +106,6 @@ def errlog(msg, e):
         sys.stderr.write('ERROR: ' + str(er) + "\n")
         return 1
 
-
 ## helper functions to print out bits of a step.
 def printstepcolophon(step,*,file, id):
     """Prints out the heading of the step to the output file"""

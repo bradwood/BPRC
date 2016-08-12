@@ -68,7 +68,7 @@ recipe:
         headerint: 2016
         headerstring: this is a string with some unicode
         headerfloat: 3.14157
-        CAPHeader: brad  # check for case-insensitive as per https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
+        CAPHeader: brad  # TODO: @TEST (15) check for case-insensitive as per https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
       body:
         bodybool0: true
         bodybool1: True
@@ -78,6 +78,6 @@ recipe:
         bodystring: this is a string with some unicode
         bodyfloat: 3.14157
         CAPBody: brad  # check for case-sensitive field name -- JSON
+  -  # step 3
+    URL: http://mockbin.org/ ## TODO: @TEST (5)try a load of different types, different schemas, etc, etc, etc.
 
-
-#TODO: @TEST (1) try a load of recipes with various keys/parts missing.

@@ -5,7 +5,6 @@ This module implements the logic to process a step in a recipe
 import sys
 import os
 
-#TODO: @ERROR @TEST (10) make sure type casting works for boolean, int, string, float etc
 #TODO: @ERROR @TEST (10) for header comparisions, make case insensitive -- check the RFC!!
 
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
@@ -149,14 +148,14 @@ class StepProcessor():
         #Set accept header
         self.recipe.steps[self.stepid].request.headers["Accept"]="application/json"
 
-
+        #TODO: @OPTIMISATION (75) set gzip, deflate header
         #Sets up content header according to the format of the body.
         if 'request.body_format' in options:
             if options['request.body_format'] == 'form':   #form option passed, so must encode
                 bodyformat='form'
                 self.recipe.steps[self.stepid].request.headers["Content-type"]="application/x-www-form-urlencoded"
 
-            else:                       #defaults to json
+            else: #defaults to json
                 bodyformat='json'
                 self.recipe.steps[self.stepid].request.headers["Content-type"]="application/json"
         else:
@@ -165,7 +164,7 @@ class StepProcessor():
 
         #sets up number of retries based on options passed
         if 'request.retries' in options:
-            #TODO: @ERROR (5) @TEST check type of option parameter in try
+            #TODO: @ERROR (25) @TEST check type of option parameter in try
             retries=int(options['request.retries'])
         else:
             retries=3 #sensible default
