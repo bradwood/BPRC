@@ -20,16 +20,19 @@ class Headers(collections.MutableMapping): #Make this class behave and look like
     """A collection of HTTP request or response headers"""
 
     def __init__(self, headers):
-        self._headers = headers
+        self._headers = dict((k.lower(), v) for k, v in headers.items()) # force all keys lowercase
 
     def __getitem__(self, key):
-        return self._headers[key]  #Header key's should be case-insensitive
+        lkey=key.lower()
+        return self._headers[lkey]  #Header key's should be case-insensitive
 
     def __setitem__(self, key, value):
-        self._headers[key] = value
+        lkey=key.lower()
+        self._headers[lkey] = value
 
     def __delitem__(self, key):
-        del self._headers[key]
+        lkey=key.lower()
+        del self._headers[lkey]
 
     def __iter__(self):
         return iter(self._headers)
@@ -244,17 +247,14 @@ class Recipe:
                 vlog("No response set. Creating an empty response object with headers, body and response code")
                 dmap["recipe"][i].update({'response': {'body': {}, 'code': '', 'headers': {}}})
 
-            ### TODO: remove below try as appears to not ever trigger.
-            try:
-                vlog("Creating recipe step object id=" + str(i) + "...")
-                self.steps.append(Step(name=dmap["recipe"][i]["name"],
-                                       URL=dmap["recipe"][i]["URL"],
-                                       httpmethod=dmap["recipe"][i]["httpmethod"],
-                                       request=dmap["recipe"][i]["request"],
-                                       response=dmap["recipe"][i]["response"],
-                                       options=dmap["recipe"][i]["options"]))
-            except Exception as e:
-                errlog("Could not instantiate Recipe object from YAML file. Check for typos.", e)
+            vlog("Creating recipe step object id=" + str(i) + "...")
+            self.steps.append(Step(name=dmap["recipe"][i]["name"],
+                                   URL=dmap["recipe"][i]["URL"],
+                                   httpmethod=dmap["recipe"][i]["httpmethod"],
+                                   request=dmap["recipe"][i]["request"],
+                                   response=dmap["recipe"][i]["response"],
+                                   options=dmap["recipe"][i]["options"]))
+
             vlog("Parsed recipe step " + str(i) + " (" + dmap["recipe"][i]["name"] + ") ok...")
 
     #TODO: @NTH  (74)implement __str__ for all other objects in this module

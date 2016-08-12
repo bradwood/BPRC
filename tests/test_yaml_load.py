@@ -38,12 +38,32 @@ class SimpleTest(unittest.TestCase):
     @unpack
     @data(['steps[0].request.headers["Authorisation"]', "yadda-step one authorisation header brad"],
           ['steps[0].name', "Create Kong API"],
-          ['steps[0].response.body["id"]', "this_is_a_param"])
+          ['steps[0].response.body["id"]', "this_is_a_param"],
+          ['steps[2].options["request.body_format"]', "json"],
+          ['steps[2].options["request.retries"]', 3],
+          ['steps[6].request.headers["someheader"]', "SoMeVaL"],
+          ['steps[6].request.headers["SoMeHeaDer2"]', 50], # check header case-insensitivity
+          ['steps[6].request.headers["someheader2"]', 50], # check header case-insensitivity
+          ['steps[6].request.headers["SOMEHEADER2"]', 50], # check header case-insensitivity
+
+          )
+
     def test_yaml_parse_values(self, path_suffix, val):
         """conducts misc value checks on the values passed in from the yaml on the Recipe object"""
         datamap=yaml.safe_load(self.yamldata)
         r = Recipe(datamap)
         self.assertEquals(eval('r.' + path_suffix),val)
+
+    @unpack
+    @data(['steps[6].request.headers["someheader"]', "someval"], ## yaml values are case-sensitive.
+          )
+    def test_yaml_parse_values_not_equal(self, path_suffix, val):
+        """conducts misc value checks on the values passed in from the yaml on the Recipe object"""
+        datamap=yaml.safe_load(self.yamldata)
+        r = Recipe(datamap)
+        self.assertNotEqual(eval('r.' + path_suffix),val)
+
+
 
     @data('r.steps[1].response.headers["Authorisation"]')
     def test_yaml_parse_nones(self, path_suffix):
@@ -141,6 +161,8 @@ class SimpleTest(unittest.TestCase):
 #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.
 #TODO: @DOCUMENTATION (70) document handling of duplicate yaml keys (last one takes preference)
 #TODO: @DOCUMENTATION (70) document handling of uknown options passed (last one takes preference)
+#TODO: @DOCUMENTATION (70) document the fact that all keys must be in lowercase to work
+
 
 if __name__ == '__main__':
     unittest.main()

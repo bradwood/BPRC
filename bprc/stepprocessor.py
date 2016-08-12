@@ -5,8 +5,6 @@ This module implements the logic to process a step in a recipe
 import sys
 import os
 
-#TODO: @ERROR @TEST (10) for header comparisions, make case insensitive -- check the RFC!!
-
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 PACKAGE_PARENT = '..'
 SCRIPT_DIR = os.path.dirname(os.path.realpath(os.path.join(os.getcwd(), os.path.expanduser(__file__))))

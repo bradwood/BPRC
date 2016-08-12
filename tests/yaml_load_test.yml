@@ -51,6 +51,9 @@ recipe:
     name: Test types
     httpmethod: POST
     URL: ddodgy URL
+    options:
+      request.retries: 3
+      request.body_format: json
     request:
       querystring:
         qsbool0: true
@@ -68,7 +71,6 @@ recipe:
         headerint: 2016
         headerstring: this is a string with some unicode
         headerfloat: 3.14157
-        CAPHeader: brad  # TODO: @TEST (15) check for case-insensitive as per https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
       body:
         bodybool0: true
         bodybool1: True
@@ -77,7 +79,6 @@ recipe:
         bodyint: 2016
         bodystring: this is a string with some unicode
         bodyfloat: 3.14157
-        CAPBody: brad  #TODO: @TEST (40) check for case-sensitive field name -- JSON
   -  # step 3
     URL: http://mockbin.org/
   -  # step 4
@@ -89,4 +90,9 @@ recipe:
     URL: http://mockbin.org/
     request:
     response:
-
+  -  # step 6 --- test case-insensitivity for Headers as per RFC
+    URL: http://mockbin.org/
+    request:
+      headers:
+        someheader: SoMeVaL ### RFC7230 says Header keys must be case insensitive, but values may not be.
+        SoMeHeaDer2: 50
