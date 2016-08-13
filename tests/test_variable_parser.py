@@ -19,18 +19,27 @@ class SimpleTest(unittest.TestCase):
 variables:
   name: brad
   favourite_colour: red
-  age: 345  #add tests for ints
-  drinks_beer: true #add tests for boolean type
+  age: 345
+  drinks_beer: true
+  floater: 343.55
+  numjoin: <%!age%>:<%!floater%>
+  multi-way-join: <%!age%>:<%!favourite_colour%> -- <%!age%>:<%!floater%>
+
   age_and_colour: <%!age%>:<%!favourite_colour%>
   lorumfile: <%f./examples/lorum.txt%> # add tests for file types
+  file_and_num: <%!lorumfile%> and <%!floater%> #TODO: @TEST (20 Set up a stest for this one.
   testnull:
 """
     @unpack
     @data(
           ['name', "brad"],
-          ['age', '345'],
+          ['age', 345],
           ['age_and_colour', "345:red"],
-# fails   ['drinks_beer', 'true'],
+          ['drinks_beer', True],
+          ['floater', 343.55],
+          ['testnull', None],
+          ['numjoin', "345:343.55"],
+          ['multi-way-join', "345:red -- 345:343.55"],
           )
     def test_processor_parse_values(self,varname,varval):
         """tests the php-like substitution logic in the recipe steps using various random checks for values"""

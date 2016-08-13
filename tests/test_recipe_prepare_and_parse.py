@@ -10,7 +10,7 @@ from bprc.recipe import Recipe
 from bprc.stepprocessor import StepProcessor
 from bprc.utils import *
 
-#TODO: @TEST (100)  Add mocking for some of these tests to make them smaller/less complex
+#TODO@ test file inserts here @test (30)
 
 @ddt
 class SimpleTest(unittest.TestCase):
@@ -20,7 +20,7 @@ class SimpleTest(unittest.TestCase):
             self.yamldata=myfile.read()
 
 
-    @unpack ##note, this is hardwired into step1 only, for now... improve at some point
+    @unpack
     @data(['steps[1].URL', "http://kong:8001/apdis/this_is_a_param/vala"],
           ['steps[1].request.querystring["keysub"]', "yadda-step one authorisation header brad"],
           ['steps[1].request.body["key4"]', "valueprefix application/json"],

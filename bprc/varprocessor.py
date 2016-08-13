@@ -34,12 +34,22 @@ class VarProcessor():
         """Instantiates the Step Processor Object"""
         self.variables=variables
 
+    def _try_val(self, val):
+        """Tries to convert a string to the type it looks like it should be"""
+        import ast
+        try:
+            val = ast.literal_eval(val)
+        except Exception:
+            pass
+        return val
+
     def parse(self, val,src):
         """parses the current variable.
         See http://stackoverflow.com/questions/7087905/python-with-regex-to-replace-strings-recursively"""
         vlog("Variable parser initialised for variable " + str(val))
-        subbed_text, n = var_sub_pattern.subn(lambda m: self.parse(eval("src['"+ m.group(1) +"']"), src), str(val))
-        return subbed_text
+        subbed_text, n = var_sub_pattern.subn(lambda m: str(self.parse(eval("src['"+ m.group(1) +"']"), src)), str(val))
+        #now need to convert subbed_txt back to it's appropriate type.
+        return self._try_val(subbed_text)
 
     def fileparse(self, val,src):
         """does file substitutions on the current variable"""
