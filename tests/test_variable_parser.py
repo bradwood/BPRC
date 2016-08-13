@@ -26,8 +26,7 @@ variables:
   multi-way-join: <%!age%>:<%!favourite_colour%> -- <%!age%>:<%!floater%>
 
   age_and_colour: <%!age%>:<%!favourite_colour%>
-  lorumfile: <%f./examples/lorum.txt%> # add tests for file types
-  file_and_num: <%!lorumfile%> and <%!floater%> #TODO: @TEST (20 Set up a stest for this one.
+  lorumfile: <%f./examples/lorum.txt%>
   testnull:
 """
     @unpack
@@ -41,7 +40,7 @@ variables:
           ['numjoin', "345:343.55"],
           ['multi-way-join', "345:red -- 345:343.55"],
           )
-    def test_processor_parse_values(self,varname,varval):
+    def test_varprocessor_parse_values(self,varname,varval):
         """tests the php-like substitution logic in the recipe steps using various random checks for values"""
         datamap=yaml.load(self.yamldata)
         variables = Variables(datamap['variables'])
@@ -56,8 +55,8 @@ This is a new line
 And so is this.
 """],
           )
-    def test_processor_fileparse_values(self,varname,varval):
-        """tests the php-like substitution logic in the recipe steps using various random checks for values"""
+    def test_varprocessor_fileparse_values(self,varname,varval):
+        """tests the file substitution logic in the recipe steps using various random checks for values"""
         datamap=yaml.load(self.yamldata)
         variables = Variables(datamap['variables'])
         varprocessor = VarProcessor(variables) #instantiate a variable processor

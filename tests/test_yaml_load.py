@@ -40,6 +40,7 @@ class SimpleTest(unittest.TestCase):
           ['steps[2].options["request.body_format"]', "json"],
           ['steps[2].options["request.retries"]', 3],
           ['steps[6].request.headers["someheader"]', "SoMeVaL"],
+          ['steps[6].request.headers["SomeHeader"]', "SoMeVaL"],
           ['steps[6].request.headers["SoMeHeaDer2"]', 50], # check header case-insensitivity
           ['steps[6].request.headers["someheader2"]', 50], # check header case-insensitivity
           ['steps[6].request.headers["SOMEHEADER2"]', 50], # check header case-insensitivity
@@ -154,6 +155,7 @@ class SimpleTest(unittest.TestCase):
         r = Recipe(datamap)
         self.assertEquals(eval('r.' + path_suffix),val)
 
+#TODO: @Test (10) Header Key in-sensitivitiy
 #TODO: @TEST test dodgy Options passed in @call() tests. lower() on string options, type checking on ints, etc.
 #TODO: @TEST (20) URL validity @call() allow requests to throw the error
 #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.

@@ -6,6 +6,7 @@ variables:
   varint: 7
   varfloat: 0.786
   varstring: Brad's favourite colour
+  dummypassword: <%f./tests/dummypassword.txt%>
 
 recipe:
   -  # step0
@@ -96,3 +97,11 @@ recipe:
       headers:
         someheader: SoMeVaL ### RFC7230 says Header keys must be case insensitive, but values may not be.
         SoMeHeaDer2: 50
+  -  # step 7 --- test file substitution
+    URL: http://mockbin.org/
+    request:
+      headers:
+        directfile: <%f./tests/dummypassword.txt%>
+        file_from_var: <%!dummypassword%>
+        directfile_plus: dummy_password = <%f./tests/dummypassword.txt%>
+        file_from_var_plus: dummy_password = <%!dummypassword%>

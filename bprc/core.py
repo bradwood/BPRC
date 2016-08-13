@@ -99,7 +99,7 @@ def main():
         variables[varname] = varprocessor.parse(varval, variables)
         vlog("Substituted " + str(varname) + "=" + str(variables[varname]))
 
-    # no subsitute filenames -- note, I tried this in the above loop but go errors.
+    # now subsitute filenames -- note, I tried this in the above loop but go errors.
     # probably safer to parse *all* varnames before trying with files anyway.
     for varname, varval in variables.items():
         vlog("Commencing filename-- substitutions for variable " + str(varname) + "=" + str(varval))
