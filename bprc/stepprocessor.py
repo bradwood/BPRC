@@ -153,7 +153,7 @@ class StepProcessor():
             vlog("Unrecognised options detected... Ingoring " + str(extra_options))
             #logging.warn("Unrecognised options detected... Ingoring " + str(extra_options))
 
-        #TODO: @OPTIMISATION (90) set gzip, deflate header
+        #TODO: @OPTIMISATION (90) set gzip, deflate header @DOCUMENTATION
 
         #Sets up content header according to the format of the body.
         if 'request.body_format' in options:
@@ -170,7 +170,6 @@ class StepProcessor():
 
         #sets up number of retries based on options passed
         if 'request.retries' in options:
-            #TODO: @ERROR (25) Add a test for @TEST check type of option parameter in try
             try:
                 retries=int(options['request.retries'])
             except ValueError as e:

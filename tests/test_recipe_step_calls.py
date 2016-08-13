@@ -1,3 +1,20 @@
+"""
+TO TEST:
+ - error handling with bad URL
+ - error handling with socket/timeout error
+ - error handling with ssl ignoring
+
+ Request stuff:
+ - setting of explicit header
+ - bad options passed (type, or unrecognised key or value)
+ - default headers set okay (host, user-agent, others)
+ - http method types (including weird ones)
+ - http retries
+ - http body (json and URL encode)
+ - retry after 4xx or 5xx (option passed)
+
+"""
+
 import sys
 sys.path.append('/home/travis/build/bradwood/BPRC/bprc')
 sys.path.append('/home/travis/build/bradwood/BPRC/bprc/tests')
@@ -5,6 +22,7 @@ print(sys.path)
 
 import unittest
 import yaml
+
 from ddt import ddt, data, file_data, unpack
 from bprc.recipe import Recipe
 from bprc.stepprocessor import StepProcessor

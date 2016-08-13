@@ -4,8 +4,36 @@
 		"selected_items":
 		[
 			[
+				"Var",
+				"VarProcessor"
+			],
+			[
+				"Re",
+				"Request"
+			],
+			[
+				"ex",
+				"extra_options"
+			],
+			[
+				"HTTP",
+				"HTTPMethod"
+			],
+			[
+				"T",
+				"TypeError"
+			],
+			[
+				"yaml",
+				"yamlnoURL"
+			],
+			[
 				"re",
-				"response"
+				"return"
+			],
+			[
+				"err",
+				"errlog"
 			],
 			[
 				"http",
@@ -84,10 +112,6 @@
 				"step_suffix"
 			],
 			[
-				"ex",
-				"executeSubstition"
-			],
-			[
 				"de",
 				"debug"
 			],
@@ -102,10 +126,6 @@
 			[
 				"bod",
 				"bodyformat"
-			],
-			[
-				"Var",
-				"VarProcessor"
 			],
 			[
 				"varp",
@@ -184,10 +204,6 @@
 				"requests"
 			],
 			[
-				"err",
-				"errlog"
-			],
-			[
 				"a",
 				"append"
 			],
@@ -222,10 +238,6 @@
 			[
 				"exc",
 				"except"
-			],
-			[
-				"yaml",
-				"yamlfile"
 			],
 			[
 				"cl",
@@ -420,18 +432,50 @@
 	"buffers":
 	[
 		{
-			"file": "docs/YAML-format.md",
+			"file": "tests/brad_temp_test.yml",
 			"settings":
 			{
-				"buffer_size": 3731,
+				"buffer_size": 165,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "// Monday 08/08/16 at 12:36AM - 71 files in 0.22 secs\n\n## TODO (32)\n1. bprc/core.py:113                            @ERROR-HANDLING (10) add try:'s around all the below calls.\n2. bprc/recipe.py:252                          @NTH  (74)implement __str__ for all other objects in this module\n3. bprc/recipe.py:191                          (75) @NTH don't use vlog to test for the error condition -- it messes up the log\n4. bprc/utils.py:91                            @NTH (76) do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.\n5. BPRC/bumpver.py:8                           @RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.\n6. bprc/stepprocessor.py:8                     ERROR HANDLING make sure type casting works for boolean, int, string, float etc\n7. bprc/stepprocessor.py:9                     ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!\n8. bprc/stepprocessor.py:169                   check type of option parameter in try\n9. bprc/stepprocessor.py:208                   OPTIMISATION, consider creating the session at the Recipe level, not\n10. bprc/utils.py:91                           NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.\n11. bprc/core.py:109                           ERROR HANDLING add try:'s around all the below calls.\n12. bprc/outputprocessor.py:34                 REFACTOR Rewrite this Output generatro to use the requests object for output.\n13. bprc/recipe.py:191                         NTH don't use vlog to test for the error condition -- it messes up the log\n14. bprc/recipe.py:252                         NTH implement __str__ for all other objects in this module\n15. bprc/stepprocessor.py:8                    ERROR HANDLING make sure type casting works for boolean, int, string, float etc\n16. bprc/stepprocessor.py:9                    ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!\n17. bprc/stepprocessor.py:169                  check type of option parameter in try\n18. bprc/stepprocessor.py:208                  OPTIMISATION, consider creating the session at the Recipe level, not\n19. tests/test_basic.py:13                     Add mocking for some of these tests to make them smaller/less complex\n20. tests/test_basic.py:63                     TEST impement excecptions test\n21. tests/test_basic.py:69                     TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n22. tests/test_basic.py:110                    TEST add cli tests.\n23. tests/test_recipe_prepare_and_parse.py:13  TEST -Add mocking for some of these tests to make them smaller/less complex\n24. tests/test_recipe_prepare_and_parse.py:85  TEST add cli tests.\n25. tests/test_yaml_load.py:12                 TEST -Add mocking for some of these tests to make them smaller/less complex\n26. tests/test_yaml_load.py:62                 TEST impement excecptions test\n27. tests/test_yaml_load.py:68                 TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n28. tests/test_recipe_prepare_and_parse.py:13  TEST -Add mocking for some of these tests to make them smaller/less complex\n29. tests/test_recipe_prepare_and_parse.py:85  TEST add cli tests.\n30. tests/test_yaml_load.py:12                 TEST -Add mocking for some of these tests to make them smaller/less complex\n31. tests/test_yaml_load.py:62                 TEST impement excecptions test\n32. tests/test_yaml_load.py:68                 TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??\n",
+			"file": "bprc/core.py",
 			"settings":
 			{
-				"buffer_size": 3611,
+				"buffer_size": 4737,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/yaml_load_test.yml",
+			"settings":
+			{
+				"buffer_size": 3246,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/utils.py",
+			"settings":
+			{
+				"buffer_size": 8337,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/varprocessor.py",
+			"settings":
+			{
+				"buffer_size": 2286,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "// Saturday 08/13/16 at 03:57PM - 66 files in 0.24 secs\n\n## TODO (17)\n1. tests/test_variable_parser.py:30            @TEST (20) Set up a stest for this one.\n2. tests/test_yaml_load.py:158                 @TEST (20) URL validity @call() allow requests to throw the error\n3. bprc/stepprocessor.py:173                   @ERROR (25) Add a test for @TEST check type of option parameter in try\n4. bprc/utils.py:98                            @NTH (40) @LOGGING Add a debug and an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.\n5. bprc/utils.py:155                           @REFACTOR (60) refactor all these print* functions -- too much copy/paste!\n6. tests/test_yaml_load.py:34                  @TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??\n7. tests/test_yaml_load.py:160                 @DOCUMENTATION (70) document handling of duplicate yaml keys (last one takes preference)\n8. tests/test_yaml_load.py:161                 @DOCUMENTATION (70) document handling of uknown options passed (last one takes preference)\n9. tests/test_yaml_load.py:162                 @DOCUMENTATION (70) document the fact that all keys must be in lowercase to work\n10. bprc/recipe.py:260                         @NTH  (74)implement __str__ for all other objects in this module\n11. bprc/stepprocessor.py:156                  @OPTIMISATION (90) set gzip, deflate header\n12. bprc/utils.py:73                           @TEST (90) try file=sys.stderr as an arg to print()\n13. BPRC/bumpver.py:8                          @RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.\n14. bprc/stepprocessor.py:215                  (100) @NTH OPTIMISATION, consider creating the session at the Recipe level, not\n15. tests/test_recipe_prepare_and_parse.py:45  @TEST (150) add cli tests.\n16. tests/test_yaml_load.py:157                @TEST test dodgy Options passed in @call() tests. lower() on string options, type checking on ints, etc.\n17. tests/yaml_load_test.yml:2                 @FEATURE add unicode support in the YAML. (120)\n\n## NOTE (1)\n1. bprc/stepprocessor.py:148                   Step Options list HERE! @options\n",
+			"settings":
+			{
+				"buffer_size": 2198,
 				"line_ending": "Windows",
 				"name": "TodoReview",
 				"scratch": true
@@ -446,83 +490,37 @@
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "tests/test_recipe_prepare_and_parse.py",
 			"settings":
 			{
-				"buffer_size": 5974,
+				"buffer_size": 3256,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": ".gitignore",
+			"file": "tests/test_variable_parser.py",
 			"settings":
 			{
-				"buffer_size": 1057,
+				"buffer_size": 2736,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "setup.py",
+			"file": "tests/test_yaml_load.py",
 			"settings":
 			{
-				"buffer_size": 5472,
+				"buffer_size": 7709,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "bprc/__main__.py",
+			"contents": "Searching 28 files for \"Could not parse YAML\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py:\n  252                  vlog(\"Parsed recipe step \" + str(i) + \" ok...\")\n  253          except TypeError as te:\n  254:             errlog(\"Could not parse YAML. PLease check the input file.\", te)\n  255  \n  256      #TODO: @NTH  (74)implement __str__ for all other objects in this module\n\n1 match in 1 file\n\n\nSearching 28 files for \"urlparse\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py:\n  127  \n  128          #Set host header on the request.\n  129:         from urllib.parse import urlparse\n  130:         parse_object = urlparse(url)\n  131  \n  132          #Set host header on the request.\n  ...\n  134              vlog(\"Host: = \" +self.recipe.steps[self.stepid].request.headers[\"Host\"])\n  135          except KeyError as ke:\n  136:             from urllib.parse import urlparse\n  137:             vlog(\"No Host header set, using host part of URL: \" + urlparse(url).hostname)\n  138:             self.recipe.steps[self.stepid].request.headers[\"Host\"]=urlparse(url).hostname\n  139  \n  140  \n\n5 matches in 1 file\n\n\nSearching 28 files for \"options\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\cli.py:\n    1  \"\"\"\n    2: This module takes care of capturing the cli options\n    3  \"\"\"\n    4  \n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py:\n   81          return len(self._querystring)\n   82  \n   83: class Options(collections.MutableMapping): #Make this class behave and look like a dict\n   84:     \"\"\"An collection of parameters passed options into a step\"\"\"\n   85:     def __init__(self, options):\n   86:         self._options=options\n   87  \n   88      def __getitem__(self, key):\n   89:         return self._options[key]\n   90  \n   91      def __setitem__(self, key, value):\n   92:         self._options[key] = value\n   93  \n   94      def __delitem__(self, key):\n   95:         del self._options[key]\n   96  \n   97      def __iter__(self):\n   98:         return iter(self._options)\n   99  \n  100      def __len__(self):\n  101:         return len(self._options)\n  102  \n  103      def __str__(self):\n  104          outstr = ''\n  105:         for key, value in sorted(self._options.items()):\n  106              outstr += key+\": \" + str(value) +\", \"\n  107          return outstr\n  ...\n  123  class Step:\n  124      \"\"\"Defines a Step in the Recipe - a specific URL and its properties\"\"\"\n  125:     def __init__(self, *, name, URL, httpmethod, request, response, options):\n  126          self.name = name\n  127          self.URL = URL\n  128          self.httpmethod = httpmethod\n  129:         self.options = Options(options)\n  130          self.request = Request(headers=request[\"headers\"], querystring=request[\"querystring\"], body=request[\"body\"])\n  131          self.response = Response(code=response[\"code\"], headers=response[\"headers\"], body=response[\"body\"])\n  ...\n  155  \n  156              try:\n  157:                 logging.debug(\"Recipe: Options =\" + str(dmap[\"recipe\"][i][\"options\"]))\n  158              except KeyError as ke:\n  159:                 vlog(\"No step options passed. Creating empty options opbject for this step.\")\n  160:                 dmap[\"recipe\"][i].update({'options': {}})\n  161  \n  162              #Check for URL passed in the YAML, otherwise fail.\n  ...\n  198                                         request=dmap[\"recipe\"][i][\"request\"],\n  199                                         response=dmap[\"recipe\"][i][\"response\"],\n  200:                                        options=dmap[\"recipe\"][i][\"options\"]))\n  201              except Exception as e:\n  202                  errlog(\"Could not instantiate Recipe object from YAML file. Check for typos.\", e)\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py:\n  123          httpmethod = self.recipe.steps[self.stepid].httpmethod\n  124          url = self.recipe.steps[self.stepid].URL\n  125:         options = self.recipe.steps[self.stepid].options\n  126  \n  127  \n  ...\n  151          #TODO: @OPTIMISATION (75) set gzip, deflate header\n  152          #Sets up content header according to the format of the body.\n  153:         if 'request.body_format' in options:\n  154:             if options['request.body_format'] == 'form':   #form option passed, so must encode\n  155                  bodyformat='form'\n  156                  self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/x-www-form-urlencoded\"\n  ...\n  163              self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/json\"\n  164  \n  165:         #sets up number of retries based on options passed\n  166:         if 'request.retries' in options:\n  167              #TODO: @ERROR (25) @TEST check type of option parameter in try\n  168:             retries=int(options['request.retries'])\n  169          else:\n  170              retries=3 #sensible default\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py:\n  111            'r.steps[3].request.querystring',\n  112            'r.steps[3].request.body',\n  113:           'r.steps[3].options',\n  114          )\n  115      def test_yaml_check_empty_elements_created(self, emtydata):\n  ...\n  132  #NOTE: @TEST (20) URL validity @WONTFIX allow requests to throw the error\n  133  #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.\n  134: #TODO: @TEST (20) add options tests and check for wrong/missing/type issues -- including unrecognised issues\n  135: #TODO: @TEST (20) add dict tests (options, querystring, headers etc) to check for duplicates, etc\n  136  \n  137  \n\n<untitled 284>:\n    5  2. bprc/stepprocessor.py:8                     @ERROR @TEST (10) for header comparisions, make case insensitive -- check the RFC!!\n    6  3. tests/yaml_load_test.yml:71                 @TEST (15) check for case-insensitive as per https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2\n    7: 4. tests/test_yaml_load.py:134                 @TEST (20) add options tests and check for wrong/missing/type issues -- including unrecognised issues\n    8: 5. tests/test_yaml_load.py:135                 @TEST (20) add dict tests (options, querystring, headers etc) to check for duplicates, etc\n    9  6. bprc/stepprocessor.py:167                   @ERROR (25) @TEST check type of option parameter in try\n   10  7. bprc/utils.py:73                            @TEST (40) try file=sys.stderr as an arg to print()\n\n35 matches across 5 files\n\n\nSearching 28 files for \"request.\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\outputprocessor.py:\n   65                  printheaders(self.step, id=self.id,file=writefile, http_part='request',  colourful=colourful)\n   66                  logging.debug(\"PRINTING REQUEST HEADERS\")\n   67:                 if self.step.request.body:\n   68                      logging.debug(\"Req.body==\" +req.body)\n   69                      try: # if this doesn't decode then it's probably not JSON, just print it\n   70                           # without a decode\n   71:                         self.step.request.body=json.loads(req.body)\n   72                      except JSONDecodeError as e:\n   73:                         self.step.request.body=req.body\n   74                      printbody(self.step, id=self.id, file=writefile, http_part='request',  colourful=colourful)\n   75                  print(\"-- Response --\", file=writefile)\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py:\n   78          parts = [self.recipe.steps[self.stepid].name,\n   79                   self.recipe.steps[self.stepid].URL,\n   80:                  self.recipe.steps[self.stepid].request.querystring,\n   81:                  self.recipe.steps[self.stepid].request.body,\n   82:                  self.recipe.steps[self.stepid].request.headers\n   83                  ]\n   84          # these 2 lists work in pairs, for each type of substitution introducted.\n   ..\n  111          self.recipe.steps[self.stepid].name = partlist[0]\n  112          self.recipe.steps[self.stepid].URL = partlist[1]\n  113:         self.recipe.steps[self.stepid].request.querystring = partlist[2]\n  114:         self.recipe.steps[self.stepid].request.body = partlist[3]\n  115:         self.recipe.steps[self.stepid].request.headers = partlist[4]\n  116  \n  117          return self.recipe.steps[self.stepid]\n  ...\n  126  \n  127  \n  128:         #Set host header on the request.\n  129          from urllib.parse import urlparse\n  130          parse_object = urlparse(url)\n  131  \n  132:         #Set host header on the request.\n  133          try:\n  134:             vlog(\"Host: = \" +self.recipe.steps[self.stepid].request.headers[\"Host\"])\n  135          except KeyError as ke:\n  136              from urllib.parse import urlparse\n  137              vlog(\"No Host header set, using host part of URL: \" + urlparse(url).hostname)\n  138:             self.recipe.steps[self.stepid].request.headers[\"Host\"]=urlparse(url).hostname\n  139  \n  140  \n  141          #Set user agent header\n  142          try:\n  143:             vlog(\"User-agent = \" +self.recipe.steps[self.stepid].request.headers[\"User-agent\"])\n  144          except KeyError as ke:\n  145              vlog(\"No User-agent header set, defaulting to bprc/\" + __version__)\n  146:             self.recipe.steps[self.stepid].request.headers[\"User-agent\"]=\"bprc/\"+__version__\n  147  \n  148          #Set accept header\n  149:         self.recipe.steps[self.stepid].request.headers[\"Accept\"]=\"application/json\"\n  150  \n  151          #TODO: @OPTIMISATION (75) set gzip, deflate header\n  152          #Sets up content header according to the format of the body.\n  153:         if 'request.body_format' in options:\n  154:             if options['request.body_format'] == 'form':   #form option passed, so must encode\n  155                  bodyformat='form'\n  156:                 self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/x-www-form-urlencoded\"\n  157  \n  158              else: #defaults to json\n  159                  bodyformat='json'\n  160:                 self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/json\"\n  161          else:\n  162              bodyformat='json' # if the option wasn't set at all, default to json too.\n  163:             self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/json\"\n  164  \n  165          #sets up number of retries based on options passed\n  166:         if 'request.retries' in options:\n  167              #TODO: @ERROR (25) @TEST check type of option parameter in try\n  168:             retries=int(options['request.retries'])\n  169          else:\n  170              retries=3 #sensible default\n  171  \n  172          #request\n  173:         querystring = self.recipe.steps[self.stepid].request.querystring\n  174:         requestheaders = self.recipe.steps[self.stepid].request.headers\n  175:         requestbody = self.recipe.steps[self.stepid].request.body\n  176  \n  177          #response\n  ...\n  231          # request headers that requests adds, e.g., an Authorization header which\n  232          # might be set in the library\n  233:         self.recipe.steps[self.stepid].request.headers=resp.request.headers\n  234  \n  235          #set the response code\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py:\n  116  \n  117      if colourful:\n  118:         if step.request.querystring == {}:\n  119:             print(step.httpmethod + \" \" + step.URL +\"?\" + urlencode(step.request.querystring),file=file)\n  120              #print(highlight(step.httpmethod + \" \" + step.URL,lexers.HttpLexer(stripnl=True), formatters.TerminalFormatter()), file=file)\n  121          else:\n  122:             print(step.httpmethod + \" \" + step.URL +\"?\" + urlencode(step.request.querystring),file=file)\n  123      else:\n  124:         if step.request.querystring == {}:\n  125              print(step.httpmethod + \" \" + step.URL,file=file)\n  126          else:\n  127:             print(step.httpmethod + \" \" + step.URL +\"?\" + urlencode(step.request.querystring),file=file)\n  128  \n  129  \n  ...\n  165      else: ## http_part == request:\n  166          try:\n  167:             printoutput = json.dumps(step.request.body,indent=4, sort_keys=True)\n  168              isJsonPayload = True\n  169          except JSONDecodeError as e: # if it doesn't parse as JSON, set it as raw output\n  170:             printoutput = step.request.body\n  171              colourful = False # and if it is not JSON, turn off colourful output.\n  172              isJsonPayload = False\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py:\n   23      @unpack ##note, this is hardwired into step1 only, for now... improve at some point\n   24      @data(['steps[1].URL', \"http://kong:8001/apdis/this_is_a_param/vala\"],\n   25:           ['steps[1].request.querystring[\"keysub\"]', \"yadda-step one authorisation header brad\"],\n   26:           ['steps[1].request.body[\"key4\"]', \"valueprefix application/json\"],\n   27:           ['steps[1].request.headers[\"Authorisation\"]', \"bearer http://wiremock/blah\"])\n   28      def test_processor_prepare_values(self,path_suffix,val):\n   29          \"\"\"tests the php-like substitution logic in the recipe steps using various random checks for values\"\"\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py:\n   37  \n   38      @unpack\n   39:     @data(['steps[0].request.headers[\"Authorisation\"]', \"yadda-step one authorisation header brad\"],\n   40            ['steps[0].name', \"Create Kong API\"],\n   41            ['steps[0].response.body[\"id\"]', \"this_is_a_param\"])\n   ..\n   54  \n   55      @unpack\n   56:     @data(['steps[2].request.querystring[\"qsbool0\"]'],\n   57:           ['steps[2].request.querystring[\"qsbool1\"]'],\n   58:           ['steps[2].request.querystring[\"qsbool2\"]'],\n   59:           ['steps[2].request.querystring[\"qsbool3\"]'],\n   60:           ['steps[2].request.headers[\"headerbool0\"]'],\n   61:           ['steps[2].request.headers[\"headerbool1\"]'],\n   62:           ['steps[2].request.headers[\"headerbool2\"]'],\n   63:           ['steps[2].request.headers[\"headerbool3\"]'],\n   64:           ['steps[2].request.body[\"bodybool0\"]'],\n   65:           ['steps[2].request.body[\"bodybool1\"]'],\n   66:           ['steps[2].request.body[\"bodybool2\"]'],\n   67:           ['steps[2].request.body[\"bodybool3\"]'],)\n   68      def test_yaml_true(self,path_suffix):\n   69          \"\"\"conducts misc Boolean checks on the values passed in from the yaml on the Recipe object\"\"\"\n   ..\n   74  \n   75      @unpack\n   76:     @data(['steps[2].request.querystring[\"qsbool0\"]'  , bool],\n   77:           ['steps[2].request.querystring[\"qsint\"]'    , int],\n   78:           ['steps[2].request.querystring[\"qsstring\"]' , str],\n   79:           ['steps[2].request.querystring[\"qsfloat\"]'  , float],\n   80:           ['steps[2].request.headers[\"headerbool0\"]'  , bool],\n   81:           ['steps[2].request.headers[\"headerint\"]'    , int],\n   82:           ['steps[2].request.headers[\"headerstring\"]' , str],\n   83:           ['steps[2].request.headers[\"headerfloat\"]'  , float],\n   84:           ['steps[2].request.body[\"bodybool0\"]'       , bool],\n   85:           ['steps[2].request.body[\"bodyint\"]'         , int],\n   86:           ['steps[2].request.body[\"bodystring\"]'      , str],\n   87:           ['steps[2].request.body[\"bodyfloat\"]'       , float],\n   88            )\n   89      def test_yaml_types(self, path_suffix, type):\n   ..\n  108          self.assertRaises(TypeError, Recipe, datamap)\n  109  \n  110:     @data('r.steps[3].request.headers',\n  111:           'r.steps[3].request.querystring',\n  112:           'r.steps[3].request.body',\n  113            'r.steps[3].options',\n  114          )\n\n66 matches across 5 files\n\n\nSearching 28 files for \"form\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\.coverage:\n    1: !coverage.py: This is a private format, don't read it directly!{\"arcs\": {\"/root/BPRC/bprc/__main__.py\": [], \"/root/BPRC/bprc/utils.py\": [[196, 199], [42, 43], [39, 40], [61, 62], [40, 41], [101, 111], [46, 47], [115, 131], [75, 78], [-3, 3], [54, 55], [95, 96], [199, -190], [16, 17], [184, 185], [52, 53], [11, 12], [88, 91], [6, 10], [25, 26], [28, 29], [82, 83], [131, 144], [3, 5], [27, 28], [36, 37], [17, 18], [12, 14], [37, 38], [195, 196], [204, 207], [41, 42], [14, 15], [157, 184], [111, 115], [50, 51], [55, 56], [68, 75], [33, 34], [22, 25], [53, 54], [47, 48], [20, 21], [45, 46], [30, 31], [209, -3], [43, 44], [18, 19], [79, 80], [96, -94], [203, 204], [10, 11], [5, 6], [-201, 203], [190, 201], [186, 190], [192, 193], [94, 101], [31, 32], [193, 194], [57, 58], [58, 59], [-190, 192], [-94, 95], [63, 64], [144, 157], [56, 57], [29, 30], [201, 209], [64, 68], [89, -88], [32, 33], [207, -201], [60, 61], [78, 79], [38, 39], [19, 20], [35, 36], [48, 49], [83, 88], [26, 27], [21, 22], [15, 16], [194, 195], [49, 50], [185, 186], [44, 45], [81, 82], [91, 94], [80, 81], [62, 63], [51, 52], [59, 60], [34, 35], [-88, 89]], \"/root/BPRC/bprc/outputprocessor.py\": [[17, 18], [22, 23], [20, 22], [5, 6], [-3, 3], [37, -27], [9, 10], [25, 27], [14, 15], [30, 37], [-27, 27], [28, 30], [23, 24], [3, 5], [16, 17], [8, 9], [6, 8], [12, 13], [19, 20], [10, 12], [27, 28], [24, 25], [13, 14], [18, 19], [15, 16], [27, -3]], \"/root/BPRC/bprc/stepprocessor.py\": [[23, 24], [62, 64], [74, 75], [61, 62], [64, 78], [33, 36], [72, 73], [30, 31], [-3, 3], [106, 107], [95, 96], [16, 17], [52, 119], [108, 91], [87, 88], [25, 26], [92, 93], [99, 92], [-43, 43], [91, 92], [27, 28], [36, 37], [19, 21], [97, 98], [37, 38], [13, 15], [6, 11], [15, 16], [105, 106], [114, 115], [96, 97], [90, 91], [43, 44], [17, 18], [111, 112], [102, 103], [112, 113], [38, -36], [98, 99], [101, 92], [115, 117], [79, 80], [22, 23], [5, 6], [88, 90], [104, 105], [18, 19], [46, 52], [31, 32], [36, 43], [82, 87], [-36, 36], [28, 30], [107, 101], [12, 13], [43, -3], [93, 94], [54, 60], [103, 104], [-52, 54], [32, 33], [113, 114], [44, 46], [60, 61], [290, -43], [73, 74], [-46, 48], [101, 102], [100, 101], [50, -46], [117, -52], [-64, 72], [11, 12], [93, 100], [3, 5], [48, 49], [75, -64], [94, 95], [21, 22], [91, 111], [119, 290], [49, 50], [24, 25], [81, 82], [80, 81], [78, 79], [92, 108], [26, 27]], \"/root/BPRC/bprc/variables.py\": [[-28, 29], [28, 31], [17, 19], [10, 11], [20, 22], [-25, 26], [19, -3], [5, 6], [37, -19], [31, 34], [-3, 3], [26, -25], [34, 37], [11, 12], [25, 28], [3, 5], [16, 17], [12, 15], [6, 7], [22, 25], [23, -22], [19, 20], [7, 10], [-19, 19], [-22, 23], [29, -28], [15, 16]], \"/root/BPRC/bprc/recipe.py\": [[253, -186], [-68, 69], [68, 71], [-116, 116], [202, 203], [37, -19], [-85, 86], [233, 234], [129, 130], [110, 111], [114, -111], [-3, 3], [148, 153], [215, 216], [223, 224], [192, -189], [-50, 51], [128, 129], [16, 17], [119, 120], [94, 97], [6, 7], [84, 85], [203, 204], [88, 91], [11, 12], [42, 44], [-22, 23], [153, 154], [112, 113], [130, 141], [105, 107], [176, 177], [141, 142], [159, 163], [-103, 104], [248, 192], [163, 164], [116, 123], [121, -118], [209, 210], [28, 31], [-47, 48], [20, 22], [124, 125], [118, -116], [-83, 83], [44, 47], [65, 68], [41, 42], [-118, 119], [242, 243], [-77, 78], [-65, 66], [41, 63], [243, 244], [-19, 19], [187, 189], [240, 241], [154, 159], [22, 25], [127, 128], [164, 169], [117, 118], [63, 83], [29, -28], [80, -63], [109, 110], [177, 184], [83, 84], [47, 50], [-111, 112], [238, 239], [-71, 72], [-186, 186], [15, 16], [192, 194], [85, 88], [-63, 63], [48, -47], [-28, 29], [206, 209], [19, 41], [10, 11], [120, 121], [126, 127], [113, 114], [5, 6], [100, 103], [97, 100], [104, 105], [184, -125], [69, -68], [-125, 126], [235, 238], [-123, 123], [66, -65], [50, 53], [-34, 35], [191, 192], [45, -44], [216, 223], [210, 215], [59, -41], [186, 187], [23, -22], [116, 117], [63, 64], [239, 240], [77, 80], [245, 248], [142, 147], [51, -50], [186, -3], [71, 74], [-109, 109], [86, -85], [109, 116], [57, -56], [231, 232], [78, -77], [-56, 57], [241, 242], [17, 19], [147, 148], [-25, 26], [232, 238], [196, 197], [74, 77], [224, 231], [-41, 41], [234, 235], [7, 10], [-44, 45], [190, 191], [31, 34], [26, -25], [34, 37], [107, -103], [19, 20], [125, -123], [25, 28], [3, 5], [64, 65], [169, 170], [12, 15], [197, 202], [189, 253], [244, 245], [205, 206], [170, 176], [56, 59], [103, -83], [-189, 190], [204, 205], [53, 56], [91, 94], [83, 109], [111, -109], [232, 233], [35, -34], [123, 124], [194, 196], [123, 186], [72, -71]], \"/root/BPRC/bprc/varprocessor.py\": [[32, 33], [6, 9], [10, 11], [40, 41], [5, 6], [-41, 41], [9, 10], [35, -33], [14, 15], [46, 47], [-3, 3], [-37, 40], [22, 23], [-33, 35], [23, 24], [27, 29], [17, 18], [11, 13], [42, -37], [31, -3], [41, 42], [48, 49], [15, 17], [33, 37], [21, 22], [19, 20], [24, 27], [29, 31], [49, -44], [-44, 46], [20, 21], [13, 14], [44, -31], [18, 19], [31, 32], [3, 5], [47, 48], [37, 44], [41, -41], [-31, 31]], \"/root/BPRC/bprc/cli.py\": [[48, 49], [49, 51], [17, 19], [22, 23], [59, 62], [58, 59], [28, 29], [53, 55], [26, 28], [56, 58], [9, 10], [62, 63], [39, 41], [14, 15], [38, 39], [11, 14], [-3, 3], [10, 11], [31, 32], [7, 9], [16, 17], [41, 42], [6, 7], [36, 38], [21, 22], [35, 36], [29, 31], [63, 65], [25, 26], [52, 53], [55, 56], [51, 52], [3, 6], [42, 48], [34, 35], [19, 21], [15, 16], [32, 34], [65, -3], [23, 25]], \"/root/BPRC/bprc/__init__.py\": [[-1, 1], [1, -1]], \"/root/BPRC/bprc/core.py\": [], \"/root/BPRC/bprc/_version.py\": [[-1, 1], [1, -1]]}}\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\setup.py:\n   84          # Indicate who your project is intended for\n   85          'Intended Audience :: Developers',\n   86:         'Intended Audience :: Information Technology',\n   87          'Intended Audience :: System Administrators',\n   88          'Operating System :: POSIX :: Linux',\n   ..\n  150  \n  151      # To provide executable scripts, use entry points in preference to the\n  152:     # \"scripts\" keyword. Entry points provide cross-platform support and allow\n  153:     # pip to create the appropriate form of executable for the target platform.\n  154      entry_points={\n  155          'console_scripts': ['bprc=bprc.__main__:main'],\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\cli.py:\n   23  protocolgroup=parser.add_argument_group(title=\"Protocol arguments\")\n   24  \n   25: parser.add_argument('--version', action='version', version='{} {}'.format(sys.argv[0],__version__),\n   26                      help='shows version number and exits')\n   27  \n   ..\n   32                      type=argparse.FileType('w'), default=sys.stdout)\n   33  \n   34: outputgroup.add_argument('--output-format', dest='outputformat', action='store',\n   35                      choices={'raw-all','raw-response','json'}, default='raw-response',\n   36:                     help='specifies output format, defaults to %(default)s')\n   37  \n   38  outputgroup.add_argument('--no-color', dest='nocolor', action='store_true', default=False,\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\core.py:\n   53          logging.basicConfig(\n   54          level=logleveldict[bprc.cli.args.loglevel],\n   55:         format='%(levelname)s:%(asctime)s: %(message)s',\n   56          handlers=[logging.NullHandler()]) # set up with a NullHandler\n   57      else:\n   ..\n   59          level=logleveldict[bprc.cli.args.loglevel],\n   60          filename=bprc.cli.args.logfile,\n   61:         format='%(levelname)s:%(asctime)s: %(message)s') #Use the standard FileHandler\n   62  \n   63  \n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\outputprocessor.py:\n   35  \n   36      # See http://stackoverflow.com/questions/20658572/python-requests-print-entire-http-request-raw\n   37:     def writeOutput(self, *, writeformat, writefile, req):\n   38:         \"\"\"Writes the output to the writefile in the format specified\"\"\"\n   39:         vlog(\"Generating output of step: \" + str(self.id) +\" \" + self.step.name + \". Format=\" + writeformat)\n   40  \n   41:         if writeformat == 'json':\n   42:             formatted_json = json.dumps(self.step.response.body,indent=4, sort_keys=True)\n   43              #colorise the json\n   44              if sys.stdout.isatty():\n   45:                 from pygments import highlight, lexers, formatters\n   46:                 colorful_json = highlight(formatted_json, lexers.JsonLexer(), formatters.TerminalFormatter())\n   47                  print(colorful_json, file=writefile)\n   48              else:\n   49:                 print(formatted_json, file=writefile)\n   50  \n   51              vlog(\"Wrote to \" + writefile.name)\n   52  \n   53:         else: # format is raw-(all|response)\n   54              printstepcolophon(self.step,id=self.id, file=writefile)\n   55  \n   ..\n   60                  colourful = sys.stdout.isatty()\n   61  \n   62:             if writeformat == 'raw-all': ## need to write the http resquest first.\n   63                  print(\"-- Request --\", file=writefile)\n   64                  printhttprequest(self.step, id=self.id, file=writefile, colourful=colourful)\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py:\n   53          \"\"\"prepares the step by substituting php-like constructs or variables in the step subtree of the passed recipe\"\"\"\n   54          vlog(\"Step parser initialised for step \" + str(self.stepid))\n   55:         # php_sub_pattern=re.compile(r'<%=(\\S+?)%>') #substitution pattern to find - of the form <%=some.var[\"blah\"]%>\n   56:         # var_sub_pattern=re.compile(r'<%!(\\S+?)%>')  #substitution pattern to find - of the form <%!somevar%>\n   57:         # file_sub_pattern=re.compile(r'<%f(\\S+?)%>')  #substitution pattern to find - of the form <%f./somefile.txt%>\n   58  \n   59          # these are teh functions to produce the substition for each regex type\n   ..\n  150  \n  151          #TODO: @OPTIMISATION (75) set gzip, deflate header\n  152:         #Sets up content header according to the format of the body.\n  153:         if 'request.body_format' in options:\n  154:             if options['request.body_format'] == 'form':   #form option passed, so must encode\n  155:                 bodyformat='form'\n  156:                 self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/x-www-form-urlencoded\"\n  157  \n  158              else: #defaults to json\n  159:                 bodyformat='json'\n  160                  self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/json\"\n  161          else:\n  162:             bodyformat='json' # if the option wasn't set at all, default to json too.\n  163              self.recipe.steps[self.stepid].request.headers[\"Content-type\"]=\"application/json\"\n  164  \n  ...\n  186          vlog(httpmethod.upper() + \" \" + self.recipe.steps[self.stepid].URL)\n  187          try:\n  188:             if bodyformat == 'json':\n  189                  r = requests.Request(httpmethod.lower(),\n  190                                        url,\n  ...\n  294          # get cli arguments and pass to the output processor\n  295  \n  296:         output.writeOutput(writeformat=bprc.cli.args.outputformat, writefile=bprc.cli.args.outputfile, req=req)\n  297  \n  298  \n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py:\n   18  import collections\n   19  import re\n   20: from pygments import highlight, lexers, formatters\n   21  from json import JSONDecoder\n   22  from json import JSONDecodeError\n   ..\n   28  \"201\": \"Created\",\n   29  \"202\": \"Accepted\",\n   30: \"203\": \"Non-Authoritative Information\",\n   31  \"204\": \"No Content\",\n   32  \"205\": \"Reset Content\",\n   ..\n   70          debug_hook(exception_type, exception, traceback)\n   71      else:\n   72:         print(\"{}: {}\".format(exception_type.__name__, exception))\n   73          #TODO: @TEST (40) try file=sys.stderr as an arg to print()\n   74  \n   ..\n   96      logging.info(msg)\n   97  \n   98: #TODO: @NTH (40) @LOGGING Add a debug and an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.\n   99  \n  100  #helper function to call logging.error and raise a RunTime error\n  ...\n  118          if step.request.querystring == {}:\n  119              print(step.httpmethod + \" \" + step.URL +\"?\" + urlencode(step.request.querystring),file=file)\n  120:             #print(highlight(step.httpmethod + \" \" + step.URL,lexers.HttpLexer(stripnl=True), formatters.TerminalFormatter()), file=file)\n  121          else:\n  122              print(step.httpmethod + \" \" + step.URL +\"?\" + urlencode(step.request.querystring),file=file)\n  ...\n  132          #print(highlight(\"HTTP/\"+str(step.response.httpversion/10) +\" \" +\n  133          #str(step.response.code) +\" \" +\n  134:         #httpstatuscodes[str(step.response.code)].upper(),lexers.HttpLexer(stripnl=True), formatters.TerminalFormatter()) ,file=file)\n  135          print(\"HTTP/\"+str(step.response.httpversion/10) +\" \" +\n  136          str(step.response.code) +\" \" +\n  ...\n  147      for key, val in od.items():\n  148          if colourful: #for now, does the same thing\n  149:             #print(highlight(key +\": \"+ val, lexers.TextLexer(stripnl=True), formatters.TerminalFormatter()), file=file)\n  150              print(key +\": \"+val, file=file)\n  151          else:\n  ...\n  174  \n  175      if colourful and isJsonPayload:\n  176:         print(highlight(printoutput,lexers.JsonLexer(),formatters.TerminalFormatter()),file=file)\n  177      else: #not JSON payload, and therefore, not colourful either\n  178          print(printoutput,file=file)\n  ...\n  181  \n  182  # define regex patterns.\n  183: php_sub_pattern=re.compile(r'<%=(\\S+?)%>') #substitution pattern to find - of the form <%=some.var[\"blah\"]%>\n  184: var_sub_pattern=re.compile(r'<%!(\\S+?)%>')  #substitution pattern to find - of the form <%!somevar%>\n  185: file_sub_pattern=re.compile(r'<%f(\\S+?)%>')  #substitution pattern to find - of the form <%f./somefile.txt%>\n  186  \n  187  ###### The three functions below are used to parse variables in the recipe.\n\n<untitled 284>:\n    9  6. bprc/stepprocessor.py:167                   @ERROR (25) @TEST check type of option parameter in try\n   10  7. bprc/utils.py:73                            @TEST (40) try file=sys.stderr as an arg to print()\n   11: 8. bprc/utils.py:98                            @NTH (40) @LOGGING Add a debug and an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.\n   12  9. tests/yaml_load_test.yml:80                 @TEST (40) check for case-sensitive field name -- JSON\n   13  10. tests/test_yaml_load.py:36                 @TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??\n\n56 matches across 8 files\n\n\nSearching 28 files for \"Response body is not\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py:\n  292              vlog(\"JSON parsed ok.\")\n  293          else:\n  294:             errlog(\"Response body is not JSON! Content-type: \" +response_content_type+\". Aborting\", None)\n  295  \n  296          return prepared\n\n1 match in 1 file\n\n\nSearching 28 files for \"Response body is not\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py:\n  292              vlog(\"JSON parsed ok.\")\n  293          else:\n  294:             errlog(\"Response body is not JSON! Content-type: \" +response_content_type+\". Aborting\", None)\n  295  \n  296          return prepared\n\n1 match in 1 file\n\n\nSearching 28 files for \"rfc\"\n\nC:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py:\n  143          self.assertEquals(eval('r.' + path_suffix),val)\n  144  \n  145: #TODO: @ERROR @TEST (10) for header comparisions, make case insensitive -- check the RFC!!\n  146  #TODO: @TEST dodgy Options passed.  Options type checking, etc. retries=int not string, etc...\n  147  #NOTE: @TEST (20) URL validity  == @WONTFIX allow requests to throw the error\n\n<untitled 284>:\n    2  \n    3  ## TODO (19)\n    4: 1. bprc/stepprocessor.py:8                     @ERROR @TEST (10) for header comparisions, make case insensitive -- check the RFC!!\n    5: 2. tests/yaml_load_test.yml:74                 @TEST (15) check for case-insensitive as per https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2\n    6  3. bprc/stepprocessor.py:175                   @ERROR (25) @TEST check type of option parameter in try\n    7  4. bprc/utils.py:73                            @TEST (40) try file=sys.stderr as an arg to print()\n\n4 matches across 2 files\n",
 			"settings":
 			{
-				"buffer_size": 492,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/cli.py",
-			"settings":
-			{
-				"buffer_size": 3040,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/stepprocessor.py",
-			"settings":
-			{
-				"buffer_size": 14073,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/outputprocessor.py",
-			"settings":
-			{
-				"buffer_size": 3562,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/utils.py",
-			"settings":
-			{
-				"buffer_size": 8275,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/recipe.py",
-			"settings":
-			{
-				"buffer_size": 9560,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "bprc/core.py",
-			"settings":
-			{
-				"buffer_size": 4755,
-				"line_ending": "Unix"
+				"buffer_size": 32493,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
@@ -541,10 +539,38 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 621.0,
-		"last_filter": "pack in",
+		"height": 181.0,
+		"last_filter": "upper",
 		"selected_items":
 		[
+			[
+				"upper",
+				"Convert Case: Upper Case"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"tod",
+				"TodoReview: Project Files"
+			],
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"to",
+				"TodoReview: Project and Open Files"
+			],
 			[
 				"pack in",
 				"Package Control: Install Package"
@@ -552,10 +578,6 @@
 			[
 				"pa",
 				"Package Control: Remove Package"
-			],
-			[
-				"pack",
-				"Package Control: Install Package"
 			],
 			[
 				"t",
@@ -570,24 +592,8 @@
 				"Package Control: Add Repository"
 			],
 			[
-				"packa",
-				"Package Control: Upgrade Package"
-			],
-			[
-				"to",
-				"TodoReview: Project and Open Files"
-			],
-			[
 				"shy",
 				"Set Syntax: Python3"
-			],
-			[
-				"todo",
-				"TodoReview: Project Files"
-			],
-			[
-				"tod",
-				"TodoReview: Project and Open Files"
 			],
 			[
 				"inde",
@@ -670,7 +676,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 934.0
+		"width": 959.0
 	},
 	"console":
 	{
@@ -694,47 +700,56 @@
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/docs",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples"
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests"
 	],
 	"file_history":
 	[
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/recipe.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/stepprocessor.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/variables.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/yaml_no_URL.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/yaml_no_steps.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/yaml_load_test.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/yaml_no_recipe.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/Makefile",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/recipe.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_URLs_methods.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_yaml_load.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/yaml_bad.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.coveragerc",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/outputprocessor.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/cli.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/__main__.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/setup.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.gitignore",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/utils.py",
+		"/C/Users/micro/AppData/Roaming/Sublime Text 3/Packages/TodoReview/TodoReview.sublime-settings",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/BPRC-project.sublime-project",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/test_oauth_login.yml",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/README.md",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/docs/YAML-format.md",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/utils.py",
+		"/C/Users/micro/AppData/Roaming/Sublime Text 3/Packages/User/TodoReview.sublime-settings",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/stepprocessor.py",
+		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/test_oauth_login.yml",
 		"/C/Users/micro/brad-mac-address.txt",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create_admin_api.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create_authenticate_api.yml",
 		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/bprc-scripts/create_all_apis.sh",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/requirements.txt",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/variables.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/stepprocessor.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/utils.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/recipe.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.gitignore",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_yaml_load.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_variable_parser.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/Makefile",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/tests/test_basic.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/core.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/cli.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/outputprocessor.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/varprocessor.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_recipe_prepare_and_parse.py",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/recipe.yml",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/build/lib/bprc/stepprocessor.py",
-		"/C/Users/micro/AppData/Roaming/Sublime Text 3/Packages/TodoReview/TodoReview.sublime-settings",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/tests/test_basic.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.travis.yml",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/.coveragerc",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/README.md",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/bootstrap.sh",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/setup.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bumpver.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/_version.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/Dockerfile",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/lorum.txt",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/recipe_httpbin.yml",
-		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/bprc/__main__.py",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create_consumer_api.yml",
 		"/C/Users/micro/DevOps/general-purpose-ubuntu/BPRC/examples/create-kong-config.yml",
 		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/bprc-scripts/create-kong-config.yml",
@@ -817,15 +832,7 @@
 		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test-oauth2-client-credentials-grant.sh",
 		"/C/Users/micro/Docker/Builds/ubuntu-dev/Dockerfile",
 		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test-oauth2-resource-owner-credentials-grant.sh",
-		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test_api_key_plus_hmac_plugins.sh",
-		"/C/Users/micro/Docker/Mountpoints/wiremock/__files/oauth_redirect_url.json",
-		"/C/Users/micro/Docker/Mountpoints/wiremock/mappings/oauth_redirect_url.json",
-		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/configure_kong.sh",
-		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test_api_key_plugin.sh",
-		"/C/Users/micro/Docker/Mountpoints/wiremock/mappings/hello.json",
-		"/C/Users/micro/Docker/Mountpoints/wiremock/__files/hello.json",
-		"/C/Program Files/Docker Toolbox/start.sh",
-		"/c/Program Files/Docker Toolbox/start.sh"
+		"/C/Users/micro/Docker/Mountpoints/ubuntu-dev/test_api_key_plus_hmac_plugins.sh"
 	],
 	"find":
 	{
@@ -855,6 +862,30 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"7",
+			"1",
+			"test_processor",
+			"processor",
+			"rfc",
+			"reuqest",
+			"request",
+			" =",
+			"KeyError",
+			"errlo",
+			"Response body is not",
+			"form",
+			"request.",
+			"options",
+			"urlparse",
+			"response",
+			"Could not parse YAML",
+			"request.querystring",
+			"\"])\n",
+			"querystring",
+			"header",
+			"qs",
+			"10",
+			"build",
 			"response",
 			"green",
 			"errlog",
@@ -958,31 +989,7 @@
 			"request",
 			"HTTPMethod",
 			"httpmethod",
-			"HTTPMethod",
-			"httpmethod",
-			"Header",
-			"Body",
-			"QueryString",
-			"errlog",
-			"e",
-			"protocolgorup",
-			"path_suffix",
-			"bod",
-			"body",
-			"AFTER PROCESSING LOOP",
-			"qs",
-			"querystring",
-			"_body",
-			"_headers",
-			"headers",
-			"datamap",
-			"httpMethod",
-			"queryString",
-			"SECURE_API_REQUEST_PATHS",
-			"echo_downstream",
-			"generator",
-			"SSL",
-			"signup"
+			"HTTPMethod"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1001,368 +1008,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "docs/YAML-format.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3731,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2984,
-								2984
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/MarkdownHighlighting/Markdown.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1445.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
-			]
-		},
-		{
 			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 1,
+					"buffer": 0,
+					"file": "tests/brad_temp_test.yml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3611,
+						"buffer_size": 165,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								896,
-								896
-							]
-						],
-						"settings":
-						{
-							"line_padding_bottom": 2,
-							"line_padding_top": 2,
-							"review_args":
-							{
-								"settings":
-								{
-									"exclude_folders":
-									[
-										"*.git*",
-										"dist",
-										"build",
-										".cache",
-										"bprc.egg-info"
-									]
-								}
-							},
-							"review_results":
-							{
-								"1039,1155":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 208,
-									"note": "OPTIMISATION, consider creating the session at the Recipe level, not",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1155,1297":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py",
-									"line": 91,
-									"note": "NTH do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1297,1398":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\core.py",
-									"line": 109,
-									"note": "ERROR HANDLING add try:'s around all the below calls.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1398,1523":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\outputprocessor.py",
-									"line": 34,
-									"note": "REFACTOR Rewrite this Output generatro to use the requests object for output.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1523,1645":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\recipe.py",
-									"line": 191,
-									"note": "NTH don't use vlog to test for the error condition -- it messes up the log",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1645,1751":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\recipe.py",
-									"line": 252,
-									"note": "NTH implement __str__ for all other objects in this module",
-									"patt": "todo",
-									"priority": 100
-								},
-								"175,287":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
-									"line": 252,
-									"note": "@NTH  (74)implement __str__ for all other objects in this module",
-									"patt": "todo",
-									"priority": 74
-								},
-								"1751,1878":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 8,
-									"note": "ERROR HANDLING make sure type casting works for boolean, int, string, float etc",
-									"patt": "todo",
-									"priority": 100
-								},
-								"1878,2006":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 9,
-									"note": "ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2006,2091":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 169,
-									"note": "check type of option parameter in try",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2091,2207":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\stepprocessor.py",
-									"line": 208,
-									"note": "OPTIMISATION, consider creating the session at the Recipe level, not",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2207,2324":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 13,
-									"note": "Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2324,2402":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 63,
-									"note": "TEST impement excecptions test",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2402,2522":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 69,
-									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2522,2589":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_basic.py",
-									"line": 110,
-									"note": "TEST add cli tests.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2589,2712":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 13,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2712,2779":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 85,
-									"note": "TEST add cli tests.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2779,2902":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
-									"line": 12,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"287,415":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
-									"line": 191,
-									"note": "(75) @NTH don't use vlog to test for the error condition -- it messes up the log",
-									"patt": "todo",
-									"priority": 75
-								},
-								"2902,2980":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
-									"line": 62,
-									"note": "TEST impement excecptions test",
-									"patt": "todo",
-									"priority": 100
-								},
-								"2980,3100":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\tests\\test_yaml_load.py",
-									"line": 68,
-									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3100,3223":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 13,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3223,3290":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py",
-									"line": 85,
-									"note": "TEST add cli tests.",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3290,3413":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
-									"line": 12,
-									"note": "TEST -Add mocking for some of these tests to make them smaller/less complex",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3413,3491":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
-									"line": 62,
-									"note": "TEST impement excecptions test",
-									"patt": "todo",
-									"priority": 100
-								},
-								"3491,3611":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
-									"line": 68,
-									"note": "TEST add a test for multiple docs in 1 YAML (using ---) -- reject this??",
-									"patt": "todo",
-									"priority": 100
-								},
-								"415,563":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\build\\lib\\bprc\\utils.py",
-									"line": 91,
-									"note": "@NTH (76) do a debug and an INFO version of vlog (parametrised) and make the default verbosity less.",
-									"patt": "todo",
-									"priority": 76
-								},
-								"563,699":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bumpver.py",
-									"line": 8,
-									"note": "@RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.",
-									"patt": "todo",
-									"priority": 99
-								},
-								"68,175":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\core.py",
-									"line": 113,
-									"note": "@ERROR-HANDLING (10) add try:'s around all the below calls.",
-									"patt": "todo",
-									"priority": 10
-								},
-								"699,826":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 8,
-									"note": "ERROR HANDLING make sure type casting works for boolean, int, string, float etc",
-									"patt": "todo",
-									"priority": 100
-								},
-								"826,954":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 9,
-									"note": "ERROR HANDLING for header comparisions, make case insensitive -- check the RFC!!",
-									"patt": "todo",
-									"priority": 100
-								},
-								"954,1039":
-								{
-									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
-									"line": 169,
-									"note": "check type of option parameter in try",
-									"patt": "todo",
-									"priority": 100
-								}
-							},
-							"selected_result": 5,
-							"syntax": "Packages/TodoReview/TodoReview.hidden-tmLanguage",
-							"todo_results": true,
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 13,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/recipe.yml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1467,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								42,
-								42
+								57,
+								57
 							]
 						],
 						"settings":
@@ -1378,89 +1041,90 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "README.md",
+					"buffer": 1,
+					"file": "bprc/core.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5974,
+						"buffer_size": 4737,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								415,
-								415
+								4324,
+								4315
 							]
 						],
 						"settings":
 						{
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/MarkdownHighlighting/Markdown.sublime-syntax",
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 95.0,
+						"translation.y": 2296.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "tests/yaml_load_test.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3246,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3000,
+								3000
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": false
+							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 324.0,
+						"translation.y": 2100.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": ".gitignore",
+					"buffer": 3,
+					"file": "bprc/utils.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1057,
+						"buffer_size": 8337,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								260,
-								260
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "setup.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5472,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1404,
-								1404
+								1782,
+								1782
 							]
 						],
 						"settings":
@@ -1473,126 +1137,27 @@
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 829.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "bprc/__main__.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 492,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								492,
-								492
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "bprc/cli.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3040,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1579,
-								1586
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 5,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 729.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "bprc/stepprocessor.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14073,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9779,
-								9802
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5477.0,
+						"translation.y": 1536.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "bprc/outputprocessor.py",
+					"buffer": 4,
+					"file": "bprc/varprocessor.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3562,
+						"buffer_size": 2286,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2967,
-								2967
+								1215,
+								1215
 							]
 						],
 						"settings":
@@ -1605,60 +1170,258 @@
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1134.0,
+						"translation.y": 375.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 7,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
 				{
-					"buffer": 10,
-					"file": "bprc/utils.py",
+					"buffer": 5,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8275,
+						"buffer_size": 2198,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6448,
-								6448
+								2198,
+								2198
+							]
+						],
+						"settings":
+						{
+							"line_padding_bottom": 2,
+							"line_padding_top": 2,
+							"review_args":
+							{
+								"settings":
+								{
+									"folder_exclude_patterns":
+									[
+										"*.git*",
+										"*dist*",
+										"*build*",
+										".cache",
+										"bprc.egg-info"
+									]
+								}
+							},
+							"review_results":
+							{
+								"1091,1219":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 162,
+									"note": "@DOCUMENTATION (70) document the fact that all keys must be in lowercase to work",
+									"patt": "todo",
+									"priority": 70
+								},
+								"1219,1331":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\recipe.py",
+									"line": 260,
+									"note": "@NTH  (74)implement __str__ for all other objects in this module",
+									"patt": "todo",
+									"priority": 74
+								},
+								"1331,1422":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 156,
+									"note": "@OPTIMISATION (90) set gzip, deflate header",
+									"patt": "todo",
+									"priority": 90
+								},
+								"1422,1521":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py",
+									"line": 73,
+									"note": "@TEST (90) try file=sys.stderr as an arg to print()",
+									"patt": "todo",
+									"priority": 90
+								},
+								"1521,1657":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bumpver.py",
+									"line": 8,
+									"note": "@RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.",
+									"patt": "todo",
+									"priority": 99
+								},
+								"157,270":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 158,
+									"note": "@TEST (20) URL validity @call() allow requests to throw the error",
+									"patt": "todo",
+									"priority": 20
+								},
+								"1657,1784":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 215,
+									"note": "(100) @NTH OPTIMISATION, consider creating the session at the Recipe level, not",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1784,1858":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_recipe_prepare_and_parse.py",
+									"line": 45,
+									"note": "@TEST (150) add cli tests.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1858,2010":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 157,
+									"note": "@TEST test dodgy Options passed in @call() tests. lower() on string options, type checking on ints, etc.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2010,2105":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\yaml_load_test.yml",
+									"line": 2,
+									"note": "@FEATURE add unicode support in the YAML. (120)",
+									"patt": "todo",
+									"priority": 100
+								},
+								"2118,2198":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 148,
+									"note": "Step Options list HERE! @options",
+									"patt": "note",
+									"priority": 100
+								},
+								"270,388":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\stepprocessor.py",
+									"line": 173,
+									"note": "@ERROR (25) Add a test for @TEST check type of option parameter in try",
+									"patt": "todo",
+									"priority": 25
+								},
+								"388,569":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py",
+									"line": 98,
+									"note": "@NTH (40) @LOGGING Add a debug and an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.",
+									"patt": "todo",
+									"priority": 40
+								},
+								"569,691":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\bprc\\utils.py",
+									"line": 155,
+									"note": "@REFACTOR (60) refactor all these print* functions -- too much copy/paste!",
+									"patt": "todo",
+									"priority": 60
+								},
+								"691,817":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 34,
+									"note": "@TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??",
+									"patt": "todo",
+									"priority": 70
+								},
+								"70,157":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_variable_parser.py",
+									"line": 30,
+									"note": "@TEST (20) Set up a stest for this one.",
+									"patt": "todo",
+									"priority": 20
+								},
+								"817,953":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 160,
+									"note": "@DOCUMENTATION (70) document handling of duplicate yaml keys (last one takes preference)",
+									"patt": "todo",
+									"priority": 70
+								},
+								"953,1091":
+								{
+									"file": "C:\\Users\\micro\\DevOps\\general-purpose-ubuntu\\BPRC\\tests\\test_yaml_load.py",
+									"line": 161,
+									"note": "@DOCUMENTATION (70) document handling of uknown options passed (last one takes preference)",
+									"patt": "todo",
+									"priority": 70
+								}
+							},
+							"syntax": "Packages/TodoReview/TodoReview.hidden-tmLanguage",
+							"todo_results": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "examples/recipe.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1467,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								980,
+								980
 							]
 						],
 						"settings":
 						{
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3969.0,
+						"translation.y": 75.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "bprc/recipe.py",
+					"buffer": 7,
+					"file": "tests/test_recipe_prepare_and_parse.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9560,
+						"buffer_size": 3256,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								515,
-								515
+								339,
+								339
 							]
 						],
 						"settings":
@@ -1674,24 +1437,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "bprc/core.py",
+					"buffer": 8,
+					"file": "tests/test_variable_parser.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4755,
+						"buffer_size": 2736,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2304,
-								2304
+								2310,
+								2316
 							]
 						],
 						"settings":
@@ -1704,14 +1467,765 @@
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1333.0,
+						"translation.y": 938.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 9,
+					"file": "tests/test_yaml_load.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7709,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7054,
+								7078
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3075.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 32493,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										250,
+										270
+									],
+									[
+										623,
+										631
+									],
+									[
+										662,
+										670
+									],
+									[
+										912,
+										920
+									],
+									[
+										994,
+										1002
+									],
+									[
+										1092,
+										1100
+									],
+									[
+										1313,
+										1320
+									],
+									[
+										1473,
+										1480
+									],
+									[
+										1604,
+										1611
+									],
+									[
+										1657,
+										1664
+									],
+									[
+										1688,
+										1695
+									],
+									[
+										1696,
+										1703
+									],
+									[
+										1779,
+										1786
+									],
+									[
+										1867,
+										1874
+									],
+									[
+										1960,
+										1967
+									],
+									[
+										2045,
+										2052
+									],
+									[
+										2124,
+										2131
+									],
+									[
+										2244,
+										2251
+									],
+									[
+										2530,
+										2537
+									],
+									[
+										2666,
+										2673
+									],
+									[
+										2676,
+										2683
+									],
+									[
+										2684,
+										2691
+									],
+									[
+										3016,
+										3023
+									],
+									[
+										3052,
+										3059
+									],
+									[
+										3143,
+										3150
+									],
+									[
+										3174,
+										3181
+									],
+									[
+										3257,
+										3264
+									],
+									[
+										3572,
+										3579
+									],
+									[
+										3599,
+										3606
+									],
+									[
+										3973,
+										3980
+									],
+									[
+										4014,
+										4021
+									],
+									[
+										4229,
+										4236
+									],
+									[
+										4260,
+										4267
+									],
+									[
+										4669,
+										4676
+									],
+									[
+										4723,
+										4730
+									],
+									[
+										4845,
+										4852
+									],
+									[
+										5141,
+										5148
+									],
+									[
+										5425,
+										5432
+									],
+									[
+										5553,
+										5560
+									],
+									[
+										6018,
+										6025
+									],
+									[
+										6186,
+										6193
+									],
+									[
+										6823,
+										6831
+									],
+									[
+										7094,
+										7102
+									],
+									[
+										7225,
+										7233
+									],
+									[
+										7679,
+										7687
+									],
+									[
+										7755,
+										7763
+									],
+									[
+										7824,
+										7832
+									],
+									[
+										8135,
+										8143
+									],
+									[
+										8215,
+										8223
+									],
+									[
+										8288,
+										8296
+									],
+									[
+										8440,
+										8448
+									],
+									[
+										8589,
+										8597
+									],
+									[
+										8685,
+										8693
+									],
+									[
+										8948,
+										8956
+									],
+									[
+										9141,
+										9149
+									],
+									[
+										9347,
+										9355
+									],
+									[
+										9485,
+										9493
+									],
+									[
+										9699,
+										9707
+									],
+									[
+										9763,
+										9771
+									],
+									[
+										9929,
+										9937
+									],
+									[
+										10143,
+										10151
+									],
+									[
+										10358,
+										10366
+									],
+									[
+										10502,
+										10510
+									],
+									[
+										10653,
+										10661
+									],
+									[
+										10832,
+										10840
+									],
+									[
+										10915,
+										10923
+									],
+									[
+										10991,
+										10999
+									],
+									[
+										11223,
+										11231
+									],
+									[
+										11244,
+										11252
+									],
+									[
+										11428,
+										11436
+									],
+									[
+										11535,
+										11543
+									],
+									[
+										11813,
+										11821
+									],
+									[
+										11885,
+										11893
+									],
+									[
+										12082,
+										12090
+									],
+									[
+										12247,
+										12255
+									],
+									[
+										12460,
+										12468
+									],
+									[
+										12899,
+										12907
+									],
+									[
+										13004,
+										13012
+									],
+									[
+										13088,
+										13096
+									],
+									[
+										13472,
+										13480
+									],
+									[
+										13738,
+										13746
+									],
+									[
+										13800,
+										13808
+									],
+									[
+										13862,
+										13870
+									],
+									[
+										13924,
+										13932
+									],
+									[
+										13986,
+										13994
+									],
+									[
+										14048,
+										14056
+									],
+									[
+										14110,
+										14118
+									],
+									[
+										14172,
+										14180
+									],
+									[
+										14234,
+										14242
+									],
+									[
+										14291,
+										14299
+									],
+									[
+										14348,
+										14356
+									],
+									[
+										14405,
+										14413
+									],
+									[
+										14654,
+										14662
+									],
+									[
+										14724,
+										14732
+									],
+									[
+										14793,
+										14801
+									],
+									[
+										14862,
+										14870
+									],
+									[
+										14933,
+										14941
+									],
+									[
+										15003,
+										15011
+									],
+									[
+										15072,
+										15080
+									],
+									[
+										15141,
+										15149
+									],
+									[
+										15212,
+										15220
+									],
+									[
+										15282,
+										15290
+									],
+									[
+										15351,
+										15359
+									],
+									[
+										15420,
+										15428
+									],
+									[
+										15643,
+										15651
+									],
+									[
+										15690,
+										15698
+									],
+									[
+										15741,
+										15749
+									],
+									[
+										15972,
+										15976
+									],
+									[
+										21735,
+										21739
+									],
+									[
+										22031,
+										22035
+									],
+									[
+										22097,
+										22101
+									],
+									[
+										22135,
+										22139
+									],
+									[
+										22451,
+										22455
+									],
+									[
+										22690,
+										22694
+									],
+									[
+										22711,
+										22715
+									],
+									[
+										22880,
+										22884
+									],
+									[
+										23195,
+										23199
+									],
+									[
+										23465,
+										23469
+									],
+									[
+										23792,
+										23796
+									],
+									[
+										23877,
+										23881
+									],
+									[
+										23989,
+										23993
+									],
+									[
+										24005,
+										24009
+									],
+									[
+										24044,
+										24048
+									],
+									[
+										24081,
+										24085
+									],
+									[
+										24303,
+										24307
+									],
+									[
+										24363,
+										24367
+									],
+									[
+										24399,
+										24403
+									],
+									[
+										24418,
+										24422
+									],
+									[
+										24545,
+										24549
+									],
+									[
+										24670,
+										24674
+									],
+									[
+										24878,
+										24882
+									],
+									[
+										25481,
+										25485
+									],
+									[
+										25608,
+										25612
+									],
+									[
+										25727,
+										25731
+									],
+									[
+										25983,
+										25987
+									],
+									[
+										26035,
+										26039
+									],
+									[
+										26099,
+										26103
+									],
+									[
+										26112,
+										26116
+									],
+									[
+										26122,
+										26126
+									],
+									[
+										26184,
+										26188
+									],
+									[
+										26192,
+										26196
+									],
+									[
+										26303,
+										26307
+									],
+									[
+										26398,
+										26402
+									],
+									[
+										26561,
+										26565
+									],
+									[
+										26875,
+										26879
+									],
+									[
+										27128,
+										27132
+									],
+									[
+										27155,
+										27159
+									],
+									[
+										27380,
+										27384
+									],
+									[
+										27559,
+										27563
+									],
+									[
+										27747,
+										27751
+									],
+									[
+										28051,
+										28055
+									],
+									[
+										28413,
+										28417
+									],
+									[
+										28432,
+										28436
+									],
+									[
+										28821,
+										28825
+									],
+									[
+										28840,
+										28844
+									],
+									[
+										29169,
+										29173
+									],
+									[
+										29188,
+										29192
+									],
+									[
+										29404,
+										29408
+									],
+									[
+										29423,
+										29427
+									],
+									[
+										29698,
+										29702
+									],
+									[
+										29815,
+										29819
+									],
+									[
+										29924,
+										29928
+									],
+									[
+										30448,
+										30452
+									],
+									[
+										30943,
+										30963
+									],
+									[
+										31300,
+										31320
+									],
+									[
+										31714,
+										31717
+									],
+									[
+										32084,
+										32087
+									],
+									[
+										32218,
+										32221
+									],
+									[
+										32226,
+										32229
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								32115,
+								32115
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 8,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ 	].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 18200.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
 					"file": "bumpver.py",
 					"semi_transient": false,
 					"settings":
@@ -1740,7 +2254,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -1748,7 +2262,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 35.0
+		"height": 33.0
 	},
 	"input":
 	{
@@ -1779,7 +2293,7 @@
 		"rows":
 		[
 			0.0,
-			0.139632968708,
+			0.491549318231,
 			1.0
 		]
 	},
@@ -1804,7 +2318,7 @@
 	"project": "BPRC-project.sublime-project",
 	"replace":
 	{
-		"height": 66.0
+		"height": 64.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1842,7 +2356,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 283.0,
+	"side_bar_width": 343.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

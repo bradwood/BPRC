@@ -1,0 +1,11 @@
+##URL mocked with requests-mock
+
+recipe:
+  -  # step 0
+    URL: http://mockbin.org/request
+  -
+    URL: http://brad.com
+    options:
+      request.retries: 3
+      request.body_format: json
+

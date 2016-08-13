@@ -32,7 +32,7 @@ parser.add_argument('outputfile', nargs='?', help=argparse.SUPPRESS, #help='spec
                     type=argparse.FileType('w'), default=sys.stdout)
 
 outputgroup.add_argument('--output-format', dest='outputformat', action='store',
-                    choices={'raw-all','raw-response','json'}, default='raw-response',
+                    choices={'raw-all','raw-response','json'}, default='raw-all',
                     help='specifies output format, defaults to %(default)s')
 
 outputgroup.add_argument('--no-color', dest='nocolor', action='store_true', default=False,

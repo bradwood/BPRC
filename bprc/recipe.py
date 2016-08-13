@@ -30,7 +30,7 @@ class Headers(collections.MutableMapping): #Make this class behave and look like
         lkey=key.lower()
         self._headers[lkey] = value
 
-    def __delitem__(self, key):
+    def __delitem__(self, key): # pragma: no cover
         lkey=key.lower()
         del self._headers[lkey]
 
@@ -53,7 +53,7 @@ class Body(collections.MutableMapping): #Make this class behave and look like a 
     def __setitem__(self, key, value):
         self._body[key] = value
 
-    def __delitem__(self, key):
+    def __delitem__(self, key):  # pragma: no cover
         del self._body[key]
 
     def __iter__(self):
@@ -74,7 +74,7 @@ class QueryString(collections.MutableMapping): #Make this class behave and look 
     def __setitem__(self, key, value):
         self._querystring[key] = value
 
-    def __delitem__(self, key):
+    def __delitem__(self, key):  # pragma: no cover
         del self._querystring[key]
 
     def __iter__(self):
@@ -94,7 +94,7 @@ class Options(collections.MutableMapping): #Make this class behave and look like
     def __setitem__(self, key, value):
         self._options[key] = value
 
-    def __delitem__(self, key):
+    def __delitem__(self, key):  # pragma: no cover
         del self._options[key]
 
     def __iter__(self):
@@ -103,7 +103,7 @@ class Options(collections.MutableMapping): #Make this class behave and look like
     def __len__(self):
         return len(self._options)
 
-    def __str__(self):
+    def __str__(self):  # pragma: no cover
         outstr = ''
         for key, value in sorted(self._options.items()):
             outstr += key+": " + str(value) +", "
@@ -258,7 +258,7 @@ class Recipe:
             vlog("Parsed recipe step " + str(i) + " (" + dmap["recipe"][i]["name"] + ") ok...")
 
     #TODO: @NTH  (74)implement __str__ for all other objects in this module
-    def __str__(self):
+    def __str__(self):   # pragma: no cover
         ret_str = ""
         for s in self.steps:
             ret_str += "Step= " + str(s)

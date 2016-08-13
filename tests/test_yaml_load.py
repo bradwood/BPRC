@@ -155,7 +155,6 @@ class SimpleTest(unittest.TestCase):
         r = Recipe(datamap)
         self.assertEquals(eval('r.' + path_suffix),val)
 
-#TODO: @Test (10) Header Key in-sensitivitiy
 #TODO: @TEST test dodgy Options passed in @call() tests. lower() on string options, type checking on ints, etc.
 #TODO: @TEST (20) URL validity @call() allow requests to throw the error
 #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.

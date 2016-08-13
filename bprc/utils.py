@@ -70,7 +70,6 @@ def exceptionHandler(exception_type, exception, traceback, debug_hook=sys.except
         debug_hook(exception_type, exception, traceback)
     else:
         print("{}: {}".format(exception_type.__name__, exception))
-        #TODO: @TEST (90) try file=sys.stderr as an arg to print()
 
 sys.excepthook = exceptionHandler
 
