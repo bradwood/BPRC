@@ -78,7 +78,7 @@ class SimpleTest(unittest.TestCase):
     @unpack
     @data(
               [
-               1, # step id being mocked
+               4, # step id being mocked
                200, # response code
                requests_mock.GET, # http method
                'http://two.com', # url / path to match

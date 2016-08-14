@@ -4,7 +4,13 @@ recipe:
 # test bad URLs
   -  # step 0
     URL: blah
-  -
+  -  # step 1
+    URL: ftp://blah
+  -  # step 2
+    URL: www.hostname.com
+  -  # step 3
+    URL: http://127.0.0.1/
+  -  # step 4
     URL: http://two.com
     options:
       request.retries: 3

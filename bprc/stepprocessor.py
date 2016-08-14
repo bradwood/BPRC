@@ -132,6 +132,12 @@ class StepProcessor():
             except ValueError as e:
                 errlog("Bad URL. Aborting...", e)
 
+        if (parse_object.scheme != 'http') and (parse_object.scheme != 'https'):
+            try:
+                raise ValueError("Couldn't find http(s) scheme in URL")
+            except ValueError as e:
+                errlog("Bad URL. Aborting...", e)
+
 
         #Set host header on the request.
         try:
