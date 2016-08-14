@@ -3,6 +3,7 @@ TO TEST:
  - error handling with bad URL
  - error handling with socket/timeout error
  - error handling with ssl ignoring
+ - missing content type on response
 
  Request stuff:
  - setting of explicit header
@@ -50,7 +51,37 @@ class SimpleTest(unittest.TestCase):
                0, # step id being mocked
                200, # response code
                requests_mock.GET, # http method
-               'http://one.com', # url / path to match
+               requests_mock.ANY, # was'blah', # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ]
+         )
+    @requests_mock.Mocker(kw='mock')
+    def test_bad_URLs(self, id, code, method, urlmatch, headers, json_body,**kwargs):
+        processor = StepProcessor(recipe=self.r, stepid=id, variables={})
+        self.r.steps[id] = processor.prepare()
+        kwargs['mock'].request(  # set up the mock
+                           method,
+                           urlmatch,
+                           status_code=code,
+                           headers=headers,
+                           json=json_body
+                           )
+
+        with self.assertRaises(ValueError):
+            prepared_statement = processor.call()
+
+        #self.assertEqual(self.r.steps[id].response.code, 200)
+
+
+
+    @unpack
+    @data(
+              [
+               1, # step id being mocked
+               200, # response code
+               requests_mock.GET, # http method
+               'http://two.com', # url / path to match
                {'content-type': 'application/json'}, # res headers
                {'msg': 'hello'} # res body
                ]
@@ -67,8 +98,7 @@ class SimpleTest(unittest.TestCase):
                            json=json_body
                            )
         prepared_statement = processor.call()
-
-        #self.assertEqual(prepared_statement.get_response('http://two.com'), 'a response')
+        self.assertEqual(self.r.steps[id].response.code, 200)
 
 
 

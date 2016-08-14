@@ -122,18 +122,24 @@ class StepProcessor():
         url = self.recipe.steps[self.stepid].URL
         options = self.recipe.steps[self.stepid].options
 
-
-        #Set host header on the request.
         from urllib.parse import urlparse
         parse_object = urlparse(url)
+
+
+        if parse_object.hostname is None:
+            try:
+                raise ValueError("Couldn't find hostname in URL")
+            except ValueError as e:
+                errlog("Bad URL. Aborting...", e)
+
 
         #Set host header on the request.
         try:
             vlog("Host: = " +self.recipe.steps[self.stepid].request.headers["Host"])
         except KeyError as ke:
-            from urllib.parse import urlparse
-            vlog("No Host header set, using host part of URL: " + urlparse(url).hostname)
-            self.recipe.steps[self.stepid].request.headers["Host"]=urlparse(url).hostname
+            #from urllib.parse import urlparse
+            vlog("No Host header set, using host part of URL: " + parse_object.hostname)
+            self.recipe.steps[self.stepid].request.headers["Host"] = parse_object.hostname
 
         #Set user agent header
         try:

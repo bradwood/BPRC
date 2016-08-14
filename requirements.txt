@@ -10,5 +10,3 @@ codecov
 coverage
 pygments
 requests_mock
-
-

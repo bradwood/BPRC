@@ -122,9 +122,12 @@ setup(
     # your project is installed. For an analysis of "install_requires" vs pip's
     # requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['pyyaml>=3.11',
+    install_requires=[
+                      'pyyaml>=3.11',
                       'requests>=2.10.0',
-                      'pygments>=2.1.3'],
+                      'pygments>=2.1.3',
+
+                      ],
 
     # List additional groups of dependencies here (e.g. development
     # dependencies). You can install these using the following syntax,

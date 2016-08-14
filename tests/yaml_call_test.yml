@@ -1,8 +1,9 @@
 ##URL mocked with requests-mock
 
 recipe:
+# test bad URLs
   -  # step 0
-    URL: http://one.com/
+    URL: blah
   -
     URL: http://two.com
     options:
