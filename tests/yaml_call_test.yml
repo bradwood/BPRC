@@ -2,9 +2,9 @@
 
 recipe:
   -  # step 0
-    URL: http://mockbin.org/request
+    URL: http://one.com/
   -
-    URL: http://brad.com
+    URL: http://two.com
     options:
       request.retries: 3
       request.body_format: json
