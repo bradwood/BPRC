@@ -1,18 +1,20 @@
 """
 TO TEST:
- - error handling with bad URL
- - error handling with socket/timeout error
- - error handling with ssl ignoring
- - missing content type on response
+ [x] error handling with bad URL
+ [-] http-codes (check for different numbers) - NOT TESTED
+ [ ] missing content-type header in the response.
+ [ ] error handling with socket/timeout error
+ [ ] error handling with ssl ignoring
+ [ ] missing content type on response
 
  Request stuff:
- - setting of explicit header
- - bad options passed (type, or unrecognised key or value)
- - default headers set okay (host, user-agent, others)
- - http method types (including weird ones)
- - http retries
- - http body (json and URL encode)
- - retry after 4xx or 5xx (option passed)
+ [ ] setting of explicit header
+ [ ] bad options passed (type, or unrecognised key or value)
+ [ ] default headers set okay (host, user[ ]agent, others)
+ [ ] http method types (including weird ones)
+ [ ] http retries
+ [ ] http body (json and URL encode)
+ [ ] retry after 4xx or 5xx (option passed)
 
 """
 
@@ -41,44 +43,31 @@ class SimpleTest(unittest.TestCase):
             self.yamldata=myfile.read()
         datamap=yaml.load(self.yamldata)
         self.r = Recipe(datamap)
-        #for i, step in enumerate(r.steps):
-        #    processor = StepProcessor(recipe=r, stepid=i, variables={})
-        #    r.steps[i] = processor.prepare()
 
-    @unpack
+
     @data(
-              [
-               0, # step id being mocked
-               200, # response code
-               requests_mock.GET, # http method
-               requests_mock.ANY, # was'blah', # url / path to match
-               {'content-type': 'application/json'}, # res headers
-               {'msg': 'hello'} # res body
-               ]
+              0, 1, 2, 3, 5, 6, 7, 8
          )
     @requests_mock.Mocker(kw='mock')
-    def test_bad_URLs(self, id, code, method, urlmatch, headers, json_body,**kwargs):
+    def test_bad_URLs(self, id,**kwargs):
         processor = StepProcessor(recipe=self.r, stepid=id, variables={})
         self.r.steps[id] = processor.prepare()
         kwargs['mock'].request(  # set up the mock
-                           method,
-                           urlmatch,
-                           status_code=code,
-                           headers=headers,
-                           json=json_body
+                           requests_mock.GET,
+                           requests_mock.ANY,
+                           status_code=200,
+                           headers={'content-type': 'application/json'},
+                           json={'msg': 'hello'}
                            )
 
         with self.assertRaises(ValueError):
             prepared_statement = processor.call()
 
-        #self.assertEqual(self.r.steps[id].response.code, 200)
-
-
 
     @unpack
     @data(
               [
-               4, # step id being mocked
+               9, # step id being mocked
                200, # response code
                requests_mock.GET, # http method
                'http://two.com', # url / path to match

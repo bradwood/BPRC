@@ -9,8 +9,19 @@ recipe:
   -  # step 2
     URL: www.hostname.com
   -  # step 3
-    URL: http://127.0.0.1/
+    URL: 127.0.0.1
   -  # step 4
+    URL: blah http://yahoo.com
+  -  # step 5
+    URL: ftp://blah/blah.txt
+  -  # step 6
+    URL: index.html
+  -  # step 7
+    URL: /files/info.html
+  -  # step 8
+    URL: 192.168.0.1:9000/info.html
+# end of bad URLs
+  -  # step 9
     URL: http://two.com
     options:
       request.retries: 3

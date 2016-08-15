@@ -283,7 +283,12 @@ class StepProcessor():
         if resp.status_code == 204 or resp.status_code == 205: # no content or reset content don't send any content
             response_content_type = ""
         else:
-            response_content_type = resp.headers['Content-type'].split(';')[0] # grabs the xxx/yyyy bit of the header
+            try:
+                response_content_type = resp.headers['Content-type'].split(';')[0] # grabs the xxx/yyyy bit of the header
+            except KeyError as ke:
+                errlog("Server sent content without content-type header. Cannot parse. Aborting...", ke)
+
+
         logging.debug(resp.text)
         logging.debug("Content-type:" + response_content_type)
         logging.debug("Encoding:" + str(resp.encoding))
