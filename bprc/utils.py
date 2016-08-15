@@ -94,7 +94,7 @@ def vlog(msg):
     verboseprint(msg)
     logging.info(msg)
 
-#TODO: @NTH (40) @LOGGING Add a debug and an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.
+#TODO: @NTH (40) @LOGGING Add a debug, WARNING an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.
 
 #helper function to call logging.error and raise a RunTime error
 def errlog(msg, e):

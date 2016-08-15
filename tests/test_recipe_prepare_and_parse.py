@@ -71,9 +71,5 @@ class SimpleTest(unittest.TestCase):
         self.assertEquals(eval('r.' + path_suffix),val)
 
 
-
-
-#TODO: @TEST (150) add cli tests.
-
 if __name__ == '__main__':
     unittest.main()

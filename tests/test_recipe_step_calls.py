@@ -360,11 +360,6 @@ class SimpleTest(unittest.TestCase):
         prepared_statement = processor.call()
         self.assertEqual(self.r.steps[id].httpmethod, method)
 
-
-
-
-
-
 #TODO: @TEST (150) add cli tests.
 
 if __name__ == '__main__':

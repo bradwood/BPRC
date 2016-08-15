@@ -65,40 +65,41 @@ This functionality is best illustrated with a complete recipe file as shown belo
 ```yaml
 --- #sample recipe
 variables:
-  name: brad
-  favourite_colour: red
-  age: 345
-  drinks_beer: true
-  age_and_colour: <%!age%>:<%!favourite_colour%>
-  lorumfile: <%f./examples/lorum.txt%>
+	name: brad
+	favourite_colour: red
+	age: 345
+	drinks_beer: true
+	age_and_colour: <%!age%>:<%!favourite_colour%>
+	lorumfile: <%f./examples/lorum.txt%>
 
 recipe:
-  -  # step0
-    name: Call Mockbin # see http://mockbin.org/docs#http-request
-    httpmethod: POST
-    # using the HTTP Basic auth process to see if the Authorization: header
-    # is visible in the output file.
-    URL: http://Aladdin:OpenSesame@mockbin.org/request/path/to/<%!name%>
-    request:
-      body:
-        name: My name is <%!name%>
-        age: I am <%!age%> years old.
-        beer_drinker: <%!drinks_beer%>
-        lorum_impsum: <%!lorumfile%>
-      querystring:
-        colors: blue, green,  <%!favourite_colour%>
-      headers:
-        X-info: <%!age_and_colour%>
-  - name: Call Mockbin with data from the previous call.
-    httpmethod: GET
-    options:
-      request.retries: 10  #set retries to 10, overriding the default of 3.
-    URL: http://mockbin.org/request/path/to/<%!name%>
-    request:
-      headers:
-        date_header_from_previous_call: <%=steps[0].response.headers["Date"]%>
-      body:
-        http_response_code_from_previous_call: <%=steps[0].response.code%>
+	-  # step0
+		name: Call Mockbin # see http://mockbin.org/docs#http-request
+		httpmethod: POST
+		# using the HTTP Basic auth process to see if the Authorization: header
+		# is visible in the output file.
+		URL: http://Aladdin:OpenSesame@mockbin.org/request/path/to/<%!name%>
+		request:
+			body:
+				name: My name is <%!name%>
+				age: I am <%!age%> years old.
+				beer_drinker: <%!drinks_beer%>
+				lorum_impsum: <%!lorumfile%>
+			querystring:
+				colors: blue, green,  <%!favourite_colour%>
+			headers:
+				X-info: <%!age_and_colour%>
+	- 
+		name: Call Mockbin with data from the previous call.
+		httpmethod: GET
+		options:
+			request.retries: 10  #set retries to 10, overriding the default of 3.
+		URL: http://mockbin.org/request/path/to/<%!name%>
+		request:
+			headers:
+				date_header_from_previous_call: <%=steps[0].response.headers["Date"]%>
+			body:
+				http_response_code_from_previous_call: <%=steps[0].response.code%>
 
 
 ```

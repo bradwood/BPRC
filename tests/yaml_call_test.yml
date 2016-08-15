@@ -26,7 +26,6 @@ recipe:
     options:
       request.retries: 7
       request.body_format: json
-# ssl test #TODO: @TEST Fix this (99)
   -  # step 10
     URL: https://two.com
     options:
@@ -63,6 +62,3 @@ recipe:
   -  # step 20 --- test HTTP methods
     URL: http://this.is.a.url.org/
     httpmethod: OPTIONS
-  -  # step 21 --- test HTTP methods
-    URL: http://this.is.a.url.org/
-    httpmethod: WHATEVER
