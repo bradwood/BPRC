@@ -158,10 +158,6 @@ class SimpleTest(unittest.TestCase):
 
 
 #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.
-#TODO: @DOCUMENTATION (70) document handling of duplicate yaml keys (last one takes preference)
-#TODO: @DOCUMENTATION (70) document handling of uknown options passed (last one takes preference)
-#TODO: @DOCUMENTATION (70) document the fact that all keys must be in lowercase to work
-
 
 if __name__ == '__main__':
     unittest.main()
