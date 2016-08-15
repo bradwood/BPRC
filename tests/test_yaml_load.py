@@ -8,6 +8,7 @@ import yaml
 from ddt import ddt, data, file_data, unpack
 from bprc.recipe import Recipe, Request, Response, Options, QueryString, Headers, Body
 from bprc.utils import *
+from bprc._version import __version__
 
 @ddt
 class SimpleTest(unittest.TestCase):
@@ -114,7 +115,7 @@ class SimpleTest(unittest.TestCase):
           ['steps[2].request.body'                    , Body],
           )
     def test_yaml_types(self, path_suffix, type):
-        """conducts misc value checks on the values passed in from the yaml on the Recipe object"""
+        """conducts misc type checks on the values passed in from the yaml on the Recipe object"""
         datamap=yaml.safe_load(self.yamldata)
         r = Recipe(datamap)
         self.assertIsInstance(eval('r.' + path_suffix),type)
@@ -155,8 +156,7 @@ class SimpleTest(unittest.TestCase):
         r = Recipe(datamap)
         self.assertEquals(eval('r.' + path_suffix),val)
 
-#TODO: @TEST test dodgy Options passed in @call() tests. lower() on string options, type checking on ints, etc.
-#TODO: @TEST (20) URL validity @call() allow requests to throw the error
+
 #TODO  @TEST (20) dicts/lists in a leaf element in the recipe.
 #TODO: @DOCUMENTATION (70) document handling of duplicate yaml keys (last one takes preference)
 #TODO: @DOCUMENTATION (70) document handling of uknown options passed (last one takes preference)

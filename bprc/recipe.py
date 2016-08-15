@@ -86,7 +86,10 @@ class QueryString(collections.MutableMapping): #Make this class behave and look 
 class Options(collections.MutableMapping): #Make this class behave and look like a dict
     """An collection of parameters passed options into a step"""
     def __init__(self, options):
-        self._options=options
+        if options is not None:
+            self._options=options
+        else:
+            self._options={}
 
     def __getitem__(self, key):
         return self._options[key]
@@ -193,11 +196,11 @@ class Recipe:
     #takes a datamap to initialise the data structure
     def __init__(self, dmap):
         if 'recipe' not in dmap: ## checks for a top-level 'recipe' entry in the yaml file
-            errlog("No 'recipe' found in YAML input. Aborting", KeyError)
+            errlog("No 'recipe' found in YAML input. Aborting", KeyError("Missing 'recipe'"))
             raise KeyError
 
         if not isinstance(dmap["recipe"], list): #checks that under the 'recipe' yaml element there is a lsit of stuff
-            errlog("Could not find any 'steps' in the recipe", TypeError)
+            errlog("Could not find any 'steps' in the recipe", TypeError("Missing 'step'"))
             raise TypeError
 
         self.steps = []

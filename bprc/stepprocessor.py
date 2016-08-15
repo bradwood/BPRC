@@ -308,7 +308,7 @@ class StepProcessor():
                 errlog("Failed to parse JSON response. Aborting", e)
             vlog("JSON parsed ok.")
         else:
-            errlog("Response body is not JSON! Content-type: " +response_content_type+". Aborting", Exception)
+            errlog("Response body is not JSON! Content-type: " +response_content_type+". Aborting", Exception("Non-JSON response not supported"))
 
         return prepared
 

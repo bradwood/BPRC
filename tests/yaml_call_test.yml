@@ -20,10 +20,24 @@ recipe:
     URL: /files/info.html
   -  # step 8
     URL: 192.168.0.1:9000/info.html
-# end of bad URLs
+# tests missing content-type header, request timeout and retries
   -  # step 9
     URL: http://two.com
     options:
-      request.retries: 3
+      request.retries: 7
       request.body_format: json
-
+# ssl test #TODO: @TEST Fix this (99)
+  -  # step 10
+    URL: https://two.com
+    options:
+      request.retries: 1
+  -  # step 11 --- test options element with bad options
+    URL: http://two.org/
+    options:
+      junk: should_be ignored
+      request.retries: rubbish
+  -  # step 12 --- test options element with no options
+    URL: http://two.org/
+    options:
+  -  # step 13 --- test default request-headers passed
+    URL: http://this.is.a.url.org/
