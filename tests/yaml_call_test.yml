@@ -41,3 +41,28 @@ recipe:
     options:
   -  # step 13 --- test default request-headers passed
     URL: http://this.is.a.url.org/
+# HTTP Method tests
+  -  # step 14 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: POST
+  -  # step 15 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: GET
+  -  # step 16 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: DELETE
+  -  # step 17 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: PUT
+  -  # step 18 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: PATCH
+  -  # step 19 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: HEAD
+  -  # step 20 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: OPTIONS
+  -  # step 21 --- test HTTP methods
+    URL: http://this.is.a.url.org/
+    httpmethod: WHATEVER

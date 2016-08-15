@@ -105,7 +105,5 @@ recipe:
         file_from_var: <%!dummypassword%>
         directfile_plus: dummy_password = <%f./tests/dummypassword.txt%>
         file_from_var_plus: dummy_password = <%!dummypassword%>
-  -  # step 8 --- test default request-headers passed
-    URL: http://this.is.a.url.org/
 
 

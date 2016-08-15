@@ -1,19 +1,17 @@
 """
 TO TEST:
  [x] error handling with bad URL
- [-] http-codes (check for different numbers) - NOT TESTED
+ [ ] http-codes (check for different numbers) - NOT TESTED (YET)
  [x] missing content-type response header aborts unless a 204 & 205 response code is returned
  [x] error handling with socket/timeout error
- NB: retries tested manually above by eyeballing the test output, but NOT (AUTOMATICALLY) TESTED
  [ ] error handling with ssl ignoring - NOT TESTED (YET)
 
- Request stuff:
- [x] setting of explicit header
+ [x] setting of request explicit headers
  [x] bad options passed (type, or unrecognised key or value)
- [x] default headers set okay (host, user-agent, others)
- [ ] http method types (including weird ones)
- [ ] http retries
- [ ] http body (json and URL encode)
+ [x] default request headers set okay (host, user-agent, others)
+ [x] http method types (including weird ones) -- Note, unknown methods deliberately passed through
+ [x] http retries -- MANUALLY TESTED ONLY (eyeball)
+ [ ] http response body (json and URL encode)
  [ ] retry after 4xx or 5xx (option passed)
 
 """
@@ -273,7 +271,7 @@ class SimpleTest(unittest.TestCase):
                ]
          )
     @requests_mock.Mocker(kw='mock')
-    def test_basic_call(self, id, code, method, urlmatch, headers, json_body,**kwargs):
+    def test_default_headers_set(self, id, code, method, urlmatch, headers, json_body,**kwargs):
         processor = StepProcessor(recipe=self.r, stepid=id, variables={})
         self.r.steps[id] = processor.prepare()
         kwargs['mock'].request(  # set up the mock
@@ -286,6 +284,83 @@ class SimpleTest(unittest.TestCase):
         prepared_statement = processor.call()
         self.assertEqual(self.r.steps[id].request.headers["user-agent"], 'bprc/'+__version__)
         self.assertEqual(self.r.steps[id].request.headers["host"], 'this.is.a.url.org')
+
+
+    @unpack
+    @data(
+              [
+               14, # step id being mocked
+               200, # response code
+               requests_mock.POST, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               200, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               16, # step id being mocked
+               200, # response code
+               requests_mock.DELETE, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               17, # step id being mocked
+               200, # response code
+               requests_mock.PUT, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               18, # step id being mocked
+               200, # response code
+               requests_mock.PATCH, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               19, # step id being mocked
+               200, # response code
+               requests_mock.HEAD, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               20, # step id being mocked
+               200, # response code
+               requests_mock.OPTIONS, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+
+         )
+    @requests_mock.Mocker(kw='mock')
+    def test_default_http_methods(self, id, code, method, urlmatch, headers, json_body,**kwargs):
+        processor = StepProcessor(recipe=self.r, stepid=id, variables={})
+        self.r.steps[id] = processor.prepare()
+        kwargs['mock'].request(  # set up the mock
+                           method,
+                           urlmatch,
+                           status_code=code,
+                           headers=headers,
+                           json=json_body
+                           )
+        prepared_statement = processor.call()
+        self.assertEqual(self.r.steps[id].httpmethod, method)
+
+
 
 
 
