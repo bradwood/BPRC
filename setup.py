@@ -86,6 +86,7 @@ setup(
         'Intended Audience :: Information Technology',
         'Intended Audience :: System Administrators',
         'Operating System :: POSIX :: Linux',
+        'Operating System :: MacOS :: MacOS X',
 
         'Topic :: Software Development :: Build Tools',
 
