@@ -36,7 +36,7 @@ from bprc.varprocessor import VarProcessor
 
 
 
-def main():
+def main():  # pragma: no cover
     """
     The main function.
     Pre-process args
