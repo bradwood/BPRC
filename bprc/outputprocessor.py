@@ -48,8 +48,6 @@ class OutputProcessor():
             else:
                 print(formatted_json, file=writefile)
 
-            vlog("Wrote to " + writefile.name)
-
         else: # format is raw-(all|response)
             printstepcolophon(self.step,id=self.id, file=writefile)
 
@@ -80,7 +78,6 @@ class OutputProcessor():
 
             if self.step.response.body:
                 printbody(self.step, id=self.id, file=writefile, http_part='response',  colourful=colourful)
-            # vlog("Appended output to " + writefile.name) 
 
 
 
