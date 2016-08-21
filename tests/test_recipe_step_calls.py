@@ -1,7 +1,7 @@
 """
 TO TEST:
  [x] error handling with bad URL
- [ ] http-codes (check for different numbers) - NOT TESTED (YET)
+ [x] http-codes (check for different numbers) 
  [x] missing content-type response header aborts unless a 204 & 205 response code is returned
  [x] error handling with socket/timeout error
  [ ] error handling with ssl ignoring - NOT TESTED (YET)
@@ -12,7 +12,7 @@ TO TEST:
  [x] http method types (including weird ones) -- Note, unknown methods deliberately passed through
  [x] http retries -- MANUALLY TESTED ONLY (eyeball)
  [ ] http response body (json and URL encode)
- [ ] retry after 4xx or 5xx (option passed)
+ [x] retry after 4xx or 5xx (option passed)
 
 """
 
@@ -35,7 +35,6 @@ from bprc.varprocessor import VarProcessor
 from bprc.variables import Variables
 from bprc.utils import *
 from bprc._version import __version__
-
 
 
 @ddt
@@ -359,6 +358,157 @@ class SimpleTest(unittest.TestCase):
                            )
         prepared_statement = processor.call()
         self.assertEqual(self.r.steps[id].httpmethod, method)
+
+    @unpack
+    @data(
+              [
+               15, # step id being mocked
+               200, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               14, # step id being mocked
+               201, # response code
+               requests_mock.POST, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               206, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+         )
+    @requests_mock.Mocker(kw='mock')
+    def test_non_error_http_response_codes(self, id, code, method, urlmatch, headers, json_body,**kwargs):
+        processor = StepProcessor(recipe=self.r, stepid=id, variables={})
+        self.r.steps[id] = processor.prepare()
+        kwargs['mock'].request(  # set up the mock
+                           method,
+                           urlmatch,
+                           status_code=code,
+                           headers=headers,
+                           json=json_body
+                           )
+        prepared_statement = processor.call()
+        self.assertEqual(self.r.steps[id].response.code, code)
+
+    @unpack
+    @data(
+            
+              [
+               15, # step id being mocked
+               401, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               404, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               500, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               410, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+
+         )
+    @requests_mock.Mocker(kw='mock')
+    def test_error_http_response_codes(self, id, code, method, urlmatch, headers, json_body,**kwargs):
+        processor = StepProcessor(recipe=self.r, stepid=id, variables={})
+        self.r.steps[id] = processor.prepare()
+        kwargs['mock'].request(  # set up the mock
+                           method,
+                           urlmatch,
+                           status_code=code,
+                           headers=headers,
+                           json=json_body
+                           )
+        with self.assertRaises(requests.exceptions.HTTPError):
+            prepared_statement = processor.call()
+
+
+    @unpack
+    @data(
+            
+              [
+               15, # step id being mocked
+               401, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               404, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               500, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+              [
+               15, # step id being mocked
+               410, # response code
+               requests_mock.GET, # http method
+               requests_mock.ANY, # url / path to match
+               {'content-type': 'application/json'}, # res headers
+               {'msg': 'hello'} # res body
+               ],
+
+         )
+    @requests_mock.Mocker(kw='mock')
+    def test_error_http_response_codes_suppressed(self, id, code, method, urlmatch, headers, json_body,**kwargs):
+        processor = StepProcessor(recipe=self.r, stepid=id, variables={})
+        self.r.steps[id] = processor.prepare()
+        kwargs['mock'].request(  # set up the mock
+                           method,
+                           urlmatch,
+                           status_code=code,
+                           headers=headers,
+                           json=json_body
+                           )
+
+        import bprc.cli
+        bprc.cli.args =  bprc.cli.parser.parse_args(['--skip-http-errors'])
+        print('4444444444444444444444444444444444' + str(vars(bprc.cli.args)))
+        prepared_statement = processor.call()
+        self.assertEqual(self.r.steps[id].response.code, code)
+
+
+
 
 #TODO: @TEST (150) add cli tests.
 

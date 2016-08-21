@@ -57,7 +57,6 @@ logtestgroup.add_argument('--log-file', dest='logfile', action='store', metavar=
 
 protocolgroup.add_argument('--skip-http-errors', dest='skiphttperrors', action='store_true',default=False,
                     help='moves to the next step if an HTTP 4xx or 5xx response code is returned')
-#ABOVE IMPLEMENTED
 
 protocolgroup.add_argument('--ignore-ssl', dest='ignoressl', action='store_true',default=False,
                     help='do not validate ssl certificates')

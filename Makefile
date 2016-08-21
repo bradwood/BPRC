@@ -10,6 +10,11 @@ test-coverage: init
 test: init
 	python3 -m unittest -v
 
+tests: test
+
+quiet-test: init
+	python3 -m unittest
+
 clean:
 	rm -f *.out.*
 	rm -f *.log
