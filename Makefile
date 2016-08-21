@@ -27,4 +27,8 @@ clean:
 pypi:
 	python3 setup.py register bdist upload
 
+pypi-wheel:
+	python3 setup.py register sdist bdist_wheel upload
+
+
 .PHONY:	test

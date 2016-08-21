@@ -15,27 +15,41 @@ If you're a Dev/DevOps engineer you may have been faced with a situation where y
 It relies on the excellent [Pygments](http://pygments.org/) and [Requests](http://docs.python-requests.org/en/master/) libraries.
 
 ## To install
-This is a Python application which is written in Python 3. It has only currently been tested on Linux (Ubuntu 14.04).
+This is a Python application which is written in Python 3. 
+
+It has only currently been tested on **Linux (Ubuntu 14.04)** and **MacOS X (El Capitan)**
 
 ### Pre-requisites
 Make sure you've installed Python 3 and Pip 3
+
+#### Ubuntu
 ```bash
-$ apt-get install -y python3
-$ apt-get install -y python3-pip
+$ apt-get install python3
+$ apt-get install python3-pip
+```
+#### Mac OS X
+On the mac you need [homebrew](http://brew.sh/) first. Then just install `python3`. The homebrew package ships with `pip3` so nothing additional should be required.
+
+```bash
+$ brew install python3
 ```
 
 ### Installation
-Install like this:
+Install like this on either Linux or Mac OS X:
+
 ```bash
 $ pip3 install bprc
 ```
-Or a tagged version directly from GitHub (as PyPI can sometimes be erratic)
+Or a tagged version directly from GitHub 
+
 ```bash
-$ pip3 install https://github.com/bradwood/BPRC/tarball/x.y.x # replace with version tag in GitHub, no tar.gz extension needed
+$ # replace x.y.z with GitHub version tag -- no tar.gz extension needed
+$ pip3 install https://github.com/bradwood/BPRC/tarball/x.y.x 
 ```
 
 ## How it works
 The recipe is specified in a single YAML file which describes:
+
  - A list of variables that are initialised at the top of the recipe for use in the steps below.
  - A list of ordered steps that comprise the recipe, each containing some or all of the below:
 	 - the URL that need to be visited
@@ -45,23 +59,29 @@ The recipe is specified in a single YAML file which describes:
 		 - `request.retries` - set to the number of retries to attempt on the step in question. Only works for non-mutating calls (e.g., GETs), defaults to 3.
 		 - `request.body_format` - can be set to `json` (default) or `form`. Will assemble the request body as either form-encoded or json and set the `Content-type:` header to `application/x-www-form-urlencoded` or `application/json` respectively.
 
-Additionally, the YAML recipe file supports the ability to grab data from any part of any of the HTTP requests or responses in earlier steps in the recipe and insert them into later steps using a PHP-like construct. For example, say I have a 10-step recipe specified and in step 7 I need to POST some data that I received in step 3's reponse. I can include a construct like this in any part of the YAML file: 
+Additionally, the YAML recipe file supports the ability to grab data from any part of any of the HTTP requests or responses in earlier steps in the recipe and insert them into later steps using a PHP-like construct. For example, say I have a 10-step recipe specified and in step 7 I need to POST some data that I received in step 3's reponse. I can include a construct like this in any part of the YAML file:
+
 ```
 <%=steps[3].response.body["id"]%>
 ```
+
 Assuming that step 3 did indeed contain a parameter called `id` in it's JSON response payload, this data will then be substituted in the specified part of step 10's request.
 
 The insertion of  variables anywhare in the recipe is done as shown:
+
 ```
 <%!varname%>
 ```
+
 Files can also be included into a recipe using a construct like this:
+
 ```
 <%f/path/to/file.txt%>
 ```
 
 ### Sample Recipe
 This functionality is best illustrated with a complete recipe file as shown below.
+
 ```yaml
 --- #sample recipe
 variables:
@@ -105,6 +125,7 @@ recipe:
 ```
 ## Other features
 `bprc` provides the following features:
+
  - robust logging support
  - saving output files as raw HTTP (response only, or both request and response) or JSON
  - SSL support (including the ability to ingore invalid server certificates)
@@ -112,12 +133,6 @@ recipe:
  - HTTP request bodies formatted either as JSON or form-encoded 
  - Pretty-printed output
 
-## Known issues/shortcomings
-The following are known areas for improvement:
-- poor tolerance of badly formatted YAML
-- `--dry-run` option not implemented
-- poor test coverage and test automation
-- only handles JSON in the response bodies, XML or ther payload types are not supported.
 
 ## Planned improvements
 - improving error handling
@@ -125,6 +140,7 @@ The following are known areas for improvement:
 - Implementing `--dry-run`
 - passing an entire payload, rather than just a single parameter, using a file include
 - setting a recipe variable via cli and/or environment variable
+- cleaning up the logging file format
 
 ## Contributing
 Contributions are welcome! Please fork, make your changes, add tests to cover your work and then raise a pull request.
