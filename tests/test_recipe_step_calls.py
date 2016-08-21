@@ -11,7 +11,7 @@ TO TEST:
  [x] default request headers set okay (host, user-agent, others)
  [x] http method types (including weird ones) -- Note, unknown methods deliberately passed through
  [x] http retries -- MANUALLY TESTED ONLY (eyeball)
- [ ] http response body (json and URL encode)
+ [ ] http request body (json and URL encode)
  [x] retry after 4xx or 5xx (option passed)
 
 """
@@ -503,7 +503,6 @@ class SimpleTest(unittest.TestCase):
 
         import bprc.cli
         bprc.cli.args =  bprc.cli.parser.parse_args(['--skip-http-errors'])
-        print('4444444444444444444444444444444444' + str(vars(bprc.cli.args)))
         prepared_statement = processor.call()
         self.assertEqual(self.r.steps[id].response.code, code)
 

@@ -80,7 +80,7 @@ class OutputProcessor():
 
             if self.step.response.body:
                 printbody(self.step, id=self.id, file=writefile, http_part='response',  colourful=colourful)
-            vlog("Appended output to " + writefile.name)
+            # vlog("Appended output to " + writefile.name) 
 
 
 

@@ -5,8 +5,6 @@ Misc utils and setup calls.
 import sys
 import os
 
-#TODO: testing todoreview
-
 
 # see http://stackoverflow.com/questions/16981921/relative-imports-in-python-3
 PACKAGE_PARENT = '..'
@@ -111,7 +109,7 @@ def errlog(msg, e):
 ## helper functions to print out bits of a step.
 def printstepcolophon(step,*,file, id):
     """Prints out the heading of the step to the output file"""
-    print("--- Step " + str(id) + ": " + step.name +" ---",file=file)
+    print("--- " + step.name +" ---",file=file)
 
 def printhttprequest(step,*,file, id, colourful):
     """Prints out the heading of the step to the output file"""
