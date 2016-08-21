@@ -40,7 +40,7 @@ recipe:
 </pre>
 
 ### Steps
-Each step must follow a defined structure in order to be processed properly, with some sections mandatory (like the `URL`) and other optional (like `headers`).
+Each step must follow a defined structure in order to be processed properly, with some sections mandatory (like the `URL`) and other optional (like `headers`). Steps are assigned a number, starting from 0.
 
 Each step can take the following elements as key-value pairs:
 
@@ -141,6 +141,102 @@ recipe:
 
 Note that `bprc` does not check for duplicate body parameters and will simply pass whatever is specified in the recipe in the request body. The body, by default, will be encoded as a JSON payload unless form body-encoding has been specified as an Option. **Nested JSON structures beyond a basic dictionary of key-value pairs are not currently supported (tested).**
 
-# Performing substitutions
+### Responses
 
-TBC
+As `bprc` processes through the steps in the recipe it creates response objects associated to each step that are then referenceable within later steps in the recipe. The schema of the response object structure is detailed below. In order to reference a variable in the response in a recipe step enclose it in a construct like this: `<%=variable%>`
+
+#### HTTP Response Code
+The HTTP response code (e.g., `200` for Okay) for step number `i` is accessible as:
+
+```python
+steps[i].response.code   # HTTP response code
+```
+#### HTTP Response Headers
+The HTTP response headers for step number `i` are accessible as a set of key-value pairs as shown in the below example:
+
+```python
+steps[i].response.headers['content-type']   # e.g. application/json
+```
+
+#### HTTP Response Body
+The HTTP response body is only parsed if it is valid JSON. `bprc` will parse the entire JSON structure, including primitive variable types (strings, numbers and booleans) as well as arrays (numbered lists) and dictionaries (key-value pairs). The system uses python's JSON parser and should be able parse well-formed JSON with arbitrarily nested structures formed from the above types.
+
+Here are some examples:
+
+```python
+# references the 'client_id' from the 0th item in an array called 
+# 'data' from step i in the recipe.
+steps[i].response.body["data"][0]["client_id"]   
+
+# references the 'id' field at the top level of the JSON response that
+# resulted from calling the endpoint in step 1
+steps[1].response.body["id"]
+
+```
+## Putting it all together
+Here is a recipe that incorporates all of the above functions. This is a real example that is used to configure the excellent open source API gateway  software, [Kong](http://getkong.org). 
+
+```yaml
+--- #Tests OAUTH2 logging in.
+variables:
+#Kong host variables
+  kong_host_name: kong
+  kong_admin_port: 8001
+  kong_api_port: 8443 #SSL only
+  kong_admin: <%!kong_host_name%>:<%!kong_admin_port%>
+  kong_api: <%!kong_host_name%>:<%!kong_api_port%> # SSL only
+  provision_key: <%f./provisionkey.txt%>
+
+#API variables
+  api_name: consumer
+  api_version: v1
+
+# name of Consumer Record in Kong
+  consumer_name: Some_Consumer
+  scope: <%!api_name%>
+  # the below was received from kong when the API was created.
+  consumer_api_provision_key: <%!provision_key%>
+# user credentials
+  auth_username: foo
+  auth_password: bar
+
+recipe:
+### THE FOLLOWING CALLS ARE JUST TO GET THE DATA NEEDED TO DO THE OAUTH DANCE.
+
+  -  # step 0 -- Set up call -- not part of the client OAUTH DANCE.
+    name: Get the client credentials # Note, normally, these would be provided manually.
+    httpmethod: GET
+    URL: http://<%!kong_admin%>/consumers/<%!consumer_name%>/oauth2
+    #The above returns client_id and client_secret, which will be used below.
+
+### NOW THE PROPER OAUTH2 DANCE STARTS.
+  -  # step 1
+    name: Try to autenticate
+    httpmethod: POST
+    URL: https://<%!kong_api%>/authenticate/<%!api_version%>
+    request:
+      body:
+      	 # returns an array with 1 item
+        client_id: <%=steps[0].response.body["data"][0]["client_id"]%> 
+        client_secret: <%=steps[0].response.body["data"][0]["client_secret"]%>
+        username: <%!auth_username%>
+        password: <%!auth_password%>
+  -  # step 2
+    name: Make the call that Authentication Service would make to get tokens
+    httpmethod: POST
+    URL: https://<%!kong_api%>/<%!api_name%>/<%!api_version%>/oauth2/token
+    options:
+    # sets the Content-type to application/x-www-form-urlencoded and 
+    # urlencodes the body instead of using JSON, as required by the OAUTH2 RFC
+      request.body_format: form 
+    request:
+      body:
+        grant_type: password
+        client_id: <%=steps[0].response.body["data"][0]["client_id"]%> # returns an array with 1 item
+        client_secret: <%=steps[0].response.body["data"][0]["client_secret"]%>
+        scope: <%!scope%>
+        authenticated_userid: <%!auth_username%>
+        provision_key: <%!consumer_api_provision_key%>
+
+```
+
