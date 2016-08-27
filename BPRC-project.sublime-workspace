@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"ass",
+				"assertRaises"
+			],
+			[
 				"Var",
 				"VarProcessor"
 			],
@@ -248,10 +252,6 @@
 				"excepthook"
 			],
 			[
-				"ass",
-				"assertIsNone"
-			],
-			[
 				"te",
 				"test_yaml_load"
 			],
@@ -435,7 +435,23 @@
 			"file": "bprc/core.py",
 			"settings":
 			{
-				"buffer_size": 4737,
+				"buffer_size": 4757,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "setup.py",
+			"settings":
+			{
+				"buffer_size": 5568,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/test_recipe_step_calls.py",
+			"settings":
+			{
+				"buffer_size": 19617,
 				"line_ending": "Unix"
 			}
 		},
@@ -448,11 +464,90 @@
 			}
 		},
 		{
+			"file": "bprc/cli.py",
+			"settings":
+			{
+				"buffer_size": 3016,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 496,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 5920,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/yaml_call_test.yml",
+			"settings":
+			{
+				"buffer_size": 1670,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/outputprocessor.py",
+			"settings":
+			{
+				"buffer_size": 3457,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "bprc/stepprocessor.py",
+			"settings":
+			{
+				"buffer_size": 15085,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "recipe:\n  -  # step 9\n    URL: http://mockbin.com/request\n    options:\n      request.retries: 7\n      request.body_format: json\n  ",
+			"file": "tests/_temp_brad_test.yml",
+			"file_size": 130,
+			"file_write_time": 131162632670000000,
+			"settings":
+			{
+				"buffer_size": 130,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 27 files for \"--\"\n\n/Users/brad/Code/BPRC/bumpver.py:\n   15  parser = argparse.ArgumentParser(description='Version bumper')\n   16  \n   17: parser.add_argument('-b','--bump', dest='bump', action='store',\n   18                      choices={'major','minor','patch'}, default='patch',\n   19                      help='defaults to %(default)s')\n   ..\n   34  # check if there are any unstaged changes. if there are, then exit\n   35  from subprocess import call, run, PIPE\n   36: result=run('expr $(git status --porcelain 2>/dev/null| egrep \"^(M| M)\" | wc -l)',\n   37              shell=True, universal_newlines=True, stdout=PIPE)\n   38  \n\n/Users/brad/Code/BPRC/setup.py:\n   63      url='https://github.com/bradwood/BPRC',\n   64  \n   65:     # download url -- use github\n   66      download_url ='https://github.com/bradwood/BPRC/tarball/' + verstr,\n   67  \n\n/Users/brad/Code/BPRC/bprc/cli.py:\n   23  protocolgroup=parser.add_argument_group(title=\"Protocol arguments\")\n   24  \n   25: parser.add_argument('--version', action='version', version='{} {}'.format(sys.argv[0],__version__),\n   26                      help='shows version number and exits')\n   27  \n   ..\n   32                      type=argparse.FileType('w'), default=sys.stdout)\n   33  \n   34: outputgroup.add_argument('--output-format', dest='outputformat', action='store',\n   35                      choices={'raw-all','raw-response','json'}, default='raw-all',\n   36                      help='specifies output format, defaults to %(default)s')\n   37  \n   38: outputgroup.add_argument('--no-color', dest='nocolor', action='store_true', default=False,\n   39                      help='turns off pretty printing for console output')\n   40  \n   41: logtestgroup.add_argument('-v', '--verbose', dest='verbose', action='store_true',\n   42                      help='verbose mode', default=False)\n   43  \n   44  #TODO implement dry run\n   45: # logtestgroup.add_argument('-d', '--dry-run', dest='dryrun', action='store_true',default=False,\n   46  #                     help='does everything except actually making any HTTP calls')\n   47  \n   48: logtestgroup.add_argument('--debug', dest='debug', action='store_true',default=False,\n   49                      help='turns on stacktrace dumps for exceptions')\n   50  \n   51: logtestgroup.add_argument('--log-level', dest='loglevel', action='store',default='none',\n   52                      choices={'none','critical','error','warning','info','debug'},\n   53                      help='sets logging level, defaults to %(default)s')\n   54  \n   55: logtestgroup.add_argument('--log-file', dest='logfile', action='store', metavar='logfile',\n   56                      default='bprc.log', help='specifies logfile, defaults to %(default)s')\n   57  \n   58: protocolgroup.add_argument('--skip-http-errors', dest='skiphttperrors', action='store_true',default=False,\n   59                      help='moves to the next step if an HTTP 4xx or 5xx response code is returned')\n   60  \n   61: protocolgroup.add_argument('--ignore-ssl', dest='ignoressl', action='store_true',default=False,\n   62                      help='do not validate ssl certificates')\n   63  \n\n/Users/brad/Code/BPRC/bprc/core.py:\n   62  \n   63  \n   64:     logging.info('----------------Initialising log----------------')\n   65  \n   66      #try to read in the file.\n   ..\n  100          vlog(\"Substituted \" + str(varname) + \"=\" + str(variables[varname]))\n  101  \n  102:     # now subsitute filenames -- note, I tried this in the above loop but go errors.\n  103      # probably safer to parse *all* varnames before trying with files anyway.\n  104      for varname, varval in variables.items():\n  105:         vlog(\"Commencing filename-- substitutions for variable \" + str(varname) + \"=\" + str(varval))\n  106          variables[varname] = varprocessor.fileparse(varval, variables)\n  107          vlog(\"Substituted filespec \" + str(varname) + \"=\" + str(variables[varname]))\n\n/Users/brad/Code/BPRC/bprc/outputprocessor.py:\n   61  \n   62              if writeformat == 'raw-all': ## need to write the http resquest first.\n   63:                 print(\"-- Request --\", file=writefile)\n   64                  printhttprequest(self.step, id=self.id, file=writefile, colourful=colourful)\n   65                  printheaders(self.step, id=self.id,file=writefile, http_part='request',  colourful=colourful)\n   ..\n   73                          self.step.request.body=req.body\n   74                      printbody(self.step, id=self.id, file=writefile, http_part='request',  colourful=colourful)\n   75:                 print(\"-- Response --\", file=writefile)\n   76  \n   77              # now write the response\n\n/Users/brad/Code/BPRC/bprc/stepprocessor.py:\n   70              vlog(\"Commencing \" + str(inputstring) + \" substitution with \" + substitfunc.__name__)\n   71              substituted_text, n = re.subn(partial(substitfunc, recipe=recipe, variables=variables),str(inputstring))\n   72:             vlog(\"Made -------------\"+ str(n) + \" substitutions resulting in \" + substituted_text)\n   73              return substituted_text\n   74  \n   ..\n  241  \n  242          except requests.exceptions.SSLError as ssle:\n  243:             errlog(\"Could not verify SSL certificate. Try the --ignore-ssl option\", ssle)\n  244          except requests.exceptions.ConnectionError as httpe:\n  245              errlog(\"Could not open HTTP connection. Network problem or bad URL?\", httpe)\n  ...\n  254  \n  255          #set the response code\n  256:         #and if it's 4xx or 5xx exist based on whether --ignore-http-errors were passed or not.\n  257          self.recipe.steps[self.stepid].response.code=resp.status_code\n  258          vlog(\"Received HTTP response code: \" + str(self.recipe.steps[self.stepid].response.code))\n  ...\n  263              verboseprint(msg)\n  264              if bprc.cli.args.skiphttperrors:\n  265:                 pass #vlog(\"--skip-http-errors passed. Ignoring error and proceeding...\")\n  266              else:\n  267                  try:\n  ...\n  270                      if bprc.cli.args.debug:\n  271                          print(\"Response body: \" + resp.text)\n  272:                     errlog(\"Got error HTTP response and --skip-http-errors not passed. Aborting\", e)\n  273  \n  274          #now grab the headers and load them into the response.headers\n\n/Users/brad/Code/BPRC/bprc/utils.py:\n   84  \n   85  \n   86: #sets up a print function for the --verbose argument\n   87  def vprint(arg):\n   88      print(arg, file=sys.stderr)\n   ..\n  110  def printstepcolophon(step,*,file, id):\n  111      \"\"\"Prints out the heading of the step to the output file\"\"\"\n  112:     print(\"--- Step \" + str(id) + \": \" + step.name +\" ---\",file=file)\n  113  \n  114  def printhttprequest(step,*,file, id, colourful):\n  ...\n  152              print(key +\": \"+val, file=file)\n  153  \n  154: #TODO: @REFACTOR (60) refactor all these print* functions -- too much copy/paste!\n  155  \n  156  def printbody(step,*,file, id,http_part, colourful):\n\n/Users/brad/Code/BPRC/tests/test_output.py:\n   57                             )\n   58          import bprc.cli\n   59:         # bprc.cli.args =  bprc.cli.parser.parse_args(['--skip-http-errors'])\n   60          \n   61          from unittest.mock import patch\n   ..\n   64          with patch('sys.stdout', new=StringIO()) as fake_std_out:\n   65              # self.assertEqual(self.r.steps[id].response.code, 200)\n   66:             self.assertEqual(fake_std_out.getvalue(), '-- Step')\n   67  \n   68  if __name__ == '__main__':\n\n/Users/brad/Code/BPRC/tests/test_recipe_step_calls.py:\n   10   [x] bad options passed (type, or unrecognised key or value)\n   11   [x] default request headers set okay (host, user-agent, others)\n   12:  [x] http method types (including weird ones) -- Note, unknown methods deliberately passed through\n   13:  [x] http retries -- MANUALLY TESTED ONLY (eyeball)\n   14   [ ] http request body (json and URL encode)\n   15   [x] retry after 4xx or 5xx (option passed)\n   ..\n  503  \n  504          import bprc.cli\n  505:         bprc.cli.args =  bprc.cli.parser.parse_args(['--skip-http-errors'])\n  506          prepared_statement = processor.call()\n  507          self.assertEqual(self.r.steps[id].response.code, code)\n\n/Users/brad/Code/BPRC/tests/test_variable_parser.py:\n   16           \"\"\"Sets up the YAML data.\"\"\"\n   17           self.yamldata=\"\"\"\n   18: --- #sample recipe\n   19  variables:\n   20    name: brad\n   ..\n   24    floater: 343.55\n   25    numjoin: <%!age%>:<%!floater%>\n   26:   multi-way-join: <%!age%>:<%!favourite_colour%> -- <%!age%>:<%!floater%>\n   27  \n   28    age_and_colour: <%!age%>:<%!favourite_colour%>\n   ..\n   39            ['testnull', None],\n   40            ['numjoin', \"345:343.55\"],\n   41:           ['multi-way-join', \"345:red -- 345:343.55\"],\n   42            )\n   43      def test_varprocessor_parse_values(self,varname,varval):\n\n/Users/brad/Code/BPRC/tests/test_yaml_load.py:\n   33          r = Recipe(datamap)\n   34          self.assertIsInstance(r,Recipe)\n   35:         #TODO: @TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??\n   36  \n   37      @unpack\n\n<untitled 67>:\n    3  ## TODO (10)\n    4  1. bprc/utils.py:97                      @NTH (40) @LOGGING Add a debug, WARNING an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.\n    5: 2. bprc/utils.py:154                     @REFACTOR (60) refactor all these print* functions -- too much copy/paste!\n    6: 3. tests/test_yaml_load.py:35            @TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??\n    7  4. bprc/recipe.py:263                    @NTH  (74)implement __str__ for all other objects in this module\n    8  5. bprc/stepprocessor.py:168             @OPTIMISATION (90) set gzip, deflate header @DOCUMENTATION\n\n62 matches across 12 files\n\n\nSearching 27 files for \"-- Ste\"\n\n/Users/brad/Code/BPRC/bprc/utils.py:\n  110  def printstepcolophon(step,*,file, id):\n  111      \"\"\"Prints out the heading of the step to the output file\"\"\"\n  112:     print(\"--- Step \" + str(id) + \": \" + step.name +\" ---\",file=file)\n  113  \n  114  def printhttprequest(step,*,file, id, colourful):\n\n/Users/brad/Code/BPRC/tests/test_output.py:\n   64          with patch('sys.stdout', new=StringIO()) as fake_std_out:\n   65              # self.assertEqual(self.r.steps[id].response.code, 200)\n   66:             self.assertEqual(fake_std_out.getvalue(), '-- Step')\n   67  \n   68  if __name__ == '__main__':\n\n2 matches across 2 files\n",
+			"settings":
+			{
+				"buffer_size": 10535,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
 			"file": "bprc/utils.py",
 			"settings":
 			{
-				"buffer_size": 8275,
+				"buffer_size": 8253,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "// Sunday 08/21/16 at 11:57PM - 57 files in 0.47 secs\n\n## TODO (10)\n1. bprc/utils.py:97                      @NTH (40) @LOGGING Add a debug, WARNING an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.\n2. bprc/utils.py:154                     @REFACTOR (60) refactor all these print* functions -- too much copy/paste!\n3. tests/test_yaml_load.py:35            @TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??\n4. bprc/recipe.py:263                    @NTH  (74)implement __str__ for all other objects in this module\n5. bprc/stepprocessor.py:168             @OPTIMISATION (90) set gzip, deflate header @DOCUMENTATION\n6. BPRC/bumpver.py:8                     @RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.\n7. tests/test_recipe_step_calls.py:183   @TEST - fix ssl mocking (99)\n8. bprc/stepprocessor.py:226             (100) @NTH OPTIMISATION, consider creating the session at the Recipe level, not\n9. tests/test_recipe_step_calls.py:512   @TEST (150) add cli tests.\n10. tests/yaml_load_test.yml:2           @FEATURE add unicode support in the YAML. (120)\n",
+			"settings":
+			{
+				"buffer_size": 1168,
+				"line_ending": "Unix",
+				"name": "TodoReview",
+				"scratch": true
 			}
 		},
 		{
@@ -480,10 +575,10 @@
 			}
 		},
 		{
-			"file": "tests/test_recipe_step_calls.py",
+			"file": "tests/test_output.py",
 			"settings":
 			{
-				"buffer_size": 13834,
+				"buffer_size": 4429,
 				"line_ending": "Unix"
 			}
 		},
@@ -492,14 +587,6 @@
 			"settings":
 			{
 				"buffer_size": 2736,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "tests/test_yaml_load.py",
-			"settings":
-			{
-				"buffer_size": 7234,
 				"line_ending": "Unix"
 			}
 		},
@@ -519,13 +606,13 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 187.0,
+		"height": 167.0,
 		"last_filter": "todo",
 		"selected_items":
 		[
 			[
 				"todo",
-				"TodoReview: Project and Open Files"
+				"TodoReview: Project Files"
 			],
 			[
 				"pack",
@@ -660,7 +747,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 523.0
+		"width": 491.0
 	},
 	"console":
 	{
@@ -683,10 +770,15 @@
 	[
 		"/Users/brad/Code/BPRC",
 		"/Users/brad/Code/BPRC/bprc",
+		"/Users/brad/Code/BPRC/docs",
+		"/Users/brad/Code/BPRC/examples",
 		"/Users/brad/Code/BPRC/tests"
 	],
 	"file_history":
 	[
+		"/Users/brad/Code/BPRC/docs/YAML-format.md",
+		"/Users/brad/Code/BPRC/.coveragerc",
+		"/Users/brad/Code/BPRC/tests/test_yaml_load.py",
 		"/Users/brad/Code/general-purpose-ubuntu/bootstrap.sh",
 		"/Users/brad/Code/BPRC/BPRC-project.sublime-project",
 		"/Users/brad/Library/Application Support/Sublime Text 3/Packages/TodoReview/TodoReview.sublime-settings",
@@ -811,14 +903,11 @@
 		"/C/Users/micro/Docker/docker-kong/Mountpoints/ubuntu-dev/specs/create_api.py",
 		"/C/Users/micro/DevOps/kubernetes-test/user-data.etcd-hosts",
 		"/C/Users/micro/DevOps/kubernetes-test/user-data.minions",
-		"/C/Users/micro/DevOps/kubernetes-test/config.rb",
-		"/C/Users/micro/DevOps/kubernetes-test/Vagrantfile",
-		"/C/Users/micro/.editorconfig",
-		"/C/Users/micro/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings"
+		"/C/Users/micro/DevOps/kubernetes-test/config.rb"
 	],
 	"find":
 	{
-		"height": 58.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -844,6 +933,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"JSON",
+			"-- Ste",
+			"--",
 			"7",
 			"1",
 			"test_processor",
@@ -968,10 +1060,7 @@
 			"headers",
 			"logging.debug",
 			"Request",
-			"request",
-			"HTTPMethod",
-			"httpmethod",
-			"HTTPMethod"
+			"request"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -990,7 +1079,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 13,
 			"sheets":
 			[
 				{
@@ -999,15 +1088,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4737,
+						"buffer_size": 4757,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4324,
-								4315
+								1204,
+								1204
 							]
 						],
 						"settings":
@@ -1020,14 +1109,75 @@
 							"trim_trailing_white_space_on_save": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1384.0,
+						"translation.y": 981.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "setup.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2722,
+								2722
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1581.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "tests/test_recipe_step_calls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19617,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13593,
+								13593
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/Python 3/Python3.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4850.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 3,
 					"file": "tests/yaml_load_test.yml",
 					"semi_transient": false,
 					"settings":
@@ -1052,20 +1202,167 @@
 							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
 						},
+						"translation.x": 1.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "bprc/cli.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3016,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1066,
+								1075
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 5,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 264.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 496,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								462,
+								462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "bprc/utils.py",
+					"buffer": 6,
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8275,
+						"buffer_size": 5920,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1511,
+								1511
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "tests/yaml_call_test.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1670,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								552,
+								552
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 474.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "bprc/outputprocessor.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3457,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1834,
+								1834
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 659.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "bprc/stepprocessor.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15085,
 						"regions":
 						{
 						},
@@ -1078,12 +1375,499 @@
 						],
 						"settings":
 						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4511.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "tests/_temp_brad_test.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 130,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								57,
+								57
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10535,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										174,
+										176
+									],
+									[
+										513,
+										515
+									],
+									[
+										760,
+										762
+									],
+									[
+										1008,
+										1010
+									],
+									[
+										1284,
+										1286
+									],
+									[
+										1553,
+										1555
+									],
+									[
+										1746,
+										1748
+									],
+									[
+										1939,
+										1941
+									],
+									[
+										2134,
+										2136
+									],
+									[
+										2311,
+										2313
+									],
+									[
+										2583,
+										2585
+									],
+									[
+										2788,
+										2790
+									],
+									[
+										3016,
+										3018
+									],
+									[
+										3238,
+										3240
+									],
+									[
+										3240,
+										3242
+									],
+									[
+										3242,
+										3244
+									],
+									[
+										3244,
+										3246
+									],
+									[
+										3246,
+										3248
+									],
+									[
+										3248,
+										3250
+									],
+									[
+										3250,
+										3252
+									],
+									[
+										3252,
+										3254
+									],
+									[
+										3270,
+										3272
+									],
+									[
+										3272,
+										3274
+									],
+									[
+										3274,
+										3276
+									],
+									[
+										3276,
+										3278
+									],
+									[
+										3278,
+										3280
+									],
+									[
+										3280,
+										3282
+									],
+									[
+										3282,
+										3284
+									],
+									[
+										3284,
+										3286
+									],
+									[
+										3468,
+										3470
+									],
+									[
+										3701,
+										3703
+									],
+									[
+										4115,
+										4117
+									],
+									[
+										4126,
+										4128
+									],
+									[
+										4582,
+										4584
+									],
+									[
+										4594,
+										4596
+									],
+									[
+										4972,
+										4974
+									],
+									[
+										4974,
+										4976
+									],
+									[
+										4976,
+										4978
+									],
+									[
+										4978,
+										4980
+									],
+									[
+										4980,
+										4982
+									],
+									[
+										4982,
+										4984
+									],
+									[
+										5242,
+										5244
+									],
+									[
+										5548,
+										5550
+									],
+									[
+										5901,
+										5903
+									],
+									[
+										6204,
+										6206
+									],
+									[
+										6429,
+										6431
+									],
+									[
+										6653,
+										6655
+									],
+									[
+										6696,
+										6698
+									],
+									[
+										6907,
+										6909
+									],
+									[
+										7174,
+										7176
+									],
+									[
+										7475,
+										7477
+									],
+									[
+										7776,
+										7778
+									],
+									[
+										7854,
+										7856
+									],
+									[
+										8097,
+										8099
+									],
+									[
+										8382,
+										8384
+									],
+									[
+										8566,
+										8568
+									],
+									[
+										8787,
+										8789
+									],
+									[
+										9100,
+										9102
+									],
+									[
+										9105,
+										9107
+									],
+									[
+										9471,
+										9473
+									],
+									[
+										9600,
+										9602
+									],
+									[
+										9605,
+										9607
+									],
+									[
+										10079,
+										10085
+									],
+									[
+										10457,
+										10463
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								9872,
+								9872
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 2,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ 	].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3375.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "bprc/utils.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8253,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3161,
+								3161
+							]
+						],
+						"settings":
+						{
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
 							"syntax": "Packages/Python 3/Python3.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1423.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1168,
+								1168
+							]
+						],
+						"settings":
+						{
+							"line_padding_bottom": 2,
+							"line_padding_top": 2,
+							"review_args":
+							{
+								"settings":
+								{
+									"folder_exclude_patterns":
+									[
+										"*.git*",
+										"*dist*",
+										"*build*",
+										".cache",
+										"bprc.egg-info"
+									]
+								}
+							},
+							"review_results":
+							{
+								"1011,1079":
+								{
+									"file": "/Users/brad/Code/BPRC/tests/test_recipe_step_calls.py",
+									"line": 512,
+									"note": "@TEST (150) add cli tests.",
+									"patt": "todo",
+									"priority": 100
+								},
+								"1079,1168":
+								{
+									"file": "/Users/brad/Code/BPRC/tests/yaml_load_test.yml",
+									"line": 2,
+									"note": "@FEATURE add unicode support in the YAML. (120)",
+									"patt": "todo",
+									"priority": 100
+								},
+								"248,364":
+								{
+									"file": "/Users/brad/Code/BPRC/bprc/utils.py",
+									"line": 154,
+									"note": "@REFACTOR (60) refactor all these print* functions -- too much copy/paste!",
+									"patt": "todo",
+									"priority": 60
+								},
+								"364,484":
+								{
+									"file": "/Users/brad/Code/BPRC/tests/test_yaml_load.py",
+									"line": 35,
+									"note": "@TEST (70) add a test for multiple docs in 1 YAML (using ---) -- reject this??",
+									"patt": "todo",
+									"priority": 70
+								},
+								"484,590":
+								{
+									"file": "/Users/brad/Code/BPRC/bprc/recipe.py",
+									"line": 263,
+									"note": "@NTH  (74)implement __str__ for all other objects in this module",
+									"patt": "todo",
+									"priority": 74
+								},
+								"590,690":
+								{
+									"file": "/Users/brad/Code/BPRC/bprc/stepprocessor.py",
+									"line": 168,
+									"note": "@OPTIMISATION (90) set gzip, deflate header @DOCUMENTATION",
+									"patt": "todo",
+									"priority": 90
+								},
+								"68,248":
+								{
+									"file": "/Users/brad/Code/BPRC/bprc/utils.py",
+									"line": 97,
+									"note": "@NTH (40) @LOGGING Add a debug, WARNING an INFO version of vlog (parametrised) review all vlog/debug calls to make consistent format, etc.",
+									"patt": "todo",
+									"priority": 40
+								},
+								"690,820":
+								{
+									"file": "/Users/brad/Code/BPRC/bumpver.py",
+									"line": 8,
+									"note": "@RELEASE @NTH (99) - consider using git shortlog 0.6.2..0.6.3 to generate release notes.",
+									"patt": "todo",
+									"priority": 99
+								},
+								"820,890":
+								{
+									"file": "/Users/brad/Code/BPRC/tests/test_recipe_step_calls.py",
+									"line": 183,
+									"note": "@TEST - fix ssl mocking (99)",
+									"patt": "todo",
+									"priority": 99
+								},
+								"890,1011":
+								{
+									"file": "/Users/brad/Code/BPRC/bprc/stepprocessor.py",
+									"line": 226,
+									"note": "(100) @NTH OPTIMISATION, consider creating the session at the Recipe level, not",
+									"patt": "todo",
+									"priority": 100
+								}
+							},
+							"selected_result": 0,
+							"syntax": "Packages/TodoReview/TodoReview.hidden-tmLanguage",
+							"todo_results": true,
+							"word_wrap": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1093,7 +1877,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 14,
 					"file": "bprc/varprocessor.py",
 					"semi_transient": false,
 					"settings":
@@ -1122,7 +1906,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 18,
 					"type": "text"
 				}
 			]
@@ -1132,7 +1916,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 4,
+					"buffer": 15,
 					"file": "examples/recipe.yml",
 					"semi_transient": false,
 					"settings":
@@ -1161,11 +1945,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 15,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 16,
 					"file": "tests/test_recipe_prepare_and_parse.py",
 					"semi_transient": false,
 					"settings":
@@ -1177,8 +1961,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								296,
+								296
 							]
 						],
 						"settings":
@@ -1194,41 +1978,41 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 16,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "tests/test_recipe_step_calls.py",
-					"semi_transient": true,
+					"buffer": 17,
+					"file": "tests/test_output.py",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13834,
+						"buffer_size": 4429,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12949,
-								12949
+								4374,
+								4374
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5040.0,
+						"translation.y": 1329.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 18,
 					"file": "tests/test_variable_parser.py",
 					"semi_transient": false,
 					"settings":
@@ -1249,7 +2033,7 @@
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
 							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": true
 						},
@@ -1257,44 +2041,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "tests/test_yaml_load.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7234,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/Python 3/Python3.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
+					"buffer": 19,
 					"file": "bumpver.py",
 					"semi_transient": false,
 					"settings":
@@ -1323,7 +2074,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 19,
 					"type": "text"
 				}
 			]
@@ -1362,7 +2113,7 @@
 		"rows":
 		[
 			0.0,
-			0.491549318231,
+			0.437719894293,
 			1.0
 		]
 	},
@@ -1425,7 +2176,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 174.0,
+	"side_bar_width": 141.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

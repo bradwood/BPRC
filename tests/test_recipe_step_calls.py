@@ -11,7 +11,7 @@ TO TEST:
  [x] default request headers set okay (host, user-agent, others)
  [x] http method types (including weird ones) -- Note, unknown methods deliberately passed through
  [x] http retries -- MANUALLY TESTED ONLY (eyeball)
- [ ] http request body (json and URL encode)
+ [x] http request body (json and URL encode)
  [x] retry after 4xx or 5xx (option passed)
 
 """
