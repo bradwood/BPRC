@@ -92,3 +92,7 @@ pandoc*
 *.crt
 *.csr
 *.key
+
+
+#Mac
+.DS_Store
