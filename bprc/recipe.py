@@ -20,7 +20,7 @@ class Headers(collections.MutableMapping): #Make this class behave and look like
     """A collection of HTTP request or response headers"""
 
     def __init__(self, headers):
-        self._headers = dict((k.lower(), v) for k, v in headers.items()) # force all keys lowercase
+        self._headers = dict((k.lower(), v) for k, v in list(headers.items())) # force all keys lowercase
 
     def __getitem__(self, key):
         lkey=key.lower()

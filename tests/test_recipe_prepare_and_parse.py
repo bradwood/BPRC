@@ -58,10 +58,10 @@ class SimpleTest(unittest.TestCase):
         variables = Variables(datamap['variables'])
         varprocessor = VarProcessor(variables)
 
-        for varname, varval in variables.items():
+        for varname, varval in list(variables.items()):
             variables[varname] = varprocessor.parse(varval, variables)
 
-        for varname, varval in variables.items():
+        for varname, varval in list(variables.items()):
             variables[varname] = varprocessor.fileparse(varval, variables)
 
         step_under_test=7
