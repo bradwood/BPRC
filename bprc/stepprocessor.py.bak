@@ -268,7 +268,7 @@ class StepProcessor():
                     resp.raise_for_status()
                 except Exception as e:
                     if bprc.cli.args.debug:
-                        print(("Response body: " + resp.text))
+                        print("Response body: " + resp.text)
                     errlog("Got error HTTP response and --skip-http-errors not passed. Aborting", e)
 
         #now grab the headers and load them into the response.headers

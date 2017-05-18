@@ -94,14 +94,14 @@ def main():  # pragma: no cover
     vlog("Commencing variable parsing and substitution...")
     varprocessor = VarProcessor(variables)
     #do recursive variable substitution.
-    for varname, varval in list(variables.items()):
+    for varname, varval in variables.items():
         vlog("Commencing variable substitutions for variable " + str(varname) + "=" + str(varval))
         variables[varname] = varprocessor.parse(varval, variables)
         vlog("Substituted " + str(varname) + "=" + str(variables[varname]))
 
     # now subsitute filenames -- note, I tried this in the above loop but go errors.
     # probably safer to parse *all* varnames before trying with files anyway.
-    for varname, varval in list(variables.items()):
+    for varname, varval in variables.items():
         vlog("Commencing filename-- substitutions for variable " + str(varname) + "=" + str(varval))
         variables[varname] = varprocessor.fileparse(varval, variables)
         vlog("Substituted filespec " + str(varname) + "=" + str(variables[varname]))

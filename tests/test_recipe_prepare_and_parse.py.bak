@@ -1,7 +1,7 @@
 import sys
 sys.path.append('/home/travis/build/bradwood/BPRC/bprc')
 sys.path.append('/home/travis/build/bradwood/BPRC/bprc/tests')
-print((sys.path))
+print(sys.path)
 
 import unittest
 import yaml
@@ -58,10 +58,10 @@ class SimpleTest(unittest.TestCase):
         variables = Variables(datamap['variables'])
         varprocessor = VarProcessor(variables)
 
-        for varname, varval in list(variables.items()):
+        for varname, varval in variables.items():
             variables[varname] = varprocessor.parse(varval, variables)
 
-        for varname, varval in list(variables.items()):
+        for varname, varval in variables.items():
             variables[varname] = varprocessor.fileparse(varval, variables)
 
         step_under_test=7
