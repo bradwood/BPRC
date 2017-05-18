@@ -40,8 +40,8 @@ if int(result.stdout) > 0:
     print("There are unstaged changes. Please fix, and re-run.")
     sys.exit(1)
 
-print(('Git status is clean. Incrementing version number in' + verfile))
-print(('New version is ' + newver))
+print('Git status is clean. Incrementing version number in' + verfile)
+print('New version is ' + newver)
 newverfile = open(verfile, 'w')
 newverfile.write('__version__ = "'+ newver +'"' +"\n")
 newverfile.close()

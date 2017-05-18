@@ -19,7 +19,7 @@ TO TEST:
 import sys
 sys.path.append('/home/travis/build/bradwood/BPRC/bprc')
 sys.path.append('/home/travis/build/bradwood/BPRC/bprc/tests')
-print((sys.path))
+print(sys.path)
 
 import unittest
 from mock import Mock
